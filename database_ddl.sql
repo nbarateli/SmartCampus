@@ -1,4 +1,3 @@
-CREATE DATABASE smartcampus;
 USE smartcampus;
 
 CREATE TABLE smartcampus.user
@@ -8,6 +7,7 @@ CREATE TABLE smartcampus.user
   last_name   VARCHAR(20)            NOT NULL,
   user_email  VARCHAR(30)            NOT NULL,
   user_type   ENUM ('user', 'admin') NOT NULL,
+  user_role   ENUM ('student', 'lecturer', 'staff'),
   user_status ENUM ('active', 'banned')
 );
 CREATE UNIQUE INDEX user_user_email_uindex
