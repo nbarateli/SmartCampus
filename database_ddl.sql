@@ -53,9 +53,15 @@ CREATE TABLE corridor_problem
 (
   problem_id  INT AUTO_INCREMENT
     PRIMARY KEY,
+  reported_by INT          NOT NULL,
+  solved_by   INT,
   floor       INT          NOT NULL,
   title       VARCHAR(100) NOT NULL,
-  description VARCHAR(500) NOT NULL
+  description VARCHAR(500) NOT NULL,
+  CONSTRAINT reported_user_fk
+  FOREIGN KEY (reported_by) REFERENCES user (user_id),
+  CONSTRAINT solved_by_fk
+  FOREIGN KEY (solved_by) REFERENCES user (user_id)
 );
 CREATE TABLE smartcampus.subject (
   subject_id   INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
