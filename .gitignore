@@ -1,0 +1,6 @@
+/.settings/*
+/build/*
+.classpath
+.project
+dbinfo.txt
+web/META-INF/*
