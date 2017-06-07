@@ -24,10 +24,17 @@ CREATE TABLE smartCampus.room_problem
 (
   problem_id   INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   room_id      INT             NOT NULL,
+  reported_by  INT             NOT NULL,
+  solved_by    INT,
   title        VARCHAR(100),
   description  VARCHAR(500),
   date_created DATE            NOT NULL,
-  FOREIGN KEY (room_id) REFERENCES room (room_id)
+  CONSTRAINT room_id_fk
+  FOREIGN KEY (room_id) REFERENCES room (room_id),
+  CONSTRAINT reporter_id_fk
+  FOREIGN KEY (reported_by) REFERENCES user (user_id),
+  CONSTRAINT solver_id_fk
+  FOREIGN KEY (solved_by) REFERENCES user (user_id)
 );
 
 CREATE TABLE smartcampus.booking
