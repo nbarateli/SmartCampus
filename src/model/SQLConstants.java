@@ -6,7 +6,7 @@ package model;
  * Contains names of tables and rows of SmartCampus database.
  */
 public class SQLConstants {
-    public static final String SQL_TABLE_USER = "user";
+    public static final String SQL_TABLE_USER = "campus_user";
 
     public static final String SQL_TABLE_ROOM = "room";
 
@@ -24,7 +24,9 @@ public class SQLConstants {
 
     public static final String SQL_TABLE_ITEM_IMAGE = "item_image";
 
-    public static final String SQL_TABLE_SUBJECT = "subject";
+    public static final String SQL_TABLE_ROOM_IMAGE = "room_image";
+
+    public static final String SQL_TABLE_SUBJECT = "campus_subject";
 
 
     public static final String SQL_ROW_USER_ID = "user_id";
@@ -34,6 +36,7 @@ public class SQLConstants {
     public static final String SQL_ROW_USER_TYPE = "user_type";
     public static final String SQL_ROW_USER_ROLE = "user_role";
     public static final String SQL_ROW_USER_STATUS = "user_status";
+    public static final String SQL_ROW_USER_IMAGE = "img_url";
 
     public static final String SQL_ROW_ROOM_ID = "room_id";
     public static final String SQL_ROW_ROOM_NAME = "room_name";
@@ -83,5 +86,7 @@ public class SQLConstants {
     public static final String SQL_ROW_SUBJECT_ID = "subject_id";
     public static final String SQL_ROW_SUBJECT_NAME = "subject_name";
 
-
+    public static final String SQL_ROW_ROOM_IMAGE_ID = "image_id";
+    public static final String SQL_ROW_ROOM_IMAGE_URL = "image_url";
+    public static final String SQL_ROW_ROOM_IMAGE_ROOM_ID = "room_id";
 }
