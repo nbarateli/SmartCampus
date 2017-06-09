@@ -11,19 +11,26 @@ public class Room {
     private final RoomType roomType;
     private final SeatType seatType;
     private final boolean isAvailableForStudents;
+    private final int floor;
 
     /**
      * Constructs a new Room object.
      */
-    public Room(int roomID, int capacity, String roomName, RoomType roomType, SeatType seatType, boolean isAvailableForStudents) {
+    public Room(int roomID, int capacity, String roomName, RoomType roomType, 
+            SeatType seatType, boolean isAvailableForStudents, int floor) {
         this.roomID = roomID;
         this.capacity = capacity;
         this.roomName = roomName;
         this.roomType = roomType;
         this.seatType = seatType;
         this.isAvailableForStudents = isAvailableForStudents;
+        this.floor = floor;
     }
-
+    
+    public int getFloor() {
+        return floor;
+    }
+    
     public boolean isAvailableForStudents() {
         return isAvailableForStudents;
     }
