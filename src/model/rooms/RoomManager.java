@@ -1,5 +1,7 @@
 package model.rooms;
 
+import model.DBConnector;
+
 /**
  * Created by Niko on 07.06.2017.
  * <p>

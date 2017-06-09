@@ -49,6 +49,6 @@ public class Room {
     }
 
     public enum SeatType {
-        DESKS, WOODEN_CHAIR, PLASTIC_CHAIR
+        DESKS, WOODEN_CHAIR, PLASTIC_CHAIR, COMPUTERS, TABLES
     }
 }

@@ -41,7 +41,8 @@ public class SQLConstants {
     public static final String SQL_ROW_ROOM_ID = "room_id";
     public static final String SQL_ROW_ROOM_NAME = "room_name";
     public static final String SQL_ROW_ROOM_FLOOR = "room_floor";
-    public static final String SQL_ROW_ROOM_CAPACITY = "room_capacity";
+    public static final String SQL_ROW_ROOM_CAPACITY = "capacity";
+    public static final String SQL_ROW_ROOM_AVAILABLE = "available_for_students";
     public static final String SQL_ROW_ROOM_TYPE = "room_type";
     public static final String SQL_ROW_ROOM_SEAT_TYPE = "seat_type";
 
