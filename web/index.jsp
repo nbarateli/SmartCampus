@@ -31,23 +31,23 @@
             <table>
                 <tr>
                     <td></td>
-                    <td><a href="/rooms/index.jsp">ოთახის მოძებნა მინდა</a></td>
+                    <td><a href="rooms/index.jsp">ოთახის მოძებნა მინდა</a></td>
                     <td></td>
 
-                    <td><a href="/index.jsp">დავკარგე რაღაც</a></td>
+                    <td><a href="index.jsp">დავკარგე რაღაც</a></td>
 
                 </tr>
                 <tr>
                     <td></td>
                     <td></td>
-                    <td><a href="/index.jsp">პრობლემა მინდა შეგატყობინოთ</a></td>
+                    <td><a href="index.jsp">პრობლემა მინდა შეგატყობინოთ</a></td>
                     <td></td>
                 </tr>
             </table>
         </tr>
         <tr></tr>
         <tr>
-            <div align="center"><a href="/index.jsp"><img
+            <div align="center"><a href="index.jsp"><img
                     src="https://developers.google.com/+/images/branding/sign-in-buttons/Red-signin_Google_base_44dp.png"
                     style="width: 10%;height: 5%;"></a>
             </div>
