@@ -4,3 +4,6 @@
 .project
 dbinfo.txt
 web/META-INF/*
+/build/
+
+.gitignore
