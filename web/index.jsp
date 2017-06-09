@@ -11,7 +11,7 @@
 <head>
     <title>SmartCampus</title>
 </head>
-2
+
 <body>
 <div align="center">
     <table>

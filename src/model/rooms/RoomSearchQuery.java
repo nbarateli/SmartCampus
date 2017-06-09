@@ -1,7 +1,5 @@
 package model.rooms;
 
-import model.DBConnector;
-
 import static model.SQLConstants.*;
 
 /**
