@@ -119,22 +119,20 @@ public class RoomSearchQuery {
      * @return a valid sql query.
      */
     public String generateQuery() {
-        StringBuilder sql = new StringBuilder();
-        sql.append("SELECT * FROM room  ");
-        if (!hasNonNullFields()) {
-            return sql.toString();
-        }
-        sql.append("WHERE ").append(assertAndGetEqualQuery(name, SQL_ROW_ROOM_NAME))
-                .append(name == null ? "" : " \nAND ")
-                .append(assertAndGetEqualQuery(floor == null ? null : floor.toString(), SQL_ROW_ROOM_FLOOR))
-                .append(floor == null ? "" : " AND ")
-                .append(SQL_ROW_ROOM_CAPACITY + (capacityFrom == null ? " > 0 " : " >= " + capacityFrom + "\n"))
-                .append(capacityTo != null ? " AND " + SQL_ROW_ROOM_CAPACITY + " <= " + capacityTo + "\n" : "")
-                .append(roomType != null ? " AND " + assertAndGetEqualQuery(roomType.toString().toLowerCase(), SQL_ROW_ROOM_TYPE) + "\n" : "")
-                .append(seatType != null ? " AND " + assertAndGetEqualQuery(seatType.toString(), SQL_ROW_ROOM_SEAT_TYPE) + "\n" : "")
-                .append(availableForBooking ? " AND " + SQL_ROW_ROOM_AVAILABLE + " = TRUE \n" : "")
-                .append(hasProblemsQuery() + ";");
-        return sql.toString();
+        return hasNonNullFields() ? String.format(
+                "SELECT * FROM room  %s%s%s%s%s%s%s%s%s%s%s;", assertAndGetEqualQuery(name, SQL_ROW_ROOM_NAME),
+                name == null ? "" : " \nAND ",
+                assertAndGetEqualQuery(floor == null ? null : floor.toString(), SQL_ROW_ROOM_FLOOR),
+                floor == null ? "" : " AND ",
+                SQL_ROW_ROOM_CAPACITY, capacityFrom == null ? " > 0 " : " >= " + capacityFrom + "\n",
+                capacityTo != null ? " AND " + SQL_ROW_ROOM_CAPACITY + " <= " + capacityTo + "\n" : "",
+                roomType != null ? " AND " +
+                        assertAndGetEqualQuery(roomType.toString().toLowerCase(), SQL_ROW_ROOM_TYPE) + "\n" : "",
+                seatType != null ? " AND " +
+                        assertAndGetEqualQuery(seatType.toString(), SQL_ROW_ROOM_SEAT_TYPE) + "\n" : "",
+                availableForBooking ? " AND " + SQL_ROW_ROOM_AVAILABLE + " = TRUE \n" : "", hasProblemsQuery())
+                :
+                "SELECT * FROM room  ";
 
     }
 
