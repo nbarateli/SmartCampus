@@ -49,11 +49,13 @@
                     </tr>
                     <tr>
                         <td>ოთახის ტიპი</td>
-                        <td><select name="room_type">
-                            <option value="any">ყველა</option>
-                            <option value="auditorium">აუდიტორია</option>
-                            <option value="utility">სხვა</option>
-                        </select></td>
+                        <td>
+                            <select name="room_type">
+                                <option value="any">ყველა</option>
+                                <option value="auditorium">აუდიტორია</option>
+                                <option value="utility">სხვა</option>
+                            </select>
+                        </td>
                     </tr>
                     <tr>
                         <td>ადგილების ტიპი</td>
@@ -69,7 +71,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>შეიძლება სტუდენტისთვის </td>
+                        <td>შეიძლება სტუდენტისთვის</td>
                         <td><input type="checkbox"></td>
                     </tr>
                 </table>
