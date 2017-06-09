@@ -47,7 +47,7 @@
         </tr>
         <tr></tr>
         <tr>
-            <div align="center"><a href="/index.jsp"><img
+            <div align="center"><a href="index.jsp"><img
                     src="https://developers.google.com/+/images/branding/sign-in-buttons/Red-signin_Google_base_44dp.png"
                     style="width: 10%;height: 5%;"></a>
             </div>
