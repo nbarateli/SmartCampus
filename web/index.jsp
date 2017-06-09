@@ -11,7 +11,7 @@
 <head>
     <title>SmartCampus</title>
 </head>
-2
+
 <body>
 <div align="center">
     <table>
@@ -31,16 +31,16 @@
             <table>
                 <tr>
                     <td></td>
-                    <td><a href="/rooms/index.jsp">ოთახის მოძებნა მინდა</a></td>
+                    <td><a href="rooms/index.jsp">ოთახის მოძებნა მინდა</a></td>
                     <td></td>
 
-                    <td><a href="/index.jsp">დავკარგე რაღაც</a></td>
+                    <td><a href="index.jsp">დავკარგე რაღაც</a></td>
 
                 </tr>
                 <tr>
                     <td></td>
                     <td></td>
-                    <td><a href="/index.jsp">პრობლემა მინდა შეგატყობინოთ</a></td>
+                    <td><a href="index.jsp">პრობლემა მინდა შეგატყობინოთ</a></td>
                     <td></td>
                 </tr>
             </table>
