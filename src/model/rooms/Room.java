@@ -24,6 +24,10 @@ public class Room {
         this.isAvailableForStudents = isAvailableForStudents;
     }
 
+    public boolean isAvailableForStudents() {
+        return isAvailableForStudents;
+    }
+
     public int getRoomID() {
         return roomID;
     }
