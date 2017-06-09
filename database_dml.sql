@@ -18,27 +18,27 @@ INSERT INTO campus_subject (subject_name) VALUES
   ('გაძლიერებული ალგორითმები I'),
   ('გერმანული II');
 
-INSERT INTO room (room_name, room_type, capacity, seat_type) VALUES
-  ('200', 'auditorium', 200, 'DESKS'),
-  ('401', 'auditorium', 50, 'DESKS'),
-  ('408', 'auditorium', 70, 'DESKS'),
-  ('216', 'auditorium', 70, 'DESKS'),
-  ('307-1', 'auditorium', 40, 'PLASTIC_CHAIR'),
-  ('412-2', 'auditorium', 40, 'PLASTIC_CHAIR'),
-  ('420', 'auditorium', 100, 'DESKS'),
-  ('309', 'auditorium', 70, 'DESKS'),
-  ('410', 'auditorium', 100, 'PLASTIC_CHAIR'),
-  ('417', 'auditorium', 70, 'DESKS'),
-  ('კაფეტერია', 'utility', 200, 'TABLES'),
-  ('402-2', 'auditorium', 40, 'PLASTIC_CHAIR'),
-  ('318', 'auditorium', 70, 'DESKS'),
-  ('103', 'auditorium', 30, 'DESKS'),
-  ('ქვედა სტუდენტური', 'utility', 20, 'WOODEN_CHAIR'),
-  ('ზედა სტუდენტური', 'utility', 30, 'WOODEN_CHAIR'),
-  ('ბიბლიოთეკა', 'utility', 150, 'TABLES'),
-  ('301', 'auditorium', 40, 'COMPUTERS'),
-  ('001', 'utility', 30, 'TABLES'),
-  ('217', 'auditorium', 70, 'DESKS');
+INSERT INTO room (room_name, room_floor, room_type, capacity, seat_type) VALUES
+  ('200', 2, 'auditorium', 200, 'DESKS'),
+  ('401', 4, 'auditorium', 50, 'DESKS'),
+  ('408', 4, 'auditorium', 70, 'DESKS'),
+  ('216', 2, 'auditorium', 70, 'DESKS'),
+  ('307-1', 3, 'auditorium', 40, 'PLASTIC_CHAIR'),
+  ('412-2', 4, 'auditorium', 40, 'PLASTIC_CHAIR'),
+  ('420', 4, 'auditorium', 100, 'DESKS'),
+  ('309', 3, 'auditorium', 70, 'DESKS'),
+  ('410', 4, 'auditorium', 100, 'PLASTIC_CHAIR'),
+  ('417', 4, 'auditorium', 70, 'DESKS'),
+  ('კაფეტერია', 2, 'utility', 200, 'TABLES'),
+  ('402-2', 4, 'auditorium', 40, 'PLASTIC_CHAIR'),
+  ('318', 3, 'auditorium', 70, 'DESKS'),
+  ('103', 1, 'auditorium', 30, 'DESKS'),
+  ('ქვედა სტუდენტური', 0, 'utility', 20, 'WOODEN_CHAIR'),
+  ('ზედა სტუდენტური', 1, 'utility', 30, 'WOODEN_CHAIR'),
+  ('ბიბლიოთეკა', 1, 'utility', 150, 'TABLES'),
+  ('301', 3, 'auditorium', 40, 'COMPUTERS'),
+  ('001', 0, 'utility', 30, 'TABLES'),
+  ('217', 0, 'auditorium', 70, 'DESKS');
 
 INSERT INTO room_problem (room_id, reported_by, description, date_created) VALUES
   (11, 1, 'ფანჯარა არ იხურება', str_to_date('07-06-2017', '%d-%m-%Y')),

@@ -1,5 +1,5 @@
-drop DATABASE SmartCampus;
-CREATE  DATABASE  SmartCampus;
+DROP DATABASE IF EXISTS SmartCampus;
+CREATE DATABASE SmartCampus;
 USE SmartCampus;
 
 CREATE TABLE campus_user
@@ -18,11 +18,12 @@ CREATE UNIQUE INDEX user_user_email_uindex
 
 CREATE TABLE room
 (
-  room_id   INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  room_name VARCHAR(40)     NOT NULL,
-  room_type ENUM ('auditorium', 'utility'),
-  capacity  INT,
-  seat_type ENUM ('DESKS', 'WOODEN_CHAIR', 'PLASTIC_CHAIR', 'COMPUTERS', 'TABLES')
+  room_id    INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  room_name  VARCHAR(40)     NOT NULL,
+  room_floor INT             NOT NULL,
+  room_type  ENUM ('auditorium', 'utility'),
+  capacity   INT,
+  seat_type  ENUM ('DESKS', 'WOODEN_CHAIR', 'PLASTIC_CHAIR', 'COMPUTERS', 'TABLES')
 );
 
 CREATE TABLE room_problem
