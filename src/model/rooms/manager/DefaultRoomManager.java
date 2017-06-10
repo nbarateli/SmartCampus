@@ -1,7 +1,9 @@
 package model.rooms.manager;
 
 import model.DBConnector;
-import model.SQLConstants;
+
+import static model.SQLConstants.*;
+
 import model.rooms.Room;
 
 import model.rooms.RoomSearchQuery;
@@ -37,15 +39,15 @@ public class DefaultRoomManager implements RoomManager {
             ResultSet matches = DBConnector.executeQuery(query.generateQuery());
             con = matches.getStatement().getConnection();
             while (matches.next()) {
-                int id = matches.getInt(SQLConstants.SQL_COLUMN_ROOM_ID);
-                int capacity = matches.getInt(SQLConstants.SQL_COLUMN_ROOM_CAPACITY);
-                int floor = matches.getInt(SQLConstants.SQL_COLUMN_ROOM_FLOOR);
-                String name = matches.getString(SQLConstants.SQL_COLUMN_ROOM_NAME);
+                int id = matches.getInt(SQL_COLUMN_ROOM_ID);
+                int capacity = matches.getInt(SQL_COLUMN_ROOM_CAPACITY);
+                int floor = matches.getInt(SQL_COLUMN_ROOM_FLOOR);
+                String name = matches.getString(SQL_COLUMN_ROOM_NAME);
                 Room.RoomType roomType =
-                        toRoomType(matches.getString(SQLConstants.SQL_COLUMN_ROOM_TYPE));
+                        toRoomType(matches.getString(SQL_COLUMN_ROOM_TYPE));
                 Room.SeatType seatType =
-                        toSeatType(matches.getString(SQLConstants.SQL_COLUMN_ROOM_SEAT_TYPE));
-                boolean available = matches.getBoolean(SQLConstants.SQL_COLUMN_ROOM_AVAILABLE);
+                        toSeatType(matches.getString(SQL_COLUMN_ROOM_SEAT_TYPE));
+                boolean available = matches.getBoolean(SQL_COLUMN_ROOM_AVAILABLE);
 
                 Room room = new Room(id, capacity, name, roomType, seatType, available, floor);
                 rooms.add(room);
@@ -65,11 +67,11 @@ public class DefaultRoomManager implements RoomManager {
 
     @Override
     public void addRoom(Room room) {
-        String insertQuery = "insert into " + SQLConstants.SQL_TABLE_ROOM + " (" +
-                SQLConstants.SQL_COLUMN_ROOM_NAME + ", " + SQLConstants.SQL_COLUMN_ROOM_FLOOR + ", " +
-                SQLConstants.SQL_COLUMN_ROOM_TYPE + ", " + SQLConstants.SQL_COLUMN_ROOM_CAPACITY +
-                ", " + SQLConstants.SQL_COLUMN_ROOM_AVAILABLE + ", " +
-                SQLConstants.SQL_COLUMN_ROOM_SEAT_TYPE + ") values (" +
+        String insertQuery = "insert into " + SQL_TABLE_ROOM + " (" +
+                SQL_COLUMN_ROOM_NAME + ", " + SQL_COLUMN_ROOM_FLOOR + ", " +
+                SQL_COLUMN_ROOM_TYPE + ", " + SQL_COLUMN_ROOM_CAPACITY +
+                ", " + SQL_COLUMN_ROOM_AVAILABLE + ", " +
+                SQL_COLUMN_ROOM_SEAT_TYPE + ") values (" +
                 room.getRoomName() + ", " + room.getFloor() + ", " + room.getRoomType() + ", " +
                 room.getRoomName() + ", " + room.getCapacity() + ", " + room.isAvailableForStudents() +
                 ", " + room.getSeatType() + ") ";
@@ -83,7 +85,7 @@ public class DefaultRoomManager implements RoomManager {
     @Override
     public void removeRoom(Room room) {
         if (roomExists(room)) {
-            String deleteQuery = "delete from " + SQLConstants.SQL_TABLE_ROOM + " where room_id = " +
+            String deleteQuery = "delete from " + SQL_TABLE_ROOM + " where room_id = " +
                     room.getRoomID();
             try {
                 DBConnector.executeUpdate(deleteQuery);
@@ -91,6 +93,31 @@ public class DefaultRoomManager implements RoomManager {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public List<String> getAllImagesOf(Room room) {
+        List<String> images = new LinkedList<>();
+        String sql = "SELECT image_url FROM  room_image WHERE room_image.room_id = room." + room.getRoomID();
+        Connection con = null;
+        try {
+            ResultSet rs = DBConnector.executeQuery(sql);
+            con = rs.getStatement().getConnection();
+            while (rs.next()) {
+                images.add(rs.getString(SQL_COLUMN_ROOM_IMAGE_URL));
+            }
+        } catch (SQLException e) {
+            //doing nothing
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return images;
     }
 
     /**
