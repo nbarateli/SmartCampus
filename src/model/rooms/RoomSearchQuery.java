@@ -36,7 +36,7 @@ public class RoomSearchQuery {
      */
     public RoomSearchQuery() {
         this(null, null, null, null,
-                null, true, null, true);
+                null, false, null, true);
     }
 
     public String getName() {
@@ -120,7 +120,7 @@ public class RoomSearchQuery {
      */
     public String generateQuery() {
         return hasNonNullFields() ? String.format(
-                "SELECT * FROM room  %s%s%s%s%s%s%s%s%s%s%s;", assertAndGetEqualQuery(name, SQL_COLUMN_ROOM_NAME),
+                "SELECT * FROM room  WHERE %s%s%s%s%s%s%s%s%s%s%s;", assertAndGetEqualQuery(name, SQL_COLUMN_ROOM_NAME),
                 name == null ? "" : " \nAND ",
                 assertAndGetEqualQuery(floor == null ? null : floor.toString(), SQL_COLUMN_ROOM_FLOOR),
                 floor == null ? "" : " AND ",
@@ -151,7 +151,7 @@ public class RoomSearchQuery {
 
     private boolean hasNonNullFields() {
 
-        return !hasProblems || name != null || floor != null ||
+        return availableForBooking || !hasProblems || name != null || floor != null ||
                 capacityFrom != null || capacityTo != null ||
                 roomType != null || seatType != null;
 

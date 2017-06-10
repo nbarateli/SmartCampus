@@ -10,6 +10,41 @@ public class Utils {
 
     }
 
+
+    /**
+     * Returns a Georgian string representation of the given <code>RoomType</code>
+     */
+    public static String roomTypeToString(Room.RoomType roomType) {
+        switch (roomType) {
+            case UTILITY:
+                return "სხვა";
+            case AUDITORIUM:
+                return "აუდიტორია";
+        }
+        return "";
+    }
+
+    /**
+     * Returns a Georgian string representation of the given <code>SeatType</code>
+     */
+    public static String seatTypeToString(Room.SeatType seatType) {
+        switch (seatType) {
+            case DESKS:
+                return "სკამები და მერხები";
+            case TABLES:
+                return "მაგიდები";
+            case COMPUTERS:
+                return "კომპიუტერები";
+            case WOODEN_CHAIR:
+                return "სკამ-მერხები (ხის)";
+
+            case PLASTIC_CHAIR:
+                return "სკამ-მერხები (პლასტმასის)";
+
+        }
+        return "";
+    }
+
     /**
      * Returns a corresponding <code>RoomType</code> object  that has a value of the passed string
      *
@@ -17,11 +52,14 @@ public class Utils {
      * @return corresponding <code>RoomType</code>
      */
     public static Room.RoomType toRoomType(String s) {
+
         switch (s.toLowerCase()) {
             case "auditorium":
                 return AUDITORIUM;
             case "utility":
                 return UTILITY;
+            case "any":
+                return null;
         }
         throw new IllegalArgumentException();
     }
@@ -33,6 +71,7 @@ public class Utils {
      * @return corresponding <code>SeatType</code>
      */
     public static Room.SeatType toSeatType(String s) {
+
         switch (s.toLowerCase()) {
             case "desks":
                 return DESKS;
@@ -44,6 +83,8 @@ public class Utils {
                 return COMPUTERS;
             case "tables":
                 return TABLES;
+            case "any":
+                return null;
         }
         throw new IllegalArgumentException();
 

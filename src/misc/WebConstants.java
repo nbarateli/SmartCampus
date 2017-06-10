@@ -7,4 +7,5 @@ package misc;
  */
 public class WebConstants {
     public static final String ROOM_MANAGER = "roomManager";
+    public static final String NO_IMAGE = "http://i.imgur.com/wpwWazp.png";
 }
