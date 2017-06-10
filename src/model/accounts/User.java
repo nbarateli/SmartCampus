@@ -8,7 +8,9 @@ package model.accounts;
  */
 public class User {
     private final int userID;
-    private final String eMail, firstName, lastName;
+    private final String eMail;
+    private final String firstName;
+    private final String lastName;
     private final UserStatus status;
     private final UserType userType;
     private final UserRole userRole;

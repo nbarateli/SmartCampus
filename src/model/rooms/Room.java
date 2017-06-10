@@ -6,7 +6,8 @@ package model.rooms;
  * The SmartCampus Room ADT (Immutable)
  */
 public class Room {
-    private final int roomID, capacity;
+    private final int roomID;
+    private final int capacity;
     private final String roomName;
     private final RoomType roomType;
     private final SeatType seatType;
