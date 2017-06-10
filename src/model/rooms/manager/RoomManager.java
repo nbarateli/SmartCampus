@@ -1,14 +1,8 @@
 package model.rooms.manager;
 
-
-import java.sql.*;
 import java.util.*;
 
-import model.DBConnector;
-import model.SQLConstants;
 import model.rooms.Room;
-import model.rooms.Room.RoomType;
-import model.rooms.Room.SeatType;
 import model.rooms.RoomSearchQuery;
 
 /**
