@@ -3,10 +3,13 @@ package model.rooms.manager;
 import model.DBConnector;
 import model.SQLConstants;
 import model.rooms.Room;
+
 import model.rooms.RoomSearchQuery;
 
 import java.sql.*;
 import java.util.*;
+
+import static misc.Utils.*;
 
 /**
  * Created by Niko on 10.06.2017.
@@ -29,24 +32,32 @@ public class DefaultRoomManager implements RoomManager {
     @Override
     public List<Room> findRooms(RoomSearchQuery query) {
         List<Room> rooms = new ArrayList<>();
+        Connection con = null;
         try {
             ResultSet matches = DBConnector.executeQuery(query.generateQuery());
+            con = matches.getStatement().getConnection();
             while (matches.next()) {
                 int id = matches.getInt(SQLConstants.SQL_COLUMN_ROOM_ID);
                 int capacity = matches.getInt(SQLConstants.SQL_COLUMN_ROOM_CAPACITY);
                 int floor = matches.getInt(SQLConstants.SQL_COLUMN_ROOM_FLOOR);
                 String name = matches.getString(SQLConstants.SQL_COLUMN_ROOM_NAME);
                 Room.RoomType roomType =
-                        Room.RoomType.valueOf(matches.getString(SQLConstants.SQL_COLUMN_ROOM_TYPE));
+                        toRoomType(matches.getString(SQLConstants.SQL_COLUMN_ROOM_TYPE));
                 Room.SeatType seatType =
-                        Room.SeatType.valueOf(matches.getString(SQLConstants.SQL_COLUMN_ROOM_SEAT_TYPE));
+                        toSeatType(matches.getString(SQLConstants.SQL_COLUMN_ROOM_SEAT_TYPE));
                 boolean available = matches.getBoolean(SQLConstants.SQL_COLUMN_ROOM_AVAILABLE);
 
                 Room room = new Room(id, capacity, name, roomType, seatType, available, floor);
                 rooms.add(room);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            //doing nothing
+        } finally {
+            if (con != null) try {
+                con.close();
+            } catch (SQLException e) {
+                //doing nothing
+            }
         }
 
         return rooms;

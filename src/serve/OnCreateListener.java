@@ -5,6 +5,7 @@ package serve;
  * Responsible for initializing and storing all the necessary objects for the server.
  */
 
+import misc.DBInfo;
 import model.rooms.manager.DefaultRoomManager;
 import model.rooms.manager.RoomManager;
 
@@ -34,6 +35,11 @@ public class OnCreateListener implements ServletContextListener,
          initialized(when the Web application is deployed). 
          You can initialize servlet context related data here.
       */
+        try {
+            DBInfo.class.newInstance();
+        } catch (IllegalAccessException | InstantiationException e) {
+            e.printStackTrace();
+        }
         RoomManager manager = DefaultRoomManager.getInstance();
         sce.getServletContext().setAttribute(ROOM_MANAGER, manager);
     }

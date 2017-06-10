@@ -17,8 +17,8 @@ public class Room {
     /**
      * Constructs a new Room object.
      */
-    public Room(int roomID, int capacity, String roomName, RoomType roomType, 
-            SeatType seatType, boolean isAvailableForStudents, int floor) {
+    public Room(int roomID, int capacity, String roomName, RoomType roomType,
+                SeatType seatType, boolean isAvailableForStudents, int floor) {
         this.roomID = roomID;
         this.capacity = capacity;
         this.roomName = roomName;
@@ -27,11 +27,11 @@ public class Room {
         this.isAvailableForStudents = isAvailableForStudents;
         this.floor = floor;
     }
-    
+
     public int getFloor() {
         return floor;
     }
-    
+
     public boolean isAvailableForStudents() {
         return isAvailableForStudents;
     }
@@ -57,10 +57,16 @@ public class Room {
     }
 
     public enum RoomType {
-        AUDITORIUM, UTILITY
+        AUDITORIUM, UTILITY;
+    }
+
+    @Override
+    public String toString() {
+        return getRoomName();
     }
 
     public enum SeatType {
-        DESKS, WOODEN_CHAIR, PLASTIC_CHAIR, COMPUTERS, TABLES
+        DESKS, WOODEN_CHAIR, PLASTIC_CHAIR, COMPUTERS, TABLES;
+
     }
 }

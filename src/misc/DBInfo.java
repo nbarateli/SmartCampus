@@ -1,9 +1,6 @@
 package misc;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created by Niko on 07.06.2017.
@@ -18,9 +15,15 @@ import java.io.IOException;
  * database name
  */
 public class DBInfo {
+    public static final String MYSQL_USERNAME;
+    public static final String MYSQL_PASSWORD;
+    public static final String MYSQL_DATABASE_SERVER;
+    public static final String MYSQL_DATABASE_NAME;
+
     private static final String DB_INFO_FILE = "dbinfo.txt";
 
     static {
+
         String userName = "";
         String passWord = "";
         String server = "";
@@ -32,16 +35,12 @@ public class DBInfo {
             databaseName = in.readLine();
         } catch (IOException e) {
             //doing nothing
+
         }
         MYSQL_USERNAME = userName;
         MYSQL_PASSWORD = passWord;
         MYSQL_DATABASE_SERVER = server;
         MYSQL_DATABASE_NAME = databaseName;
     }
-
-    public static final String MYSQL_USERNAME;
-    public static final String MYSQL_PASSWORD;
-    public static final String MYSQL_DATABASE_SERVER;
-    public static final String MYSQL_DATABASE_NAME;
 
 }

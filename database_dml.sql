@@ -1,6 +1,7 @@
-USE smartcampus;
+use smartcampus;
 
-INSERT INTO campus_user (first_name, last_name, user_email, user_type, user_role, user_status) VALUES
+INSERT INTO campus_user (first_name, last_name, user_email, user_type, user_role, user_status)
+VALUES
   ('nino', 'khaduri', 'nkhad15@freeuni.edu.ge', 'user', 'student', 'active'),
   ('niko', 'barateli', 'nbara15@freeuni.edu.ge', 'admin', 'student', 'active'),
   ('zaur', 'meshveliani', 'zmesh15@freeuni.edu.ge', 'user', 'student', 'active'),
