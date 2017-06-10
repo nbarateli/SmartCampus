@@ -1,15 +1,30 @@
-package model.rooms;
+package model.rooms.manager;
 
 import model.DBConnector;
 import model.SQLConstants;
+import model.rooms.Room;
+import model.rooms.RoomSearchQuery;
 
 import java.sql.*;
 import java.util.*;
 
 /**
  * Created by Niko on 10.06.2017.
+ * <p>
+ * The default implementation of the <code>RoomManager</code> interface.
+ * Uses Database Connection to store and retrieve requested information.
  */
 public class DefaultRoomManager implements RoomManager {
+    private static RoomManager instance;
+
+    /***/
+    public static RoomManager getInstance() {
+        return instance == null ? instance = new DefaultRoomManager() : instance;
+    }
+
+    private DefaultRoomManager() {
+
+    }
 
     @Override
     public List<Room> findRooms(RoomSearchQuery query) {
@@ -67,6 +82,9 @@ public class DefaultRoomManager implements RoomManager {
         }
     }
 
+    /**
+     * Returns whether the given room exists in database
+     */
     private boolean roomExists(Room room) {
         return !findRooms(new RoomSearchQuery(room.getRoomName(), room.getFloor(), room.getCapacity(),
                 room.getCapacity(), room.getRoomType(), room.isAvailableForStudents(),

@@ -19,7 +19,8 @@ public class RoomSearchQuery {
     private boolean hasProblems;
 
     public RoomSearchQuery(String name, Integer floor, Integer capacityFrom, Integer capacityTo,
-                           Room.RoomType roomType, boolean availableForBooking, Room.SeatType seatType, boolean hasProblems) {
+                           Room.RoomType roomType, boolean availableForBooking,
+                           Room.SeatType seatType, boolean hasProblems) {
         this.name = name;
         this.floor = floor;
         this.capacityFrom = capacityFrom;
@@ -34,7 +35,8 @@ public class RoomSearchQuery {
      * Default constructor:
      */
     public RoomSearchQuery() {
-        this(null, null, null, null, null, true, null, true);
+        this(null, null, null, null,
+                null, true, null, true);
     }
 
     public String getName() {

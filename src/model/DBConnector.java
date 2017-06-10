@@ -58,17 +58,18 @@ public class DBConnector {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             //Initializing the try block so that the connection may close automatically in case of Exception.
-            try (Connection connection = DriverManager.getConnection
-                    (MYSQL_DATABASE_SERVER, MYSQL_USERNAME, MYSQL_PASSWORD)) {
-                Statement statement = connection.createStatement();
-                statement.executeQuery("USE " + MYSQL_DATABASE_NAME + ";");
-                if (isUpdate)
-                    return statement.executeUpdate(sql);
-                else
-                    return statement.executeQuery(sql);
+            Connection connection = DriverManager.getConnection
+                    (MYSQL_DATABASE_SERVER, MYSQL_USERNAME, MYSQL_PASSWORD);
+            Statement statement = connection.createStatement();
+            statement.executeQuery("USE " + MYSQL_DATABASE_NAME + ";");
+            connection.close();
+            if (isUpdate)
+                return statement.executeUpdate(sql);
+            else
+                return statement.executeQuery(sql);
 
-            }
-        } catch (ClassNotFoundException e) {
+
+        } catch (ClassNotFoundException  e) {
             e.printStackTrace();
             return null;
         }
