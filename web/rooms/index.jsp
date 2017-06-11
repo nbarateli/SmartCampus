@@ -141,7 +141,8 @@
 
                         for (Room room : rooms) {
                             out.println("<tr>");
-                            out.println("                        <td style=\"font-size: 25px\">" + room.getRoomName() + "</td>");
+                            out.println("                        <td style=\"font-size: 25px\">" +
+                                    "<a href=room.jsp?id="+room.getRoomID()+">" + room.getRoomName() + "<a></td>");
                             out.println("                    </tr>");
                             out.println("                    <tr>");
                             List<String> images = manager.getAllImagesOf(room);
