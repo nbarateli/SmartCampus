@@ -41,100 +41,103 @@
 <html>
 <head>
     <title>ოთახები</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-<table style="height: 100%; width: 100%;">
-    <tr>
-        <td style="width: 20%">
+    <table style="height: 100%; width: 100%;">
+        <tr>
+            <td style="width: 30%; left-margin: 10px;">
 
-            <form style="width: 100%" action="index.jsp" method="post">
+                <form style="width: 100%" action="index.jsp"
+                    method="post" class="form-vertical">
 
-                <table>
-                    <tr>
-                        <td style="text-align: left">ოთახის სახელი</td>
-                        <td style="text-align: left"><input name="room_name"></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left">სართული</td>
-                        <td style="text-align: left"><input type="number"
-                                                            name="room_floor"></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left">ადგილების რაოდენობა:</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left ">
-                            <input type="number" name="capacity_from" title="-დან">
-                            <br>-დან
-                        </td>
+                        <div class="form-group">
+                            <label class="control-label" for="name">ოთახის სახელი</label>
+                            <input name="room_name" class="form-control"
+                                placeholder="შეიყვანეთ ოთახის სახელი">
+                        </div>
+                        
+                        <div class="form-group">    
+                            <label class="control-label" for="floor">სართული</label>
+                            <input type="number" name="room_floor" class="form-control"
+                                placeholder="შეიყვანეთ სართული">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="control-label" for="capacity">
+                                                                                    ადგილების რაოდენობა</label>
+                            <input type="number" name="capacity_from" class="form-control"
+                                title="-დან" placeholder="ადგილების რაოდენობა(-დან)">
+                            
+                            <br> 
+                            
+                            <input type="number" name="capacity_to" class="form-control"
+                                title="-მდე" placeholder="ადგილების რაოდენობა(-მდე)">
+                        </div>
+                        
+                        <div class="select">
+                            <label class="control-label" for="room_type">ოთახის ტიპი</label>
+                            <select name="room_type" class="form-control">
+                                    <option value="any">ყველა</option>
+                                    <option value="auditorium">აუდიტორია</option>
+                                    <option value="utility">სხვა</option>
+                            </select>
+                        </div>        
+                        
+                        <div class="select">
+                            <label class="control-label" for="seat_type">ადგილების ტიპი</label>
+                            <select name="seat_type" class="form-control">
+                                <option value="any">ყველანაირი</option>
+                                <option value="desks">სკამები და მერხები</option>
+                                <option value="wooden_chair">სკამ-მერხები (ხის)</option>
+                                <option value="plastic_chair">სკამ-მერხები
+                                    (პლასტმასის)</option>
+                                <option value="computers">კომპიუტერები</option>
+                                <option value="tables">მაგიდები</option>
+                            </select>
+                        </div>
+                        
+                        <div class="checkbox">
+                            <label class="control-label" for="available"> 
+                                <input type="checkbox" name="can_be_booked">
+                                                                                     შეიძლება სტუდენტისთვის
+                            </label>
+                        </div>
+                        
+                        <div class="checkbox">
+                            <label class="control-label" for="problems">
+                                <input type="checkbox" name="no_problems">
+                                                                                      პრობლემების გარეშე
+                            </label>
+                        </div>
+    
+                        <input type="submit" value="ძებნა" class="btn btn-default">
+                        
+                        <input type="hidden" name="search" value="true" class="form-control">
+                </form>
 
-                        <td style="text-align: left">
-                            <input type="number" name="capacity_to">
-                            <br>-მდე
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left">ოთახის ტიპი</td>
-                        <td style="text-align: left"><select name="room_type">
-                            <option value="any">ყველა</option>
-                            <option value="auditorium">აუდიტორია</option>
-                            <option value="utility">სხვა</option>
-                        </select></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left">ადგილების ტიპი</td>
-                        <td style="text-align: left"><select name="seat_type">
-                            <option value="any">ყველანაირი</option>
-                            <option value="desks">სკამები და მერხები</option>
-                            <option value="wooden_chair">სკამ-მერხები
-                                (ხის)
-                            </option>
-                            <option value="plastic_chair">სკამ-მერხები
-                                (პლასტმასის)
-                            </option>
-                            <option value="computers">კომპიუტერები</option>
-                            <option value="tables">მაგიდები</option>
-                        </select></td>
-                    </tr>
-                    <tr>
 
-                        <td style="text-align: left"><label>
-                            <input type="checkbox" name="can_be_booked">
-                        </label>შეიძლება სტუდენტისთვის
-                        </td>
-                        <td style="text-align: left"></td>
-                    </tr>
+            <td style="width: 85%">
+                <div align="center"
+                    style="overflow-y: scroll; height: 100%;">
+                    <style>
+                        td, tr {
+                            text-align: center;
+                            align-items: center;
+                        }
+                    </style>
 
-                    <tr>
+                    <table>
 
-                        <td style="text-align: left"><label>
-                            <input type="checkbox" name="no_problems">
-                        </label>პრობლემების გარეშე
-                        </td>
-                        <td style="text-align: left"></td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: left"><input type="submit" value="ძებნა"></td>
-                    </tr>
-                </table>
-                <input type="hidden" name="search" value="true">
-            </form>
-
-        </td>
-
-        <td style="width: 85%">
-            <div align="center" style="overflow-y: scroll; height: 100%;">
-                <style>
-                    td, tr {
-                        text-align: center;
-                        align-items: center;
-                    }
-                </style>
-
-                <table>
-
-                    <%
+                        <%
                         RoomSearchQuery query = new RoomSearchQuery();
                         buildQuery(request, query);
                         List<Room> rooms = manager.findRooms(query);
@@ -174,11 +177,11 @@
                             out.println("                    ");
 
                         } %>
-                </table>
+                    </table>
 
-            </div>
-        </td>
-    </tr>
-</table>
+                </div>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
