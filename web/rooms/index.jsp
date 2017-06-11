@@ -54,14 +54,14 @@
 
     <table style="height: 100%; width: 100%;">
         <tr>
-            <td style="width: 30%; left-margin: 10px;">
+            <td style="width: 30%;">
 
                 <form style="width: 100%" action="index.jsp"
                     method="post" class="form-vertical">
 
                         <div class="form-group">
                             <label class="control-label" for="name">ოთახის სახელი</label>
-                            <input name="room_name" class="form-control"
+                            <input type="text" name="room_name" class="form-control"
                                 placeholder="შეიყვანეთ ოთახის სახელი">
                         </div>
                         
@@ -119,7 +119,7 @@
                             </label>
                         </div>
     
-                        <input type="submit" value="ძებნა" class="btn btn-default">
+                        <input type="submit" value="ძებნა" class="btn btn-primary">
                         
                         <input type="hidden" name="search" value="true" class="form-control">
                 </form>
