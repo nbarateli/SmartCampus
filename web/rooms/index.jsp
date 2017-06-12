@@ -14,7 +14,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%!
     private Integer nullIfNoLength(String s) {
-        return s == null || s.length() < 1 ? null : Integer.valueOf(s);
+        return s == null || s.length() < 1 ? null : (Integer.valueOf(s) < 0 ? 0 : Integer.valueOf(s));
 
     }
 
@@ -34,9 +34,9 @@
         query.setAvailableForBooking(canBeBooked);
     }
 
-    private RoomManager manager;%>
+%>
 <%
-    manager = (RoomManager) request.getServletContext().getAttribute(ROOM_MANAGER);
+    RoomManager manager = (RoomManager) request.getServletContext().getAttribute(ROOM_MANAGER);
 %>
 <html>
 <head>
@@ -59,44 +59,45 @@
             <td id="left-td">
 
                 <form id="search-form" action="index.jsp"
-                    method="post" class="form-vertical">
+                    method="get" class="form-vertical" accept-charset="UTF-8">
+                    <input type="hidden" name="search" value="true" class="form-control">
 
-                        <div class="form-group">
+                    <div class="form-group">
                             <label class="control-label" for="name">ოთახის სახელი</label>
-                            <input type="text" name="room_name" class="form-control"
+                            <input type="text" name="room_name" class="form-control" id="name"
                                 placeholder="შეიყვანეთ ოთახის სახელი">
                         </div>
-                        
-                        <div class="form-group">    
+
+                        <div class="form-group">
                             <label class="control-label" for="floor">სართული</label>
-                            <input type="number" name="room_floor" class="form-control"
+                            <input type="number" name="room_floor" class="form-control" id="floor"
                                 placeholder="შეიყვანეთ სართული">
                         </div>
-                        
-                        <div class="form-group">
+
+                        <div class="form-group" id="capacity">
                             <label class="control-label" for="capacity">
                                                                                     ადგილების რაოდენობა</label>
                             <input type="number" name="capacity_from" class="form-control"
                                 title="-დან" placeholder="ადგილების რაოდენობა(-დან)">
-                            
-                            <br> 
-                            
+
+                            <br>
+
                             <input type="number" name="capacity_to" class="form-control"
                                 title="-მდე" placeholder="ადგილების რაოდენობა(-მდე)">
                         </div>
-                        
+
                         <div class="select">
                             <label class="control-label" for="room_type">ოთახის ტიპი</label>
-                            <select name="room_type" class="form-control">
+                            <select name="room_type" class="form-control" id="room_type">
                                     <option value="any">ყველა</option>
                                     <option value="auditorium">აუდიტორია</option>
                                     <option value="utility">სხვა</option>
                             </select>
-                        </div>        
-                        
+                        </div>
+
                         <div class="select">
                             <label class="control-label" for="seat_type">ადგილების ტიპი</label>
-                            <select name="seat_type" class="form-control">
+                            <select name="seat_type" class="form-control" id="seat_type">
                                 <option value="any">ყველანაირი</option>
                                 <option value="desks">სკამები და მერხები</option>
                                 <option value="wooden_chair">სკამ-მერხები (ხის)</option>
@@ -106,24 +107,23 @@
                                 <option value="tables">მაგიდები</option>
                             </select>
                         </div>
-                        
+
                         <div class="checkbox">
-                            <label class="control-label" for="available"> 
-                                <input type="checkbox" name="can_be_booked">
+                            <label class="control-label" for="can_be_booked">
+                                <input type="checkbox" name="can_be_booked" id="can_be_booked">
                                                                                      შეიძლება სტუდენტისთვის
                             </label>
                         </div>
-                        
+
                         <div class="checkbox">
                             <label class="control-label" for="problems">
-                                <input type="checkbox" name="no_problems">
+                                <input type="checkbox" name="no_problems" id="problems">
                                                                                       პრობლემების გარეშე
                             </label>
                         </div>
-    
+
                         <input type="submit" value="ძებნა" class="btn btn-primary">
-                        
-                        <input type="hidden" name="search" value="true" class="form-control">
+
                 </form>
 
 
@@ -140,7 +140,7 @@
                         for (Room room : rooms) {
                             out.println("<tr>");
                             out.println("<td id=\"room-id-td\">" +
-                                    "<a href=room.jsp?id=" + room.getRoomID() + ">" 
+                                    "<a href=room.jsp?id=" + room.getRoomID() + ">"
                                     + room.getRoomName() + "<a></td>");
                             out.println("</tr>");
                             out.println("<tr>");
@@ -160,9 +160,9 @@
                             out.println("</tr>");
                             out.println("<tr id=\"room-info-tr\">");
                             out.println("<td>შეიძლება დაჯავშნა: ");
-                            out.println(room.isAvailableForStudents() 
-                                    ? "<span id=\"yes-span\">კი</span>"
-                                    : "<span id=\"no-span\">არა</span>");
+                            out.println(room.isAvailableForStudents()
+                                    ? "<span id=\"yes-span\">კი.</span>"
+                                    : "<span id=\"no-span\">არა.</span>");
                             out.println("</td> ");
                             out.println("<td>ადგილის ტიპი: "
                                     + seatTypeToString(room.getSeatType()) + ".</td>");
@@ -171,7 +171,7 @@
                             out.println("</table>");
                             out.println("</td>");
                             out.println("</tr>");
-                            
+
 
                         } %>
                     </table>
