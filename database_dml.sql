@@ -61,5 +61,9 @@ INSERT INTO lecture (lecturer, room_id, subject_id, day_of_week, start_time, end
   (8, 2, 4, 'wednesday', '17:00',  '19:10'),
   (8, 2, 4, 'saturday', '11:10',  '13:20');
   
-    
+Select * from lecture 
+Where 
+lecturer like "%%" AND
+room_id = 4 AND
+True;
     
