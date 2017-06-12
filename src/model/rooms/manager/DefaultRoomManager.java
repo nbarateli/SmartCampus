@@ -4,6 +4,7 @@ import model.DBConnector;
 
 import static model.SQLConstants.*;
 
+import model.Interfaces.SearchQuery;
 import model.rooms.Room;
 
 import model.rooms.RoomSearchQuery;
@@ -32,7 +33,7 @@ public class DefaultRoomManager implements RoomManager {
     }
 
     @Override
-    public List<Room> findRooms(RoomSearchQuery query) {
+    public List<Room> find(SearchQuery query) {
         List<Room> rooms = new ArrayList<>();
         Connection con = null;
         try {
@@ -66,7 +67,7 @@ public class DefaultRoomManager implements RoomManager {
     }
 
     @Override
-    public void addRoom(Room room) {
+    public void add(Room room) {
         String insertQuery = "insert into " + SQL_TABLE_ROOM + " (" +
                 SQL_COLUMN_ROOM_NAME + ", " + SQL_COLUMN_ROOM_FLOOR + ", " +
                 SQL_COLUMN_ROOM_TYPE + ", " + SQL_COLUMN_ROOM_CAPACITY +
@@ -83,7 +84,7 @@ public class DefaultRoomManager implements RoomManager {
     }
 
     @Override
-    public void removeRoom(Room room) {
+    public void remove(Room room) {
 
         String deleteQuery = "delete from " + SQL_TABLE_ROOM + " where room_id = " + room.getRoomID();
         try {

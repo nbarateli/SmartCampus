@@ -57,7 +57,6 @@ public class DBConnector {
     private static Object execute(String sql, boolean isUpdate) throws SQLException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-
             Connection connection = DriverManager.getConnection
                     (MYSQL_DATABASE_SERVER, MYSQL_USERNAME, MYSQL_PASSWORD);
             Statement statement = connection.createStatement();

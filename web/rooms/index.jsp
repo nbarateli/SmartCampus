@@ -132,7 +132,7 @@
                   <%
                     RoomSearchQuery query = new RoomSearchQuery();
                     buildQuery(request, query);
-                    List<Room> rooms = manager.findRooms(query);
+                    List<Room> rooms = manager.find(query);
                     System.out.println(rooms.size());
                     for (Room room : rooms) {
                         out.println("<div id=\"room-id-div\">" +

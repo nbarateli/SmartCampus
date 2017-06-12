@@ -2,6 +2,7 @@ package model.rooms;
 
 import static model.SQLConstants.*;
 
+import model.Interfaces.SearchQuery;
 import model.accounts.User;
 import model.lecture.Lecture;
 
@@ -10,7 +11,7 @@ import model.lecture.Lecture;
  * <p>
  * A class responsible for generating valid SQL queries for searching rooms.
  */
-public class RoomSearchQuery {
+public class RoomSearchQuery implements SearchQuery{
 
     private String name;
     private Integer floor;
