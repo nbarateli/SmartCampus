@@ -1,0 +1,48 @@
+@CHARSET "UTF-8";
+
+#full-table {
+  height: 100%; 
+  width: 100%;
+}
+
+#left-td {
+  width: 30%;
+}
+
+#search-form {
+  width: 100%;
+}
+
+#right-td {
+  width: 85%;
+}
+
+#right-div {
+  overflow-y: scroll; 
+  height: 100%;
+}
+
+td, tr {
+  text-align: center;
+  align-items: center;
+}
+
+#room-id-td {
+  font-size: 25px;
+}
+
+#room-table {
+  font-size: 17px;
+}
+
+#room-info-tr {
+  align-items: center;
+}
+
+#yes-span {
+  color: #009900;
+}
+
+#no-span {
+  color: #cc0000;
+}

@@ -45,6 +45,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="SearchPageStyle.css">
     <script
         src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script
@@ -52,11 +54,11 @@
 </head>
 <body>
 
-    <table style="height: 100%; width: 100%;">
+    <table id="full-table">
         <tr>
-            <td style="width: 30%;">
+            <td id="left-td">
 
-                <form style="width: 100%" action="index.jsp"
+                <form id="search-form" action="index.jsp"
                     method="post" class="form-vertical">
 
                         <div class="form-group">
@@ -125,15 +127,8 @@
                 </form>
 
 
-            <td style="width: 85%">
-                <div align="center"
-                    style="overflow-y: scroll; height: 100%;">
-                    <style>
-                        td, tr {
-                            text-align: center;
-                            align-items: center;
-                        }
-                    </style>
+            <td id="right-td">
+                <div align="center" id="right-div">
 
                     <table>
 
@@ -141,40 +136,42 @@
                         RoomSearchQuery query = new RoomSearchQuery();
                         buildQuery(request, query);
                         List<Room> rooms = manager.findRooms(query);
-
+                        System.out.println(rooms.size());
                         for (Room room : rooms) {
                             out.println("<tr>");
-                            out.println("                        <td style=\"font-size: 25px\">" +
-                                    "<a href=room.jsp?id="+room.getRoomID()+">" + room.getRoomName() + "<a></td>");
-                            out.println("                    </tr>");
-                            out.println("                    <tr>");
+                            out.println("<td id=\"room-id-td\">" +
+                                    "<a href=room.jsp?id=" + room.getRoomID() + ">" 
+                                    + room.getRoomName() + "<a></td>");
+                            out.println("</tr>");
+                            out.println("<tr>");
                             List<String> images = manager.getAllImagesOf(room);
                             String src = images.size() > 0 ? images.get(0) : NO_IMAGE;
-                            out.println("                        <td><img src=\"" + src + "\" height=\"60%\"></td>");
+                            out.println("<td><img src=\"" + src + "\" height=\"60%\"></td>");
 
-                            out.println("                    </tr>");
-                            out.println("                    <tr>");
-                            out.println("                        <td>");
-                            out.println("                            <table style=\"font-size: 17\">");
-                            out.println("                                <tr style=\"align-items: center\">");
-                            out.println("                                    <td>სართული: " + room.getFloor() + ".</td>");
-                            out.println("                                    <td>ოთახის ტიპი: "
+                            out.println("</tr>");
+                            out.println("<tr>");
+                            out.println("<td>");
+                            out.println("<table id=\"room-table\">");
+                            out.println("<tr id=\"room-info-tr\">");
+                            out.println("<td>სართული: " + room.getFloor() + ".</td>");
+                            out.println("<td>ოთახის ტიპი: "
                                     + roomTypeToString(room.getRoomType()) + ".</td>");
-                            out.println("                                    <td>ადგილები: " + room.getCapacity() + ".</td>");
-                            out.println("                                </tr>");
-                            out.println("                                <tr style=\"align-text: center\">");
-                            out.println("                                    <td>შეიძლება დაჯავშნა: ");
-                            out.println(room.isAvailableForStudents() ? "<span style=\"color: #009900\">კი</span>"
-                                    : "<span style=\"color: #cc0000\">არა</span>");
+                            out.println("<td>ადგილები: " + room.getCapacity() + ".</td>");
+                            out.println("</tr>");
+                            out.println("<tr id=\"room-info-tr\">");
+                            out.println("<td>შეიძლება დაჯავშნა: ");
+                            out.println(room.isAvailableForStudents() 
+                                    ? "<span id=\"yes-span\">კი</span>"
+                                    : "<span id=\"no-span\">არა</span>");
                             out.println("</td> ");
-                            out.println("                                    <td>ადგილის ტიპი: "
+                            out.println("<td>ადგილის ტიპი: "
                                     + seatTypeToString(room.getSeatType()) + ".</td>");
-                            out.println("                                </tr>");
-                            out.println("                                </tr>");
-                            out.println("                            </table>");
-                            out.println("                        </td>");
-                            out.println("                    </tr>");
-                            out.println("                    ");
+                            out.println("</tr>");
+                            out.println("</tr>");
+                            out.println("</table>");
+                            out.println("</td>");
+                            out.println("</tr>");
+                            
 
                         } %>
                     </table>
