@@ -85,8 +85,8 @@ CREATE TABLE lecture
   room_id     INT             NOT NULL,
   subject_id  INT             NOT NULL,
   day_of_week ENUM ('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'),
-  start_time  DATETIME        NOT NULL,
-  end_time    DATETIME        NOT NULL,
+  start_time  TIME        NOT NULL,
+  end_time    TIME        NOT NULL,
   CONSTRAINT lecture_user_user_id_fk FOREIGN KEY (lecturer) REFERENCES campus_user (user_id),
   CONSTRAINT lecture_room_room_id_fk FOREIGN KEY (room_id) REFERENCES room (room_id),
   CONSTRAINT lecture_subject_subject_id_fk FOREIGN KEY (subject_id) REFERENCES campus_subject (subject_id)

@@ -46,19 +46,20 @@ INSERT INTO room_problem (room_id, reported_by, description, date_created) VALUE
   (6, 3, 'კონდიციონერი არ არის', str_to_date('06-06-2017', '%d-%m-%Y'));
 
 INSERT INTO lecture (lecturer, room_id, subject_id, day_of_week, start_time, end_time) VALUES
-  (6, 4, 1, 'monday', str_to_date('10:00', '%H:%i'), str_to_date('12:10', '%H:%i')),
-  (6, 4, 1, 'monday', str_to_date('13:30', '%H:%i'), str_to_date('15:40', '%H:%i')),
-  (6, 20, 1, 'thursday', str_to_date('10:00', '%H:%i'), str_to_date('12:10', '%H:%i')),
-  (6, 5, 1, 'friday', str_to_date('11:10', '%H:%i'), str_to_date('13:20', '%H:%i')),
-  (7, 9, 2, 'tuesday', str_to_date('11:10', '%H:%i'), str_to_date('12:10', '%H:%i')),
-  (7, 10, 2, 'tuesday', str_to_date('12:20', '%H:%i'), str_to_date('14:30', '%H:%i')),
-  (7, 7, 2, 'friday', str_to_date('10:00', '%H:%i'), str_to_date('11:00', '%H:%i')),
-  (7, 10, 2, 'friday', str_to_date('11:10', '%H:%i'), str_to_date('12:10', '%H:%i')),
-  (7, 8, 2, 'friday', str_to_date('13:30', '%H:%i'), str_to_date('14:30', '%H:%i')),
-  (9, 3, 3, 'monday', str_to_date('16:00', '%H:%i'), str_to_date('18:00', '%H:%i')),
-  (9, 3, 3, 'sunday', str_to_date('12:00', '%H:%i'), str_to_date('17:00', '%H:%i')),
-  (8, 2, 4, 'tuesday', str_to_date('17:00', '%H:%i'), str_to_date('19:10', '%H:%i')),
-  (8, 2, 4, 'wednesday', str_to_date('17:00', '%H:%i'), str_to_date('19:10', '%H:%i')),
-  (8, 2, 4, 'saturday', str_to_date('11:10', '%H:%i'), str_to_date('13:20', '%H:%i'));
+  (6, 4, 1, 'monday', '10:00', '12:10'),
+  (6, 4, 1, 'monday', '13:30', '15:40'),
+  (6, 20, 1, 'thursday', '10:00', '12:10'),
+  (6, 5, 1, 'friday', '11:10', '13:20'),
+  (7, 9, 2, 'tuesday', '11:10', '12:10'),
+  (7, 10, 2, 'tuesday', '12:20', '14:30'),
+  (7, 7, 2, 'friday', '10:00',  '11:00'),
+  (7, 10, 2, 'friday', '11:10',  '12:10'),
+  (7, 8, 2, 'friday', '13:30', '14:30'),
+  (9, 3, 3, 'monday', '16:00', '18:00'),
+  (9, 3, 3, 'sunday', '12:00', '17:00'),
+  (8, 2, 4, 'tuesday', '17:00',  '19:10'),
+  (8, 2, 4, 'wednesday', '17:00',  '19:10'),
+  (8, 2, 4, 'saturday', '11:10',  '13:20');
+  
     
     
