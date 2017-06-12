@@ -1,5 +1,9 @@
 @CHARSET "UTF-8";
 
+body {
+  background-color: #A2D9CE;  
+}
+
 #full-table {
   height: 100%;
   width: 100%;
