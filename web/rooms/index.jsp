@@ -138,7 +138,7 @@
                         out.println("<div id=\"room-id-div\">" +
                                 "<a href=room.jsp?id=" + room.getRoomID() + ">" 
                                 + room.getRoomName() + "</a></div>");
-                        out.println("<button>ინფორმაციის ჩამოშლა</button>");
+                        out.println("<button>ვრცლად</button>");
                       
                         List<String> images = manager.getAllImagesOf(room);
                         String src = images.size() > 0 ? images.get(0) : NO_IMAGE;

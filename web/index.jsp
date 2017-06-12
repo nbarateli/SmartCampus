@@ -6,54 +6,60 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-<title>SmartCampus</title>
+    <title>SmartCampus</title>
 </head>
+<meta name="google-signin-client_id"
+      content="752594653432-dcqce0b92nbtce0d0ahpq91jfis07092.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/api.js">gapi.load('auth2', function () {
+    gapi.auth2.init();
+
+});
+</script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <body>
-	<div align="center">
-		<table>
-			<tr>
-				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td>რა გაგჭირვებია?</td>
-				<td></td>
-			</tr>
-			<tr></tr>
-			<tr>
-				<table>
-					<tr>
-						<td></td>
-						<td><a href="rooms/index.jsp">ოთახის მოძებნა მინდა</a></td>
-						<td></td>
+<div align="center">
+    <table>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>რა გაგჭირვებია?</td>
+            <td></td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <table>
+                <tr>
+                    <td></td>
+                    <td><a href="rooms/index.jsp">ოთახის მოძებნა მინდა</a></td>
+                    <td></td>
 
-						<td><a href="index.jsp">დავკარგე რაღაც</a></td>
+                    <td><a href="index.jsp">დავკარგე რაღაც</a></td>
 
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td><a href="index.jsp">პრობლემა მინდა შეგატყობინოთ</a></td>
-						<td></td>
-					</tr>
-				</table>
-			</tr>
-			<tr></tr>
-			<tr>
-				<div align="center">
-					<a href="index.jsp"><img
-						src="https://developers.google.com/+/images/branding/sign-in-buttons/Red-signin_Google_base_44dp.png"
-						style="width: 10%; height: 5%;"></a>
-				</div>
-			</tr>
-		</table>
-	</div>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><a href="index.jsp">პრობლემა მინდა შეგატყობინოთ</a></td>
+                    <td></td>
+                </tr>
+            </table>
+        </tr>
+        <tr></tr>
+        <tr>
+            <div align="center">
+                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            </div>
+        </tr>
+    </table>
+</div>
 </body>
 </html>
