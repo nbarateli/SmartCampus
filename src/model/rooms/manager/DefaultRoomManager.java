@@ -1,13 +1,11 @@
 package model.rooms.manager;
 
-import model.DBConnector;
+import model.database.DBConnector;
 
-import static model.SQLConstants.*;
+import static model.database.SQLConstants.*;
 
-import model.Interfaces.SearchQuery;
+import model.campus.CampusSearchQuery;
 import model.rooms.Room;
-
-import model.rooms.RoomSearchQuery;
 
 import java.sql.*;
 import java.util.*;
@@ -33,7 +31,7 @@ public class DefaultRoomManager implements RoomManager {
     }
 
     @Override
-    public List<Room> find(SearchQuery query) {
+    public List<Room> find(CampusSearchQuery query) {
         List<Room> rooms = new ArrayList<>();
         Connection con = null;
         try {
@@ -86,7 +84,7 @@ public class DefaultRoomManager implements RoomManager {
     @Override
     public void remove(Room room) {
 
-        String deleteQuery = "delete from " + SQL_TABLE_ROOM + " where room_id = " + room.getRoomID();
+        String deleteQuery = "delete from " + SQL_TABLE_ROOM + " where room_id = " + room.getID();
         try {
             DBConnector.executeUpdate(deleteQuery);
         } catch (SQLException e) {
@@ -98,7 +96,7 @@ public class DefaultRoomManager implements RoomManager {
     @Override
     public List<String> getAllImagesOf(Room room) {
         List<String> images = new LinkedList<>();
-        String sql = "SELECT image_url FROM  room_image WHERE room_image.room_id = room." + room.getRoomID();
+        String sql = "SELECT image_url FROM  room_image WHERE room_image.room_id = room." + room.getID();
         Connection con = null;
         try {
             ResultSet rs = DBConnector.executeQuery(sql);

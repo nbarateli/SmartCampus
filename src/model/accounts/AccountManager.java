@@ -1,5 +1,7 @@
 package model.accounts;
 
+import model.campus.CampusManager;
+
 import java.sql.Statement;
 
 /**
@@ -9,7 +11,7 @@ import java.sql.Statement;
  * Responsible for pulling and pushing information related to user accounts
  * from and into the database.
  */
-public interface AccountManager {
+public interface AccountManager extends CampusManager<User> {
 
     //TODO: write related methods prototypes.
 }

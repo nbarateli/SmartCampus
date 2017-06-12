@@ -1,12 +1,14 @@
 package model.accounts;
 
+import model.campus.CampusObject;
+
 /**
  * Created by Niko on 07.06.2017.
  * <p>
  * The SmartCampus account ADT
  * (immutable)
  */
-public class User {
+public class User implements CampusObject {
     private final int userID;
     private final String eMail;
     private final String firstName;
@@ -15,7 +17,19 @@ public class User {
     private final UserType userType;
     private final UserRole userRole;
 
-    public int getUserID() {
+    public User(int userID, String eMail, String firstName, String lastName,
+                UserStatus status, UserType userType, UserRole userRole) {
+        this.userID = userID;
+        this.eMail = eMail;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.status = status;
+        this.userType = userType;
+        this.userRole = userRole;
+    }
+
+    @Override
+    public int getID() {
         return userID;
     }
 
@@ -41,17 +55,6 @@ public class User {
 
     public UserRole getUserRole() {
         return userRole;
-    }
-
-    public User(int userID, String eMail, String firstName, String lastName,
-                UserStatus status, UserType userType, UserRole userRole) {
-        this.userID = userID;
-        this.eMail = eMail;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.status = status;
-        this.userType = userType;
-        this.userRole = userRole;
     }
 
     public enum UserStatus {

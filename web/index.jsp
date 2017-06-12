@@ -15,11 +15,15 @@
       content="752594653432-dcqce0b92nbtce0d0ahpq91jfis07092.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/api.js">gapi.load('auth2', function () {
     gapi.auth2.init();
-
 });
 </script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
-
+<script>
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log(profile.getEmail());
+    }
+</script>
 <body>
 <div align="center">
     <table>
@@ -57,6 +61,15 @@
         <tr>
             <div align="center">
                 <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                <a href="#" onclick="signOut();">Sign out</a>
+                <script>
+                    function signOut() {
+                        var auth2 = gapi.auth2.getAuthInstance();
+                        auth2.signOut().then(function () {
+                            console.log('User signed out.');
+                        });
+                    }
+                </script>
             </div>
         </tr>
     </table>

@@ -1,11 +1,13 @@
 package model.rooms;
 
+import model.campus.CampusObject;
+
 /**
  * Created by Niko on 07.06.2017.
  * <p>
  * The SmartCampus Room ADT (Immutable)
  */
-public class Room {
+public class Room implements CampusObject {
     private final int roomID;
     private final int capacity;
     private final String roomName;
@@ -36,7 +38,8 @@ public class Room {
         return isAvailableForStudents;
     }
 
-    public int getRoomID() {
+    @Override
+    public int getID() {
         return roomID;
     }
 
@@ -57,7 +60,7 @@ public class Room {
     }
 
     public enum RoomType {
-        AUDITORIUM, UTILITY;
+        AUDITORIUM, UTILITY
     }
 
     @Override
@@ -66,7 +69,7 @@ public class Room {
     }
 
     public enum SeatType {
-        DESKS, WOODEN_CHAIR, PLASTIC_CHAIR, COMPUTERS, TABLES;
+        DESKS, WOODEN_CHAIR, PLASTIC_CHAIR, COMPUTERS, TABLES
 
     }
 }

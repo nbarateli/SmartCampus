@@ -1,8 +1,8 @@
 package model.rooms;
 
-import static model.SQLConstants.*;
+import static model.database.SQLConstants.*;
 
-import model.Interfaces.SearchQuery;
+import model.campus.CampusSearchQuery;
 import model.accounts.User;
 import model.lecture.Lecture;
 
@@ -11,7 +11,7 @@ import model.lecture.Lecture;
  * <p>
  * A class responsible for generating valid SQL queries for searching rooms.
  */
-public class RoomSearchQuery implements SearchQuery{
+public class RoomSearchQuery implements CampusSearchQuery {
 
     private String name;
     private Integer floor;
@@ -23,6 +23,7 @@ public class RoomSearchQuery implements SearchQuery{
     private boolean hasProblems;
     private User lecturer;
     private Lecture lecture;
+
     public RoomSearchQuery(String name, Integer floor, Integer capacityFrom, Integer capacityTo,
                            Room.RoomType roomType, boolean availableForBooking,
                            Room.SeatType seatType, boolean hasProblems,
@@ -143,28 +144,6 @@ public class RoomSearchQuery implements SearchQuery{
 
     }
 
-    private String hasProblemsQuery() {
-
-
-        return hasProblems ? "" : " AND COUNT(SELECT * FROM room_problem\n" +
-                " WHERE room_problem.room_id = ) < 1";
-    }
-
-
-    private String assertAndGetEqualQuery(String field, String rowName) {
-
-        return field == null ? "" : " " + rowName + " like \'%" + field + "%\'";
-    }
-
-    private boolean hasNonNullFields() {
-
-        return availableForBooking || !hasProblems || name != null || floor != null ||
-                capacityFrom != null || capacityTo != null ||
-                roomType != null || seatType != null || 
-                lecture != null || lecturer !=null;
-
-    }
-
     /**
      * @return the lecturer
      */
@@ -191,5 +170,38 @@ public class RoomSearchQuery implements SearchQuery{
      */
     public void setLecture(Lecture lecture) {
         this.lecture = lecture;
+    }
+
+    /**
+     * Returns a segment of SQL query that checks whether the given room has any problems.
+     */
+    private String hasProblemsQuery() {
+
+        return hasProblems ? "" : " AND COUNT(SELECT * FROM room_problem\n" +
+                " WHERE room_problem.room_id = ) < 1";
+    }
+
+    /**
+     * If the passed field isn't null, generates "like" query for it.
+     *
+     * @param field  value being searched
+     * @param column name of the column
+     * @return an empty string or a valid segment of SQL query.
+     */
+    private String assertAndGetEqualQuery(String field, String column) {
+
+        return field == null ? "" : " " + column + " like \'%" + field + "%\'";
+    }
+
+    /**
+     * Returns whether this object has any variable in non-default state.
+     */
+    private boolean hasNonNullFields() {
+
+        return availableForBooking || !hasProblems || name != null || floor != null ||
+                capacityFrom != null || capacityTo != null ||
+                roomType != null || seatType != null ||
+                lecture != null || lecturer != null;
+
     }
 }
