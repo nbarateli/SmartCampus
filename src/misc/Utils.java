@@ -1,5 +1,6 @@
 package misc;
 
+import model.lecture.Lecture;
 import model.rooms.*;
 
 import static model.rooms.Room.RoomType.*;
@@ -88,5 +89,28 @@ public class Utils {
         }
         throw new IllegalArgumentException();
 
+    }
+
+    /*
+    * Converts given String to WeekDays format.
+    * */
+    public static Lecture.WeekDays toWeekDay(String day){
+        switch (day){
+            case "monday":
+                return Lecture.WeekDays.MONDAY;
+            case "tuesday":
+                return Lecture.WeekDays.TUESDAY;
+            case "wednesday":
+                return Lecture.WeekDays.WEDNESDAY;
+            case "thursday":
+                return Lecture.WeekDays.THURSDAY;
+            case "friday":
+                return Lecture.WeekDays.FRIDAY;
+            case "saturday":
+                return Lecture.WeekDays.SATURDAY;
+            case "sunday":
+                return Lecture.WeekDays.SUNDAY;
+        }
+        return null;
     }
 }
