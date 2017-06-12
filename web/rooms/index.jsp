@@ -14,7 +14,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%!
     private Integer nullIfNoLength(String s) {
-        return s == null || s.length() < 1 ? null : Integer.valueOf(s);
+        return s == null || s.length() < 1 ? null : Integer.valueOf(s) < 0 ? 0: Integer.valueOf(s);
     }
     private void buildQuery(HttpServletRequest request, RoomSearchQuery query) {
         if (request.getParameter("search") == null) return;
