@@ -2,6 +2,9 @@ package model.rooms;
 
 import static model.SQLConstants.*;
 
+import model.accounts.User;
+import model.lecture.Lecture;
+
 /**
  * Created by Niko on 07.06.2017.
  * <p>
@@ -17,10 +20,12 @@ public class RoomSearchQuery {
     private Room.SeatType seatType;
     private boolean availableForBooking;
     private boolean hasProblems;
-
+    private User lecturer;
+    private Lecture lecture;
     public RoomSearchQuery(String name, Integer floor, Integer capacityFrom, Integer capacityTo,
                            Room.RoomType roomType, boolean availableForBooking,
-                           Room.SeatType seatType, boolean hasProblems) {
+                           Room.SeatType seatType, boolean hasProblems,
+                           User lecturer, Lecture lecture) {
         this.name = name;
         this.floor = floor;
         this.capacityFrom = capacityFrom;
@@ -29,6 +34,7 @@ public class RoomSearchQuery {
         this.seatType = seatType;
         this.availableForBooking = availableForBooking;
         this.hasProblems = hasProblems;
+        this.lecturer = lecturer;
     }
 
     /**
@@ -36,7 +42,7 @@ public class RoomSearchQuery {
      */
     public RoomSearchQuery() {
         this(null, null, null, null,
-                null, false, null, true);
+                null, false, null, true, null, null);
     }
 
     public String getName() {
@@ -153,7 +159,36 @@ public class RoomSearchQuery {
 
         return availableForBooking || !hasProblems || name != null || floor != null ||
                 capacityFrom != null || capacityTo != null ||
-                roomType != null || seatType != null;
+                roomType != null || seatType != null || 
+                lecture != null || lecturer !=null;
 
+    }
+
+    /**
+     * @return the lecturer
+     */
+    public User getLecturer() {
+        return lecturer;
+    }
+
+    /**
+     * @param lecturer the lecturer to set
+     */
+    public void setLecturer(User lecturer) {
+        this.lecturer = lecturer;
+    }
+
+    /**
+     * @return the lecture
+     */
+    public Lecture getLecture() {
+        return lecture;
+    }
+
+    /**
+     * @param lecture the lecture to set
+     */
+    public void setLecture(Lecture lecture) {
+        this.lecture = lecture;
     }
 }

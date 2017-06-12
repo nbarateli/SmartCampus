@@ -25,18 +25,14 @@
 td, tr {
   text-align: center;
   align-items: center;
-
 }
 
-#room-id-td {
+#room-id-div {
   font-size: 25px;
 }
 
-#room-table {
+#room-info-div {
   font-size: 17px;
-}
-
-#room-info-tr {
   align-items: center;
 }
 

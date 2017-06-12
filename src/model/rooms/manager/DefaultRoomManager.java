@@ -84,15 +84,14 @@ public class DefaultRoomManager implements RoomManager {
 
     @Override
     public void removeRoom(Room room) {
-        if (roomExists(room)) {
-            String deleteQuery = "delete from " + SQL_TABLE_ROOM + " where room_id = " +
-                    room.getRoomID();
-            try {
-                DBConnector.executeUpdate(deleteQuery);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+
+        String deleteQuery = "delete from " + SQL_TABLE_ROOM + " where room_id = " + room.getRoomID();
+        try {
+            DBConnector.executeUpdate(deleteQuery);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
     }
 
     @Override
@@ -120,14 +119,4 @@ public class DefaultRoomManager implements RoomManager {
         return images;
     }
 
-    /**
-     * Returns whether the given room exists in database
-     */
-    private boolean roomExists(Room room) {
-        return !findRooms(new RoomSearchQuery(room.getRoomName(), room.getFloor(), room.getCapacity(),
-                room.getCapacity(), room.getRoomType(), room.isAvailableForStudents(),
-                room.getSeatType(), true)).isEmpty() || !findRooms(new RoomSearchQuery(room.getRoomName(),
-                room.getFloor(), room.getCapacity(), room.getCapacity(), room.getRoomType(),
-                room.isAvailableForStudents(), room.getSeatType(), false)).isEmpty();
-    }
 }
