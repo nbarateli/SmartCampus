@@ -31,7 +31,6 @@ public class Lecture implements CampusObject {
         return lectureID;
     }
 
-
     public int getLecturerID() {
         return lecturerID;
     }
