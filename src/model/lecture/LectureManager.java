@@ -21,10 +21,10 @@ import static model.database.SQLConstants.*;
  * and is responsible for finding, adding and removing lecture entities.
  * NOTE: THIS CLASS IS NOT TESTED YET.
  */
-public class LectureManager implements CampusManager<Lecture> {
+public class LectureManager implements CampusManager<Lecture, LectureSearchQuery> {
 
     @Override
-    public List<Lecture> find(CampusSearchQuery query) {
+    public List<Lecture> find(LectureSearchQuery query) {
         List<Lecture> list = new ArrayList<>();
         Connection con = null;
         try {
@@ -35,7 +35,7 @@ public class LectureManager implements CampusManager<Lecture> {
                 int lecturerID = set.getInt(SQL_COLUMN_LECTURE_LECTURER);
                 int roomID = set.getInt(SQL_COLUMN_LECTURE_ROOM);
                 int subjectID = set.getInt(SQL_COLUMN_LECTURE_SUBJECT);
-                Lecture.WeekDays day = Utils.toWeekDay(set.getString(SQL_COLUMN_LECTURE_DAY));
+                Lecture.WeekDay day = Utils.toWeekDay(set.getString(SQL_COLUMN_LECTURE_DAY));
                 Time startTime = set.getTime(SQL_COLUMN_LECTURE_START_TIME);
                 Time endTime = set.getTime(SQL_COLUMN_LECTURE_END_TIME);
                 Lecture lecture = new Lecture(lectureID, lecturerID, roomID, subjectID, day, startTime, endTime);

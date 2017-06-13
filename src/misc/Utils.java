@@ -92,24 +92,24 @@ public class Utils {
     }
 
     /*
-    * Converts given String to WeekDays format.
+    * Converts given String to WeekDay format.
     * */
-    public static Lecture.WeekDays toWeekDay(String day){
+    public static Lecture.WeekDay toWeekDay(String day){
         switch (day){
             case "monday":
-                return Lecture.WeekDays.MONDAY;
+                return Lecture.WeekDay.MONDAY;
             case "tuesday":
-                return Lecture.WeekDays.TUESDAY;
+                return Lecture.WeekDay.TUESDAY;
             case "wednesday":
-                return Lecture.WeekDays.WEDNESDAY;
+                return Lecture.WeekDay.WEDNESDAY;
             case "thursday":
-                return Lecture.WeekDays.THURSDAY;
+                return Lecture.WeekDay.THURSDAY;
             case "friday":
-                return Lecture.WeekDays.FRIDAY;
+                return Lecture.WeekDay.FRIDAY;
             case "saturday":
-                return Lecture.WeekDays.SATURDAY;
+                return Lecture.WeekDay.SATURDAY;
             case "sunday":
-                return Lecture.WeekDays.SUNDAY;
+                return Lecture.WeekDay.SUNDAY;
         }
         return null;
     }

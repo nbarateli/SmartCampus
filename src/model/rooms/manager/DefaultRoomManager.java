@@ -5,7 +5,9 @@ import model.database.DBConnector;
 import static model.database.SQLConstants.*;
 
 import model.campus.CampusSearchQuery;
+import model.lecture.Lecture;
 import model.rooms.Room;
+import model.rooms.RoomSearchQuery;
 
 import java.sql.*;
 import java.util.*;
@@ -57,7 +59,7 @@ public class DefaultRoomManager implements RoomManager {
     }
 
     @Override
-    public List<Room> find(CampusSearchQuery query) {
+    public List<Room> find(RoomSearchQuery query) {
 
         return findRooms(query.generateQuery());
     }
@@ -114,6 +116,21 @@ public class DefaultRoomManager implements RoomManager {
             }
         }
         return images;
+    }
+
+    @Override
+    public List<Lecture> findAllLecturesAt(Room room) {
+        return null;
+    }
+
+    @Override
+    public List<Lecture> findAllLecturesAt(Room room, Lecture.WeekDay day) {
+        return null;
+    }
+
+    @Override
+    public List<Lecture> findAllLecturesAt(Room room, Lecture.WeekDay day, Time start, Time end) {
+        return null;
     }
 
 }

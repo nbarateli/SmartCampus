@@ -12,11 +12,11 @@ public class Lecture implements CampusObject {
     private final int lecturerID;
     private final int roomID;
     private final int subjectID;
-    private final WeekDays day;
+    private final WeekDay day;
     private final Time startTime;
     private final Time endTime;
 
-    public Lecture(int lectureID, int lecturerID, int roomID, int subjectID, WeekDays day, Time startTime, Time endTime) {
+    public Lecture(int lectureID, int lecturerID, int roomID, int subjectID, WeekDay day, Time startTime, Time endTime) {
         this.lectureID = lectureID;
         this.lecturerID = lecturerID;
         this.roomID = roomID;
@@ -52,11 +52,11 @@ public class Lecture implements CampusObject {
         return new Time(startTime.getTime());
     }
 
-    public WeekDays getDay() {
+    public WeekDay getDay() {
         return day;
     }
 
-    public enum WeekDays {
+    public enum WeekDay {
         MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
     }
 }

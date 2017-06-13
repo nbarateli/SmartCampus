@@ -11,7 +11,7 @@ import model.lecture.Lecture;
  * <p>
  * A class responsible for generating valid SQL queries for searching rooms.
  */
-public class RoomSearchQuery implements CampusSearchQuery {
+public class RoomSearchQuery implements CampusSearchQuery<Room> {
 
     private String name;
     private Integer floor;
