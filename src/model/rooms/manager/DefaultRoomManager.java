@@ -39,18 +39,8 @@ public class DefaultRoomManager implements RoomManager {
         List<Room> rooms = new ArrayList<>();
         try (ResultSet matches = DBConnector.executeQuery(sql)) {
             while (matches.next()) {
-                int id = matches.getInt(SQL_COLUMN_ROOM_ID);
-                int capacity = matches.getInt(SQL_COLUMN_ROOM_CAPACITY);
-                int floor = matches.getInt(SQL_COLUMN_ROOM_FLOOR);
-                String name = matches.getString(SQL_COLUMN_ROOM_NAME);
-                Room.RoomType roomType =
-                        toRoomType(matches.getString(SQL_COLUMN_ROOM_TYPE));
-                Room.SeatType seatType =
-                        toSeatType(matches.getString(SQL_COLUMN_ROOM_SEAT_TYPE));
-                boolean available = matches.getBoolean(SQL_COLUMN_ROOM_AVAILABLE);
 
-                Room room = new Room(id, capacity, name, roomType, seatType, available, floor);
-                rooms.add(room);
+                rooms.add(getRoomFromResults(matches));
             }
         } catch (SQLException e) {
             //doing nothing
@@ -97,40 +87,51 @@ public class DefaultRoomManager implements RoomManager {
     public List<String> getAllImagesOf(Room room) {
         List<String> images = new LinkedList<>();
         String sql = "SELECT image_url FROM  room_image WHERE room_image.room_id = room." + room.getID();
-        Connection con = null;
-        try {
-            ResultSet rs = DBConnector.executeQuery(sql);
-            con = rs.getStatement().getConnection();
+        try (ResultSet rs = DBConnector.executeQuery(sql)) {
+
             while (rs.next()) {
                 images.add(rs.getString(SQL_COLUMN_ROOM_IMAGE_URL));
             }
         } catch (SQLException e) {
             //doing nothing
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return images;
     }
 
     @Override
     public List<Lecture> findAllLecturesAt(Room room) {
-        return null;
+        return findAllLecturesAt(room, null, null, null);
     }
 
     @Override
     public List<Lecture> findAllLecturesAt(Room room, Lecture.WeekDay day) {
-        return null;
+        return findAllLecturesAt(room, day, null, null);
     }
 
     @Override
     public List<Lecture> findAllLecturesAt(Room room, Lecture.WeekDay day, Time start, Time end) {
-        return null;
+        List<Lecture> lectures = new ArrayList<>();
+        String sql = "SELECT * FROM " + SQL_TABLE_LECTURE + " JOIN " + SQL_TABLE_USER + " ON " +
+                SQL_TABLE_LECTURE + "." + SQL_COLUMN_LECTURE_LECTURER + " = " + SQL_TABLE_USER + "." +
+                SQL_COLUMN_USER_ID +
+                " JOIN " + SQL_TABLE_SUBJECT + " ON " + SQL_TABLE_SUBJECT + "." + SQL_COLUMN_SUBJECT_ID +
+                "= " + SQL_TABLE_LECTURE + "." + SQL_COLUMN_SUBJECT_ID + " \n " +
+                " JOIN " + SQL_TABLE_ROOM + " ON " + SQL_TABLE_LECTURE + "." + SQL_COLUMN_ROOM_ID + "" +
+                "= " + SQL_TABLE_ROOM + "." + SQL_COLUMN_ROOM_ID +
+                " WHERE lecture.room_id = " + room.getID() +
+                (day == null ? "" : " AND lecture.day_of_week = " + day.toString()) +
+                (start == null ? "" : " AND start_time >= " + toSqlTime(start)) +
+                (end == null ? "" : " AND end_time <= " + toSqlTime(end));
+        try (ResultSet rs = DBConnector.executeQuery(sql)) {
+            while (rs.next()) {
+                lectures.add(getLectureFromResults(rs));
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            //ignored
+        }
+        return lectures;
     }
 
 }

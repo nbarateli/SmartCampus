@@ -2,7 +2,6 @@ package model.lecture;
 
 import misc.Utils;
 import model.campus.CampusManager;
-import model.campus.CampusSearchQuery;
 import model.database.DBConnector;
 
 import java.sql.Connection;
@@ -26,29 +25,14 @@ public class LectureManager implements CampusManager<Lecture, LectureSearchQuery
     @Override
     public List<Lecture> find(LectureSearchQuery query) {
         List<Lecture> list = new ArrayList<>();
-        Connection con = null;
         try {
             ResultSet set = DBConnector.executeQuery(query.generateQuery());
-            con = set.getStatement().getConnection();
+
             while (set.next()) {
-                int lectureID = set.getInt(SQL_COLUMN_LECTURE_ID);
-                int lecturerID = set.getInt(SQL_COLUMN_LECTURE_LECTURER);
-                int roomID = set.getInt(SQL_COLUMN_LECTURE_ROOM);
-                int subjectID = set.getInt(SQL_COLUMN_LECTURE_SUBJECT);
-                Lecture.WeekDay day = Utils.toWeekDay(set.getString(SQL_COLUMN_LECTURE_DAY));
-                Time startTime = set.getTime(SQL_COLUMN_LECTURE_START_TIME);
-                Time endTime = set.getTime(SQL_COLUMN_LECTURE_END_TIME);
-                Lecture lecture = new Lecture(lectureID, lecturerID, roomID, subjectID, day, startTime, endTime);
-                list.add(lecture);
+                list.add(Utils.getLectureFromResults(set));
             }
         } catch (SQLException e) {
             //doing nothing
-        } finally {
-            if (con != null) try {
-                con.close();
-            } catch (SQLException e) {
-                //doing nothing
-            }
         }
         return list;
     }
@@ -60,7 +44,7 @@ public class LectureManager implements CampusManager<Lecture, LectureSearchQuery
                 SQL_COLUMN_LECTURE_SUBJECT + ", " + SQL_COLUMN_LECTURE_DAY +
                 ", " + SQL_COLUMN_LECTURE_START_TIME + ", " +
                 SQL_COLUMN_LECTURE_END_TIME + ") values (" +
-                lecture.getLecturerID() + ", " + lecture.getRoomID() + ", " + lecture.getSubjectID() + ", '" +
+                lecture.getLecturer() + ", " + lecture.getRoom() + ", " + lecture.getSubject() + ", '" +
                 lecture.getDay().name().toLowerCase() + "', '" + lecture.getStartTime() + "', " +
                 lecture.getEndTime() + ") ";
         try {

@@ -12,6 +12,8 @@ import java.util.List;
  * @param <Q> a SQL query generator related to the given data type.
  */
 public interface CampusManager<T extends CampusObject, Q extends CampusSearchQuery<T>> {
+
+
     List<T> find(Q query);
 
     void add(T entity);

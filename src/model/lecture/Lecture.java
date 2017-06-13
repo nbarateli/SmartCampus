@@ -1,26 +1,31 @@
 package model.lecture;
 
+import model.accounts.User;
 import model.campus.CampusObject;
+import model.rooms.Room;
+
 
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  * Class for Lecture ADT (immutable)
  */
 public class Lecture implements CampusObject {
     private final int lectureID;
-    private final int lecturerID;
-    private final int roomID;
-    private final int subjectID;
+    private final User lecturer;
+    private final Room room;
+    private final CampusSubject subject;
     private final WeekDay day;
     private final Time startTime;
     private final Time endTime;
 
-    public Lecture(int lectureID, int lecturerID, int roomID, int subjectID, WeekDay day, Time startTime, Time endTime) {
+    public Lecture(int lectureID, User lecturer, Room room, CampusSubject subject, WeekDay day, Time startTime, Time endTime) {
         this.lectureID = lectureID;
-        this.lecturerID = lecturerID;
-        this.roomID = roomID;
-        this.subjectID = subjectID;
+        this.lecturer = lecturer;
+        this.room = room;
+        this.subject = subject;
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -31,16 +36,17 @@ public class Lecture implements CampusObject {
         return lectureID;
     }
 
-    public int getLecturerID() {
-        return lecturerID;
+
+    public User getLecturer() {
+        return lecturer;
     }
 
-    public int getRoomID() {
-        return roomID;
+    public Room getRoom() {
+        return room;
     }
 
-    public int getSubjectID() {
-        return subjectID;
+    public CampusSubject getSubject() {
+        return subject;
     }
 
     public Time getEndTime() {
@@ -53,6 +59,16 @@ public class Lecture implements CampusObject {
 
     public WeekDay getDay() {
         return day;
+    }
+
+    @Override
+    public String toString() {
+        DateFormat format = new SimpleDateFormat("hh:mm");
+        return "Lecture{" + "\n"
+                + subject.getName() + ": ლექტორი: " + lecturer.getFirstName() + " " +
+                lecturer.getLastName() + " დღე: " + day + " დასაწყისი " + format.format(startTime) +
+                " აუდიტორია " + room.getRoomName() +
+                "}";
     }
 
     public enum WeekDay {
