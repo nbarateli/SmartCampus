@@ -16,12 +16,11 @@ import static model.database.SQLConstants.*;
 
 /**
  * Created by Shota on 6/13/2017.
+ * <p>
+ * LectureManager class overrides base functionality of CampusManager
+ * and is responsible for finding, adding and removing lecture entities.
+ * NOTE: THIS CLASS IS NOT TESTED YET.
  */
-/*
-* LectureManager class overrides base functionality of CampusManager
-* and is responsible for finding, adding and removing lecture entities.
-* NOTE: THIS CLASS IS NOT TESTED YET.
-* */
 public class LectureManager implements CampusManager<Lecture> {
 
     @Override
@@ -31,7 +30,7 @@ public class LectureManager implements CampusManager<Lecture> {
         try {
             ResultSet set = DBConnector.executeQuery(query.generateQuery());
             con = set.getStatement().getConnection();
-            while (set.next()){
+            while (set.next()) {
                 int lectureID = set.getInt(SQL_COLUMN_LECTURE_ID);
                 int lecturerID = set.getInt(SQL_COLUMN_LECTURE_LECTURER);
                 int roomID = set.getInt(SQL_COLUMN_LECTURE_ROOM);
@@ -39,12 +38,12 @@ public class LectureManager implements CampusManager<Lecture> {
                 Lecture.WeekDays day = Utils.toWeekDay(set.getString(SQL_COLUMN_LECTURE_DAY));
                 Time startTime = set.getTime(SQL_COLUMN_LECTURE_START_TIME);
                 Time endTime = set.getTime(SQL_COLUMN_LECTURE_END_TIME);
-                Lecture lecture = new Lecture(lectureID, lecturerID, roomID, subjectID ,day,startTime,endTime);
+                Lecture lecture = new Lecture(lectureID, lecturerID, roomID, subjectID, day, startTime, endTime);
                 list.add(lecture);
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             //doing nothing
-        }finally {
+        } finally {
             if (con != null) try {
                 con.close();
             } catch (SQLException e) {

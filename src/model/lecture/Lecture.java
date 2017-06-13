@@ -3,9 +3,10 @@ package model.lecture;
 import model.campus.CampusObject;
 
 import java.sql.Time;
-/*
-* Class for Lecture ADT (immutable)
-* */
+
+/**
+ * Class for Lecture ADT (immutable)
+ */
 public class Lecture implements CampusObject {
     private final int lectureID;
     private final int lecturerID;
@@ -15,7 +16,7 @@ public class Lecture implements CampusObject {
     private final Time startTime;
     private final Time endTime;
 
-    public Lecture(int lectureID, int lecturerID, int roomID, int subjectID, WeekDays day, Time startTime, Time endTime){
+    public Lecture(int lectureID, int lecturerID, int roomID, int subjectID, WeekDays day, Time startTime, Time endTime) {
         this.lectureID = lectureID;
         this.lecturerID = lecturerID;
         this.roomID = roomID;
@@ -27,12 +28,9 @@ public class Lecture implements CampusObject {
 
     @Override
     public int getID() {
-        return 0;
-    }
-
-    public int getLectureID() {
         return lectureID;
     }
+
 
     public int getLecturerID() {
         return lecturerID;

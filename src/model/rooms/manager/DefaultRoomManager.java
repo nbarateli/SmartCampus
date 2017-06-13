@@ -30,13 +30,12 @@ public class DefaultRoomManager implements RoomManager {
 
     }
 
-    @Override
-    public List<Room> find(CampusSearchQuery query) {
+    /**
+     * Returns a list of rooms fetched by given SQL query
+     */
+    public static List<Room> findRooms(String sql) {
         List<Room> rooms = new ArrayList<>();
-        Connection con = null;
-        try {
-            ResultSet matches = DBConnector.executeQuery(query.generateQuery());
-            con = matches.getStatement().getConnection();
+        try (ResultSet matches = DBConnector.executeQuery(sql)) {
             while (matches.next()) {
                 int id = matches.getInt(SQL_COLUMN_ROOM_ID);
                 int capacity = matches.getInt(SQL_COLUMN_ROOM_CAPACITY);
@@ -53,15 +52,14 @@ public class DefaultRoomManager implements RoomManager {
             }
         } catch (SQLException e) {
             //doing nothing
-        } finally {
-            if (con != null) try {
-                con.close();
-            } catch (SQLException e) {
-                //doing nothing
-            }
         }
-
         return rooms;
+    }
+
+    @Override
+    public List<Room> find(CampusSearchQuery query) {
+
+        return findRooms(query.generateQuery());
     }
 
     @Override

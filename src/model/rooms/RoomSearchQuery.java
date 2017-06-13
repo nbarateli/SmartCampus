@@ -21,13 +21,10 @@ public class RoomSearchQuery implements CampusSearchQuery {
     private Room.SeatType seatType;
     private boolean availableForBooking;
     private boolean hasProblems;
-    private User lecturer;
-    private Lecture lecture;
 
     public RoomSearchQuery(String name, Integer floor, Integer capacityFrom, Integer capacityTo,
                            Room.RoomType roomType, boolean availableForBooking,
-                           Room.SeatType seatType, boolean hasProblems,
-                           User lecturer, Lecture lecture) {
+                           Room.SeatType seatType, boolean hasProblems) {
         this.name = name;
         this.floor = floor;
         this.capacityFrom = capacityFrom;
@@ -36,7 +33,6 @@ public class RoomSearchQuery implements CampusSearchQuery {
         this.seatType = seatType;
         this.availableForBooking = availableForBooking;
         this.hasProblems = hasProblems;
-        this.lecturer = lecturer;
     }
 
     /**
@@ -44,7 +40,7 @@ public class RoomSearchQuery implements CampusSearchQuery {
      */
     public RoomSearchQuery() {
         this(null, null, null, null,
-                null, false, null, true, null, null);
+                null, false, null, true);
     }
 
     public String getName() {
@@ -128,7 +124,8 @@ public class RoomSearchQuery implements CampusSearchQuery {
      */
     public String generateQuery() {
         return hasNonNullFields() ? String.format(
-                "SELECT * FROM room  WHERE %s%s%s%s%s%s%s%s%s%s%s;", assertAndGetEqualQuery(name, SQL_COLUMN_ROOM_NAME),
+                "SELECT * FROM  " + SQL_TABLE_ROOM + " WHERE " +
+                        "%s%s%s%s%s%s%s%s%s%s%s;", assertAndGetEqualQuery(name, SQL_COLUMN_ROOM_NAME),
                 name == null ? "" : " \nAND ",
                 assertAndGetEqualQuery(floor == null ? null : floor.toString(), SQL_COLUMN_ROOM_FLOOR),
                 floor == null ? "" : " AND ",
@@ -142,34 +139,6 @@ public class RoomSearchQuery implements CampusSearchQuery {
                 :
                 "SELECT * FROM room  ";
 
-    }
-
-    /**
-     * @return the lecturer
-     */
-    public User getLecturer() {
-        return lecturer;
-    }
-
-    /**
-     * @param lecturer the lecturer to set
-     */
-    public void setLecturer(User lecturer) {
-        this.lecturer = lecturer;
-    }
-
-    /**
-     * @return the lecture
-     */
-    public Lecture getLecture() {
-        return lecture;
-    }
-
-    /**
-     * @param lecture the lecture to set
-     */
-    public void setLecture(Lecture lecture) {
-        this.lecture = lecture;
     }
 
     /**
@@ -200,8 +169,7 @@ public class RoomSearchQuery implements CampusSearchQuery {
 
         return availableForBooking || !hasProblems || name != null || floor != null ||
                 capacityFrom != null || capacityTo != null ||
-                roomType != null || seatType != null ||
-                lecture != null || lecturer != null;
+                roomType != null || seatType != null;
 
     }
 }
