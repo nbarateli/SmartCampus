@@ -2,6 +2,11 @@ DROP DATABASE IF EXISTS SmartCampus;
 CREATE DATABASE SmartCampus;
 USE SmartCampus;
 
+SET foreign_key_checks = 0;
+delete from room where room_id = 1;
+SET foreign_key_checks = 1;
+select * from room_image;
+
 CREATE TABLE campus_user
 (
   user_id     INT PRIMARY KEY        NOT NULL AUTO_INCREMENT,
@@ -104,7 +109,6 @@ CREATE TABLE item_report
   CONSTRAINT item_report_user_user_id_fk
   FOREIGN KEY (report_id) REFERENCES campus_user (user_id)
 );
-
 CREATE TABLE item_image
 (
   image_id  INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -143,3 +147,42 @@ CREATE TABLE room_image
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 );
+
+-- drop trigger item_remove_trigger;
+delimiter //
+CREATE TRIGGER item_remove_trigger
+before delete
+   ON item_report FOR EACH ROW
+
+BEGIN
+   
+   delete from item_image 
+   where report_id = old.report_id;
+END; //
+delimiter ;
+
+-- drop trigger room_remove_trigger;
+delimiter //
+CREATE TRIGGER room_remove_trigger
+before delete
+   ON room FOR EACH ROW
+
+BEGIN
+   
+   delete from room_image 
+   where room_id = old.room_id;
+END; //
+delimiter ;
+
+-- drop trigger user_remove_trigger;
+delimiter //
+CREATE TRIGGER user_remove_trigger
+before delete
+   ON campus_user FOR EACH ROW
+
+BEGIN
+   
+   delete from booking 
+   where booker_id = old.user_id;
+END; //
+delimiter ;

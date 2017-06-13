@@ -5,7 +5,7 @@ VALUES
   ('nino', 'khaduri', 'nkhad15@freeuni.edu.ge', 'user', 'student', 'active'),
   ('niko', 'barateli', 'nbara15@freeuni.edu.ge', 'admin', 'student', 'active'),
   ('zaur', 'meshveliani', 'zmesh15@freeuni.edu.ge', 'user', 'student', 'active'),
-  ('davit', 'maghaltadze', 'dmagh15@freeuni.edu.ge', 'user', 'student', 'banned'),
+  ('davit', 'maghaltadze', 'dmagh15@freeuni.edu.ge', 'user', 'student', 'active'),
   ('shota', 'nanushsvili', 'snanu15@freeuni.edu.ge', 'user', 'student', 'active'),
   ('nikoloz', 'matchavariani', 'n.matchavariani@freeuni.edu.ge', 'admin', 'lecturer', 'active'),
   ('nikoloz', 'tsimakuridze', 'n.tsimakuridze@freeuni.edu.ge', 'admin', 'lecturer', 'active'),
@@ -46,6 +46,7 @@ INSERT INTO room_problem (room_id, reported_by, description, date_created) VALUE
   (6, 3, 'კონდიციონერი არ არის', str_to_date('06-06-2017', '%d-%m-%Y'));
 
 INSERT INTO lecture (lecturer, room_id, subject_id, day_of_week, start_time, end_time) VALUES
+<<<<<<< HEAD
   (6, 4, 1, 'monday', '10:00', '12:10'),
   (6, 4, 1, 'monday', '13:30', '15:40'),
   (6, 20, 1, 'thursday', '10:00', '12:10'),
@@ -67,3 +68,67 @@ lecturer like "%%" AND
 room_id = 4 AND
 True;
     
+=======
+  (6, 4, 1, 'monday', str_to_date('10:00', '%H:%i'), str_to_date('12:10', '%H:%i')),
+  (6, 4, 1, 'monday', str_to_date('13:30', '%H:%i'), str_to_date('15:40', '%H:%i')),
+  (6, 20, 1, 'thursday', str_to_date('10:00', '%H:%i'), str_to_date('12:10', '%H:%i')),
+  (6, 5, 1, 'friday', str_to_date('11:10', '%H:%i'), str_to_date('13:20', '%H:%i')),
+  (7, 9, 2, 'tuesday', str_to_date('11:10', '%H:%i'), str_to_date('12:10', '%H:%i')),
+  (7, 10, 2, 'tuesday', str_to_date('12:20', '%H:%i'), str_to_date('14:30', '%H:%i')),
+  (7, 7, 2, 'friday', str_to_date('10:00', '%H:%i'), str_to_date('11:00', '%H:%i')),
+  (7, 10, 2, 'friday', str_to_date('11:10', '%H:%i'), str_to_date('12:10', '%H:%i')),
+  (7, 8, 2, 'friday', str_to_date('13:30', '%H:%i'), str_to_date('14:30', '%H:%i')),
+  (9, 3, 3, 'monday', str_to_date('16:00', '%H:%i'), str_to_date('18:00', '%H:%i')),
+  (9, 3, 3, 'sunday', str_to_date('12:00', '%H:%i'), str_to_date('17:00', '%H:%i')),
+  (8, 2, 4, 'tuesday', str_to_date('17:00', '%H:%i'), str_to_date('19:10', '%H:%i')),
+  (8, 2, 4, 'wednesday', str_to_date('17:00', '%H:%i'), str_to_date('19:10', '%H:%i')),
+  (8, 2, 4, 'saturday', str_to_date('11:10', '%H:%i'), str_to_date('13:20', '%H:%i'));
+    
+INSERT INTO item_report(item_name, item_description , author_id, report_type, date_added) VALUES
+  ('ტანსაცმლის კაჟადა', 'ყავისფერი, ხის, პატარა', 4, 'found', '09-05-17'), 
+  ('უცხო ქვეყნის დროშა', 'დიდი, ლამაზი გაშლილი', 1, 'lost', '11-04-17'),
+  ('სათვალე', 'მზის ყავისფერი სათვალე', 5, 'lost', '2-06-17'),
+  ('პასტა', '0.3მმ, შავი ციმაკურიძის პასტა', 3, 'lost', '21-02-17'),
+  ('ყურსასმენი', 'თეთრი', 3, 'found', '16-05-17'),
+  ('ქუდი', 'ლურჯი, ყურებიანი', 3, 'lost', '20-03-17'),
+  ('რვეული', 'სახატავი რვეული', 3, 'lost', '19-02-17'),
+  ('ლეპტოპი', 'alienware Intel® Core™ i7-7820HK', 3, 'found', '18-04-17'),
+  ('საფულე', 'შავი, ტყავის', 6, 'lost', '17-05-17'),
+  ('ყურსასმენი', 'მწვანე, Panasonic-ის', 3, 'found', '16-05-17');
+
+  
+INSERT INTO item_image(image_url, report_id) VALUES
+  ('wardrobe.jpg', 1), 
+  ('flag.jpg', 2), 
+  ('sunglasses.jpg', 3), 
+  ('pen.jpg', 4),
+  ('headphones.jpg', 5),
+  ('notebook1.jpg', 6),
+  ('notebook2.jpg', 6),
+  ('notebook3.jpg', 6),
+  ('latpop1.jpg', 7),
+  ('laptop2.jpg', 7),
+  ('hat.jpg', 8),
+  ('wallet.jpg', 9),
+  ('headphones5.jpg', 10);
+  
+  INSERT INTO room_image(image_url, room_id) VALUES
+  ('200.jpg', 1), 
+  ('401.jpg', 2), 
+  ('216.jpg', 3), 
+  ('307-1.jpg', 4),
+  ('412-2.jpg', 5),
+  ('420.jpg', 6),
+  ('309.jpg', 7),
+  ('410.jpg', 8),
+  ('417.jpg', 9),
+  ('cafeteria.jpg', 10),
+  ('402-2.jpg', 11),
+  ('318.jpg', 12),
+  ('103.jpg', 13);
+  
+  
+  
+  
+  
+>>>>>>> cc4234d6f82d9e91fc1268d79f99774322c412fa

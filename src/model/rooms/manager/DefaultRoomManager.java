@@ -5,7 +5,9 @@ import model.database.DBConnector;
 import static model.database.SQLConstants.*;
 
 import model.campus.CampusSearchQuery;
+import model.lecture.Lecture;
 import model.rooms.Room;
+import model.rooms.RoomSearchQuery;
 
 import java.sql.*;
 import java.util.*;
@@ -30,13 +32,12 @@ public class DefaultRoomManager implements RoomManager {
 
     }
 
-    @Override
-    public List<Room> find(CampusSearchQuery query) {
+    /**
+     * Returns a list of rooms fetched by given SQL query
+     */
+    public static List<Room> findRooms(String sql) {
         List<Room> rooms = new ArrayList<>();
-        Connection con = null;
-        try {
-            ResultSet matches = DBConnector.executeQuery(query.generateQuery());
-            con = matches.getStatement().getConnection();
+        try (ResultSet matches = DBConnector.executeQuery(sql)) {
             while (matches.next()) {
                 int id = matches.getInt(SQL_COLUMN_ROOM_ID);
                 int capacity = matches.getInt(SQL_COLUMN_ROOM_CAPACITY);
@@ -53,15 +54,14 @@ public class DefaultRoomManager implements RoomManager {
             }
         } catch (SQLException e) {
             //doing nothing
-        } finally {
-            if (con != null) try {
-                con.close();
-            } catch (SQLException e) {
-                //doing nothing
-            }
         }
-
         return rooms;
+    }
+
+    @Override
+    public List<Room> find(RoomSearchQuery query) {
+
+        return findRooms(query.generateQuery());
     }
 
     @Override
@@ -116,6 +116,21 @@ public class DefaultRoomManager implements RoomManager {
             }
         }
         return images;
+    }
+
+    @Override
+    public List<Lecture> findAllLecturesAt(Room room) {
+        return null;
+    }
+
+    @Override
+    public List<Lecture> findAllLecturesAt(Room room, Lecture.WeekDay day) {
+        return null;
+    }
+
+    @Override
+    public List<Lecture> findAllLecturesAt(Room room, Lecture.WeekDay day, Time start, Time end) {
+        return null;
     }
 
 }
