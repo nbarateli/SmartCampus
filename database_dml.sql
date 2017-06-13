@@ -1,4 +1,4 @@
-use smartcampus;
+USE smartcampus;
 
 INSERT INTO campus_user (first_name, last_name, user_email, user_type, user_role, user_status)
 VALUES
@@ -46,25 +46,24 @@ INSERT INTO room_problem (room_id, reported_by, description, date_created) VALUE
   (6, 3, 'კონდიციონერი არ არის', str_to_date('06-06-2017', '%d-%m-%Y'));
 
 INSERT INTO lecture (lecturer, room_id, subject_id, day_of_week, start_time, end_time) VALUES
-<<<<<<< HEAD
   (6, 4, 1, 'monday', '10:00', '12:10'),
   (6, 4, 1, 'monday', '13:30', '15:40'),
   (6, 20, 1, 'thursday', '10:00', '12:10'),
   (6, 5, 1, 'friday', '11:10', '13:20'),
   (7, 9, 2, 'tuesday', '11:10', '12:10'),
   (7, 10, 2, 'tuesday', '12:20', '14:30'),
-  (7, 7, 2, 'friday', '10:00',  '11:00'),
-  (7, 10, 2, 'friday', '11:10',  '12:10'),
+  (7, 7, 2, 'friday', '10:00', '11:00'),
+  (7, 10, 2, 'friday', '11:10', '12:10'),
   (7, 8, 2, 'friday', '13:30', '14:30'),
   (9, 3, 3, 'monday', '16:00', '18:00'),
   (9, 3, 3, 'sunday', '12:00', '17:00'),
-  (8, 2, 4, 'tuesday', '17:00',  '19:10'),
-  (8, 2, 4, 'wednesday', '17:00',  '19:10'),
-  (8, 2, 4, 'saturday', '11:10',  '13:20');
+  (8, 2, 4, 'tuesday', '17:00', '19:10'),
+  (8, 2, 4, 'wednesday', '17:00', '19:10'),
+  (8, 2, 4, 'saturday', '11:10', '13:20');
 
-    
-INSERT INTO item_report(item_name, item_description , author_id, report_type, date_added) VALUES
-  ('ტანსაცმლის კაჟადა', 'ყავისფერი, ხის, პატარა', 4, 'found', '09-05-17'), 
+
+INSERT INTO item_report (item_name, item_description, author_id, report_type, date_added) VALUES
+  ('ტანსაცმლის კაჟადა', 'ყავისფერი, ხის, პატარა', 4, 'found', '09-05-17'),
   ('უცხო ქვეყნის დროშა', 'დიდი, ლამაზი გაშლილი', 1, 'lost', '11-04-17'),
   ('სათვალე', 'მზის ყავისფერი სათვალე', 5, 'lost', '2-06-17'),
   ('პასტა', '0.3მმ, შავი ციმაკურიძის პასტა', 3, 'lost', '21-02-17'),
@@ -75,11 +74,11 @@ INSERT INTO item_report(item_name, item_description , author_id, report_type, da
   ('საფულე', 'შავი, ტყავის', 6, 'lost', '17-05-17'),
   ('ყურსასმენი', 'მწვანე, Panasonic-ის', 3, 'found', '16-05-17');
 
-  
-INSERT INTO item_image(image_url, report_id) VALUES
-  ('wardrobe.jpg', 1), 
-  ('flag.jpg', 2), 
-  ('sunglasses.jpg', 3), 
+
+INSERT INTO item_image (image_url, report_id) VALUES
+  ('wardrobe.jpg', 1),
+  ('flag.jpg', 2),
+  ('sunglasses.jpg', 3),
   ('pen.jpg', 4),
   ('headphones.jpg', 5),
   ('notebook1.jpg', 6),
@@ -90,11 +89,11 @@ INSERT INTO item_image(image_url, report_id) VALUES
   ('hat.jpg', 8),
   ('wallet.jpg', 9),
   ('headphones5.jpg', 10);
-  
-  INSERT INTO room_image(image_url, room_id) VALUES
-  ('200.jpg', 1), 
-  ('401.jpg', 2), 
-  ('216.jpg', 3), 
+
+INSERT INTO room_image (image_url, room_id) VALUES
+  ('200.jpg', 1),
+  ('401.jpg', 2),
+  ('216.jpg', 3),
   ('307-1.jpg', 4),
   ('412-2.jpg', 5),
   ('420.jpg', 6),

@@ -50,4 +50,6 @@ public interface RoomManager extends CampusManager<Room, RoomSearchQuery> {
      * @param end   end of the time range when the lectures start
      */
     List<Lecture> findAllLecturesAt(Room room, Lecture.WeekDay day, Time start, Time end);
+
+    Room getRoomByID(int id);
 }

@@ -134,4 +134,10 @@ public class DefaultRoomManager implements RoomManager {
         return lectures;
     }
 
+    @Override
+    public Room getRoomByID(int id) {
+        List<Room> rooms = findRooms("SELECT * FROM room where room_id = " + id);
+        return rooms == null || rooms.size() == 0 ? null : rooms.get(0);
+    }
+
 }
