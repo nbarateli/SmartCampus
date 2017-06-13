@@ -61,28 +61,7 @@ INSERT INTO lecture (lecturer, room_id, subject_id, day_of_week, start_time, end
   (8, 2, 4, 'tuesday', '17:00',  '19:10'),
   (8, 2, 4, 'wednesday', '17:00',  '19:10'),
   (8, 2, 4, 'saturday', '11:10',  '13:20');
-  
-Select * from lecture 
-Where 
-lecturer like "%%" AND
-room_id = 4 AND
-True;
-    
-=======
-  (6, 4, 1, 'monday', str_to_date('10:00', '%H:%i'), str_to_date('12:10', '%H:%i')),
-  (6, 4, 1, 'monday', str_to_date('13:30', '%H:%i'), str_to_date('15:40', '%H:%i')),
-  (6, 20, 1, 'thursday', str_to_date('10:00', '%H:%i'), str_to_date('12:10', '%H:%i')),
-  (6, 5, 1, 'friday', str_to_date('11:10', '%H:%i'), str_to_date('13:20', '%H:%i')),
-  (7, 9, 2, 'tuesday', str_to_date('11:10', '%H:%i'), str_to_date('12:10', '%H:%i')),
-  (7, 10, 2, 'tuesday', str_to_date('12:20', '%H:%i'), str_to_date('14:30', '%H:%i')),
-  (7, 7, 2, 'friday', str_to_date('10:00', '%H:%i'), str_to_date('11:00', '%H:%i')),
-  (7, 10, 2, 'friday', str_to_date('11:10', '%H:%i'), str_to_date('12:10', '%H:%i')),
-  (7, 8, 2, 'friday', str_to_date('13:30', '%H:%i'), str_to_date('14:30', '%H:%i')),
-  (9, 3, 3, 'monday', str_to_date('16:00', '%H:%i'), str_to_date('18:00', '%H:%i')),
-  (9, 3, 3, 'sunday', str_to_date('12:00', '%H:%i'), str_to_date('17:00', '%H:%i')),
-  (8, 2, 4, 'tuesday', str_to_date('17:00', '%H:%i'), str_to_date('19:10', '%H:%i')),
-  (8, 2, 4, 'wednesday', str_to_date('17:00', '%H:%i'), str_to_date('19:10', '%H:%i')),
-  (8, 2, 4, 'saturday', str_to_date('11:10', '%H:%i'), str_to_date('13:20', '%H:%i'));
+
     
 INSERT INTO item_report(item_name, item_description , author_id, report_type, date_added) VALUES
   ('ტანსაცმლის კაჟადა', 'ყავისფერი, ხის, პატარა', 4, 'found', '09-05-17'), 
@@ -127,8 +106,3 @@ INSERT INTO item_image(image_url, report_id) VALUES
   ('318.jpg', 12),
   ('103.jpg', 13);
   
-  
-  
-  
-  
->>>>>>> cc4234d6f82d9e91fc1268d79f99774322c412fa
