@@ -70,7 +70,7 @@
                   : "<span id=\"no-span\">არა</span>");
         %>
       </div>
-      <div>ადგილის ტიპი: <%seatTypeToString(room.getSeatType());%>.</div>
+      <div>ადგილის ტიპი: <%out.print(seatTypeToString(room.getSeatType()));%>.</div>
     </div>
     <div>ლექციები:</div>
     <style>
