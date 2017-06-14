@@ -18,6 +18,7 @@ public interface AccountManager extends CampusManager<User, UserSearchQuery> {
 
     User getUserViaID(int id);
 
+    User getUserViaEMail(String email);
     List<UserProblem> getAllProblemsOf(User user);
 
     List<ItemReport> getAllItemReportsBy(User user);
