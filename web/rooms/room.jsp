@@ -22,6 +22,7 @@
     if no parameters is passed
 --%>
 <head>
+  <link rel="stylesheet" href="SearchPageStyle.css">
   <%!
     private void printAll(List<Lecture> allLecturesAt, JspWriter out) throws Exception {
       for (Lecture lecture : allLecturesAt) {
