@@ -1,10 +1,12 @@
-<%@ page import="model.rooms.Room" %>
+<%@ page import="misc.WebConstants" %>
 <%@ page import="static misc.WebConstants.ROOM_MANAGER" %>
+<%@ page import="model.lecture.Lecture" %>
+<%@ page import="model.rooms.Room" %>
 <%@ page import="model.rooms.manager.RoomManager" %>
 <%@ page import="java.util.List" %>
-<%@ page import="misc.WebConstants" %>
-<%@ page import="model.lecture.Lecture" %>
-<%@ page import="java.io.PrintWriter" %><%--
+<%@ page import="static misc.Utils.roomTypeToString" %>
+<%@ page import="static misc.Utils.toSeatType" %>
+<%@ page import="static misc.Utils.seatTypeToString" %><%--
   Created by IntelliJ IDEA.
   User: Niko
   Date: 11.06.2017
@@ -59,13 +61,16 @@
     <div><img src="<%out.print(images.size()>0?images.get(1):WebConstants.NO_IMAGE);%>" style="width: 25%">
     </div>
     <div id="room-info-div">
-      <div>სართული: 4.</div>
-      <div>ოთახის ტიპი: აუდიტორია.</div>
-      <div>ადგილები: 100.</div>
+      <div>სართული: <%out.print(room.getFloor());%>.</div>
+      <div>ოთახის ტიპი: <%out.print(roomTypeToString(room.getRoomType()));%>.</div>
+      <div>ადგილები: <%out.println(room.getCapacity());%>.</div>
       <div>შეიძლება დაჯავშნა:
-        <span id="no-span">არა</span>
+        <%
+          out.println(room.isAvailableForStudents() ? "<span id=\"yes-span\">კი</span>"
+                  : "<span id=\"no-span\">არა</span>");
+        %>
       </div>
-      <div>ადგილის ტიპი: სკამები და მერხები.</div>
+      <div>ადგილის ტიპი: <%seatTypeToString(room.getSeatType());%>.</div>
     </div>
     <div>ლექციები:</div>
     <style>
