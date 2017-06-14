@@ -2,10 +2,6 @@ DROP DATABASE IF EXISTS SmartCampus;
 CREATE DATABASE SmartCampus;
 USE SmartCampus;
 
-SET foreign_key_checks = 0;
-delete from room where room_id = 1;
-SET foreign_key_checks = 1;
-select * from room_image;
 
 CREATE TABLE campus_user
 (
@@ -90,8 +86,8 @@ CREATE TABLE lecture
   room_id     INT             NOT NULL,
   subject_id  INT             NOT NULL,
   day_of_week ENUM ('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'),
-  start_time  TIME        NOT NULL,
-  end_time    TIME        NOT NULL,
+  start_time  TIME            NOT NULL,
+  end_time    TIME            NOT NULL,
   CONSTRAINT lecture_user_user_id_fk FOREIGN KEY (lecturer) REFERENCES campus_user (user_id),
   CONSTRAINT lecture_room_room_id_fk FOREIGN KEY (room_id) REFERENCES room (room_id),
   CONSTRAINT lecture_subject_subject_id_fk FOREIGN KEY (subject_id) REFERENCES campus_subject (subject_id)
@@ -149,40 +145,46 @@ CREATE TABLE room_image
 );
 
 -- drop trigger item_remove_trigger;
-delimiter //
+DELIMITER //
 CREATE TRIGGER item_remove_trigger
-before delete
-   ON item_report FOR EACH ROW
+BEFORE DELETE
+  ON item_report
+FOR EACH ROW
 
-BEGIN
-   
-   delete from item_image 
-   where report_id = old.report_id;
-END; //
-delimiter ;
+  BEGIN
+
+    DELETE FROM item_image
+    WHERE report_id = old.report_id;
+  END;
+//
+DELIMITER ;
 
 -- drop trigger room_remove_trigger;
-delimiter //
+DELIMITER //
 CREATE TRIGGER room_remove_trigger
-before delete
-   ON room FOR EACH ROW
+BEFORE DELETE
+  ON room
+FOR EACH ROW
 
-BEGIN
-   
-   delete from room_image 
-   where room_id = old.room_id;
-END; //
-delimiter ;
+  BEGIN
+
+    DELETE FROM room_image
+    WHERE room_id = old.room_id;
+  END;
+//
+DELIMITER ;
 
 -- drop trigger user_remove_trigger;
-delimiter //
+DELIMITER //
 CREATE TRIGGER user_remove_trigger
-before delete
-   ON campus_user FOR EACH ROW
+BEFORE DELETE
+  ON campus_user
+FOR EACH ROW
 
-BEGIN
-   
-   delete from booking 
-   where booker_id = old.user_id;
-END; //
-delimiter ;
+  BEGIN
+
+    DELETE FROM booking
+    WHERE booker_id = old.user_id;
+  END;
+//
+DELIMITER ;

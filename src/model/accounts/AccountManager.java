@@ -1,9 +1,9 @@
 package model.accounts;
 
 import model.campus.CampusManager;
-import model.lecture.Lecture;
+import model.lostandfound.ItemReport;
+import model.problems.CampusProblem;
 
-import java.sql.Statement;
 import java.util.List;
 
 /**
@@ -15,7 +15,15 @@ import java.util.List;
  */
 public interface AccountManager extends CampusManager<User, UserSearchQuery> {
 
-    //TODO: write related methods prototypes.
 
+    User getUserViaID(int id);
+
+    List<UserProblem> getAllProblemsOf(User user);
+
+    List<ItemReport> getAllItemReportsBy(User user);
+
+    List<CampusProblem> getAllProblemReportsBy(User user);
+
+    void removeUserProblem(int problemID);
 
 }
