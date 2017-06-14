@@ -103,7 +103,7 @@ CREATE TABLE item_report
   report_type      ENUM ('lost', 'found') NOT NULL,
   date_added       DATE                   NOT NULL,
   CONSTRAINT item_report_user_user_id_fk
-  FOREIGN KEY (report_id) REFERENCES campus_user (user_id)
+  FOREIGN KEY (author_id) REFERENCES campus_user (user_id)
 );
 CREATE TABLE item_image
 (

@@ -51,7 +51,7 @@
   %>
   </title>
 </head>
-<body style="background-color: #0066cc">
+<body style="background-color: #bbbbbb">
 <div align="center">
 
   <div class="to-hide">
