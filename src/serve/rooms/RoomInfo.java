@@ -4,7 +4,6 @@ import model.lecture.Lecture;
 import model.rooms.Room;
 import model.rooms.RoomProblem;
 import model.rooms.manager.RoomManager;
-import org.omg.CORBA.BAD_PARAM;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;

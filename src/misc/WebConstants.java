@@ -38,7 +38,7 @@ public class WebConstants {
     public static final String JSON_ROOM_ERROR_BAD_PARAM = "bad parameter";
     public static final String JSON_ROOM_ERROR_NOT_FOUND = "room not found";
 
-    public static final String JSON_ERROR = "images";
+    public static final String JSON_ERROR = "error";
 }
 
 
