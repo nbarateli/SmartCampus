@@ -139,7 +139,7 @@
     <button id="button3">ოთახის წაშლა</button> 
     <div id="remove-room-div" class="to-hide">
       <br><br><br>
-      <form id="remove-room-form" action="RoomRemover" class="form-vertical" method="get">
+      <form id="remove-room-form" action="../RoomRemover" class="form-vertical" method="get">
 
         <div class="form-group">
           <input type="text" name="room_name"
