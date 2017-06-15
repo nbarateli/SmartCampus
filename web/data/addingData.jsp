@@ -25,7 +25,7 @@
       <br><br><br>
       <label id="info-label"><b>შეგიძლიათ მონაცემები შეიყვანოთ ხელით (სათითაოდ):</b></label> 
       <br><br>
-      <form id="sched-form" action="#" class="form-vertical">
+      <form id="sched-form" action="#" class="form-vertical" method="get">
 
         <div class="form-group">
           <input type="text" name="lecturer_name" class="form-control"
@@ -71,7 +71,7 @@
       <label id="info-label"><b>ან ატვირთოთ Excel-ის ფაილი:</b></label>
       <br><br>
       
-      <form action="#" class="form-vertical" id="upload-form">
+      <form action="#" class="form-vertical" id="upload-form" method="get">
         <input type="file" name="pic" accept=".xls,.xlsx"><br>
         <input type="submit" value="ატვირთვა" class="btn btn-primary btn-lg">
       </form>
@@ -82,7 +82,7 @@
     <button id="button2">ოთახის დამატება</button> 
     <div id="add-room-div" class="to-hide">
       <br><br><br>
-      <form id="add-room-form" action="#" class="form-vertical">
+      <form id="add-room-form" action="#" class="form-vertical" method="get">
 
         <div class="form-group">
           <label class="control-label">ოთახის სახელი</label>
@@ -139,7 +139,7 @@
     <button id="button3">ოთახის წაშლა</button> 
     <div id="remove-room-div" class="to-hide">
       <br><br><br>
-      <form id="remove-room-form" action="#" class="form-vertical">
+      <form id="remove-room-form" action="RoomRemover" class="form-vertical" method="get">
 
         <div class="form-group">
           <input type="text" name="room_name"
@@ -154,7 +154,7 @@
     <button id="button4">საგნის დამატება</button> 
     <div id="add-subj-div" class="to-hide">
       <br><br><br>
-      <form id="add-subj-form" action="#" class="form-vertical">
+      <form id="add-subj-form" action="#" class="form-vertical" method="get">
 
         <div class="form-group">
           <input type="text" name="subj_name"

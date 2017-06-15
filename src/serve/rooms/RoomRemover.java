@@ -1,11 +1,19 @@
 package serve.rooms;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import model.rooms.Room;
+import model.rooms.RoomSearchQuery;
+import model.rooms.manager.RoomManager;
+
+import static misc.WebConstants.ROOM_MANAGER;
 
 /**
  * Servlet implementation class RoomRemover
@@ -26,16 +34,16 @@ public class RoomRemover extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		RoomManager manager = 
+		        (RoomManager) request.getServletContext().getAttribute(ROOM_MANAGER);
+	    String name = request.getParameter("room_name");
+	    RoomSearchQuery query = new RoomSearchQuery();
+	    query.setName(name);
+	    manager.remove(manager.find(query).get(0));
+	    
+	    RequestDispatcher dispatch = 
+                request.getRequestDispatcher("data/addingData.jsp");
+        dispatch.forward(request, response);
 	}
 
 }
