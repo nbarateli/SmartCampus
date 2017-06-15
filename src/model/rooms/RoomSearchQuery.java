@@ -101,7 +101,7 @@ public class RoomSearchQuery implements CampusSearchQuery<Room> {
         this.seatType = seatType;
     }
 
-    public boolean isHasProblems() {
+    public boolean hasProblems() {
         return hasProblems;
     }
 
