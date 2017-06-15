@@ -7,6 +7,7 @@ import static model.database.SQLConstants.*;
 import model.campus.CampusSearchQuery;
 import model.lecture.Lecture;
 import model.rooms.Room;
+import model.rooms.RoomProblem;
 import model.rooms.RoomSearchQuery;
 
 import java.sql.*;
@@ -28,10 +29,6 @@ public class DefaultRoomManager implements RoomManager {
         return instance == null ? instance = new DefaultRoomManager() : instance;
     }
 
-    private DefaultRoomManager() {
-
-    }
-
     /**
      * Returns a list of rooms fetched by given SQL query
      */
@@ -46,6 +43,10 @@ public class DefaultRoomManager implements RoomManager {
             //doing nothing
         }
         return rooms;
+    }
+
+    private DefaultRoomManager() {
+
     }
 
     @Override
@@ -138,6 +139,24 @@ public class DefaultRoomManager implements RoomManager {
     public Room getRoomByID(int id) {
         List<Room> rooms = findRooms("SELECT * FROM room where room_id = " + id);
         return rooms == null || rooms.size() == 0 ? null : rooms.get(0);
+    }
+
+    @Override
+    public List<RoomProblem> findAllProblemsOf(Room room) {
+        String sql = "SELECT * FROM room_problem " +
+                " JOIN room ON room_problem.room_id = room.room_id " +
+                " JOIN campus_user ON room_problem.reported_by = campus_user.user_id " +
+                " WHERE room_problem.room_id = " + room.getID();
+        List<RoomProblem> problems = new ArrayList<>();
+        try (ResultSet results = DBConnector.executeQuery(sql)) {
+            while (results.next()) {
+                problems.add(getProblemFromResults(results));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            //ignored
+        }
+        return problems;
     }
 
 }

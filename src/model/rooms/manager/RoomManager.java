@@ -6,6 +6,7 @@ import java.util.*;
 import model.campus.CampusManager;
 import model.lecture.Lecture;
 import model.rooms.Room;
+import model.rooms.RoomProblem;
 import model.rooms.RoomSearchQuery;
 
 /**
@@ -51,5 +52,14 @@ public interface RoomManager extends CampusManager<Room, RoomSearchQuery> {
      */
     List<Lecture> findAllLecturesAt(Room room, Lecture.WeekDay day, Time start, Time end);
 
+    /***/
     Room getRoomByID(int id);
+
+    /**
+     * Returns the list of all the infrastructural problems this room currently has.
+     *
+     * @return a <code>List</code> of <code>RoomProblem</code> s
+     */
+    List<RoomProblem> findAllProblemsOf(Room room);
+
 }

@@ -15,8 +15,7 @@ import java.util.List;
 
 import static misc.Utils.toRoomType;
 import static misc.Utils.toSeatType;
-import static misc.WebConstants.NO_IMAGE;
-import static misc.WebConstants.ROOM_MANAGER;
+import static misc.WebConstants.*;
 
 /**
  * The sole function of this class is to return a JSON array of
@@ -33,15 +32,15 @@ public class RoomFinder extends HttpServlet {
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
         for (Room room : rooms) {
             JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-            objectBuilder.add("id", room.getID());
-            objectBuilder.add("name", room.getRoomName());
-            objectBuilder.add("floor", room.getFloor());
-            objectBuilder.add("capacity", room.getCapacity());
-            objectBuilder.add("roomtype", room.getRoomType().name());
-            objectBuilder.add("seattype", room.getSeatType().name());
-            objectBuilder.add("available", room.isAvailableForStudents());
+            objectBuilder.add(JSON_ROOM_ID, room.getID());
+            objectBuilder.add(JSON_ROOM_NAME, room.getRoomName());
+            objectBuilder.add(JSON_ROOM_FLOOR, room.getFloor());
+            objectBuilder.add(JSON_ROOM_CAPACITY, room.getCapacity());
+            objectBuilder.add(JSON_ROOM_TYPE, room.getRoomType().name());
+            objectBuilder.add(JSON_ROOM_SEAT_TYPE, room.getSeatType().name());
+            objectBuilder.add(JSON_ROOM_AVAILABLE, room.isAvailableForStudents());
             List<String> images = manager.getAllImagesOf(room);
-            objectBuilder.add("mainimage", images.size() > 0 ? images.get(0) : NO_IMAGE);
+            objectBuilder.add(JSON_ROOM_MAIN_IMAGE, images.size() > 0 ? images.get(0) : NO_IMAGE);
             arrayBuilder.add(objectBuilder.build());
         }
         JsonArray array = arrayBuilder.build();

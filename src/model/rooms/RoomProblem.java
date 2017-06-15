@@ -1,6 +1,7 @@
 package model.rooms;
 
 import model.accounts.User;
+import model.campus.CampusObject;
 
 import java.util.Date;
 
@@ -9,14 +10,16 @@ import java.util.Date;
  * <p>
  * The SmartCampus room problem ADT
  */
-public class RoomProblem {
+public class RoomProblem implements CampusObject {
     private final User author;
     private final Room room;
     private final String title;
     private final String description;
     private final long dateCreated;
+    private final int id;
 
-    public RoomProblem(User author, Room room, String title, String description, Date dateCreated) {
+    public RoomProblem(int id, User author, Room room, String title, String description, Date dateCreated) {
+        this.id = id;
         this.author = author;
         this.room = room;
         this.title = title;
@@ -33,14 +36,19 @@ public class RoomProblem {
     }
 
     public String getTitle() {
-        return title;
+        return title == null ? "" : title;
     }
 
     public String getDescription() {
-        return description;
+        return description == null ? "" : description;
     }
 
     public Date getDateCreated() {
         return new Date(dateCreated);
+    }
+
+    @Override
+    public int getID() {
+        return id;
     }
 }

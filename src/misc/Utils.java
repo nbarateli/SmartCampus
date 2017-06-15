@@ -6,6 +6,7 @@ import model.lecture.Lecture;
 import model.rooms.*;
 
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -135,6 +136,7 @@ public class Utils {
 
     /**
      * Returns a user object from current row of the given <code>ResultSet</code>.
+     *
      */
     public static User getUserFromResults(ResultSet rs) throws SQLException {
         int id = rs.getInt(SQL_COLUMN_USER_ID);
@@ -148,10 +150,19 @@ public class Utils {
         return new User(id, eMail, firstName, lastName, status, userType, role);
     }
 
+    public static RoomProblem getProblemFromResults(ResultSet rs) throws SQLException {
+        int id = rs.getInt(SQL_COLUMN_ROOM_PROBLEM_ID);
+        User author = getUserFromResults(rs);
+        Room room = getRoomFromResults(rs);
+        String title = rs.getString(SQL_COLUMN_ROOM_PROBLEM_TITLE);
+        String description = rs.getString(SQL_COLUMN_ROOM_PROBLEM_DESCRIPTION);
+        Date dateCreated = rs.getDate(SQL_COLUMN_ROOM_PROBLEM_DATE_CREATED);
+        return new RoomProblem(id, author, room, title, description, dateCreated);
+    }
+
     /**
      * Returns a <code>Lecture</code> object from current row of the given <code>ResultSet</code>
      */
-
     public static Lecture getLectureFromResults(ResultSet rs) throws SQLException {
         int id = rs.getInt(SQL_COLUMN_LECTURE_ID);
         User lecturer = getUserFromResults(rs);
@@ -225,6 +236,25 @@ public class Utils {
                 return BANNED;
         }
         return null;
+    }
+
+    public static String toGeorgian(Lecture.WeekDay day) {
+        switch (day) {
+            case MONDAY:
+                return "ორშაბათი";
+            case TUESDAY:
+                return "სამშაბათი";
+            case WEDNESDAY:
+                return "ოთხშაბათი";
+            case THURSDAY:
+                return "ხუთშაბათი";
+            case FRIDAY:
+                return "პარასკევი";
+            case SATURDAY:
+                return "შაბათი";
+            default:
+                return "კვირა";
+        }
     }
 
     private Utils() {
