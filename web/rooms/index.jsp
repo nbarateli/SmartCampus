@@ -129,7 +129,7 @@
           List<Room> rooms = manager.find(query);
           System.out.println(rooms.size());
           for (Room room : rooms) {
-            out.println("<div id=\"room-id-div\">" + "<a href=room.jsp?id=" + room.getID() + ">"
+            out.println("<div id=\"room-id-div\">" + "<a href=showroom.jsp?id=" + room.getID() + ">"
                     + room.getRoomName() + "</a></div>");
             out.println("<button>ვრცლად</button>");
 

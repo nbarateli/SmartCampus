@@ -1,4 +1,4 @@
-package serve;
+package serve.rooms;
 
 import model.rooms.Room;
 import model.rooms.RoomSearchQuery;
@@ -41,7 +41,6 @@ public class RoomFinder extends HttpServlet {
             objectBuilder.add("seattype", room.getSeatType().name());
             objectBuilder.add("available", room.isAvailableForStudents());
             List<String> images = manager.getAllImagesOf(room);
-
             objectBuilder.add("mainimage", images.size() > 0 ? images.get(0) : NO_IMAGE);
             arrayBuilder.add(objectBuilder.build());
         }

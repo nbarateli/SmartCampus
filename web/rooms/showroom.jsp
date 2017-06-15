@@ -17,7 +17,7 @@
 <html>
 <%--
     the room will be displayed based on its id.
-    for example: .../room.jsp?id=1 must display a room with id 1.
+    for example: .../showroom.jsp?id=1 must display a room with id 1.
     if such exists.
     if no parameters is passed
 --%>
