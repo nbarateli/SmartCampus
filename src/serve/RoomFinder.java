@@ -1,27 +1,53 @@
 package serve;
 
+import model.rooms.Room;
 import model.rooms.RoomSearchQuery;
+import model.rooms.manager.RoomManager;
 
+import javax.json.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 import static misc.Utils.toRoomType;
 import static misc.Utils.toSeatType;
+import static misc.WebConstants.NO_IMAGE;
+import static misc.WebConstants.ROOM_MANAGER;
 
 /**
  * The sole function of this class is to return a JSON array of
  * <code>{@link model.rooms.Room}</code> objects that match passed parameters
  */
-@WebServlet(name = "RoomFinder", urlPatterns = {"rooms/findrooms"})
+@WebServlet(name = "RoomFinder", urlPatterns = {"/rooms/findrooms"})
 public class RoomFinder extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        RoomManager manager = ((RoomManager) request.getServletContext().getAttribute(ROOM_MANAGER));
+        List<Room> rooms = manager.find(getQuery(request));
+        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+        for (Room room : rooms) {
+            JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
+            objectBuilder.add("id", room.getID());
+            objectBuilder.add("name", room.getRoomName());
+            objectBuilder.add("floor", room.getFloor());
+            objectBuilder.add("capacity", room.getCapacity());
+            objectBuilder.add("roomtype", room.getRoomType().name());
+            objectBuilder.add("seattype", room.getSeatType().name());
+            objectBuilder.add("available", room.isAvailableForStudents());
+            List<String> images = manager.getAllImagesOf(room);
 
+            objectBuilder.add("mainimage", images.size() > 0 ? images.get(0) : NO_IMAGE);
+            arrayBuilder.add(objectBuilder.build());
+        }
+        JsonArray array = arrayBuilder.build();
+        JsonWriter writer = Json.createWriter(response.getWriter());
+        writer.writeArray(array);
 
     }
 
