@@ -1,5 +1,6 @@
 package serve.rooms;
 
+import model.lecture.Lecture;
 import model.rooms.Room;
 import model.rooms.RoomProblem;
 import model.rooms.manager.RoomManager;
@@ -17,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import static misc.Utils.exactDateToString;
+import static misc.Utils.toHHSS;
 import static misc.WebConstants.*;
 
 /**
@@ -67,6 +70,7 @@ public class RoomInfo extends HttpServlet {
         objectBuilder.add(JSON_ROOM_TYPE, room.getRoomType().name());
         objectBuilder.add(JSON_ROOM_SEAT_TYPE, room.getSeatType().name());
         objectBuilder.add(JSON_ROOM_AVAILABLE, room.isAvailableForStudents());
+
     }
 
     /**
@@ -97,6 +101,7 @@ public class RoomInfo extends HttpServlet {
             problemBuilder.add(JSON_ROOM_PROBLEM_DESCR, problem.getDescription());
             problemBuilder.add(JSON_ROOM_PROBLEM_AUTHOR,
                     problem.getAuthor().getFirstName() + " " + problem.getAuthor().getLastName());
+            problemBuilder.add(JSON_ROOM_PROBLEM_DATE, exactDateToString(problem.getDateCreated()));
             problemArrayBuilder.add(problemBuilder.build());
         }
         builder.add(JSON_ROOM_PROBLEMS, problemArrayBuilder.build());
@@ -107,6 +112,16 @@ public class RoomInfo extends HttpServlet {
      * of the json array.
      */
     private void addLectures(JsonObjectBuilder builder, Room room, RoomManager manager) {
-        //TODO:
+        JsonArrayBuilder lectureArrayBuilder = Json.createArrayBuilder();
+        for (Lecture lecture : manager.findAllLecturesAt(room)) {
+            JsonObjectBuilder lectureBuilder = Json.createObjectBuilder();
+            lectureBuilder.add(JSON_LECTURE_SUBJECT, lecture.getSubject().getName());
+            lectureBuilder.add(JSON_LECTURE_LECTURER, lecture.getLecturer().getFirstName() + " " +
+                    lecture.getLecturer().getLastName());
+            lectureBuilder.add(JSON_LECTURE_START_TIME, toHHSS(lecture.getStartTime()));
+            lectureBuilder.add(JSON_LECTURE_END_TIME, toHHSS(lecture.getEndTime()));
+            lectureArrayBuilder.add(lectureBuilder.build());
+        }
+        builder.add(JSON_ROOM_LECTURES, lectureArrayBuilder.build());
     }
 }

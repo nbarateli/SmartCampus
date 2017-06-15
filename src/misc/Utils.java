@@ -6,12 +6,13 @@ import model.lecture.Lecture;
 import model.rooms.*;
 
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import static model.database.SQLConstants.*;
 import static model.rooms.Room.RoomType.*;
@@ -22,13 +23,25 @@ import static model.accounts.User.UserStatus.*;
 import static model.accounts.User.UserRole.*;
 import static model.accounts.User.*;
 
-public class Utils {
+public final class Utils {
 
+    public static String exactDateToString(Date date) {
+        DateFormat format = new SimpleDateFormat("dd.mm.yyyy HH:mm");
+        return format.format(date);
+    }
 
+    /**
+     * TODO
+     */
+    public static String toHHSS(Time time) {
+        DateFormat format = new SimpleDateFormat("HH:mm");
+        return format.format(time);
+    }
+
+    //TODO
     public static String toSqlTime(Time time) {
-        DateFormat format = new SimpleDateFormat("hh:mm");
 
-        return "STR_TO_DATE(\'" + format.format(time) + "\', \'%H:%i\')";
+        return "STR_TO_DATE(\'" + toHHSS(time) + "\', \'%H:%i\')";
 
     }
 
@@ -136,7 +149,6 @@ public class Utils {
 
     /**
      * Returns a user object from current row of the given <code>ResultSet</code>.
-     *
      */
     public static User getUserFromResults(ResultSet rs) throws SQLException {
         int id = rs.getInt(SQL_COLUMN_USER_ID);
@@ -174,12 +186,6 @@ public class Utils {
         return new Lecture(id, lecturer, room, subject, day, starTime, endTime);
     }
 
-    private static CampusSubject getSubjectFromResults(ResultSet rs) throws SQLException {
-        int id = rs.getInt(SQL_COLUMN_SUBJECT_ID);
-        String name = rs.getString(SQL_COLUMN_SUBJECT_NAME);
-        return new CampusSubject(id, name);
-    }
-
     /**
      * Returns a room object from current row of the given <code>ResultSet</code>
      */
@@ -195,34 +201,6 @@ public class Utils {
         boolean available = rs.getBoolean(SQL_COLUMN_ROOM_AVAILABLE);
 
         return new Room(id, capacity, name, roomType, seatType, available, floor);
-    }
-
-    /**
-     * Returns an associated enum value (if exists) of given string.
-     */
-    private static UserRole toUserRole(String s) {
-        switch (s.toLowerCase()) {
-            case "student":
-                return STUDENT;
-            case "lecturer":
-                return LECTURER;
-            case "staff":
-                return STAFF;
-        }
-        return null;
-    }
-
-    /**
-     * Returns an associated enum value (if exists) of given string.
-     */
-    private static UserType toUserType(String s) {
-        switch (s.toLowerCase()) {
-            case "user":
-                return USER;
-            case "admin":
-                return ADMIN;
-        }
-        return null;
     }
 
     /**
@@ -255,6 +233,40 @@ public class Utils {
             default:
                 return "კვირა";
         }
+    }
+
+    private static CampusSubject getSubjectFromResults(ResultSet rs) throws SQLException {
+        int id = rs.getInt(SQL_COLUMN_SUBJECT_ID);
+        String name = rs.getString(SQL_COLUMN_SUBJECT_NAME);
+        return new CampusSubject(id, name);
+    }
+
+    /**
+     * Returns an associated enum value (if exists) of given string.
+     */
+    private static UserRole toUserRole(String s) {
+        switch (s.toLowerCase()) {
+            case "student":
+                return STUDENT;
+            case "lecturer":
+                return LECTURER;
+            case "staff":
+                return STAFF;
+        }
+        return null;
+    }
+
+    /**
+     * Returns an associated enum value (if exists) of given string.
+     */
+    private static UserType toUserType(String s) {
+        switch (s.toLowerCase()) {
+            case "user":
+                return USER;
+            case "admin":
+                return ADMIN;
+        }
+        return null;
     }
 
     private Utils() {

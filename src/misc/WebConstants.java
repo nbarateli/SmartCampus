@@ -19,6 +19,7 @@ public class WebConstants {
     public static final String JSON_ROOM_MAIN_IMAGE = "mainimage";
     public static final String JSON_ROOM_IMAGES = "images";
     public static final String JSON_ROOM_PROBLEMS = "problems";
+    public static final String JSON_ROOM_LECTURES = "lectures";
 
     public static final String JSON_ROOM_PROBLEM_ID = "id";
     public static final String JSON_ROOM_PROBLEM_AUTHOR = "author";
@@ -27,6 +28,13 @@ public class WebConstants {
     public static final String JSON_ROOM_PROBLEM_DESCR = "description";
     public static final String JSON_ROOM_PROBLEM_DATE = "datecreated";
 
+    public static final String JSON_LECTURE_ID = "id";
+    public static final String JSON_LECTURE_LECTURER = "lecturer";
+    public static final String JSON_LECTURE_ROOM = "room";
+    public static final String JSON_LECTURE_SUBJECT = "subject";
+    public static final String JSON_LECTURE_DAY = "day";
+    public static final String JSON_LECTURE_START_TIME = "starttime";
+    public static final String JSON_LECTURE_END_TIME = "endtime";
     public static final String JSON_ROOM_ERROR_BAD_PARAM = "bad parameter";
     public static final String JSON_ROOM_ERROR_NOT_FOUND = "room not found";
 
