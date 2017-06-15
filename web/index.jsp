@@ -23,6 +23,13 @@
         var profile = googleUser.getBasicProfile();
         console.log(profile.getEmail());
     }
+    
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            console.log('User signed out.');
+        });
+    }
 </script>
 <body>
 <div align="center">
@@ -64,15 +71,9 @@
       </td>
     </tr>
     <tr><td><a href="#" onclick="signOut();">Sign out</a></td></tr>
-    <script>
-        function signOut() {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(function () {
-                console.log('User signed out.');
-            });
-        }
-    </script>
   </table>
+  <br><br>
+  <div><a href="data/addingData.jsp">მონაცემების შეყვანა</a></div>
 </div>
 </body>
 </html>

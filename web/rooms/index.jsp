@@ -61,19 +61,19 @@
             class="form-vertical">
 
         <div class="form-group">
-          <label class="control-label" for="name">ოთახის სახელი</label>
+          <label class="control-label">ოთახის სახელი</label>
           <input type="text" name="room_name"
                  class="form-control" placeholder="შეიყვანეთ ოთახის სახელი">
         </div>
 
         <div class="form-group">
-          <label class="control-label" for="floor">სართული</label> <input
-                type="number" name="room_floor" class="form-control"
+          <label class="control-label">სართული</label> 
+          <input type="number" name="room_floor" class="form-control"
                 placeholder="შეიყვანეთ სართული">
         </div>
 
         <div class="form-group">
-          <label class="control-label" for="capacity">ადგილების რაოდენობა</label>
+          <label class="control-label">ადგილების რაოდენობა</label>
           <input type="number"
                  name="capacity_from" class="form-control" title="-დან"
                  placeholder="ადგილების რაოდენობა(-დან)"> <br>
@@ -83,7 +83,7 @@
         </div>
 
         <div class="select">
-          <label class="control-label" for="room_type">ოთახის ტიპი</label>
+          <label class="control-label">ოთახის ტიპი</label>
           <select name="room_type" class="form-control">
             <option value="any">ყველა</option>
             <option value="auditorium">აუდიტორია</option>
@@ -92,7 +92,7 @@
         </div>
 
         <div class="select">
-          <label class="control-label" for="seat_type">ადგილების ტიპი</label>
+          <label class="control-label">ადგილების ტიპი</label>
           <select name="seat_type" class="form-control">
             <option value="any">ყველანაირი</option>
             <option value="desks">სკამები და მერხები</option>
@@ -106,13 +106,13 @@
         </div>
 
         <div class="checkbox">
-          <label class="control-label" for="available">
+          <label class="control-label">
             <input type="checkbox" name="can_be_booked"> შეიძლება სტუდენტისთვის
           </label>
         </div>
 
         <div class="checkbox">
-          <label class="control-label" for="problems">
+          <label class="control-label">
             <input type="checkbox" name="no_problems"> პრობლემების გარეშე
           </label>
         </div>
