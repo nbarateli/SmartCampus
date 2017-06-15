@@ -6,6 +6,7 @@ $(document).ready(function(){
 	var clicked1 = false;
 	var clicked2 = false;
 	var clicked3 = false;
+	var clicked4 = false;
 	
 	$(".to-hide").hide();
 	
@@ -50,6 +51,19 @@ $(document).ready(function(){
 	
 	$("#button3").mouseout(function() {
 		if($(this).next().is(":visible") && (clicked3 === false)) {
+			$(this).next().slideToggle(400);
+		}
+	});
+	
+	$("#button4").click(function() {
+		if(!(($(this).next().is(":visible")) && (clicked4 === false))) {
+			$(this).next().slideToggle(400);
+		}
+		clicked4 = !clicked4;
+	});
+	
+	$("#button4").mouseout(function() {
+		if($(this).next().is(":visible") && (clicked4 === false)) {
 			$(this).next().slideToggle(400);
 		}
 	});

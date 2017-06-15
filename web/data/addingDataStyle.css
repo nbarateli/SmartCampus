@@ -7,7 +7,7 @@ body {
 #main-div {
   align-items: center;
   margin-top: 100px;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 button {
@@ -35,6 +35,10 @@ button:hover {
 }
 
 #remove-room-div {
+  width: 500px;
+}
+
+#add-subj-div {
   width: 500px;
 }
 
