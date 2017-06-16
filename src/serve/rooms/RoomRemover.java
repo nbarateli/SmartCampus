@@ -40,7 +40,6 @@ public class RoomRemover extends HttpServlet {
 	    RoomSearchQuery query = new RoomSearchQuery();
 	    query.setName(name);
 	    manager.remove(manager.find(query).get(0));
-	    
 	    response.sendRedirect("data/addingData.jsp");
 	    
 	}

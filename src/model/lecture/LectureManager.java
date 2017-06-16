@@ -21,6 +21,20 @@ import static model.database.SQLConstants.*;
  * NOTE: THIS CLASS IS NOT TESTED YET.
  */
 public class LectureManager implements CampusManager<Lecture, LectureSearchQuery> {
+    /**
+     * Adds a new subject entry to the database
+     *
+     * @param subject a subject to be added
+     */
+    public void addSubject(CampusSubject subject) {
+        String sql = "INSERT  INTO campus_subject (subject_name) " +
+                "VALUE (\'" + subject.getName() + "\')";
+        try {
+            DBConnector.executeUpdate(sql);
+        } catch (SQLException e) {
+            //ignored
+        }
+    }
 
     @Override
     public List<Lecture> find(LectureSearchQuery query) {
