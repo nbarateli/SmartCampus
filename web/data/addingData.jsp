@@ -93,13 +93,13 @@
         <div class="form-group">
           <label class="control-label">სართული</label> 
           <input type="number" name="room_floor" class="form-control"
-                placeholder="შეიყვანეთ სართული">
+                placeholder="შეიყვანეთ სართული" min=0 max=4>
         </div>
 
         <div class="form-group">
           <label class="control-label">ადგილების რაოდენობა</label>
           <input type="number" name="capacity" class="form-control"
-                 placeholder="შეიყვანეთ ადგილების რაოდენობა"> 
+                 placeholder="შეიყვანეთ ადგილების რაოდენობა" min=0> 
         </div>
 
         <div class="select">

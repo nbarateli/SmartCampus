@@ -30,7 +30,36 @@ public class RoomAdder extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+    
+    /*
+     * checks if given string is a positive number
+     */
+    private boolean numberStringIsValid(String s) {
+        try {
+            int numValue = Integer.parseInt(s);
+            //capacity and floor can't be negative
+            //their input types are "number" but some old browsers don't have support for
+            //that and we don't won't any exceptions
+            if(numValue <= 0)
+                return false;
+        } catch (NumberFormatException e) {
+            return false; //the text wasn't a number
+        }
+        
+        return true;
+    }
+    
+    /*
+     * checks if room with given name already exists
+     */
+    private boolean roomExists(String name, RoomManager manager) {
+        RoomSearchQuery query = new RoomSearchQuery();
+        query.setName(name);
+        if(manager.find(query).isEmpty())
+            return false;
+        return true;
+    }
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -38,16 +67,24 @@ public class RoomAdder extends HttpServlet {
 	    RoomManager manager = 
                 (RoomManager) request.getServletContext().getAttribute(ROOM_MANAGER);
         String name = request.getParameter("room_name");
-        int floor = Integer.parseInt(request.getParameter("room_floor"));
-        int capacity = Integer.parseInt(request.getParameter("capacity"));
+        String floorStr = request.getParameter("room_floor");
+        String capacityStr = request.getParameter("capacity");
         RoomType roomType = Utils.toRoomType(request.getParameter("room_type"));
         SeatType seatType = Utils.toSeatType(request.getParameter("seat_type").toUpperCase());
         boolean available = (request.getParameter("can_be_booked") != null);
         
-        Room room = new Room(-1, capacity, name, roomType, seatType, 
-                available, floor);
-        manager.add(room);
-        
+        //add to database only if every field has valid input
+        if (!name.equals("") && numberStringIsValid(floorStr) 
+                && numberStringIsValid(capacityStr) && !roomExists(name, manager)) {
+            int floor = Integer.parseInt(floorStr);
+            int capacity = Integer.parseInt(capacityStr);
+
+            Room room = new Room(-1, capacity, name, roomType, seatType, 
+                    available, floor);
+            manager.add(room);
+         
+        }
+          
         response.sendRedirect("data/addingData.jsp");
 	}
 

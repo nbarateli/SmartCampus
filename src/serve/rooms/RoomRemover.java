@@ -40,8 +40,14 @@ public class RoomRemover extends HttpServlet {
 	    RoomSearchQuery query = new RoomSearchQuery();
 	    query.setName(name);
 	    manager.remove(manager.find(query).get(0));
-	    response.sendRedirect("data/addingData.jsp");
-	    
+	    response.sendRedirect("data/addingData.jsp"); 
 	}
-
+	
+	   /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
 }
