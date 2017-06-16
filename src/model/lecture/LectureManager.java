@@ -69,8 +69,8 @@ public class LectureManager implements CampusManager<Lecture, LectureSearchQuery
     }
 
     @Override
-    public void remove(Lecture lecture) {
-        String deleteQuery = "delete from " + SQL_TABLE_LECTURE + " where " + SQL_COLUMN_LECTURE_ID + " = " + lecture.getID();
+    public void remove(int lectureID) {
+        String deleteQuery = "delete from " + SQL_TABLE_LECTURE + " where " + SQL_COLUMN_LECTURE_ID + " = " + lectureID;
         try {
             DBConnector.executeUpdate(deleteQuery);
         } catch (SQLException e) {

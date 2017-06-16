@@ -73,10 +73,9 @@ public class DefaultRoomManager implements RoomManager {
     }
 
     @Override
-    public void remove(Room room) {
-
+    public void remove(int roomID) {
         String deleteQuery = "DELETE  FROM  " + SQL_TABLE_ROOM +
-                " WHERE  " + SQL_COLUMN_ROOM_ID + " = " + room.getID();
+                " WHERE  " + SQL_COLUMN_ROOM_ID + " = " + roomID;
         try {
             DBConnector.executeUpdate(deleteQuery);
         } catch (SQLException e) {
