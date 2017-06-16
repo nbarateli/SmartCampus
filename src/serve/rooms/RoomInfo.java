@@ -25,7 +25,7 @@ import static misc.WebConstants.*;
  * This servlet takes a single parameter - the id of the room and if such exists
  * and prints its data in a JSON format.
  */
-//@WebServlet(name = "RoomInfo", urlPatterns = {"/rooms/room"})
+@WebServlet(name = "RoomInfo", urlPatterns = {"/rooms/room"})
 public class RoomInfo extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
