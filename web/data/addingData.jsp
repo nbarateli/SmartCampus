@@ -20,7 +20,7 @@
 <body>
 
   <div align="center" id="main-div">
-    <button id="button1">ლექციების ცხრილის შეყვანა</button> 
+    <button>ლექციების ცხრილის შეყვანა</button> 
     <div id="schedule" class="to-hide">
       <br><br><br>
       <label id="info-label"><b>შეგიძლიათ მონაცემები შეიყვანოთ ხელით (სათითაოდ):</b></label> 
@@ -79,7 +79,7 @@
     </div>
     <br><br><br>
     
-    <button id="button2">ოთახის დამატება</button> 
+    <button>ოთახის დამატება</button> 
     <div id="add-room-div" class="to-hide">
       <br><br><br>
       <form id="add-room-form" action="#" class="form-vertical" method="get">
@@ -136,7 +136,7 @@
     </div>
     <br><br><br>
     
-    <button id="button3">ოთახის წაშლა</button> 
+    <button>ოთახის წაშლა</button> 
     <div id="remove-room-div" class="to-hide">
       <br><br><br>
       <form id="remove-room-form" action="../RoomRemover" class="form-vertical" method="get">
@@ -151,7 +151,7 @@
     </div>
     <br><br><br>
     
-    <button id="button4">საგნის დამატება</button> 
+    <button>საგნის დამატება</button> 
     <div id="add-subj-div" class="to-hide">
       <br><br><br>
       <form id="add-subj-form" action="#" class="form-vertical" method="get">
