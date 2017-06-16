@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static misc.Utils.exactDateToString;
-import static misc.Utils.toHHSS;
+import static misc.Utils.toHHMM;
 import static misc.WebConstants.*;
 
 /**
@@ -117,8 +117,8 @@ public class RoomInfo extends HttpServlet {
             lectureBuilder.add(JSON_LECTURE_SUBJECT, lecture.getSubject().getName());
             lectureBuilder.add(JSON_LECTURE_LECTURER, lecture.getLecturer().getFirstName() + " " +
                     lecture.getLecturer().getLastName());
-            lectureBuilder.add(JSON_LECTURE_START_TIME, toHHSS(lecture.getStartTime()));
-            lectureBuilder.add(JSON_LECTURE_END_TIME, toHHSS(lecture.getEndTime()));
+            lectureBuilder.add(JSON_LECTURE_START_TIME, toHHMM(lecture.getStartTime()));
+            lectureBuilder.add(JSON_LECTURE_END_TIME, toHHMM(lecture.getEndTime()));
             lectureArrayBuilder.add(lectureBuilder.build());
         }
         builder.add(JSON_ROOM_LECTURES, lectureArrayBuilder.build());

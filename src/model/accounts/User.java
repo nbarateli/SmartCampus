@@ -9,6 +9,42 @@ import model.campus.CampusObject;
  * (immutable)
  */
 public class User implements CampusObject {
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        User other = (User) obj;
+        if (eMail == null) {
+            if (other.eMail != null)
+                return false;
+        } else if (!eMail.equals(other.eMail))
+            return false;
+        if (firstName == null) {
+            if (other.firstName != null)
+                return false;
+        } else if (!firstName.equals(other.firstName))
+            return false;
+        if (lastName == null) {
+            if (other.lastName != null)
+                return false;
+        } else if (!lastName.equals(other.lastName))
+            return false;
+        if (status != other.status)
+            return false;
+        if (userID != other.userID)
+            return false;
+        if (userRole != other.userRole)
+            return false;
+        if (userType != other.userType)
+            return false;
+        return true;
+    }
+
     private final int userID;
     private final String eMail;
     private final String firstName;

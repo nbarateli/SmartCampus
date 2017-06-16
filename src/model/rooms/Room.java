@@ -8,6 +8,26 @@ import model.campus.CampusObject;
  * The SmartCampus Room ADT (Immutable)
  */
 public class Room implements CampusObject {
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Room other = (Room) obj;
+        if (roomID != other.roomID)
+            return false;
+        if (roomName == null) {
+            if (other.roomName != null)
+                return false;
+        } else if (!roomName.equals(other.roomName))
+            return false;
+        return true;
+    }
+
     private final int roomID;
     private final int capacity;
     private final String roomName;

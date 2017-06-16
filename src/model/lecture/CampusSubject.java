@@ -20,4 +20,18 @@ public class CampusSubject implements CampusObject {
     public int getID() {
         return id;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        CampusSubject other = (CampusSubject) obj;
+        if (id != other.id)
+            return false;
+        return true;
+    }
 }

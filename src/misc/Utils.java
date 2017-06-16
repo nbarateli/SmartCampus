@@ -5,7 +5,6 @@ import model.lecture.CampusSubject;
 import model.lecture.Lecture;
 import model.rooms.*;
 
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -24,24 +23,33 @@ import static model.accounts.User.UserRole.*;
 import static model.accounts.User.*;
 
 public final class Utils {
-
+    
+    /**
+     * converts Date object to respective string in dd.MM.yyyy HH:mm format
+     * @param date Date object to convert
+     * @return string representation of date
+     */
     public static String exactDateToString(Date date) {
-        DateFormat format = new SimpleDateFormat("dd.mm.yyyy HH:mm");
+        DateFormat format = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         return format.format(date);
     }
 
     /**
-     * TODO
+     * converts Time object to respective string in HH:mm format
+     * @param time Time object to be converted
+     * @return string representation of time
      */
-    public static String toHHSS(Time time) {
+    public static String toHHMM(Time time) {
         DateFormat format = new SimpleDateFormat("HH:mm");
         return format.format(time);
     }
 
-    //TODO
+    /**
+     * return sql format of given time
+     */
     public static String toSqlTime(Time time) {
 
-        return "STR_TO_DATE(\'" + toHHSS(time) + "\', \'%H:%i\')";
+        return "STR_TO_DATE(\'" + toHHMM(time) + "\', \'%H:%i\')";
 
     }
 
@@ -71,7 +79,6 @@ public final class Utils {
                 return "კომპიუტერები";
             case WOODEN_CHAIR:
                 return "სკამ-მერხები (ხის)";
-
             case PLASTIC_CHAIR:
                 return "სკამ-მერხები (პლასტმასის)";
 
@@ -173,7 +180,7 @@ public final class Utils {
         Room room = getRoomFromResults(rs);
         String title = rs.getString(SQL_COLUMN_ROOM_PROBLEM_TITLE);
         String description = rs.getString(SQL_COLUMN_ROOM_PROBLEM_DESCRIPTION);
-        Date dateCreated = rs.getDate(SQL_COLUMN_ROOM_PROBLEM_DATE_CREATED);
+        java.sql.Date dateCreated = rs.getDate(SQL_COLUMN_ROOM_PROBLEM_DATE_CREATED);
         return new RoomProblem(id, author, room, title, description, dateCreated);
     }
 
@@ -249,7 +256,7 @@ public final class Utils {
     /**
      * Returns an associated enum value (if exists) of given string.
      */
-    private static UserRole toUserRole(String s) {
+    public static UserRole toUserRole(String s) {
         switch (s.toLowerCase()) {
             case "student":
                 return STUDENT;
@@ -264,7 +271,7 @@ public final class Utils {
     /**
      * Returns an associated enum value (if exists) of given string.
      */
-    private static UserType toUserType(String s) {
+    public static UserType toUserType(String s) {
         switch (s.toLowerCase()) {
             case "user":
                 return USER;

@@ -13,6 +13,48 @@ import java.text.SimpleDateFormat;
  * Class for Lecture ADT (immutable)
  */
 public class Lecture implements CampusObject {
+   
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Lecture other = (Lecture) obj;
+        if (day != other.day)
+            return false;
+        if (endTime == null) {
+            if (other.endTime != null)
+                return false;
+        } else if (!endTime.equals(other.endTime))
+            return false;
+        if (lectureID != other.lectureID)
+            return false;
+        if (lecturer == null) {
+            if (other.lecturer != null)
+                return false;
+        } else if (!lecturer.equals(other.lecturer))
+            return false;
+        if (room == null) {
+            if (other.room != null)
+                return false;
+        } else if (!room.equals(other.room))
+            return false;
+        if (startTime == null) {
+            if (other.startTime != null)
+                return false;
+        } else if (!startTime.equals(other.startTime))
+            return false;
+        if (subject == null) {
+            if (other.subject != null)
+                return false;
+        } else if (!subject.equals(other.subject))
+            return false;
+        return true;
+    }
+
     private final int lectureID;
     private final User lecturer;
     private final Room room;
