@@ -4,7 +4,6 @@ import model.database.DBConnector;
 
 import static model.database.SQLConstants.*;
 
-import model.campus.CampusSearchQuery;
 import model.lecture.Lecture;
 import model.rooms.Room;
 import model.rooms.RoomProblem;
@@ -61,10 +60,11 @@ public class DefaultRoomManager implements RoomManager {
                 SQL_COLUMN_ROOM_NAME + ", " + SQL_COLUMN_ROOM_FLOOR + ", " +
                 SQL_COLUMN_ROOM_TYPE + ", " + SQL_COLUMN_ROOM_CAPACITY +
                 ", " + SQL_COLUMN_ROOM_AVAILABLE + ", " +
-                SQL_COLUMN_ROOM_SEAT_TYPE + ") values (" +
-                room.getRoomName() + ", " + room.getFloor() + ", " + room.getRoomType() + ", " +
-                room.getRoomName() + ", " + room.getCapacity() + ", " + room.isAvailableForStudents() +
-                ", " + room.getSeatType() + ") ";
+                SQL_COLUMN_ROOM_SEAT_TYPE + ") values (\"" +
+                room.getRoomName() + "\", " + room.getFloor() + ", '" + 
+                room.getRoomType().toString().toLowerCase() + "', " +
+                room.getCapacity() + ", " + room.isAvailableForStudents() +
+                ", '" + room.getSeatType().toString().toLowerCase() + "') ";
         try {
             DBConnector.executeUpdate(insertQuery);
         } catch (SQLException e) {

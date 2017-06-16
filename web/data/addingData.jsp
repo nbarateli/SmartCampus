@@ -82,7 +82,7 @@
     <button>ოთახის დამატება</button> 
     <div id="add-room-div" class="to-hide">
       <br><br><br>
-      <form id="add-room-form" action="#" class="form-vertical" method="get">
+      <form id="add-room-form" action="../RoomAdder" class="form-vertical" method="get">
 
         <div class="form-group">
           <label class="control-label">ოთახის სახელი</label>
@@ -105,7 +105,6 @@
         <div class="select">
           <label class="control-label">ოთახის ტიპი</label>
           <select name="room_type" class="form-control">
-            <option value="any">ყველა</option>
             <option value="auditorium">აუდიტორია</option>
             <option value="utility">სხვა</option>
           </select>
@@ -114,7 +113,6 @@
         <div class="select">
           <label class="control-label">ადგილების ტიპი</label>
           <select name="seat_type" class="form-control">
-            <option value="any">ყველანაირი</option>
             <option value="desks">სკამები და მერხები</option>
             <option value="wooden_chair">სკამ-მერხები (ხის)</option>
             <option value="plastic_chair">სკამ-მერხები

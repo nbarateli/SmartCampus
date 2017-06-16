@@ -70,6 +70,5 @@ public class Room implements CampusObject {
 
     public enum SeatType {
         DESKS, WOODEN_CHAIR, PLASTIC_CHAIR, COMPUTERS, TABLES
-
     }
 }
