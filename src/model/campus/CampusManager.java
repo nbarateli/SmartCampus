@@ -1,3 +1,4 @@
+
 package model.campus;
 
 
@@ -18,5 +19,5 @@ public interface CampusManager<T extends CampusObject, Q extends CampusSearchQue
 
     void add(T entity);
 
-    void remove(T entity);
+    void remove(int entityID);
 }
