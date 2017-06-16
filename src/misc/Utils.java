@@ -162,6 +162,11 @@ public final class Utils {
         return new User(id, eMail, firstName, lastName, status, userType, role);
     }
 
+    /**
+     * Returns a <code>RoomProblem</code> object from current row of the given <code>ResultSet</code>
+     * <p>
+     * NOTE: The given result set must also contain columns from user and room tables.
+     */
     public static RoomProblem getProblemFromResults(ResultSet rs) throws SQLException {
         int id = rs.getInt(SQL_COLUMN_ROOM_PROBLEM_ID);
         User author = getUserFromResults(rs);

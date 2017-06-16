@@ -38,11 +38,14 @@ CREATE TABLE room_problem
   description  VARCHAR(500),
   date_created DATE            NOT NULL,
   CONSTRAINT room_id_fk
-  FOREIGN KEY (room_id) REFERENCES room (room_id),
+  FOREIGN KEY (room_id) REFERENCES room (room_id)
+    ON DELETE CASCADE,
   CONSTRAINT reporter_id_fk
-  FOREIGN KEY (reported_by) REFERENCES campus_user (user_id),
+  FOREIGN KEY (reported_by) REFERENCES campus_user (user_id)
+    ON DELETE CASCADE,
   CONSTRAINT solver_id_fk
   FOREIGN KEY (solved_by) REFERENCES campus_user (user_id)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE booking
@@ -52,9 +55,11 @@ CREATE TABLE booking
   booker_id  INT             NOT NULL,
   start_date DATE            NOT NULL,
   CONSTRAINT booking_room_fk
-  FOREIGN KEY (room_id) REFERENCES room (room_id),
+  FOREIGN KEY (room_id) REFERENCES room (room_id)
+    ON DELETE CASCADE,
   CONSTRAINT booking_user_fk
   FOREIGN KEY (booker_id) REFERENCES campus_user (user_id)
+    ON DELETE CASCADE
 
 );
 
@@ -68,9 +73,11 @@ CREATE TABLE corridor_problem
   title       VARCHAR(100) NOT NULL,
   description VARCHAR(500) NOT NULL,
   CONSTRAINT reported_user_fk
-  FOREIGN KEY (reported_by) REFERENCES campus_user (user_id),
+  FOREIGN KEY (reported_by) REFERENCES campus_user (user_id)
+    ON DELETE CASCADE,
   CONSTRAINT solved_by_fk
   FOREIGN KEY (solved_by) REFERENCES campus_user (user_id)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE campus_subject
@@ -88,9 +95,12 @@ CREATE TABLE lecture
   day_of_week ENUM ('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'),
   start_time  TIME            NOT NULL,
   end_time    TIME            NOT NULL,
-  CONSTRAINT lecture_user_user_id_fk FOREIGN KEY (lecturer) REFERENCES campus_user (user_id),
-  CONSTRAINT lecture_room_room_id_fk FOREIGN KEY (room_id) REFERENCES room (room_id),
+  CONSTRAINT lecture_user_user_id_fk FOREIGN KEY (lecturer) REFERENCES campus_user (user_id)
+    ON DELETE CASCADE,
+  CONSTRAINT lecture_room_room_id_fk FOREIGN KEY (room_id) REFERENCES room (room_id)
+    ON DELETE CASCADE,
   CONSTRAINT lecture_subject_subject_id_fk FOREIGN KEY (subject_id) REFERENCES campus_subject (subject_id)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE item_report
@@ -104,6 +114,7 @@ CREATE TABLE item_report
   date_added       DATE                   NOT NULL,
   CONSTRAINT item_report_user_user_id_fk
   FOREIGN KEY (author_id) REFERENCES campus_user (user_id)
+    ON DELETE CASCADE
 );
 CREATE TABLE item_image
 (
@@ -111,6 +122,7 @@ CREATE TABLE item_image
   image_url VARCHAR(300)    NOT NULL,
   report_id INT             NOT NULL,
   CONSTRAINT item_image_item_report_report_id_fk FOREIGN KEY (report_id) REFERENCES item_report (report_id)
+    ON DELETE CASCADE
 );
 CREATE UNIQUE INDEX item_image_image_url_uindex
   ON item_image (image_url);
@@ -125,9 +137,11 @@ CREATE TABLE user_problem
   warning_message VARCHAR(500) NOT NULL,
   date_warned     DATE         NOT NULL,
   CONSTRAINT user_problem_user_user_id_fk
-  FOREIGN KEY (user_id) REFERENCES campus_user (user_id),
+  FOREIGN KEY (user_id) REFERENCES campus_user (user_id)
+    ON DELETE CASCADE,
   CONSTRAINT user_problem_user_warner_id_fk
   FOREIGN KEY (warner_id) REFERENCES campus_user (user_id)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE room_image
@@ -140,10 +154,10 @@ CREATE TABLE room_image
   CONSTRAINT `fk_room_images_rooms`
   FOREIGN KEY (room_id)
   REFERENCES room (room_id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
+    ON DELETE CASCADE
 );
 
+/*
 -- drop trigger item_remove_trigger;
 DELIMITER //
 CREATE TRIGGER item_remove_trigger
@@ -187,4 +201,4 @@ FOR EACH ROW
     WHERE booker_id = old.user_id;
   END;
 //
-DELIMITER ;
+DELIMITER ;*/
