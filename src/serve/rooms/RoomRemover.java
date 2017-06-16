@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import misc.ModelConstants;
 import model.rooms.Room;
 import model.rooms.RoomSearchQuery;
 import model.rooms.manager.RoomManager;
@@ -39,7 +40,7 @@ public class RoomRemover extends HttpServlet {
 	    String name = request.getParameter("room_name");
 	    RoomSearchQuery query = new RoomSearchQuery();
 	    query.setName(name);
-	    manager.remove(manager.find(query).get(0));
+	    manager.remove(manager.find(query).size() == 0 ? ModelConstants.SENTINEL_INT : manager.find(query).get(0).getID());
 	    response.sendRedirect("data/addingData.jsp"); 
 	}
 	
