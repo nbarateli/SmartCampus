@@ -41,9 +41,8 @@ public class RoomRemover extends HttpServlet {
 	    query.setName(name);
 	    manager.remove(manager.find(query).get(0));
 	    
-	    RequestDispatcher dispatch = 
-                request.getRequestDispatcher("data/addingData.jsp");
-        dispatch.forward(request, response);
+	    response.sendRedirect("data/addingData.jsp");
+	    
 	}
 
 }
