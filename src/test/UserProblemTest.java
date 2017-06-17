@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 public class UserProblemTest {
 
-private UserProblem problem;
+    private UserProblem problem;
     
     @Before 
     public void createUserProblem() {

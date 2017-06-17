@@ -19,7 +19,8 @@ public class RoomProblem implements CampusObject {
     private final long dateCreated;
     private final int id;
 
-    public RoomProblem(int id, User author, Room room, String title, String description, Date dateCreated) {
+    public RoomProblem(int id, User author, Room room, String title, String description, 
+            Date dateCreated) {
         this.id = id;
         this.author = author;
         this.room = room;

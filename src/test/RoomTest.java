@@ -3,7 +3,6 @@ package test;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.problems.CampusProblem;
 import model.rooms.Room;
 import model.rooms.Room.RoomType;
 import model.rooms.Room.SeatType;
