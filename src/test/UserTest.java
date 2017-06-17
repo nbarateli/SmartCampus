@@ -15,8 +15,8 @@ public class UserTest {
     
     @Before 
     public void createUser() {
-        user = new User(-1, "mail", "firstName", "lastName", UserStatus.valueOf("ACTIVE"),
-                UserType.valueOf("USER"), UserRole.valueOf("STUDENT"));
+        user = new User(-1, "mail", "firstName", "lastName", UserStatus.ACTIVE,
+                UserType.USER, UserRole.STUDENT);
     }
     
     @Test
