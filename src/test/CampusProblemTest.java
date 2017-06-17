@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 public class CampusProblemTest {
 
-private CampusProblem problem, problem1;
+    private CampusProblem problem, problem1;
     
     @Before 
     public void setUp() {
