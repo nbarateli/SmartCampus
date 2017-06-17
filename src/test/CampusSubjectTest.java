@@ -1,10 +1,8 @@
 package test;
 
-import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.accounts.UserProblem;
 import model.lecture.CampusSubject;
 
 import static org.junit.Assert.*;
