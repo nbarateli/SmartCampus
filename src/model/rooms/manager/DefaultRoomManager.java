@@ -159,4 +159,10 @@ public class DefaultRoomManager implements RoomManager {
         return problems;
     }
 
+    @Override
+    public int size() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
 }

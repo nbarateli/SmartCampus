@@ -3,11 +3,11 @@ package model.lecture;
 import misc.Utils;
 import model.campus.CampusManager;
 import model.database.DBConnector;
+import model.rooms.manager.DefaultRoomManager;
+import model.rooms.manager.RoomManager;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,14 +21,21 @@ import static model.database.SQLConstants.*;
  * NOTE: THIS CLASS IS NOT TESTED YET.
  */
 public class LectureManager implements CampusManager<Lecture, LectureSearchQuery> {
+    private static LectureManager instance;
+    
+    /***/
+    public static LectureManager getInstance() {
+        return instance == null ? instance = new LectureManager() : instance;
+    }
+
     /**
      * Adds a new subject entry to the database
      *
      * @param subject a subject to be added
      */
-    public void addSubject(CampusSubject subject) {
-        String sql = "INSERT  INTO campus_subject (subject_name) " +
-                "VALUE (\'" + subject.getName() + "\')";
+    public void addSubject(String subjectName) {
+        String sql = "INSERT INTO " + SQL_TABLE_SUBJECT + " (" + SQL_COLUMN_SUBJECT_NAME +
+                ") VALUES (\'" + subjectName + "\')";
         try {
             DBConnector.executeUpdate(sql);
         } catch (SQLException e) {
@@ -70,11 +77,45 @@ public class LectureManager implements CampusManager<Lecture, LectureSearchQuery
 
     @Override
     public void remove(int lectureID) {
-        String deleteQuery = "delete from " + SQL_TABLE_LECTURE + " where " + SQL_COLUMN_LECTURE_ID + " = " + lectureID;
+        String deleteQuery = "delete from " + SQL_TABLE_LECTURE + " where " 
+                    + SQL_COLUMN_LECTURE_ID + " = " + lectureID;
         try {
             DBConnector.executeUpdate(deleteQuery);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    /**
+     * returns number of lectures in the database
+     */
+    @Override
+    public int size() {
+        String query = "select * from " + SQL_TABLE_LECTURE;
+        int count = 0;
+        try {
+            ResultSet res = DBConnector.executeQuery(query);
+            while(res.next())
+                count++;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+    
+    /**
+     * returns number of subjects in the database
+     */
+    public int numOfSubjects() {
+        String query = "select * from " + SQL_TABLE_SUBJECT;
+        int count = 0;
+        try {
+            ResultSet res = DBConnector.executeQuery(query);
+            while(res.next())
+                count++;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 }

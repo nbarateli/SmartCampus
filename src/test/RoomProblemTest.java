@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 
 public class RoomProblemTest {
 
-    private RoomProblem problem;
+    private RoomProblem problem, problem1;
     private User user;
     private Room room;
     
@@ -27,15 +27,22 @@ public class RoomProblemTest {
                 UserType.USER, UserRole.STUDENT);
         room = new Room(5, 5, "name", RoomType.AUDITORIUM, SeatType.DESKS, false, 5);
         problem = new RoomProblem(1, user, room, "title", "desc", new Date(500));
+        problem1 = new RoomProblem(1, user, room, null, null, new Date(500));
     }
     
     @Test
-    public void test() {
+    public void test1() {
         assertEquals(1, problem.getID());
         assertEquals(user, problem.getAuthor());
         assertEquals(room, problem.getRoom());
         assertEquals("title", problem.getTitle());
         assertEquals("desc", problem.getDescription());
         assertEquals(500, problem.getDateCreated().getTime());
+    }
+    
+    @Test
+    public void test2() {
+        assertEquals("", problem1.getTitle());
+        assertEquals("", problem1.getDescription());
     }
 }
