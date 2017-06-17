@@ -116,20 +116,29 @@ public class LectureSearchQuery implements CampusSearchQuery<Lecture> {
     public String generateQuery() {
         return hasNonNullField() ? String.format(
                 "SELECT * FROM lecture \nWHERE %s%s%s%s%s%s%s%s%s%s%s%s",
-                generateEqualQuery(lectureID, SQL_COLUMN_LECTURE_ID), lectureID == ModelConstants.SENTINEL_INT ? "" : " AND \n",
-                generateEqualQuery(lecturerID, SQL_COLUMN_LECTURE_LECTURER), lecturerID == ModelConstants.SENTINEL_INT ? "" : " AND \n",
-                generateEqualQuery(roomID, SQL_COLUMN_ROOM_ID), roomID == ModelConstants.SENTINEL_INT ? "" : " AND \n",
-                generateEqualQuery(subjectID, SQL_COLUMN_SUBJECT_ID), subjectID == ModelConstants.SENTINEL_INT ? "" : " AND \n",
-                generateEqualQuery(day.name().toLowerCase(), SQL_COLUMN_LECTURE_DAY), day.ordinal() == ModelConstants.SENTINEL_INT ? "" : " AND \n",
-                startTime == ModelConstants.SENTINEL_PTR ? "" : "" + SQL_COLUMN_LECTURE_START_TIME + " >= " + Utils.toSqlTime(startTime) + " AND \n",
-                endTime == ModelConstants.SENTINEL_PTR ? "TRUE;" : "" + SQL_COLUMN_LECTURE_END_TIME + " <= " + Utils.toSqlTime(endTime) + ";"
-        )
+                generateEqualQuery(lectureID, SQL_COLUMN_LECTURE_ID), 
+                    lectureID == ModelConstants.SENTINEL_INT ? "" : " AND \n",
+                generateEqualQuery(lecturerID, SQL_COLUMN_LECTURE_LECTURER), 
+                    lecturerID == ModelConstants.SENTINEL_INT ? "" : " AND \n",
+                generateEqualQuery(roomID, SQL_COLUMN_ROOM_ID), 
+                    roomID == ModelConstants.SENTINEL_INT ? "" : " AND \n",
+                generateEqualQuery(subjectID, SQL_COLUMN_SUBJECT_ID), 
+                    subjectID == ModelConstants.SENTINEL_INT ? "" : " AND \n",
+                generateEqualQuery(day.name().toLowerCase(), SQL_COLUMN_LECTURE_DAY), 
+                    day.ordinal() == ModelConstants.SENTINEL_INT ? "" : " AND \n",
+                startTime == ModelConstants.SENTINEL_PTR ? "" : 
+                    "" + SQL_COLUMN_LECTURE_START_TIME + " >= " + Utils.toSqlTime(startTime) 
+                    + " AND \n",
+                endTime == ModelConstants.SENTINEL_PTR ? "TRUE;" : 
+                    "" + SQL_COLUMN_LECTURE_END_TIME + " <= " + Utils.toSqlTime(endTime) + ";"
+                )
                 :
                 "SELECT * FROM lecture";
     }
 
     public static void main(String[] args) {
-        LectureSearchQuery bla = new LectureSearchQuery(1, 2, 3, 4, WeekDay.FRIDAY, new Time(100), new Time(200));
+        LectureSearchQuery bla = new LectureSearchQuery(1, 2, 3, 4, WeekDay.FRIDAY, 
+                new Time(100), new Time(200));
         System.out.println(bla.generateQuery());
     }
 }

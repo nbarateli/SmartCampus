@@ -13,8 +13,8 @@ public class ItemReport implements CampusObject {
     private final long dateAdded;
 
 
-    public ItemReport(int id, int authorID, String itemName, String itemDescription, ReportType reportType, Date dateAdded) {
-
+    public ItemReport(int id, int authorID, String itemName, String itemDescription, 
+            ReportType reportType, Date dateAdded) {
         this.id = id;
         this.authorID = authorID;
         this.itemName = itemName;

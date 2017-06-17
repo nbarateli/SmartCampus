@@ -1,6 +1,5 @@
 package test;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.*;
@@ -186,7 +185,6 @@ public class UtilsTest {
         }
     }
     
-    @SuppressWarnings("deprecation")
     @Test
     public void getLectureFromResultsTest() {
         try {
@@ -196,7 +194,7 @@ public class UtilsTest {
                     new Room(5, 5, "name", RoomType.valueOf("AUDITORIUM"), 
                     SeatType.valueOf("DESKS"), false, 5),
                     new CampusSubject(5, "name"), WeekDay.valueOf("MONDAY"),
-                    new Time(22, 58, 40), new Time(22, 58, 40)),
+                    new Time(500), new Time(500)),
                     Utils.getLectureFromResults(new MockResultSet()));
         } catch (SQLException e) {
             // TODO Auto-generated catch block

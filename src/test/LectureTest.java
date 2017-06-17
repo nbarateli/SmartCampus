@@ -47,6 +47,8 @@ public class LectureTest {
         assertEquals(WeekDay.MONDAY, lecture.getDay());
         assertEquals(startTime, lecture.getStartTime());
         assertEquals(endTime, lecture.getEndTime());
+        assertEquals("Lecture{\nკალკულუსი: ლექტორი: firstName lastName დღე: MONDAY " + 
+                "დასაწყისი 04:00 აუდიტორია name}", lecture.toString());
     }
 
 }
