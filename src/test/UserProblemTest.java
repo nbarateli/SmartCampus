@@ -17,7 +17,7 @@ public class UserProblemTest {
 private UserProblem problem;
     
     @Before 
-    public void createUser() {
+    public void createUserProblem() {
         problem = new UserProblem(1, 1, 1, "title", "message", new Date(500));
     }
     

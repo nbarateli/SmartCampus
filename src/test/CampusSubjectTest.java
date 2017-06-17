@@ -14,7 +14,7 @@ public class CampusSubjectTest {
     private CampusSubject subject;
     
     @Before 
-    public void createUser() {
+    public void createSubject() {
         subject = new CampusSubject(1, "კალკულუსი");
     }
     
