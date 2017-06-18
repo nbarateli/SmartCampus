@@ -33,8 +33,8 @@
         </div>
 
         <div class="form-group">
-          <input type="text" name="room_number" class="form-control"
-            placeholder="შეიყვანეთ ოთახის ნომერი">
+          <input type="text" name="room_name" class="form-control"
+            placeholder="შეიყვანეთ ოთახის დასახელება">
         </div>
 
         <div class="form-group">
