@@ -82,7 +82,6 @@ public class RoomAdder extends HttpServlet {
             Room room = new Room(-1, capacity, name, roomType, seatType, 
                     available, floor);
             manager.add(room);
-         
         }
           
         response.sendRedirect("data/addingData.jsp");

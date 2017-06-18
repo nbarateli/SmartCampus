@@ -1,8 +1,8 @@
 package misc;
 
 import model.accounts.User;
-import model.lecture.CampusSubject;
-import model.lecture.Lecture;
+import model.lectures.CampusSubject;
+import model.lectures.Lecture;
 import model.rooms.*;
 
 import java.sql.ResultSet;

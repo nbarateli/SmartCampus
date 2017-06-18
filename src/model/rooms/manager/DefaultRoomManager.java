@@ -1,10 +1,10 @@
 package model.rooms.manager;
 
 import model.database.DBConnector;
+import model.lectures.Lecture;
 
 import static model.database.SQLConstants.*;
 
-import model.lecture.Lecture;
 import model.rooms.Room;
 import model.rooms.RoomProblem;
 import model.rooms.RoomSearchQuery;
@@ -126,7 +126,6 @@ public class DefaultRoomManager implements RoomManager {
         try (ResultSet rs = DBConnector.executeQuery(sql)) {
             while (rs.next()) {
                 lectures.add(getLectureFromResults(rs));
-
             }
         } catch (SQLException e) {
             e.printStackTrace();

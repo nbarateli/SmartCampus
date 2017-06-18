@@ -4,7 +4,7 @@ import java.sql.Time;
 import java.util.*;
 
 import model.campus.CampusManager;
-import model.lecture.Lecture;
+import model.lectures.Lecture;
 import model.rooms.Room;
 import model.rooms.RoomProblem;
 import model.rooms.RoomSearchQuery;

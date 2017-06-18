@@ -1,4 +1,4 @@
-package model.lecture;
+package model.lectures;
 
 import model.accounts.User;
 import model.campus.CampusObject;

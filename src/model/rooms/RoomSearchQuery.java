@@ -3,8 +3,8 @@ package model.rooms;
 import static model.database.SQLConstants.*;
 
 import model.campus.CampusSearchQuery;
+import model.lectures.Lecture;
 import model.accounts.User;
-import model.lecture.Lecture;
 
 /**
  * Created by Niko on 07.06.2017.

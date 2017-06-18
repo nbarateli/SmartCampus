@@ -1,32 +1,21 @@
-package model.lecture;
-
-import misc.Utils;
-import model.campus.CampusManager;
-import model.database.DBConnector;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.List;
+package model.lectures.manager;
 
 import static model.database.SQLConstants.*;
 
-/**
- * Created by Shota on 6/13/2017.
- * <p>
- * LectureManager class overrides base functionality of CampusManager
- * and is responsible for finding, adding and removing lecture entities.
- * NOTE: THIS CLASS IS NOT TESTED YET.
- */
-public class LectureManager implements CampusManager<Lecture, LectureSearchQuery> {
-    /**
-     * Adds a new subject entry to the database
-     *
-     * @param subject a subject to be added
-     */
-    public void addSubject(CampusSubject subject) {
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import misc.Utils;
+import model.database.DBConnector;
+import model.lectures.CampusSubject;
+import model.lectures.Lecture;
+import model.lectures.LectureSearchQuery;
+
+public class DefaultLectureManager implements LectureManager {
+	
+	public void addSubject(CampusSubject subject) {
         String sql = "INSERT  INTO campus_subject (subject_name) " +
                 "VALUE (\'" + subject.getName() + "\')";
         try {

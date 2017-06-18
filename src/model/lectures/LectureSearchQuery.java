@@ -1,4 +1,4 @@
-package model.lecture;
+package model.lectures;
 
 import java.sql.Time;
 import java.time.temporal.WeekFields;
@@ -6,7 +6,7 @@ import java.time.temporal.WeekFields;
 import misc.ModelConstants;
 import misc.Utils;
 import model.campus.CampusSearchQuery;
-import model.lecture.Lecture.WeekDay;
+import model.lectures.Lecture.WeekDay;
 
 import static model.database.SQLConstants.*;
 
@@ -122,8 +122,7 @@ public class LectureSearchQuery implements CampusSearchQuery<Lecture> {
                 generateEqualQuery(subjectID, SQL_COLUMN_SUBJECT_ID), subjectID == ModelConstants.SENTINEL_INT ? "" : " AND \n",
                 generateEqualQuery(day.name().toLowerCase(), SQL_COLUMN_LECTURE_DAY), day.ordinal() == ModelConstants.SENTINEL_INT ? "" : " AND \n",
                 startTime == ModelConstants.SENTINEL_PTR ? "" : "" + SQL_COLUMN_LECTURE_START_TIME + " >= " + Utils.toSqlTime(startTime) + " AND \n",
-                endTime == ModelConstants.SENTINEL_PTR ? "TRUE;" : "" + SQL_COLUMN_LECTURE_END_TIME + " <= " + Utils.toSqlTime(endTime) + ";"
-        )
+                endTime == ModelConstants.SENTINEL_PTR ? "TRUE;" : "" + SQL_COLUMN_LECTURE_END_TIME + " <= " + Utils.toSqlTime(endTime) + ";")
                 :
                 "SELECT * FROM lecture";
     }
