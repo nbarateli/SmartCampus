@@ -145,7 +145,7 @@ public class RoomSearchQuery implements CampusSearchQuery<Room> {
     private String hasProblemsQuery() {
 
         return hasProblems ? "" : String.format(
-                "!(%s.%s IN (SELECT %s.%s\n" +
+                "AND !(%s.%s IN (SELECT %s.%s\n" +
                         "                         FROM %s))",
                 SQL_TABLE_ROOM, SQL_COLUMN_ROOM_ID, SQL_TABLE_ROOM_PROBLEM,
                 SQL_COLUMN_ROOM_PROBLEM_ROOM, SQL_TABLE_ROOM_PROBLEM);
