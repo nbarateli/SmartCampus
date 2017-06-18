@@ -21,9 +21,8 @@ public class LectureManagerTest {
     
     @Test
     public void test1() {
-        manager.addSubject("a");
-        System.out.println("Now is: " + manager.numOfSubjects());
-        assertEquals(numSubjects, manager.numOfSubjects());
+    	manager.addSubject("a");
+        assertEquals(numSubjects+1, manager.numOfSubjects());
     }
 
 }
