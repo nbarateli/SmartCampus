@@ -1,7 +1,6 @@
 package model.database;
 
 import java.sql.*;
-import java.util.Calendar;
 
 import static misc.DBInfo.*;
 
@@ -59,7 +58,7 @@ public class DBConnector {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection
                     (MYSQL_DATABASE_SERVER, MYSQL_USERNAME, MYSQL_PASSWORD);
-            Statement statement = connection.createStatement();
+            PreparedStatement statement = connection.prepareStatement(sql);
             statement.executeQuery("USE " + MYSQL_DATABASE_NAME + ";");
 
             if (isUpdate)

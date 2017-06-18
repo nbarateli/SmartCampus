@@ -52,7 +52,11 @@ public interface RoomManager extends CampusManager<Room, RoomSearchQuery> {
      */
     List<Lecture> findAllLecturesAt(Room room, Lecture.WeekDay day, Time start, Time end);
 
-    /***/
+    /**
+     * returns room with given id from the database
+     * 
+     * @param id id of the room we're searching for 
+     */
     Room getRoomByID(int id);
 
     /**
