@@ -7,10 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import misc.Utils;
+import model.accounts.User;
 import model.database.DBConnector;
+import model.lectures.CampusSubject;
 import model.lectures.Lecture;
 import model.lectures.LectureSearchQuery;
+
+import static misc.Utils.*;
 
 public class DefaultLectureManager implements LectureManager {
     
@@ -19,6 +22,57 @@ public class DefaultLectureManager implements LectureManager {
 	public static LectureManager getInstance(){
 		return instance == null ? instance = new DefaultLectureManager() : instance ;
 	}
+	
+	/**
+	 * returns the list of lectures Fetched by given SQL query
+	 * @param sql
+	 */
+	public static List<Lecture> findLectures(String sql){
+		List<Lecture> lectures = new ArrayList<>();
+		try {
+			ResultSet matches = DBConnector.executeQuery(sql);
+			while(matches.next()){
+				lectures.add(getLectureFromResults(matches));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lectures;
+	}
+	
+	/**
+	 * returns the list of lecturers Fetched by given SQL query
+	 * @param sql
+	 */
+    public static List<User> findLecturer(String sql){
+    	List<User> users = new ArrayList<>();
+    	try {
+			ResultSet matches = DBConnector.executeQuery(sql);
+			while(matches.next()){
+				users.add(getUserFromResults(matches));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	return users;
+    }
+    
+    /**
+     * returns the list of subjects Fetched by given SQL query
+     * @param sql
+     */
+    public static List<CampusSubject> findSubject(String sql){
+    	List<CampusSubject> subjects = new ArrayList<>();
+    	try {
+			ResultSet matches = DBConnector.executeQuery(sql);
+			while(matches.next()){
+				subjects.add(getSubjectFromResults(matches));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	return subjects;
+    }
 	
 	@Override
 	public void addSubject(String subjectName) {
@@ -49,7 +103,7 @@ public class DefaultLectureManager implements LectureManager {
             ResultSet set = DBConnector.executeQuery(query.generateQuery());
 
             while (set.next()) {
-                list.add(Utils.getLectureFromResults(set));
+                list.add(getLectureFromResults(set));
             }
         } catch (SQLException e) {
             //doing nothing
@@ -134,4 +188,5 @@ public class DefaultLectureManager implements LectureManager {
         }
         return count;
     }
+
 }

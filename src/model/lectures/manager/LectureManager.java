@@ -29,7 +29,8 @@ public interface LectureManager extends CampusManager<Lecture, LectureSearchQuer
     
     /**
      * gets id of the given lecture from the database
+     * 
      * @param lecture lecture to get id of
      */
     public int getLectureId(Lecture lecture);
-}
+}	

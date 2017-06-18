@@ -37,7 +37,6 @@ public class DefaultRoomManager implements RoomManager {
         List<Room> rooms = new ArrayList<>();
         try (ResultSet matches = DBConnector.executeQuery(sql)) {
             while (matches.next()) {
-
                 rooms.add(getRoomFromResults(matches));
             }
         } catch (SQLException e) {
@@ -46,10 +45,10 @@ public class DefaultRoomManager implements RoomManager {
         return rooms;
     }
 
+
     private DefaultRoomManager() {
-
     }
-
+    
     @Override
     public List<Room> find(RoomSearchQuery query) {
 
@@ -141,6 +140,12 @@ public class DefaultRoomManager implements RoomManager {
         List<Room> rooms = findRooms("SELECT * FROM room where room_id = " + id);
         return rooms == null || rooms.size() == 0 ? null : rooms.get(0);
     }
+    
+	@Override
+	public Room getRoomByName(String roomName) {
+		List<Room> rooms = findRooms("SELECT * FROM room WHERE room_name = " + roomName);
+		return rooms == null || rooms.size() == 0 ? null : rooms.get(0);
+	}
 
     @Override
     public List<RoomProblem> findAllProblemsOf(Room room) {

@@ -17,7 +17,7 @@ import model.rooms.RoomSearchQuery;
  * from and into the database.
  */
 public interface RoomManager extends CampusManager<Room, RoomSearchQuery> {
-
+	
     /**
      * Returns a list of URL-s of all the images of given room.
      *
@@ -58,7 +58,14 @@ public interface RoomManager extends CampusManager<Room, RoomSearchQuery> {
      * @param id id of the room we're searching for 
      */
     Room getRoomByID(int id);
-
+    
+    /**
+     * returns room with given name from the database
+     * 
+     * @param roomName
+     */
+    Room getRoomByName(String roomName);
+    
     /**
      * Returns the list of all the infrastructural problems this room currently has.
      *
