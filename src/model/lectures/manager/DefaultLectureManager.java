@@ -46,7 +46,6 @@ public class DefaultLectureManager implements LectureManager {
     public List<Lecture> find(LectureSearchQuery query) {
         List<Lecture> list = new ArrayList<>();
         try {
-            System.out.println(query.generateQuery());
             ResultSet set = DBConnector.executeQuery(query.generateQuery());
 
             while (set.next()) {
