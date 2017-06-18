@@ -43,7 +43,19 @@ public final class Utils {
         DateFormat format = new SimpleDateFormat("HH:mm");
         return format.format(time);
     }
-
+    
+    /**
+     * returns the Time object corresponding 
+     * to its String representation
+     */
+    @SuppressWarnings("deprecation")
+	public static Time toHHMM(String time){
+    	int hour = Integer.valueOf(time.substring(0, 2));
+    	int min = Integer.valueOf(time.substring(3, 5));
+    	int sec = Integer.valueOf(time.substring(6));
+    	
+    	return new Time(hour, min, sec);
+    }
     /**
      * return sql format of given time
      */
@@ -214,6 +226,15 @@ public final class Utils {
 
         return new Room(id, capacity, name, roomType, seatType, available, floor);
     }
+    
+    /**
+     * Returns a subject from current row of the given <code>ResultSet</code>
+     */
+    public static CampusSubject getSubjectFromResults(ResultSet rs) throws SQLException {
+        int id = rs.getInt(SQL_COLUMN_SUBJECT_ID);
+        String name = rs.getString(SQL_COLUMN_SUBJECT_NAME);
+        return new CampusSubject(id, name);
+    }
 
     /**
      * Returns an associated enum value (if exists) of given string.
@@ -245,12 +266,6 @@ public final class Utils {
             default:
                 return "კვირა";
         }
-    }
-
-    private static CampusSubject getSubjectFromResults(ResultSet rs) throws SQLException {
-        int id = rs.getInt(SQL_COLUMN_SUBJECT_ID);
-        String name = rs.getString(SQL_COLUMN_SUBJECT_NAME);
-        return new CampusSubject(id, name);
     }
 
     /**
