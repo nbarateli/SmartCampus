@@ -23,7 +23,9 @@ import static misc.Utils.*;
 public class DefaultRoomManager implements RoomManager {
     private static RoomManager instance;
 
-    /***/
+    /**
+     * Returns the instance of RoomManager
+     * */
     public static RoomManager getInstance() {
         return instance == null ? instance = new DefaultRoomManager() : instance;
     }
