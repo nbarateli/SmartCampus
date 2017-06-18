@@ -17,7 +17,7 @@ import model.rooms.RoomSearchQuery;
  * from and into the database.
  */
 public interface RoomManager extends CampusManager<Room, RoomSearchQuery> {
-	
+
     /**
      * Returns a list of URL-s of all the images of given room.
      *
@@ -72,5 +72,5 @@ public interface RoomManager extends CampusManager<Room, RoomSearchQuery> {
      * @return a <code>List</code> of <code>RoomProblem</code> s
      */
     List<RoomProblem> findAllProblemsOf(Room room);
-
+    
 }

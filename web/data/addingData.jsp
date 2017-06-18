@@ -25,7 +25,7 @@
       <br><br><br>
       <label id="info-label"><b>შეგიძლიათ მონაცემები შეიყვანოთ ხელით (სათითაოდ):</b></label> 
       <br><br>
-      <form id="sched-form" action="#" class="form-vertical" method="get">
+      <form id="sched-form" action="../LectureAdder" class="form-vertical" method="get">
 
         <div class="form-group">
           <input type="text" name="lecturer_name" class="form-control"

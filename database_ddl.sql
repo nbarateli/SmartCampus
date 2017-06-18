@@ -157,6 +157,8 @@ CREATE TABLE room_image
     ON DELETE CASCADE
 );
 
+Select * from room;
+Select * from room where room_name='200'
 /*
 -- drop trigger item_remove_trigger;
 DELIMITER //
