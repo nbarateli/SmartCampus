@@ -1,10 +1,8 @@
 package model.rooms;
 
-import static model.database.SQLConstants.*;
-
 import model.campus.CampusSearchQuery;
-import model.lectures.Lecture;
-import model.accounts.User;
+
+import static model.database.SQLConstants.*;
 
 /**
  * Created by Niko on 07.06.2017.
@@ -146,8 +144,11 @@ public class RoomSearchQuery implements CampusSearchQuery<Room> {
      */
     private String hasProblemsQuery() {
 
-        return hasProblems ? "" : " AND COUNT(SELECT * FROM room_problem\n" +
-                " WHERE room_problem.room_id = ) < 1";
+        return hasProblems ? "" : String.format(
+                "!(%s.%s IN (SELECT %s.%s\n" +
+                        "                         FROM %s))",
+                SQL_TABLE_ROOM, SQL_COLUMN_ROOM_ID, SQL_TABLE_ROOM_PROBLEM,
+                SQL_COLUMN_ROOM_PROBLEM_ROOM, SQL_TABLE_ROOM_PROBLEM);
     }
 
     /**
