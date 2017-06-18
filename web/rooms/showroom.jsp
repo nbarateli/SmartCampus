@@ -1,6 +1,6 @@
 <%@ page import="misc.WebConstants" %>
 <%@ page import="static misc.WebConstants.ROOM_MANAGER" %>
-<%@ page import="model.lecture.Lecture" %>
+<%@ page import="model.lectures.Lecture" %>
 <%@ page import="model.rooms.Room" %>
 <%@ page import="model.rooms.manager.RoomManager" %>
 <%@ page import="java.util.List" %>
