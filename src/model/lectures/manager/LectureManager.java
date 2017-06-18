@@ -11,5 +11,7 @@ public interface LectureManager extends CampusManager<Lecture, LectureSearchQuer
      *
      * @param subject a subject to be added
      */
-    public void addSubject(CampusSubject subject);
+    public void addSubject(String subjectName);
+    
+    public int numOfSubjects();
 }

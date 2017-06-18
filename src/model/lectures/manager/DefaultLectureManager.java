@@ -15,17 +15,14 @@ import model.lectures.LectureSearchQuery;
 
 public class DefaultLectureManager implements LectureManager {
 	private static LectureManager instance;
-	
-	/**
-	 * Returns the instance of LectureManager
-	 * */
+	/***/
 	public static LectureManager getInstance(){
 		return instance == null ? instance = new DefaultLectureManager() : instance ;
 	}
 	
-	public void addSubject(CampusSubject subject) {
+	public void addSubject(String subjectName) {
         String sql = "INSERT  INTO campus_subject (subject_name) " +
-                "VALUE (\'" + subject.getName() + "\')";
+                "VALUES (\'" + subjectName + "\')";
         try {
             DBConnector.executeUpdate(sql);
         } catch (SQLException e) {
@@ -73,5 +70,40 @@ public class DefaultLectureManager implements LectureManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    /**
+     * returns number of lectures in the database
+     */
+	@Override
+    public int size() {
+        String query = "select * from " + SQL_TABLE_LECTURE;
+        int count = 0;
+        try {
+            ResultSet res = DBConnector.executeQuery(query);
+            while(res.next())
+                count++;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+	
+	
+    /**
+     * returns number of subjects in the database
+     */
+	@Override
+    public int numOfSubjects() {
+        String query = "select * from " + SQL_TABLE_SUBJECT;
+        int count = 0;
+        try {
+            ResultSet res = DBConnector.executeQuery(query);
+            while(res.next())
+                count++;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 }

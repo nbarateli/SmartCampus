@@ -47,7 +47,7 @@ public class OnCreateListener implements ServletContextListener,
         LectureManager lectureManager = DefaultLectureManager.getInstance();
         sce.getServletContext().setAttribute(ROOM_MANAGER, roomManager);
         sce.getServletContext().setAttribute(LECTURE_MANAGER, lectureManager);
-    }
+    }	
 
     public void contextDestroyed(ServletContextEvent sce) {
       /* This method is invoked when the Servlet Context 
