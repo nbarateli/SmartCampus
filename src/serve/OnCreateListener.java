@@ -6,6 +6,8 @@ package serve;
  */
 
 import misc.DBInfo;
+import model.lectures.manager.DefaultLectureManager;
+import model.lectures.manager.LectureManager;
 import model.rooms.manager.DefaultRoomManager;
 import model.rooms.manager.RoomManager;
 
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpSessionListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 
 import static misc.WebConstants.ROOM_MANAGER;
+import static misc.WebConstants.LECTURE_MANAGER;
 
 @WebListener()
 public class OnCreateListener implements ServletContextListener,
@@ -40,8 +43,10 @@ public class OnCreateListener implements ServletContextListener,
         } catch (IllegalAccessException | InstantiationException e) {
             e.printStackTrace();
         }
-        RoomManager manager = DefaultRoomManager.getInstance();
-        sce.getServletContext().setAttribute(ROOM_MANAGER, manager);
+        RoomManager roomManager = DefaultRoomManager.getInstance();
+        LectureManager lectureManager = DefaultLectureManager.getInstance();
+        sce.getServletContext().setAttribute(ROOM_MANAGER, roomManager);
+        sce.getServletContext().setAttribute(LECTURE_MANAGER, lectureManager);
     }
 
     public void contextDestroyed(ServletContextEvent sce) {

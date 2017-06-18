@@ -14,6 +14,14 @@ import model.lectures.Lecture;
 import model.lectures.LectureSearchQuery;
 
 public class DefaultLectureManager implements LectureManager {
+	private static LectureManager instance;
+	
+	/**
+	 * Returns the instance of LectureManager
+	 * */
+	public static LectureManager getInstance(){
+		return instance == null ? instance = new DefaultLectureManager() : instance ;
+	}
 	
 	public void addSubject(CampusSubject subject) {
         String sql = "INSERT  INTO campus_subject (subject_name) " +
