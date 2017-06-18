@@ -148,20 +148,28 @@ public final class Utils {
     * */
     public static Lecture.WeekDay toWeekDay(String day) {
         switch (day.toLowerCase()) {
+        	case "ორშაბათი":	
             case "monday":
                 return Lecture.WeekDay.MONDAY;
+            case "სამშაბათი":
             case "tuesday":
                 return Lecture.WeekDay.TUESDAY;
+            case "ოთხშაბათი":
             case "wednesday":
                 return Lecture.WeekDay.WEDNESDAY;
+            case "ხუთშაბათი":
             case "thursday":
                 return Lecture.WeekDay.THURSDAY;
+            case "პარასკევი":
             case "friday":
                 return Lecture.WeekDay.FRIDAY;
+            case "შაბათი":
             case "saturday":
                 return Lecture.WeekDay.SATURDAY;
+            case "კვირა":
             case "sunday":
                 return Lecture.WeekDay.SUNDAY;
+            	
         }
         return null;
     }
