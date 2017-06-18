@@ -9,20 +9,32 @@ import java.util.List;
 
 import misc.Utils;
 import model.database.DBConnector;
-import model.lectures.CampusSubject;
 import model.lectures.Lecture;
 import model.lectures.LectureSearchQuery;
 
 public class DefaultLectureManager implements LectureManager {
+    
 	private static LectureManager instance;
 	/***/
 	public static LectureManager getInstance(){
 		return instance == null ? instance = new DefaultLectureManager() : instance ;
 	}
 	
+	@Override
 	public void addSubject(String subjectName) {
-        String sql = "INSERT  INTO campus_subject (subject_name) " +
+        String sql = "INSERT INTO " + SQL_TABLE_SUBJECT + " (" + SQL_COLUMN_SUBJECT_NAME + ") " +
                 "VALUES (\'" + subjectName + "\')";
+        try {
+            DBConnector.executeUpdate(sql);
+        } catch (SQLException e) {
+            //ignored
+        }
+    }
+	
+	@Override
+	public void removeSubject(String subjectName) {
+        String sql = "DELETE FROM " + SQL_TABLE_SUBJECT + " WHERE " + 
+                SQL_COLUMN_SUBJECT_NAME + " = '" + subjectName + "'";
         try {
             DBConnector.executeUpdate(sql);
         } catch (SQLException e) {
@@ -34,6 +46,7 @@ public class DefaultLectureManager implements LectureManager {
     public List<Lecture> find(LectureSearchQuery query) {
         List<Lecture> list = new ArrayList<>();
         try {
+            System.out.println(query.generateQuery());
             ResultSet set = DBConnector.executeQuery(query.generateQuery());
 
             while (set.next()) {
@@ -52,19 +65,35 @@ public class DefaultLectureManager implements LectureManager {
                 SQL_COLUMN_LECTURE_SUBJECT + ", " + SQL_COLUMN_LECTURE_DAY +
                 ", " + SQL_COLUMN_LECTURE_START_TIME + ", " +
                 SQL_COLUMN_LECTURE_END_TIME + ") values (" +
-                lecture.getLecturer() + ", " + lecture.getRoom() + ", " + lecture.getSubject() + ", '" +
-                lecture.getDay().name().toLowerCase() + "', '" + lecture.getStartTime() + "', " +
-                lecture.getEndTime() + ") ";
+                lecture.getLecturer().getID() + ", " + lecture.getRoom().getID() + ", " + 
+                lecture.getSubject().getID() + ", '" +
+                lecture.getDay().name().toLowerCase() + "', '" + lecture.getStartTime() + "', '" +
+                lecture.getEndTime() + "') ";
         try {
             DBConnector.executeUpdate(insertQuery);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+    
+    @Override
+    public int getLectureId(Lecture lecture) {
+        LectureSearchQuery query = new LectureSearchQuery();
+        query.setLecturerID(lecture.getLecturer().getID());
+        query.setRoomID(lecture.getRoom().getID());
+        query.setSubjectID(lecture.getSubject().getID());
+        query.setDay(lecture.getDay());
+        query.setStartTime(lecture.getStartTime());
+        query.setEndTime(lecture.getEndTime());
+        List<Lecture> lectures = find(query);
+        
+        return lectures.get(0).getID();
+    }
 
     @Override
     public void remove(int lectureID) {
-        String deleteQuery = "delete from " + SQL_TABLE_LECTURE + " where " + SQL_COLUMN_LECTURE_ID + " = " + lectureID;
+        String deleteQuery = "delete from " + SQL_TABLE_LECTURE + " where " 
+                    + SQL_COLUMN_LECTURE_ID + " = " + lectureID;
         try {
             DBConnector.executeUpdate(deleteQuery);
         } catch (SQLException e) {
