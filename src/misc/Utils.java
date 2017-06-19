@@ -50,6 +50,7 @@ public final class Utils {
      */
     @SuppressWarnings("deprecation")
 	public static Time toHHMM(String time){
+        System.out.println(time);
     	if(time.equals(""))
     		return null;
     	

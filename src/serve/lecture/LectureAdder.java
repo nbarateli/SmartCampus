@@ -43,8 +43,7 @@ public class LectureAdder extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		LectureManager manager = (LectureManager)request.getServletContext().getAttribute(WebConstants.LECTURE_MANAGER);
-		
-		
+			
 		String lecturerName = request.getParameter("lecturer_name");
 		String firstName = lecturerName.indexOf(' ') != -1 ? lecturerName.substring(0,lecturerName.indexOf(' ')) : "";
 		String lastName = lecturerName.substring(lecturerName.indexOf(' ') + 1);
@@ -68,7 +67,7 @@ public class LectureAdder extends HttpServlet {
 		Room room = roomList.size() == 0 ? null : roomList.get(0);
 		
 		if(lecturer != null && room != null && subject != null 
-				&& weekDay != null && startTime != null && endTime != null){
+				&& startTime != null && endTime != null){
 			Lecture thisLecture = new Lecture(ModelConstants.SENTINEL_INT, lecturer, room, subject, weekDay, startTime, endTime);
 			manager.add(thisLecture);
 		}

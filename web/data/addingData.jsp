@@ -43,7 +43,7 @@
         </div>
         
         <div class="select">
-          <label class="control-label">კვირის დღე</label>
+          <label class="control-label">ლექციის დრო</label>
           <select name="week_day" class="form-control">
             <option value="monday">ორშაბათი</option>
             <option value="tuesday">სამშაბათი</option>
@@ -54,14 +54,16 @@
             <option value="sunday">კვირა</option>
           </select>
         </div>
-        
+        <br>
         <div class="form-group">
-          <label class="control-label">შეიყვანეთ ლექციის დაწყების დრო</label>
-          <input type="time" name="start_time" class="form-control">
+          
+          <input type="text" name="start_time" class="form-control" 
+              placeholder="შეიყვანეთ ლექციის დაწყების დრო(HH:mm 24-საათიანი ფორმატით)">
         </div>
         <div class="form-group">
-          <label class="control-label">შეიყვანეთ ლექციის დამთავრების დრო</label>
-          <input type="time" name="end_time" class="form-control">
+          
+          <input type="text" name="end_time" class="form-control"
+              placeholder="შეიყვანეთ ლექციის დასრულების დრო(HH:mm 24-საათიანი ფორმატით)">
         </div>
         
         <input type="submit" value="დამატება" class="btn btn-primary btn-lg">   
