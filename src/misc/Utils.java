@@ -44,21 +44,45 @@ public final class Utils {
         return format.format(time);
     }
     
+    /*
+     * checks if given string is valid for representing hour or minute
+     */
+    private static boolean numberStringIsValid(String s, boolean checkHour) {
+        try {
+            int numValue = Integer.parseInt(s);
+            //capacity and floor can't be negative
+            //their input types are "number" but some old browsers don't have support for
+            //that and we don't won't any exceptions
+            if(numValue < 0 || (checkHour && numValue >= 24) || (!checkHour && numValue >= 59))
+                return false;
+        } catch (NumberFormatException e) {
+            return false; //the text wasn't a number
+        }
+        
+        return true;
+    }
+    
+    private static boolean isValidFormat(String time) {
+        if(time.length() != 5 || time.charAt(2) != ':' || 
+                !numberStringIsValid(time.substring(0,2), true) ||
+                !numberStringIsValid(time.substring(3,5), false))
+            return false;
+        return true;
+    }
+    
     /**
      * returns the Time object corresponding 
      * to its String representation
      */
     @SuppressWarnings("deprecation")
 	public static Time toHHMM(String time){
-        System.out.println(time);
-    	if(time.equals(""))
+    	if(!isValidFormat(time))
     		return null;
     	
     	int hour = Integer.valueOf(time.substring(0, 2));
     	int min = Integer.valueOf(time.substring(3, 5));
-    	int sec = Integer.valueOf(time.substring(6));
     	
-    	return new Time(hour, min, sec);
+    	return new Time(hour, min, 0);
     }
     /**
      * return sql format of given time
