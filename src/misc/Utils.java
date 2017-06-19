@@ -50,6 +50,9 @@ public final class Utils {
      */
     @SuppressWarnings("deprecation")
 	public static Time toHHMM(String time){
+    	if(time.equals(""))
+    		return null;
+    	
     	int hour = Integer.valueOf(time.substring(0, 2));
     	int min = Integer.valueOf(time.substring(3, 5));
     	int sec = Integer.valueOf(time.substring(6));

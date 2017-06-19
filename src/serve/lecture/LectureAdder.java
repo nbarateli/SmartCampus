@@ -2,6 +2,7 @@ package serve.lecture;
 
 import java.io.IOException;
 import java.sql.Time;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,8 +44,9 @@ public class LectureAdder extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		LectureManager manager = (LectureManager)request.getServletContext().getAttribute(WebConstants.LECTURE_MANAGER);
 		
+		
 		String lecturerName = request.getParameter("lecturer_name");
-		String firstName = lecturerName.substring(0,lecturerName.indexOf(' '));
+		String firstName = lecturerName.indexOf(' ') != -1 ? lecturerName.substring(0,lecturerName.indexOf(' ')) : "";
 		String lastName = lecturerName.substring(lecturerName.indexOf(' ') + 1);
 		
 		String subjectName = request.getParameter("subject");
@@ -53,25 +55,18 @@ public class LectureAdder extends HttpServlet {
 		Time startTime = misc.Utils.toHHMM(request.getParameter("start_time"));
 		Time endTime = misc.Utils.toHHMM(request.getParameter("end_time"));
 		
-		System.out.println("SELECT * FROM " + SQL_TABLE_USER + " WHERE " + 
-				SQL_COLUMN_USER_FIRST_NAME + "=\'" + firstName + "\' AND "+ 
-				SQL_COLUMN_USER_LAST_NAME + "=\'" + lastName + "\'");
-		System.out.println("SELECT * FROM " + SQL_TABLE_ROOM + " WHERE " +
-				SQL_COLUMN_ROOM_NAME + "=\'" + roomName + "\'");
-		System.out.println("SELECT * FROM " + SQL_TABLE_SUBJECT + " WHERE " +
-				SQL_COLUMN_SUBJECT_NAME + "=\'" + subjectName + "\'");
-		User lecturer = DefaultLectureManager.findLecturer("SELECT * FROM " + SQL_TABLE_USER + " WHERE " + 
+		List<User> lecList = DefaultLectureManager.findLecturer("SELECT * FROM " + SQL_TABLE_USER + " WHERE " + 
 															SQL_COLUMN_USER_FIRST_NAME + "=\'" + firstName + "\' AND "+ 
-															SQL_COLUMN_USER_LAST_NAME + "=\'" + lastName + "\'").get(0);
-		System.out.println(lecturer.getLastName());
-		CampusSubject subject = DefaultLectureManager.findSubject("SELECT * FROM " + SQL_TABLE_SUBJECT + " WHERE " +
-															SQL_COLUMN_SUBJECT_NAME + "=\'" + subjectName + "\'").get(0);
-		System.out.println(subject.getName());
-		Room room = DefaultRoomManager.findRooms("SELECT * FROM " + SQL_TABLE_ROOM + " WHERE " +
-				SQL_COLUMN_ROOM_NAME + "=\'" + roomName + "\'").get(0);
+															SQL_COLUMN_USER_LAST_NAME + "=\'" + lastName + "\'");
+		List<CampusSubject> subList = DefaultLectureManager.findSubject("SELECT * FROM " + SQL_TABLE_SUBJECT + " WHERE " +
+															SQL_COLUMN_SUBJECT_NAME + "=\'" + subjectName + "\'");
+		List<Room> roomList = DefaultRoomManager.findRooms("SELECT * FROM " + SQL_TABLE_ROOM + " WHERE " +
+															SQL_COLUMN_ROOM_NAME + "=\'" + roomName + "\'");
 
-		System.out.println("Zauraaaaaaaaaa");
-		System.out.println(room.getID() + "   " + lecturer.getLastName() + " " + subject.getName());
+		User lecturer = lecList.size() == 0 ? null : lecList.get(0);
+		CampusSubject subject = subList.size() == 0 ? null : subList.get(0);
+		Room room = roomList.size() == 0 ? null : roomList.get(0);
+		
 		if(lecturer != null && room != null && subject != null 
 				&& weekDay != null && startTime != null && endTime != null){
 			Lecture thisLecture = new Lecture(ModelConstants.SENTINEL_INT, lecturer, room, subject, weekDay, startTime, endTime);
