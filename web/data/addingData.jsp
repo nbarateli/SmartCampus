@@ -152,7 +152,7 @@
     <button>საგნის დამატება</button> 
     <div id="add-subj-div" class="to-hide">
       <br><br><br>
-      <form id="add-subj-form" action="#" class="form-vertical" method="get">
+      <form id="add-subj-form" action="../SubjectAdder" class="form-vertical" method="get">
 
         <div class="form-group">
           <input type="text" name="subj_name"
