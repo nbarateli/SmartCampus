@@ -477,7 +477,7 @@ public class MockResultSet implements ResultSet{
             case SQL_COLUMN_USER_TYPE:
                 return "user";
             case SQL_COLUMN_USER_ROLE:
-                return "student";
+                return "1";
             case SQL_COLUMN_ROOM_TYPE:
                 return "auditorium";
             case SQL_COLUMN_ROOM_SEAT_TYPE:

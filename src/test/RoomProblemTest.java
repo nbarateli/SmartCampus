@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.accounts.User;
-import model.accounts.User.UserRole;
 import model.accounts.User.UserStatus;
 import model.accounts.User.UserType;
 import model.rooms.Room;
@@ -24,7 +23,7 @@ public class RoomProblemTest {
     @Before 
     public void createRoomProblem() {
         user = new User(-1, "mail", "firstName", "lastName", UserStatus.ACTIVE,
-                UserType.USER, UserRole.STUDENT);
+                UserType.USER, 1);
         room = new Room(5, 5, "name", RoomType.AUDITORIUM, SeatType.DESKS, false, 5);
         problem = new RoomProblem(1, user, room, "title", "desc", new Date(500));
         problem1 = new RoomProblem(1, user, room, null, null, new Date(500));

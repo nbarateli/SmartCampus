@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.accounts.User;
-import model.accounts.User.UserRole;
 import model.accounts.User.UserStatus;
 import model.accounts.User.UserType;
 import model.lectures.CampusSubject;
@@ -29,7 +28,7 @@ public class LectureTest {
     @Before 
     public void setUp() {
         user = new User(-1, "mail", "firstName", "lastName", UserStatus.ACTIVE,
-                UserType.USER, UserRole.STUDENT);
+                UserType.USER, 1);
         room = new Room(5, 5, "name", RoomType.AUDITORIUM, SeatType.DESKS, false, 5);
         subject = new CampusSubject(1, "კალკულუსი");
         startTime = new Time(500);

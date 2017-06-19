@@ -4,13 +4,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.accounts.User;
-import model.accounts.User.UserRole;
 import model.accounts.User.UserStatus;
 import model.accounts.User.UserType;
 import model.lectures.CampusSubject;
 import model.lectures.Lecture;
 import model.lectures.Lecture.WeekDay;
-import model.lectures.LectureSearchQuery;
 import model.lectures.manager.*;
 import model.rooms.Room;
 import model.rooms.Room.RoomType;
@@ -43,7 +41,7 @@ public class LectureManagerTest {
     @Test
     public void test2() {
         User user = new User(6, "mail", "firstName", "lastName", UserStatus.ACTIVE,
-                UserType.USER, UserRole.STUDENT);
+                UserType.USER, 3);
         Room room = new Room(5, 5, "name", RoomType.AUDITORIUM, SeatType.DESKS, false, 5);
         CampusSubject subject = new CampusSubject(1, "კალკულუსი");
         Time startTime = new Time(500);

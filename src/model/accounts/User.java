@@ -16,17 +16,17 @@ public class User implements CampusObject {
     private final String lastName;
     private final UserStatus status;
     private final UserType userType;
-    private final UserRole userRole;
+    private final int userRoleId;
 
     public User(int userID, String eMail, String firstName, String lastName,
-                UserStatus status, UserType userType, UserRole userRole) {
+                UserStatus status, UserType userType, int userRoleId) {
         this.userID = userID;
         this.eMail = eMail;
         this.firstName = firstName;
         this.lastName = lastName;
         this.status = status;
         this.userType = userType;
-        this.userRole = userRole;
+        this.userRoleId = userRoleId;
     }
 
     @Override
@@ -54,16 +54,16 @@ public class User implements CampusObject {
         return userType;
     }
 
-    public UserRole getUserRole() {
-        return userRole;
+    public int getUserRoleId() {
+        return userRoleId;
     }
-
-    public enum UserStatus {
-        ACTIVE, BANNED
-    }
-
+    
     public enum UserRole {
         STUDENT, LECTURER, STAFF
+    }
+    
+    public enum UserStatus {
+        ACTIVE, BANNED
     }
 
     public enum UserType {
@@ -93,28 +93,7 @@ public class User implements CampusObject {
         if (getClass() != obj.getClass())
             return false;
         User other = (User) obj;
-        if (eMail == null) {
-            if (other.eMail != null)
-                return false;
-        } else if (!eMail.equals(other.eMail))
-            return false;
-        if (firstName == null) {
-            if (other.firstName != null)
-                return false;
-        } else if (!firstName.equals(other.firstName))
-            return false;
-        if (lastName == null) {
-            if (other.lastName != null)
-                return false;
-        } else if (!lastName.equals(other.lastName))
-            return false;
-        if (status != other.status)
-            return false;
         if (userID != other.userID)
-            return false;
-        if (userRole != other.userRole)
-            return false;
-        if (userType != other.userType)
             return false;
         return true;
     }

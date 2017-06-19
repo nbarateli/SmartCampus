@@ -212,7 +212,7 @@ public final class Utils {
         String lastName = rs.getString(SQL_COLUMN_USER_LAST_NAME);
         User.UserStatus status = toUserStatus(rs.getString(SQL_COLUMN_USER_STATUS));
         User.UserType userType = toUserType(rs.getString(SQL_COLUMN_USER_TYPE));
-        User.UserRole role = toUserRole(rs.getString(SQL_COLUMN_USER_ROLE));
+        int role = Integer.parseInt(rs.getString(SQL_COLUMN_USER_ROLE));
 
         return new User(id, eMail, firstName, lastName, status, userType, role);
     }

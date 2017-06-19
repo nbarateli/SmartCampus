@@ -2,7 +2,6 @@ package test;
 
 import org.junit.Test;
 import model.accounts.User;
-import model.accounts.User.UserRole;
 import model.accounts.User.UserStatus;
 import model.accounts.User.UserType;
 import org.junit.Before;
@@ -16,7 +15,7 @@ public class UserTest {
     @Before 
     public void createUser() {
         user = new User(-1, "mail", "firstName", "lastName", UserStatus.ACTIVE,
-                UserType.USER, UserRole.STUDENT);
+                UserType.USER, 1);
     }
     
     @Test
@@ -27,7 +26,7 @@ public class UserTest {
         assertEquals("lastName", user.getLastName());
         assertEquals(UserStatus.ACTIVE, user.getStatus());
         assertEquals(UserType.USER, user.getUserType());
-        assertEquals(UserRole.STUDENT, user.getUserRole());
+        assertEquals(1, user.getUserRoleId());
     }
 
 }
