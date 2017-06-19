@@ -2,7 +2,12 @@ DROP DATABASE IF EXISTS SmartCampus;
 CREATE DATABASE SmartCampus;
 USE SmartCampus;
 
-
+CREATE TABLE role (
+  role_id INT NOT NULL AUTO_INCREMENT,
+  role_name VARCHAR(45) NOT NULL,
+  PRIMARY KEY (role_id),
+  UNIQUE INDEX role_name_UNIQUE (role_name ASC));
+  
 CREATE TABLE campus_user
 (
   user_id     INT PRIMARY KEY        NOT NULL AUTO_INCREMENT,
@@ -10,9 +15,12 @@ CREATE TABLE campus_user
   last_name   VARCHAR(20)            NOT NULL,
   user_email  VARCHAR(30)            NOT NULL,
   user_type   ENUM ('user', 'admin') NOT NULL,
-  user_role   ENUM ('student', 'lecturer', 'staff'),
+  user_role   INT,
   user_status ENUM ('active', 'banned'),
-  img_url     VARCHAR(300)
+  img_url     VARCHAR(300),
+  CONSTRAINT user_role_fk
+  FOREIGN KEY (user_role) REFERENCES role (role_id)
+    ON DELETE SET NULL
 );
 CREATE UNIQUE INDEX user_user_email_uindex
   ON campus_user (user_email);
@@ -150,57 +158,33 @@ CREATE TABLE room_image
   image_url VARCHAR(300) NOT NULL,
   room_id   INT          NOT NULL,
   PRIMARY KEY (image_id),
-  INDEX `fk_room_images_rooms_idx` (`room_id` ASC),
-  CONSTRAINT `fk_room_images_rooms`
+  INDEX fk_room_images_rooms_idx (room_id ASC),
+  CONSTRAINT fk_room_images_rooms
   FOREIGN KEY (room_id)
   REFERENCES room (room_id)
     ON DELETE CASCADE
 );
 
-Select * from room;
-Select * from room where room_name='200'
-/*
--- drop trigger item_remove_trigger;
-DELIMITER //
-CREATE TRIGGER item_remove_trigger
-BEFORE DELETE
-  ON item_report
-FOR EACH ROW
+CREATE TABLE permission (
+  permission_id INT NOT NULL AUTO_INCREMENT,
+  permission_description VARCHAR(200) NOT NULL,
+  PRIMARY KEY (permission_id),
+  UNIQUE INDEX permission_description_UNIQUE (permission_description ASC));
 
-  BEGIN
-
-    DELETE FROM item_image
-    WHERE report_id = old.report_id;
-  END;
-//
-DELIMITER ;
-
--- drop trigger room_remove_trigger;
-DELIMITER //
-CREATE TRIGGER room_remove_trigger
-BEFORE DELETE
-  ON room
-FOR EACH ROW
-
-  BEGIN
-
-    DELETE FROM room_image
-    WHERE room_id = old.room_id;
-  END;
-//
-DELIMITER ;
-
--- drop trigger user_remove_trigger;
-DELIMITER //
-CREATE TRIGGER user_remove_trigger
-BEFORE DELETE
-  ON campus_user
-FOR EACH ROW
-
-  BEGIN
-
-    DELETE FROM booking
-    WHERE booker_id = old.user_id;
-  END;
-//
-DELIMITER ;*/
+CREATE TABLE role_permission (
+  id INT NOT NULL AUTO_INCREMENT,
+  role_id INT NOT NULL,
+  permission_id INT NOT NULL,
+  PRIMARY KEY (id),
+  INDEX fk_role_permission_role_idx (role_id ASC),
+  INDEX fk_role_permission_permission_idx (permission_id ASC),
+  CONSTRAINT fk_role_permission_role
+    FOREIGN KEY (role_id)
+    REFERENCES smartcampus.role (role_id)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT fk_role_permission_permission
+    FOREIGN KEY (permission_id)
+    REFERENCES smartcampus.permission (permission_id)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION);
