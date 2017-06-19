@@ -6,6 +6,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="static misc.Utils.roomTypeToString" %>
 <%@ page import="static misc.Utils.toSeatType" %>
+<%@ page import="static misc.Utils.toGeorgian" %>
 <%@ page import="static misc.Utils.seatTypeToString" %><%--
   Created by IntelliJ IDEA.
   User: Niko
@@ -22,14 +23,17 @@
     if no parameters is passed
 --%>
 <head>
-  <link rel="stylesheet" href="SearchPageStyle.css">
+  <link rel="stylesheet" href="ShowRoomStyle.css">
   <%!
     private void printAll(List<Lecture> allLecturesAt, JspWriter out) throws Exception {
       for (Lecture lecture : allLecturesAt) {
-        out.println("<tr>");
+        out.println("<tr><form action=\"LectureRemover\" method=\"post\">");
+        out.println("<input type=\"hidden\" value=\"" + lecture.getID() + "\" name=\"lecture_id\">");
         out.println("<td>" + lecture.getSubject().getName() + "</td>");
-        out.println("<td>" + lecture.getLecturer().getFirstName() + " " + lecture.getLecturer().getLastName() + "</td>");
-        out.println("<td>" + lecture.getDay() + " " + lecture.getStartTime() + "</td>");
+        out.println("<td>" + lecture.getLecturer().getFirstName() + " " 
+              + lecture.getLecturer().getLastName() + "</td>");
+        out.println("<td>" + toGeorgian(lecture.getDay()) + " " + lecture.getStartTime() + "</td>");
+        out.println("<td><input type=\"submit\" value=\"წაშლა\"></td>");
         out.println("</tr>");
       }
     }
@@ -74,20 +78,15 @@
       <div>ადგილის ტიპი: <%out.print(seatTypeToString(room.getSeatType()));%>.</div>
     </div>
     <div>ლექციები:</div>
-    <style>
-      table {
-        border-collapse: collapse;
-      }
 
-      tr, th, td {
-        border: 1px solid;
-      }</style>
     <div>
       <table>
-        <th>სახელი</th>
-        <th>ლექტორი</th>
-        <th>დაწყების დრო</th>
-        <%
+          <tr>
+            <th>სახელი</th>
+            <th>ლექტორი</th>
+            <th>დაწყების დრო</th>
+          </tr>
+          <%
           if (room != null && room.getRoomType() != Room.RoomType.UTILITY) {
             try {
               printAll(manager.findAllLecturesAt(room), out);

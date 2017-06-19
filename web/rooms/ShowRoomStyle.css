@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+
+table {
+  border-collapse: collapse;
+}
+
+tr, th, td {
+  border: 1px solid;
+}
+
+#yes-span {
+  padding-right: 5px;
+  color: #009900;
+}
+
+#no-span {
+  color: #cc0000;
+  padding-right: 5px;
+}
