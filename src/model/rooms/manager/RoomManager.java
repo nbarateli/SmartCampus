@@ -57,7 +57,7 @@ public interface RoomManager extends CampusManager<Room, RoomSearchQuery> {
      *
      * @param id id of the room we're searching for
      */
-    Room getRoomByID(int id);
+    Room getRoomById(int id);
 
     /**
      * returns room with given name from the database

@@ -35,7 +35,7 @@ public class RoomInfo extends HttpServlet {
         String id = request.getParameter("id");
         Room room;
         try {
-            room = manager.getRoomByID(Integer.valueOf(id));
+            room = manager.getRoomById(Integer.valueOf(id));
             buildJson(builder, room, manager);
         } catch (NumberFormatException | NullPointerException e) {
             builder.add(JSON_ERROR, JSON_ROOM_ERROR_BAD_PARAM);

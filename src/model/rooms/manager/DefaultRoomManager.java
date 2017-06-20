@@ -143,9 +143,9 @@ public class DefaultRoomManager implements RoomManager {
     }
 
     @Override
-    public Room getRoomByID(int id) {
+    public Room getRoomById(int id) {
         String sql = "SELECT * FROM " + SQL_TABLE_ROOM + " WHERE " +
-                SQL_COLUMN_ROOM_NAME + " = ?";
+                SQL_COLUMN_ROOM_ID + " = ?";
         try {
             ResultSet results = DBConnector.executeQuery(sql, id);
             if (results.next()) {

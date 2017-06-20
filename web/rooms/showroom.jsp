@@ -47,7 +47,7 @@
     try {
       manager = ((RoomManager) request.getServletContext()
               .getAttribute(ROOM_MANAGER));
-      room = manager.getRoomByID(Integer.valueOf(request.getParameter("id")));
+      room = manager.getRoomById(Integer.valueOf(request.getParameter("id")));
       images = manager.getAllImagesOf(room);
     } catch (Exception e) {
 
