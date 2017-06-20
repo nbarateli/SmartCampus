@@ -1,5 +1,6 @@
 package model.rooms.manager;
 
+import misc.Utils;
 import model.database.DBConnector;
 import model.lectures.Lecture;
 import model.rooms.Room;
@@ -32,12 +33,14 @@ public class DefaultRoomManager implements RoomManager {
         return instance == null ? instance = new DefaultRoomManager() : instance;
     }
 
-    /**
-     * Returns a list of rooms fetched by given SQL query
-     */
-    public static List<Room> findRooms(String sql) {
+
+    private DefaultRoomManager() {
+    }
+
+    @Override
+    public List<Room> find(RoomSearchQuery query) {
         List<Room> rooms = new ArrayList<>();
-        try (ResultSet matches = DBConnector.executeQuery(sql, null)) {
+        try (ResultSet matches = DBConnector.executeQuery(query.generateQuery())) {
             while (matches.next()) {
                 rooms.add(getRoomFromResults(matches));
             }
@@ -45,16 +48,7 @@ public class DefaultRoomManager implements RoomManager {
             //doing nothing
         }
         return rooms;
-    }
 
-
-    private DefaultRoomManager() {
-    }
-
-    @Override
-    public List<Room> find(RoomSearchQuery query) {
-
-        return findRooms(query.generateQuery());
     }
 
     @Override
@@ -100,7 +94,7 @@ public class DefaultRoomManager implements RoomManager {
         List<String> images = new LinkedList<>();
         String sql = "SELECT image_url FROM  room_image WHERE room_image.room_id = room." + room.getID();
         //TODO
-        try (ResultSet rs = DBConnector.executeQuery(sql, null)) {
+        try (ResultSet rs = DBConnector.executeQuery(sql)) {
 
             while (rs.next()) {
                 images.add(rs.getString(SQL_COLUMN_ROOM_IMAGE_URL));
@@ -136,7 +130,8 @@ public class DefaultRoomManager implements RoomManager {
                 (start == null ? "" : " AND start_time >= " + toSqlTime(start)) +
                 (end == null ? "" : " AND end_time <= " + toSqlTime(end));
         //TODO
-        try (ResultSet rs = DBConnector.executeQuery(sql, null)) {
+        try (ResultSet rs = DBConnector.executeQuery(sql)) {
+
             while (rs.next()) {
                 lectures.add(getLectureFromResults(rs));
             }
@@ -149,14 +144,33 @@ public class DefaultRoomManager implements RoomManager {
 
     @Override
     public Room getRoomByID(int id) {
-        List<Room> rooms = findRooms("SELECT * FROM room where room_id = " + id);
-        return rooms == null || rooms.size() == 0 ? null : rooms.get(0);
+        String sql = "SELECT * FROM " + SQL_TABLE_ROOM + " WHERE " +
+                SQL_COLUMN_ROOM_NAME + " = ?";
+        try {
+            ResultSet results = DBConnector.executeQuery(sql, id);
+            if (results.next()) {
+                return Utils.getRoomFromResults(results);
+            }
+        } catch (SQLException e) {
+            //ignored
+        }
+        return null;
     }
 
     @Override
     public Room getRoomByName(String roomName) {
-        List<Room> rooms = findRooms("SELECT * FROM room WHERE room_name = " + roomName);
-        return rooms == null || rooms.size() == 0 ? null : rooms.get(0);
+
+        String sql = "SELECT * FROM " + SQL_TABLE_ROOM + " WHERE " +
+                SQL_COLUMN_ROOM_NAME + " = ?";
+        try {
+            ResultSet results = DBConnector.executeQuery(sql, roomName);
+            if (results.next()) {
+                return Utils.getRoomFromResults(results);
+            }
+        } catch (SQLException e) {
+            //ignored
+        }
+        return null;
     }
 
     @Override
@@ -185,8 +199,8 @@ public class DefaultRoomManager implements RoomManager {
     }
 
     @Override
-    public void addImage(Room room, String imageName) {
-        String sql = "INSERT INTO room_image (image_url, room_id) VALUES ('" + imageName + "', " + room.getID() + ")";
+    public void addImage(Room room, String imageURL) {
+        String sql = "INSERT INTO room_image (image_url, room_id) VALUES ('" + imageURL + "', " + room.getID() + ")";
         try {
             DBConnector.executeUpdate(sql, null);
         } catch (SQLException e) {

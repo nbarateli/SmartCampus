@@ -10,7 +10,6 @@ import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,7 +33,7 @@ public class RoomInfo extends HttpServlet {
         JsonObjectBuilder builder = Json.createObjectBuilder();
         RoomManager manager = ((RoomManager) request.getServletContext().getAttribute(ROOM_MANAGER));
         String id = request.getParameter("id");
-        Room room = null;
+        Room room;
         try {
             room = manager.getRoomByID(Integer.valueOf(id));
             buildJson(builder, room, manager);

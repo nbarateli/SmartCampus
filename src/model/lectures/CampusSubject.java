@@ -33,8 +33,6 @@ public class CampusSubject implements CampusObject {
         if (getClass() != obj.getClass())
             return false;
         CampusSubject other = (CampusSubject) obj;
-        if (id != other.id)
-            return false;
-        return true;
+        return id == other.id;
     }
 }

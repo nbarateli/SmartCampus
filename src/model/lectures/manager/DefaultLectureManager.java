@@ -23,24 +23,6 @@ public class DefaultLectureManager implements LectureManager {
         return instance == null ? instance = new DefaultLectureManager() : instance;
     }
 
-    /**
-     * returns the list of lectures Fetched by given SQL query
-     *
-     * @param sql
-     */
-    public static List<Lecture> findLectures(String sql) {
-        List<Lecture> lectures = new ArrayList<>();
-        try {
-            //TODO
-            ResultSet matches = DBConnector.executeQuery(sql, null);
-            while (matches.next()) {
-                lectures.add(getLectureFromResults(matches));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return lectures;
-    }
 
     @Override
     public void addSubject(String subjectName) {
@@ -48,7 +30,7 @@ public class DefaultLectureManager implements LectureManager {
                 "VALUES (\'" + subjectName + "\')";
         try {
             //TODO
-            DBConnector.executeUpdate(sql, null);
+            DBConnector.executeUpdate(sql);
         } catch (SQLException e) {
             //ignored
         }
@@ -63,7 +45,7 @@ public class DefaultLectureManager implements LectureManager {
         int count = 0;
         try {
             //TODO
-            ResultSet res = DBConnector.executeQuery(query, null);
+            ResultSet res = DBConnector.executeQuery(query);
             while (res.next())
                 count++;
         } catch (SQLException e) {
@@ -78,7 +60,7 @@ public class DefaultLectureManager implements LectureManager {
                 SQL_COLUMN_SUBJECT_NAME + " = '?'";
         try {
             //TODO
-            DBConnector.executeUpdate(sql, new Object[]{subjectName});
+            DBConnector.executeUpdate(sql, subjectName);
         } catch (SQLException e) {
             //ignored
         }
@@ -124,7 +106,7 @@ public class DefaultLectureManager implements LectureManager {
         List<Lecture> list = new ArrayList<>();
         try {
             //TODO
-            ResultSet set = DBConnector.executeQuery(query.generateQuery(), null);
+            ResultSet set = DBConnector.executeQuery(query.generateQuery());
 
             while (set.next()) {
                 list.add(getLectureFromResults(set));
@@ -173,7 +155,7 @@ public class DefaultLectureManager implements LectureManager {
         String query = "select * from " + SQL_TABLE_LECTURE;
         int count = 0;
         try {
-            ResultSet res = DBConnector.executeQuery(query, null);
+            ResultSet res = DBConnector.executeQuery(query);
             while (res.next())
                 count++;
         } catch (SQLException e) {

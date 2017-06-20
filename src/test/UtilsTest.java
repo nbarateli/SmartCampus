@@ -1,10 +1,5 @@
 package test;
 
-import java.sql.SQLException;
-import java.sql.Time;
-import java.util.*;
-import org.junit.Test;
-
 import misc.Utils;
 import model.accounts.User;
 import model.accounts.User.UserRole;
@@ -13,41 +8,46 @@ import model.accounts.User.UserType;
 import model.lectures.CampusSubject;
 import model.lectures.Lecture;
 import model.lectures.Lecture.WeekDay;
-import model.rooms.RoomProblem;
 import model.rooms.Room;
 import model.rooms.Room.RoomType;
 import model.rooms.Room.SeatType;
+import model.rooms.RoomProblem;
+import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.sql.SQLException;
+import java.sql.Time;
+import java.util.Calendar;
+
+import static org.junit.Assert.assertEquals;
 
 public class UtilsTest {
-    
+
     @Test
     public void exactDateToStringTest() {
         Calendar cal = Calendar.getInstance();
-        cal.set(2017, 6, 16, 10, 20);
+        cal.set(2017, Calendar.JULY, 16, 10, 20);
         java.util.Date date = cal.getTime();
         assertEquals("16.07.2017 10:20", Utils.exactDateToString(date));
-        
-        cal.set(2017, 6, 16, 23, 20, 50);
+
+        cal.set(2017, Calendar.JULY, 16, 23, 20, 50);
         date = cal.getTime();
         assertEquals("16.07.2017 23:20", Utils.exactDateToString(date));
     }
-    
+
     @Test
     public void toHHMMTest() {
         @SuppressWarnings("deprecation")
         Time time = new Time(22, 58, 40);
         assertEquals("22:58", Utils.toHHMM(time));
     }
-    
+
     @Test
     public void toSqlTimeTest() {
         @SuppressWarnings("deprecation")
         Time time = new Time(22, 58, 40);
         assertEquals("STR_TO_DATE('22:58', '%H:%i')", Utils.toSqlTime(time));
     }
-    
+
     @Test
     public void roomTypeToStringTest() {
         RoomType type = RoomType.valueOf("UTILITY");
@@ -55,7 +55,7 @@ public class UtilsTest {
         type = RoomType.valueOf("AUDITORIUM");
         assertEquals("აუდიტორია", Utils.roomTypeToString(type));
     }
-    
+
     @Test
     public void seatTypeToStringTest() {
         SeatType type = SeatType.valueOf("DESKS");
@@ -69,7 +69,7 @@ public class UtilsTest {
         type = SeatType.valueOf("PLASTIC_CHAIR");
         assertEquals("სკამ-მერხები (პლასტმასის)", Utils.seatTypeToString(type));
     }
-    
+
     @Test
     public void toRoomTypeTest() {
         RoomType type = RoomType.valueOf("UTILITY");
@@ -78,7 +78,7 @@ public class UtilsTest {
         assertEquals(type, Utils.toRoomType("auditorium"));
         assertEquals(null, Utils.toRoomType("any"));
     }
-    
+
     @Test
     public void toUserRoleTest() {
         UserRole role = UserRole.valueOf("STUDENT");
@@ -89,7 +89,7 @@ public class UtilsTest {
         assertEquals(role, Utils.toUserRole("staff"));
         assertEquals(null, Utils.toUserRole("any"));
     }
-    
+
     @Test
     public void toUserTypeTest() {
         UserType type = UserType.valueOf("USER");
@@ -98,7 +98,7 @@ public class UtilsTest {
         assertEquals(type, Utils.toUserType("admin"));
         assertEquals(null, Utils.toUserType("any"));
     }
-    
+
     @Test
     public void toUserStatusTest() {
         UserStatus status = UserStatus.valueOf("ACTIVE");
@@ -107,7 +107,7 @@ public class UtilsTest {
         assertEquals(status, Utils.toUserStatus("banned"));
         assertEquals(null, Utils.toUserStatus("any"));
     }
-    
+
     @Test
     public void toSeatTypeTest() {
         SeatType type = SeatType.valueOf("DESKS");
@@ -122,7 +122,7 @@ public class UtilsTest {
         assertEquals(type, Utils.toSeatType("plastic_chair"));
         assertEquals(null, Utils.toSeatType("any"));
     }
-    
+
     @Test
     public void toWeekDayTest() {
         WeekDay day = WeekDay.valueOf("MONDAY");
@@ -140,7 +140,7 @@ public class UtilsTest {
         day = WeekDay.valueOf("SUNDAY");
         assertEquals(day, Utils.toWeekDay("sunday"));
     }
-    
+
     @Test
     public void toGeorgianTest() {
         WeekDay day = WeekDay.valueOf("MONDAY");
@@ -158,43 +158,43 @@ public class UtilsTest {
         day = WeekDay.valueOf("SUNDAY");
         assertEquals("კვირა", Utils.toGeorgian(day));
     }
-    
+
     @Test
     public void getUserFromResultsTest() {
         try {
-            assertEquals(new User(5, "name", "name", "name", UserStatus.valueOf("ACTIVE"), 
-                    UserType.valueOf("USER"), 1), 
+            assertEquals(new User(5, "name", "name", "name", UserStatus.valueOf("ACTIVE"),
+                            UserType.valueOf("USER"), 1),
                     Utils.getUserFromResults(new MockResultSet()));
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    
+
     @Test
     public void getProblemFromResults() {
         try {
-            assertEquals(new RoomProblem(5, 
-                    new User(5, "name", "name", "name", UserStatus.valueOf("ACTIVE"), 
-                    UserType.valueOf("USER"), 1), 
-                    new Room(5, 5, "name", RoomType.valueOf("AUDITORIUM"), 
-                    SeatType.valueOf("DESKS"), false, 5), "name", "name", 
-                    java.sql.Date.valueOf("2017-07-16")),
+            assertEquals(new RoomProblem(5,
+                            new User(5, "name", "name", "name", UserStatus.valueOf("ACTIVE"),
+                                    UserType.valueOf("USER"), 1),
+                            new Room(5, 5, "name", RoomType.valueOf("AUDITORIUM"),
+                                    SeatType.valueOf("DESKS"), false, 5), "name", "name",
+                            java.sql.Date.valueOf("2017-07-16")),
                     Utils.getProblemFromResults(new MockResultSet()));
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    
+
     @Test
     public void getLectureFromResultsTest() {
         try {
-            assertEquals(new Lecture(5, 
-                    new User(5, "name", "name", "name", UserStatus.valueOf("ACTIVE"), 
-                    UserType.valueOf("USER"), 1), 
-                    new Room(5, 5, "name", RoomType.valueOf("AUDITORIUM"), 
-                    SeatType.valueOf("DESKS"), false, 5),
-                    new CampusSubject(5, "name"), WeekDay.valueOf("MONDAY"),
-                    new Time(500), new Time(500)),
+            assertEquals(new Lecture(5,
+                            new User(5, "name", "name", "name", UserStatus.valueOf("ACTIVE"),
+                                    UserType.valueOf("USER"), 1),
+                            new Room(5, 5, "name", RoomType.valueOf("AUDITORIUM"),
+                                    SeatType.valueOf("DESKS"), false, 5),
+                            new CampusSubject(5, "name"), WeekDay.valueOf("MONDAY"),
+                            new Time(500), new Time(500)),
                     Utils.getLectureFromResults(new MockResultSet()));
         } catch (SQLException e) {
             // TODO Auto-generated catch block

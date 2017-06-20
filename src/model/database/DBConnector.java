@@ -28,7 +28,7 @@ public class DBConnector {
      *                      <code>ResultSet</code> object, the method is called on a
      *                      <code>PreparedStatement</code> or <code>CallableStatement</code>
      */
-    public static ResultSet executeQuery(String sql, Object[] values) throws SQLException {
+    public static ResultSet executeQuery(String sql, Object... values) throws SQLException {
         return (ResultSet) execute(sql, values, false);
     }
 
@@ -37,14 +37,14 @@ public class DBConnector {
      *
      * @param sql    a SQL Data Manipulation Language (DML) statement, such as <code>INSERT</code>,
      *               <code>UPDATE</code> or <code>DELETE</code>; or a SQL statement that returns nothing,
-     * @param values
+     * @param values an array of values to replace "?" characters in the SQL statement
      * @return either (1) the row count for SQL Data Manipulation Language (DML) statements
      * or (2) 0 for SQL statements that return nothing
      * @throws SQLException if a database access error occurs,
      *                      this method is called on a closed <code>Statement</code>, the given
      *                      SQL statement produces a <code>ResultSet</code> object, the method is called on a
      */
-    public static int executeUpdate(String sql, Object[] values) throws SQLException {
+    public static int executeUpdate(String sql, Object... values) throws SQLException {
         return (int) execute(sql, values, true);
     }
 

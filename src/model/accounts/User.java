@@ -93,8 +93,6 @@ public class User implements CampusObject {
         if (getClass() != obj.getClass())
             return false;
         User other = (User) obj;
-        if (userID != other.userID)
-            return false;
-        return true;
+        return userID == other.userID;
     }
 }

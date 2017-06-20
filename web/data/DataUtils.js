@@ -32,7 +32,7 @@ var addLecturesFromFile = function (file) {
     ExcelToJSON(file);
 
 
-}
+};
 var toWeekDay = function (weeknumber) {
     switch (weeknumber) {
         case "1":
@@ -50,13 +50,13 @@ var toWeekDay = function (weeknumber) {
         case "7":
             return "sunday";
     }
-}
+};
 var addLectureFromForm = function () {
     var params = ($('#sched-form').serialize());
     console.log(params);
     addLecture(params, true);
 
-}
+};
 
 var addLectureFromJson = function (jsonObject, doAlert) {
     var params = "";
@@ -67,7 +67,7 @@ var addLectureFromJson = function (jsonObject, doAlert) {
     params += "&start_time=" + jsonObject.start_time;
     params += "&end_time=" + jsonObject.end_time;
     addLecture(params, doAlert);
-}
+};
 var addLecture = function (params, doAlert) {
     var url = "/lectures/addlecture";
     console.log(params);
@@ -78,9 +78,9 @@ var addLecture = function (params, doAlert) {
     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     http.onreadystatechange = function (alert) {//Call a function when the state changes.
-        if (http.readyState == 4 && http.status == 200 && doAlert) {
+        if (http.readyState === 4 && http.status === 200 && doAlert) {
             window.alert(http.responseText);
         }
-    }
+    };
     http.send(params);
-}
+};

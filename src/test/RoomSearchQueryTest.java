@@ -3,16 +3,12 @@ package test;
 import misc.DBInfo;
 import model.rooms.Room;
 import model.rooms.RoomSearchQuery;
-import model.rooms.manager.DefaultRoomManager;
-import model.rooms.manager.RoomManager;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
 import java.util.StringTokenizer;
 
-import static model.rooms.manager.DefaultRoomManager.findRooms;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 
 public class RoomSearchQueryTest {

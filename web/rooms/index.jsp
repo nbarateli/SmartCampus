@@ -1,9 +1,8 @@
-<%@ page import="java.util.Random" %>
-<%@ page import="model.rooms.manager.RoomManager" %>
-<%@ page import="static misc.WebConstants.*" %>
-<%@ page import="model.rooms.RoomSearchQuery" %>
-<%@ page import="java.util.List" %>
 <%@ page import="model.rooms.Room" %>
+<%@ page import="model.rooms.RoomSearchQuery" %>
+<%@ page import="static misc.WebConstants.*" %>
+<%@ page import="model.rooms.manager.RoomManager" %>
+<%@ page import="java.util.List" %>
 <%@ page import="static misc.Utils.*" %><%--
   Created by IntelliJ IDEA.
   User: Niko
@@ -33,9 +32,9 @@
     query.setAvailableForBooking(canBeBooked);
   }
 
-  private RoomManager manager;%>
+%>
 <%
-  manager = (RoomManager) request.getServletContext().getAttribute(ROOM_MANAGER);
+  RoomManager manager1 = (RoomManager) request.getServletContext().getAttribute(ROOM_MANAGER);
 %>
 <html>
 <head>
@@ -146,14 +145,14 @@
         <%
           RoomSearchQuery query = new RoomSearchQuery();
           buildQuery(request, query);
-          List<Room> rooms = manager.find(query);
+          List<Room> rooms = manager1.find(query);
           System.out.println(rooms.size());
           for (Room room : rooms) {
             out.println("<div id=\"room-id-div\">" + "<a href=showroom.jsp?id=" + room.getID() + ">"
                     + room.getRoomName() + "</a></div>");
             out.println("<button>ვრცლად</button>");
 
-            List<String> images = manager.getAllImagesOf(room);
+            List<String> images = manager1.getAllImagesOf(room);
             String src = images.size() > 0 ? images.get(0) : NO_IMAGE;
             out.println("<div class=\"to-hide\">");
             out.println("<div><img src=\"" + src + "\" height=\"60%\"></div>");

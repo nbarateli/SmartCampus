@@ -1,8 +1,5 @@
 package model.campus;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 /**
  * Created by Shota on 6/12/2017.
  * <p>

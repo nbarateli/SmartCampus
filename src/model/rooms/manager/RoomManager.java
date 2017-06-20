@@ -1,13 +1,13 @@
 package model.rooms.manager;
 
-import java.sql.Time;
-import java.util.*;
-
 import model.campus.CampusManager;
 import model.lectures.Lecture;
 import model.rooms.Room;
 import model.rooms.RoomProblem;
 import model.rooms.RoomSearchQuery;
+
+import java.sql.Time;
+import java.util.List;
 
 /**
  * Created by Niko on 07.06.2017.
@@ -54,30 +54,31 @@ public interface RoomManager extends CampusManager<Room, RoomSearchQuery> {
 
     /**
      * returns room with given id from the database
-     * 
-     * @param id id of the room we're searching for 
+     *
+     * @param id id of the room we're searching for
      */
     Room getRoomByID(int id);
-    
+
     /**
      * returns room with given name from the database
-     * 
-     * @param roomName
+     *
+     * @param roomName the name of the room to be found
      */
     Room getRoomByName(String roomName);
-    
+
     /**
      * Returns the list of all the infrastructural problems this room currently has.
      *
      * @return a <code>List</code> of <code>RoomProblem</code> s
      */
     List<RoomProblem> findAllProblemsOf(Room room);
-    
+
     /**
      * Adds new image for the room object in the database
-     * @param room
-     * @param imageName
+     *
+     * @param room     a room to which said image belongs to
+     * @param imageURL an URL to the image
      */
-    void addImage(Room room, String imageName);
-    
+    void addImage(Room room, String imageURL);
+
 }

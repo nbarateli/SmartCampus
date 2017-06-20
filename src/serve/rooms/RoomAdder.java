@@ -55,9 +55,7 @@ public class RoomAdder extends HttpServlet {
     private boolean roomExists(String name, RoomManager manager) {
         RoomSearchQuery query = new RoomSearchQuery();
         query.setName(name);
-        if(manager.find(query).isEmpty())
-            return false;
-        return true;
+        return !manager.find(query).isEmpty();
     }
     
 	/**

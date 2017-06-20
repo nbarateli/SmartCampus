@@ -208,11 +208,9 @@ public final class Utils {
      * @return whether the first 5 characters of the argument form a valid time format.
      */
     private static boolean isValidFormat(String time) {
-        if (time.length() < 5 || time.charAt(2) != ':' ||
-                !numberStringIsValid(time.substring(0, 2), true) ||
-                !numberStringIsValid(time.substring(3, 5), false))
-            return false;
-        return true;
+        return time.length() >= 5 && time.charAt(2) == ':' &&
+                numberStringIsValid(time.substring(0, 2), true) &&
+                numberStringIsValid(time.substring(3, 5), false);
     }
 
     /**

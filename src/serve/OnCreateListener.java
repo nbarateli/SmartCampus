@@ -1,9 +1,4 @@
 package serve;
-/**
- * Created by Niko on 10.06.2017.
- * <p>
- * Responsible for initializing and storing all the necessary objects for the server.
- */
 
 import misc.DBInfo;
 import model.accounts.DefaultAccountManager;
@@ -23,6 +18,11 @@ import javax.servlet.http.HttpSessionListener;
 
 import static misc.WebConstants.*;
 
+/**
+ * Created by Niko on 10.06.2017.
+ * <p>
+ * Responsible for initializing and storing all the necessary objects for the server.
+ */
 @WebListener()
 public class OnCreateListener implements ServletContextListener,
         HttpSessionListener, HttpSessionAttributeListener {
@@ -52,7 +52,7 @@ public class OnCreateListener implements ServletContextListener,
         context.setAttribute(LECTURE_MANAGER, lectureManager);
         context.setAttribute(ACCOUNT_MANAGER, DefaultAccountManager.getInstance());
 
-    }	
+    }
 
     public void contextDestroyed(ServletContextEvent sce) {
       /* This method is invoked when the Servlet Context 

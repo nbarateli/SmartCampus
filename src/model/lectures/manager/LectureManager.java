@@ -9,28 +9,28 @@ public interface LectureManager extends CampusManager<Lecture, LectureSearchQuer
 	/**
      * Adds a new subject entry to the database
      *
-     * @param subject a subject to be added
+     * @param subjectName a subject to be added
      */
-    public void addSubject(String subjectName);
+    void addSubject(String subjectName);
     
     /**
      * Returns number of subjects in the database (mostly needed for testing)
      */
-    public int numOfSubjects();
+    int numOfSubjects();
     
     /**
      * Removes subject entry with given name from the database
      *
      * @param subject a subject to be removed
      */
-    public void removeSubject(String subject);
+    void removeSubject(String subject);
     
     /**
      * gets id of the given lecture from the database
      * 
      * @param lecture lecture to get id of
      */
-    public int getLectureId(Lecture lecture);
+    int getLectureId(Lecture lecture);
 
     CampusSubject findSubject(String subjectName);
 }
