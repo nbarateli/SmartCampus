@@ -85,8 +85,18 @@ public class DefaultRoomManager implements RoomManager {
 
     }
 
+    @Override
     public void addImage(Room room, String imageName) {
         String sql = "INSERT INTO room_image (image_url, room_id) VALUES ('" + imageName + "', " + room.getID() + ")";
+        try {
+        	DBConnector.executeUpdate(sql);
+        } catch (SQLException e) {
+            //doing nothing
+        }
+    }
+    
+    public void remove(Room room) {
+        String sql = "DELETE FROM room_image where room_image.room_id = " + room.getID();
         try {
         	DBConnector.executeUpdate(sql);
         } catch (SQLException e) {
