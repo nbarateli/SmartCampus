@@ -34,6 +34,7 @@ public class DBInfo {
             server = in.readLine();
             databaseName = in.readLine();
         } catch (IOException e) {
+            e.printStackTrace();
             //doing nothing
 
         }

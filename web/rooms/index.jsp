@@ -67,9 +67,9 @@
         </div>
 
         <div class="form-group">
-          <label class="control-label">სართული</label> 
+          <label class="control-label">სართული</label>
           <input type="number" name="room_floor" class="form-control"
-                placeholder="შეიყვანეთ სართული">
+                 placeholder="შეიყვანეთ სართული">
         </div>
 
         <div class="form-group">
@@ -120,6 +120,26 @@
         <input type="submit" value="ძებნა" class="btn btn-primary">
         <input type="hidden" name="search" value="true" class="form-control">
       </form>
+      <script>
+
+          function get(name) {
+              if (name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search))
+                  return decodeURIComponent(name[1]);
+          }
+
+          let array;
+          $.getJSON("findrooms", function (result) {
+              for (i in array) {
+                  array.append(result);
+                  console.log(array[i]);
+              }
+              array = result;
+
+          });
+
+
+      </script>
+
     <td id="right-td">
       <div align="center" id="right-div">
 

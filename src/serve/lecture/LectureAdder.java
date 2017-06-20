@@ -54,16 +54,16 @@ public class LectureAdder extends HttpServlet {
 		Time startTime = misc.Utils.toHHMM(request.getParameter("start_time"));
 		Time endTime = misc.Utils.toHHMM(request.getParameter("end_time"));
 		
-		List<User> lecList = DefaultLectureManager.findLecturer("SELECT * FROM " + SQL_TABLE_USER + " WHERE " + 
+		List<User> lecturers = DefaultLectureManager.findLecturer("SELECT * FROM " + SQL_TABLE_USER + " WHERE " +
 															SQL_COLUMN_USER_FIRST_NAME + "=\'" + firstName + "\' AND "+ 
 															SQL_COLUMN_USER_LAST_NAME + "=\'" + lastName + "\'");
-		List<CampusSubject> subList = DefaultLectureManager.findSubject("SELECT * FROM " + SQL_TABLE_SUBJECT + " WHERE " +
+		List<CampusSubject> subjects = DefaultLectureManager.findSubject("SELECT * FROM " + SQL_TABLE_SUBJECT + " WHERE " +
 															SQL_COLUMN_SUBJECT_NAME + "=\'" + subjectName + "\'");
 		List<Room> roomList = DefaultRoomManager.findRooms("SELECT * FROM " + SQL_TABLE_ROOM + " WHERE " +
 															SQL_COLUMN_ROOM_NAME + "=\'" + roomName + "\'");
 
-		User lecturer = lecList.size() == 0 ? null : lecList.get(0);
-		CampusSubject subject = subList.size() == 0 ? null : subList.get(0);
+		User lecturer = lecturers.size() == 0 ? null : lecturers.get(0);
+		CampusSubject subject = subjects.size() == 0 ? null : subjects.get(0);
 		Room room = roomList.size() == 0 ? null : roomList.get(0);
 		
 		if(lecturer != null && room != null && subject != null 

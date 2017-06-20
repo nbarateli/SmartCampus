@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.StringTokenizer;
 
 import static model.rooms.manager.DefaultRoomManager.findRooms;
 import static org.junit.Assert.*;
@@ -29,13 +30,32 @@ public class RoomSearchQueryTest {
     public void testQuery1() {
         //teting default query - should fetch all of the rooms.
         RoomSearchQuery query = new RoomSearchQuery();
-        String sql = "SELECT * FROM  room";
-        List<Room> expected = findRooms(sql);
-        List<Room> actual = findRooms(query.generateQuery());
-        assertEquals(expected.toString(), actual.toString());
+        String sql = "SELECT * FROM room";
+        assertTrue(haveSameTokens(sql, query.generateQuery()));
+        query.setName("name");
+        query.setFloor(0);
+        query.setAvailableForBooking(true);
+        query.setSeatType(Room.SeatType.DESKS);
+        query.setRoomType(Room.RoomType.AUDITORIUM);
+        query.setCapacityFrom(0);
+        query.setCapacityTo(10);
+        query.setHasProblems(false);
+        System.out.println(query.generateQuery());
+        sql += " \n WHERE ";
+        //assertTrue(haveSameTokens(sql, query.generateQuery()));
+    }
 
-        RoomManager manager = DefaultRoomManager.getInstance();
-        System.out.println(manager.findAllLecturesAt(mockRoom(3)));
+    private boolean haveSameTokens(String a, String b) {
+        StringTokenizer tokenizerA = new StringTokenizer(a);
+        StringTokenizer tokenizerB = new StringTokenizer(b);
+        while (tokenizerA.hasMoreTokens()) {
+            String aToken = tokenizerA.nextToken().toLowerCase();
+            String bToken = tokenizerB.nextToken().toLowerCase();
+            if (!aToken.equals(bToken)) {
+                return false;
+            }
+        }
+        return !tokenizerB.hasMoreTokens();
     }
 
 
