@@ -85,10 +85,19 @@ public class DefaultRoomManager implements RoomManager {
 
     }
 
+    public void addImage(Room room, String imageName) {
+        String sql = "INSERT INTO room_image (image_url, room_id) VALUES ('" + imageName + "', " + room.getID() + ")";
+        try {
+        	DBConnector.executeUpdate(sql);
+        } catch (SQLException e) {
+            //doing nothing
+        }
+    }
+
     @Override
     public List<String> getAllImagesOf(Room room) {
         List<String> images = new LinkedList<>();
-        String sql = "SELECT image_url FROM  room_image WHERE room_image.room_id = room." + room.getID();
+        String sql = "SELECT image_url FROM  room_image WHERE room_image.room_id = " + room.getID();
         try (ResultSet rs = DBConnector.executeQuery(sql)) {
 
             while (rs.next()) {

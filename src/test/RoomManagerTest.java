@@ -74,9 +74,21 @@ public class RoomManagerTest {
 		assertEquals(x - 3, y);
 	}
 	
-//	@Test
-//	public void test3() {
-//		 
-//	}
+	@Test
+	public void test3() {
+		String query = "SELECT * FROM " + SQL_TABLE_ROOM;
+		List<Room> list =  DefaultRoomManager.findRooms(query);
+		Room room1 = list.get(0);
+		List<String> listOfImages =  manager.getAllImagesOf(room1);
+		int x = listOfImages.size();
+		manager.addImage(room1, "test");
+		listOfImages =  manager.getAllImagesOf(room1);
+		int y = listOfImages.size();
+		assertEquals(x+1, y);
+		manager.addImage(room1, "test2");
+		listOfImages =  manager.getAllImagesOf(room1);
+		y = listOfImages.size();
+		assertEquals(x+2, y);
+	}
 
 }

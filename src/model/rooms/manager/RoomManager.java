@@ -73,4 +73,11 @@ public interface RoomManager extends CampusManager<Room, RoomSearchQuery> {
      */
     List<RoomProblem> findAllProblemsOf(Room room);
     
+    /**
+     * Adds new image for the room object in the database
+     * @param room
+     * @param imageName
+     */
+    void addImage(Room room, String imageName);
+    
 }
