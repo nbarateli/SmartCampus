@@ -105,7 +105,7 @@
   <button>ოთახის დამატება</button>
   <div id="add-room-div" class="to-hide">
     <br><br><br>
-    <form id="add-room-form" action="rooms/addroom" class="form-vertical" method="get">
+    <form id="add-room-form" action="/rooms/addroom" class="form-vertical" method="get">
 
       <div class="form-group">
         <label class="control-label">ოთახის სახელი</label>
