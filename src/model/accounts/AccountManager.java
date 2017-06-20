@@ -19,12 +19,16 @@ public interface AccountManager extends CampusManager<User, UserSearchQuery> {
     User getUserViaID(int id);
 
     User getUserViaEMail(String email);
+
     List<UserProblem> getAllProblemsOf(User user);
 
     List<ItemReport> getAllItemReportsBy(User user);
 
     List<CampusProblem> getAllProblemReportsBy(User user);
 
-    void removeUserProblem(int problemID);
+    /**
+     * Removes the user problem from database.
+     */
+    void removeUserProblem(int problemId);
 
 }

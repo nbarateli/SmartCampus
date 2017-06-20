@@ -2,17 +2,19 @@ package model.rooms.manager;
 
 import model.database.DBConnector;
 import model.lectures.Lecture;
-
-import static model.database.SQLConstants.*;
-
 import model.rooms.Room;
 import model.rooms.RoomProblem;
 import model.rooms.RoomSearchQuery;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import static misc.Utils.*;
+import static model.database.SQLConstants.*;
 
 /**
  * Created by Niko on 10.06.2017.
@@ -25,7 +27,7 @@ public class DefaultRoomManager implements RoomManager {
 
     /**
      * Returns the instance of RoomManager
-     * */
+     */
     public static RoomManager getInstance() {
         return instance == null ? instance = new DefaultRoomManager() : instance;
     }
@@ -35,7 +37,7 @@ public class DefaultRoomManager implements RoomManager {
      */
     public static List<Room> findRooms(String sql) {
         List<Room> rooms = new ArrayList<>();
-        try (ResultSet matches = DBConnector.executeQuery(sql)) {
+        try (ResultSet matches = DBConnector.executeQuery(sql, null)) {
             while (matches.next()) {
                 rooms.add(getRoomFromResults(matches));
             }
@@ -48,7 +50,7 @@ public class DefaultRoomManager implements RoomManager {
 
     private DefaultRoomManager() {
     }
-    
+
     @Override
     public List<Room> find(RoomSearchQuery query) {
 
@@ -62,12 +64,13 @@ public class DefaultRoomManager implements RoomManager {
                 SQL_COLUMN_ROOM_TYPE + ", " + SQL_COLUMN_ROOM_CAPACITY +
                 ", " + SQL_COLUMN_ROOM_AVAILABLE + ", " +
                 SQL_COLUMN_ROOM_SEAT_TYPE + ") values (\"" +
-                room.getRoomName() + "\", " + room.getFloor() + ", '" + 
+                room.getRoomName() + "\", " + room.getFloor() + ", '" +
                 room.getRoomType().toString().toLowerCase() + "', " +
                 room.getCapacity() + ", " + room.isAvailableForStudents() +
                 ", '" + room.getSeatType().toString().toLowerCase() + "') ";
         try {
-            DBConnector.executeUpdate(insertQuery);
+            //TODO
+            DBConnector.executeUpdate(insertQuery, null);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -78,7 +81,8 @@ public class DefaultRoomManager implements RoomManager {
         String deleteQuery = "DELETE  FROM  " + SQL_TABLE_ROOM +
                 " WHERE  " + SQL_COLUMN_ROOM_ID + " = " + roomID;
         try {
-            DBConnector.executeUpdate(deleteQuery);
+            //TODO
+            DBConnector.executeUpdate(deleteQuery, null);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -89,7 +93,8 @@ public class DefaultRoomManager implements RoomManager {
     public List<String> getAllImagesOf(Room room) {
         List<String> images = new LinkedList<>();
         String sql = "SELECT image_url FROM  room_image WHERE room_image.room_id = room." + room.getID();
-        try (ResultSet rs = DBConnector.executeQuery(sql)) {
+        //TODO
+        try (ResultSet rs = DBConnector.executeQuery(sql, null)) {
 
             while (rs.next()) {
                 images.add(rs.getString(SQL_COLUMN_ROOM_IMAGE_URL));
@@ -124,7 +129,8 @@ public class DefaultRoomManager implements RoomManager {
                 (day == null ? "" : " AND lecture.day_of_week = " + day.toString()) +
                 (start == null ? "" : " AND start_time >= " + toSqlTime(start)) +
                 (end == null ? "" : " AND end_time <= " + toSqlTime(end));
-        try (ResultSet rs = DBConnector.executeQuery(sql)) {
+        //TODO
+        try (ResultSet rs = DBConnector.executeQuery(sql, null)) {
             while (rs.next()) {
                 lectures.add(getLectureFromResults(rs));
             }
@@ -140,21 +146,28 @@ public class DefaultRoomManager implements RoomManager {
         List<Room> rooms = findRooms("SELECT * FROM room where room_id = " + id);
         return rooms == null || rooms.size() == 0 ? null : rooms.get(0);
     }
-    
-	@Override
-	public Room getRoomByName(String roomName) {
-		List<Room> rooms = findRooms("SELECT * FROM room WHERE room_name = " + roomName);
-		return rooms == null || rooms.size() == 0 ? null : rooms.get(0);
-	}
+
+    @Override
+    public Room getRoomByName(String roomName) {
+        List<Room> rooms = findRooms("SELECT * FROM room WHERE room_name = " + roomName);
+        return rooms == null || rooms.size() == 0 ? null : rooms.get(0);
+    }
 
     @Override
     public List<RoomProblem> findAllProblemsOf(Room room) {
-        String sql = "SELECT * FROM room_problem " +
-                " JOIN room ON room_problem.room_id = room.room_id " +
-                " JOIN campus_user ON room_problem.reported_by = campus_user.user_id " +
-                " WHERE room_problem.room_id = " + room.getID();
+        String sql = "SELECT * FROM ? " +
+                " JOIN ? ON ?.? = ?.? " +
+                " JOIN ? ON ?.? = ?.? " +
+                " WHERE ?.? = ?";
         List<RoomProblem> problems = new ArrayList<>();
-        try (ResultSet results = DBConnector.executeQuery(sql)) {
+        Object[] values = {
+                SQL_TABLE_ROOM_PROBLEM, SQL_TABLE_ROOM, SQL_TABLE_ROOM_PROBLEM,
+                SQL_COLUMN_ROOM_PROBLEM_ROOM, SQL_TABLE_ROOM, SQL_COLUMN_ROOM_ID, SQL_TABLE_USER,
+                SQL_TABLE_ROOM_PROBLEM, SQL_COLUMN_ROOM_PROBLEM_REPORTED_BY, SQL_TABLE_USER,
+                SQL_COLUMN_USER_ID, SQL_TABLE_ROOM_PROBLEM, SQL_COLUMN_ROOM_PROBLEM_ROOM,
+                room.getID()
+        };
+        try (ResultSet results = DBConnector.executeQuery(sql, values)) {
             while (results.next()) {
                 problems.add(getProblemFromResults(results));
             }

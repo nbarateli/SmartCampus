@@ -18,8 +18,9 @@ public class DBConnector {
     /**
      * Executes the passed sql query and returns fetched results.
      *
-     * @param sql a SQL statement to be sent to the database, typically a
-     *            static SQL <code>SELECT</code> statement
+     * @param sql    a SQL statement to be sent to the database, typically a
+     *               static SQL <code>SELECT</code> statement
+     * @param values an array of values to replace "?" characters in the SQL statement
      * @return a <code>ResultSet</code> object that contains the data produced
      * by the given query; never <code>null</code>
      * @throws SQLException if a database access error occurs,
@@ -27,23 +28,37 @@ public class DBConnector {
      *                      <code>ResultSet</code> object, the method is called on a
      *                      <code>PreparedStatement</code> or <code>CallableStatement</code>
      */
-    public static ResultSet executeQuery(String sql) throws SQLException {
-        return (ResultSet) execute(sql, false);
+    public static ResultSet executeQuery(String sql, Object[] values) throws SQLException {
+        return (ResultSet) execute(sql, values, false);
     }
 
     /**
      * Executes passed SQL query and returns number of rows affected.
      *
-     * @param sql a SQL Data Manipulation Language (DML) statement, such as <code>INSERT</code>,
-     *            <code>UPDATE</code> or <code>DELETE</code>; or a SQL statement that returns nothing,
+     * @param sql    a SQL Data Manipulation Language (DML) statement, such as <code>INSERT</code>,
+     *               <code>UPDATE</code> or <code>DELETE</code>; or a SQL statement that returns nothing,
+     * @param values
      * @return either (1) the row count for SQL Data Manipulation Language (DML) statements
      * or (2) 0 for SQL statements that return nothing
      * @throws SQLException if a database access error occurs,
      *                      this method is called on a closed <code>Statement</code>, the given
      *                      SQL statement produces a <code>ResultSet</code> object, the method is called on a
      */
-    public static int executeUpdate(String sql) throws SQLException {
-        return (int) execute(sql, true);
+    public static int executeUpdate(String sql, Object[] values) throws SQLException {
+        return (int) execute(sql, values, true);
+    }
+
+    public static PreparedStatement getPreparedStatement(String sql) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection
+                    (MYSQL_DATABASE_SERVER, MYSQL_USERNAME, MYSQL_PASSWORD);
+            PreparedStatement statement = connection.prepareStatement(sql);
+            return statement;
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**
@@ -53,18 +68,23 @@ public class DBConnector {
      * @return a <code>ResultSet</code> if the query type is not update, an int denoting the number of rows if it is.
      * @throws SQLException if database access error occurs.
      */
-    private static Object execute(String sql, boolean isUpdate) throws SQLException {
+    private static Object execute(String sql, Object[] values, boolean isUpdate) throws SQLException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection
                     (MYSQL_DATABASE_SERVER, MYSQL_USERNAME, MYSQL_PASSWORD);
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.executeQuery("USE " + MYSQL_DATABASE_NAME + ";");
-
+            if (values != null) {
+                for (int i = 0; i < values.length; i++) {
+                    statement.setObject(i + 1, values[i]);
+                }
+            }
+            String s = statement.toString();
             if (isUpdate)
-                return statement.executeUpdate(sql);
+                return statement.executeUpdate();
             else
-                return statement.executeQuery(sql);
+                return statement.executeQuery();
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

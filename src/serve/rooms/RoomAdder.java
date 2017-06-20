@@ -1,14 +1,5 @@
 package serve.rooms;
 
-import static misc.WebConstants.ROOM_MANAGER;
-
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import misc.Utils;
 import model.rooms.Room;
 import model.rooms.Room.RoomType;
@@ -16,10 +7,19 @@ import model.rooms.Room.SeatType;
 import model.rooms.RoomSearchQuery;
 import model.rooms.manager.RoomManager;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+import static misc.WebConstants.ROOM_MANAGER;
+
 /**
  * Servlet implementation class RoomAdder
  */
-@WebServlet("/RoomAdder")
+@WebServlet(name = "Room Adder", urlPatterns = {"/rooms/addroom"})
 public class RoomAdder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

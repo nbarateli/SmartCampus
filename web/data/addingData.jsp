@@ -27,11 +27,12 @@
     <br><br><br>
     <label id="info-label"><b>შეგიძლიათ მონაცემები შეიყვანოთ ხელით (სათითაოდ):</b></label>
     <br><br>
-    <form id="sched-form" action="../LectureAdder" class="form-vertical" method="get">
+
+    <form id="sched-form" class="form-vertical" onsubmit="foo()">
 
       <div class="form-group">
-        <input type="text" name="lecturer_name" class="form-control"
-               placeholder="შეიყვანეთ ლექტორის სახელი და გვარი">
+        <input type="email" name="lecturer_email" class="form-control"
+               placeholder="შეიყვანეთ ლექტორის ფოსტის მისამართი">
       </div>
 
       <div class="form-group">
@@ -40,7 +41,7 @@
       </div>
 
       <div class="form-group">
-        <input name="subject" class="form-control"
+        <input name="subject_name" class="form-control"
                placeholder="შეიყვანეთ საგნის სახელი">
       </div>
 
@@ -68,39 +69,35 @@
                placeholder="შეიყვანეთ ლექციის დასრულების დრო(HH:mm 24-საათიანი ფორმატით)">
       </div>
 
-      <input type="submit" value="დამატება" class="btn btn-primary btn-lg">
+      <input type="button" value="დამატება" class="btn btn-primary btn-lg" onclick="addLectureFromForm()">
     </form>
 
     <br><br><br>
     <label id="info-label2"><b>ან ატვირთოთ Excel-ის ფაილი:</b></label>
+    <div id="info-label3">ექსელის ფორმატის შაბლონი შეგიძლიათ <a href="/excel_template.xlsx">იხილოთ აქ.</a>
+      <br>უცვლელი დატოვეთ <b>პირველი მწკრივი!</b></div>
     <br><br>
     <script></script>
-    <form action="#" class="form-vertical" id="file" method="get">
+    <div class="form-vertical" id="file">
       <input type="file" name="pic" accept=".xls,.xlsx"><br>
       <output id="list"></output>
 
       <script>
           function handleFileSelect(evt) {
               var files = evt.target.files; // FileList object
-              console.log("ra xdebaaa");
               // files is a FileList of File objects. List some properties.
               var output = [];
               for (var i = 0, f; f = files[i]; i++) {
-                  console.log(f);
-                  ExcelToJSON(f);
-//                  output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
-//                      f.size, ' bytes, last modified: ',
-//                      f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
-//                      '</li>');
-              }
 
+                  addLecturesFromFile(f);
+              }
               document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
           }
 
           document.getElementById('file').addEventListener('change', handleFileSelect, false);
       </script>
-      <input type="submit" value="ატვირთვა" class="btn btn-primary btn-lg">
-    </form>
+
+    </div>
     <br><br>
   </div>
   <br><br><br>

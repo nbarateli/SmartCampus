@@ -8,6 +8,11 @@ package misc;
 public class WebConstants {
     public static final String ROOM_MANAGER = "roomManager";
     public static final String LECTURE_MANAGER = "lectureManager";
+    public static final String ACCOUNT_MANAGER = "accountManager";
+
+    public static final String SUCCESS = "success";
+    public static final String FAILED = "failure";
+
     public static final String NO_IMAGE = "http://i.imgur.com/wpwWazp.png";
 
     public static final String JSON_ROOM_ID = "id";

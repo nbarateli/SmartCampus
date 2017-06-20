@@ -3,29 +3,33 @@ package misc;
 import model.accounts.User;
 import model.lectures.CampusSubject;
 import model.lectures.Lecture;
-import model.rooms.*;
+import model.rooms.Room;
+import model.rooms.RoomProblem;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
+import static model.accounts.User.*;
+import static model.accounts.User.UserRole.*;
+import static model.accounts.User.UserStatus.ACTIVE;
+import static model.accounts.User.UserStatus.BANNED;
+import static model.accounts.User.UserType.ADMIN;
+import static model.accounts.User.UserType.USER;
 import static model.database.SQLConstants.*;
-import static model.rooms.Room.RoomType.*;
+import static model.rooms.Room.RoomType.AUDITORIUM;
+import static model.rooms.Room.RoomType.UTILITY;
 import static model.rooms.Room.SeatType.*;
 
-import static model.accounts.User.UserType.*;
-import static model.accounts.User.UserStatus.*;
-import static model.accounts.User.UserRole.*;
-import static model.accounts.User.*;
-
 public final class Utils {
-    
+
     /**
      * converts Date object to respective string in dd.MM.yyyy HH:mm format
+     *
      * @param date Date object to convert
      * @return string representation of date
      */
@@ -36,6 +40,7 @@ public final class Utils {
 
     /**
      * converts Time object to respective string in HH:mm format
+     *
      * @param time Time object to be converted
      * @return string representation of time
      */
@@ -43,8 +48,55 @@ public final class Utils {
         DateFormat format = new SimpleDateFormat("HH:mm");
         return format.format(time);
     }
-    
+
+    /**
+     * returns the Time object corresponding
+     * to its String representation
+     */
+    public static Time toHHMM(String time) {
+        if (!isValidFormat(time))
+            return null;
+
+        int hour = Integer.valueOf(time.substring(0, 2));
+        int min = Integer.valueOf(time.substring(3, 5));
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR, hour);
+        calendar.set(Calendar.MINUTE, min);
+        return new Time(calendar.getTimeInMillis());
+    }
+
     /*
+    * Converts given String to WeekDay format.
+    * */
+    public static Lecture.WeekDay toWeekDay(String day) {
+        switch (day.toLowerCase()) {
+            case "ორშაბათი":
+            case "monday":
+                return Lecture.WeekDay.MONDAY;
+            case "სამშაბათი":
+            case "tuesday":
+                return Lecture.WeekDay.TUESDAY;
+            case "ოთხშაბათი":
+            case "wednesday":
+                return Lecture.WeekDay.WEDNESDAY;
+            case "ხუთშაბათი":
+            case "thursday":
+                return Lecture.WeekDay.THURSDAY;
+            case "პარასკევი":
+            case "friday":
+                return Lecture.WeekDay.FRIDAY;
+            case "შაბათი":
+            case "saturday":
+                return Lecture.WeekDay.SATURDAY;
+            case "კვირა":
+            case "sunday":
+                return Lecture.WeekDay.SUNDAY;
+
+        }
+        return null;
+    }
+
+    /**
      * checks if given string is valid for representing hour or minute
      */
     private static boolean numberStringIsValid(String s, boolean checkHour) {
@@ -53,37 +105,15 @@ public final class Utils {
             //capacity and floor can't be negative
             //their input types are "number" but some old browsers don't have support for
             //that and we don't won't any exceptions
-            if(numValue < 0 || (checkHour && numValue >= 24) || (!checkHour && numValue >= 59))
+            if (numValue < 0 || (checkHour && numValue >= 24) || (!checkHour && numValue >= 59))
                 return false;
         } catch (NumberFormatException e) {
             return false; //the text wasn't a number
         }
-        
+
         return true;
     }
-    
-    private static boolean isValidFormat(String time) {
-        if(time.length() != 5 || time.charAt(2) != ':' || 
-                !numberStringIsValid(time.substring(0,2), true) ||
-                !numberStringIsValid(time.substring(3,5), false))
-            return false;
-        return true;
-    }
-    
-    /**
-     * returns the Time object corresponding 
-     * to its String representation
-     */
-    @SuppressWarnings("deprecation")
-	public static Time toHHMM(String time){
-    	if(!isValidFormat(time))
-    		return null;
-    	
-    	int hour = Integer.valueOf(time.substring(0, 2));
-    	int min = Integer.valueOf(time.substring(3, 5));
-    	
-    	return new Time(hour, min, 0);
-    }
+
     /**
      * return sql format of given time
      */
@@ -171,35 +201,18 @@ public final class Utils {
 
     }
 
-    /*
-    * Converts given String to WeekDay format.
-    * */
-    public static Lecture.WeekDay toWeekDay(String day) {
-        switch (day.toLowerCase()) {
-        	case "ორშაბათი":	
-            case "monday":
-                return Lecture.WeekDay.MONDAY;
-            case "სამშაბათი":
-            case "tuesday":
-                return Lecture.WeekDay.TUESDAY;
-            case "ოთხშაბათი":
-            case "wednesday":
-                return Lecture.WeekDay.WEDNESDAY;
-            case "ხუთშაბათი":
-            case "thursday":
-                return Lecture.WeekDay.THURSDAY;
-            case "პარასკევი":
-            case "friday":
-                return Lecture.WeekDay.FRIDAY;
-            case "შაბათი":
-            case "saturday":
-                return Lecture.WeekDay.SATURDAY;
-            case "კვირა":
-            case "sunday":
-                return Lecture.WeekDay.SUNDAY;
-            	
-        }
-        return null;
+    /**
+     * Returns whether the first 5 characters of passed {@code String} form a valid time format.
+     *
+     * @param time a {@code String} value of a time to be checked.
+     * @return whether the first 5 characters of the argument form a valid time format.
+     */
+    private static boolean isValidFormat(String time) {
+        if (time.length() < 5 || time.charAt(2) != ':' ||
+                !numberStringIsValid(time.substring(0, 2), true) ||
+                !numberStringIsValid(time.substring(3, 5), false))
+            return false;
+        return true;
     }
 
     /**
@@ -262,7 +275,7 @@ public final class Utils {
 
         return new Room(id, capacity, name, roomType, seatType, available, floor);
     }
-    
+
     /**
      * Returns a subject from current row of the given <code>ResultSet</code>
      */

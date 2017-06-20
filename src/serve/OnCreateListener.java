@@ -6,21 +6,22 @@ package serve;
  */
 
 import misc.DBInfo;
+import model.accounts.DefaultAccountManager;
 import model.lectures.manager.DefaultLectureManager;
 import model.lectures.manager.LectureManager;
 import model.rooms.manager.DefaultRoomManager;
 import model.rooms.manager.RoomManager;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionAttributeListener;
+import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
-import javax.servlet.http.HttpSessionBindingEvent;
 
-import static misc.WebConstants.ROOM_MANAGER;
-import static misc.WebConstants.LECTURE_MANAGER;
+import static misc.WebConstants.*;
 
 @WebListener()
 public class OnCreateListener implements ServletContextListener,
@@ -45,8 +46,12 @@ public class OnCreateListener implements ServletContextListener,
         }
         RoomManager roomManager = DefaultRoomManager.getInstance();
         LectureManager lectureManager = DefaultLectureManager.getInstance();
-        sce.getServletContext().setAttribute(ROOM_MANAGER, roomManager);
-        sce.getServletContext().setAttribute(LECTURE_MANAGER, lectureManager);
+        ServletContext context = sce.getServletContext();
+
+        context.setAttribute(ROOM_MANAGER, roomManager);
+        context.setAttribute(LECTURE_MANAGER, lectureManager);
+        context.setAttribute(ACCOUNT_MANAGER, DefaultAccountManager.getInstance());
+
     }	
 
     public void contextDestroyed(ServletContextEvent sce) {

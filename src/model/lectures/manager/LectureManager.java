@@ -1,7 +1,5 @@
 package model.lectures.manager;
 
-import java.util.List;
-
 import model.campus.CampusManager;
 import model.lectures.CampusSubject;
 import model.lectures.Lecture;
@@ -25,7 +23,7 @@ public interface LectureManager extends CampusManager<Lecture, LectureSearchQuer
      *
      * @param subject a subject to be removed
      */
-    public void removeSubject(String string);
+    public void removeSubject(String subject);
     
     /**
      * gets id of the given lecture from the database
@@ -33,4 +31,6 @@ public interface LectureManager extends CampusManager<Lecture, LectureSearchQuer
      * @param lecture lecture to get id of
      */
     public int getLectureId(Lecture lecture);
-}	
+
+    CampusSubject findSubject(String subjectName);
+}
