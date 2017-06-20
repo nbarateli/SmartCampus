@@ -1,7 +1,7 @@
 var ExcelToJSON = function (file) {
 
     this.parseExcel = function (file) {
-        console.log(file);
+
         var reader = new FileReader();
 
         reader.onload = function (e) {
@@ -26,7 +26,7 @@ var ExcelToJSON = function (file) {
 
         reader.readAsBinaryString(file);
     };
-    return parseExcel(file);
+    this.parseExcel(file);
 };
 var addLecturesFromFile = function (file) {
     ExcelToJSON(file);

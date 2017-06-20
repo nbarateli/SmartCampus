@@ -17,7 +17,7 @@
   <script src="addingDataScript.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
-  <script src="ExcelReader.js"></script>
+  <script src="DataUtils.js"></script>
 </head>
 <body>
 
@@ -105,7 +105,7 @@
   <button>ოთახის დამატება</button>
   <div id="add-room-div" class="to-hide">
     <br><br><br>
-    <form id="add-room-form" action="../RoomAdder" class="form-vertical" method="get">
+    <form id="add-room-form" action="rooms/addroom" class="form-vertical" method="get">
 
       <div class="form-group">
         <label class="control-label">ოთახის სახელი</label>
@@ -175,7 +175,7 @@
   <button>საგნის დამატება</button>
   <div id="add-subj-div" class="to-hide">
     <br><br><br>
-    <form id="add-subj-form" action="#" class="form-vertical" method="get">
+    <form id="add-subj-form" action="/lectures/addsubject" class="form-vertical" method="get">
 
       <div class="form-group">
         <input type="text" name="subj_name"

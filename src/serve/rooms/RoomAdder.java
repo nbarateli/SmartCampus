@@ -83,9 +83,9 @@ public class RoomAdder extends HttpServlet {
                     available, floor);
             manager.add(room);
         }
-          
-        response.sendRedirect("data/addingData.jsp");
-	}
+
+        response.sendRedirect("/data/addingData.jsp");
+    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

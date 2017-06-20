@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class SubjectAdder
  */
-@WebServlet("/SubjectAdder")
+@WebServlet(name = "Subject Adder", urlPatterns = {"/lectures/addsubject"})
 public class SubjectAdder extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -43,7 +43,7 @@ public class SubjectAdder extends HttpServlet {
             manager.addSubject(subjectName);
             System.out.println("I added subject: " + subjectName);
         }
-        response.sendRedirect("data/addingData.jsp");
+        response.sendRedirect("/data/addingData.jsp");
     }
 
     /**
