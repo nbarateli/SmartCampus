@@ -90,6 +90,12 @@ public class DefaultRoomManager implements RoomManager {
     }
 
     @Override
+    public int size() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
     public List<String> getAllImagesOf(Room room) {
         List<String> images = new LinkedList<>();
         String sql = "SELECT image_url FROM  room_image WHERE room_image.room_id = room." + room.getID();
@@ -179,9 +185,13 @@ public class DefaultRoomManager implements RoomManager {
     }
 
     @Override
-    public int size() {
-        // TODO Auto-generated method stub
-        return 0;
+    public void addImage(Room room, String imageName) {
+        String sql = "INSERT INTO room_image (image_url, room_id) VALUES ('" + imageName + "', " + room.getID() + ")";
+        try {
+            DBConnector.executeUpdate(sql, null);
+        } catch (SQLException e) {
+            //doing nothing
+        }
     }
 
 }
