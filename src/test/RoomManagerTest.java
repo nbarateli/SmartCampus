@@ -38,9 +38,9 @@ public class RoomManagerTest {
 		String query = "SELECT * FROM " + SQL_TABLE_ROOM;
 		List<Room> list =  DefaultRoomManager.findRooms(query);
 		int x = list.size();
-		Room room1 = new Room(21, 50, "100", RoomType.AUDITORIUM, SeatType.DESKS, true, 1);
-		Room room2 = new Room(22, 150, "101", RoomType.UTILITY, SeatType.COMPUTERS, false, 1);
-		Room room3 = new Room(23, 90, "102", RoomType.AUDITORIUM, SeatType.DESKS, true, 1);
+		Room room1 = new Room(-1, 50, "100", RoomType.AUDITORIUM, SeatType.DESKS, true, 1);
+		Room room2 = new Room(-1, 150, "101", RoomType.UTILITY, SeatType.COMPUTERS, false, 1);
+		Room room3 = new Room(-1, 90, "102", RoomType.AUDITORIUM, SeatType.DESKS, true, 1);
 		manager.add(room1);
 		list = DefaultRoomManager.findRooms(query);
 		int y = list.size();
@@ -53,6 +53,7 @@ public class RoomManagerTest {
 		list = DefaultRoomManager.findRooms(query);
 		y = list.size();
 		assertEquals(x + 3, y);
+		
 	}
 	
 	@Test
@@ -60,23 +61,39 @@ public class RoomManagerTest {
 		String query = "SELECT * FROM " + SQL_TABLE_ROOM;
 		List<Room> list =  DefaultRoomManager.findRooms(query);
 		int x = list.size();
-		manager.remove(14);
+		manager.remove(manager.getRoomByName("100").getID());
 		list =  DefaultRoomManager.findRooms(query);
 		int y = list.size();
 		assertEquals(x - 1, y);
-		manager.remove(15);
+		manager.remove(manager.getRoomByName("101").getID());
 		list =  DefaultRoomManager.findRooms(query);
 		y = list.size();
 		assertEquals(x - 2, y);
-		manager.remove(16);
+		manager.remove(manager.getRoomByName("102").getID());
 		list =  DefaultRoomManager.findRooms(query);
 		y = list.size();
 		assertEquals(x - 3, y);
 	}
 	
-//	@Test
-//	public void test3() {
-//		 
-//	}
+	@Test
+	public void test3() {
+		String query = "SELECT * FROM " + SQL_TABLE_ROOM;
+		List<Room> list =  DefaultRoomManager.findRooms(query);
+		Room room1 = list.get(0);
+		List<String> listOfImages =  manager.getAllImagesOf(room1);
+		int x = listOfImages.size();
+		manager.addImage(room1, "test");
+		listOfImages =  manager.getAllImagesOf(room1);
+		int y = listOfImages.size();
+		assertEquals(x+1, y);
+		manager.addImage(room1, "test2");
+		listOfImages =  manager.getAllImagesOf(room1);
+		y = listOfImages.size();
+		assertEquals(x+2, y);
+		manager.addImage(room1, "test3");
+		listOfImages =  manager.getAllImagesOf(room1);
+		y = listOfImages.size();
+		assertEquals(x+3, y);
+	}
 
 }
