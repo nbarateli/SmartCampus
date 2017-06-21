@@ -5,15 +5,15 @@ VALUES ('student'), ('lecturer'), ('staff');
 
 INSERT INTO campus_user (first_name, last_name, user_email, user_type, user_role, user_status)
 VALUES
-  ('nino', 'khaduri', 'nkhad15@freeuni.edu.ge', 'user', 1, 'active'),
-  ('niko', 'barateli', 'nbara15@freeuni.edu.ge', 'admin', 1, 'active'),
-  ('zaur', 'meshveliani', 'zmesh15@freeuni.edu.ge', 'user', 1, 'active'),
-  ('davit', 'maghaltadze', 'dmagh15@freeuni.edu.ge', 'user', 1, 'active'),
-  ('shota', 'nanushsvili', 'snanu15@freeuni.edu.ge', 'user', 1, 'active'),
-  ('nikoloz', 'matchavariani', 'n.matchavariani@freeuni.edu.ge', 'admin', 2, 'active'),
-  ('nikoloz', 'tsimakuridze', 'n.tsimakuridze@freeuni.edu.ge', 'admin', 2, 'active'),
-  ('lia', 'solomonia', 'l.solomonia@freeuni.edu.ge', 'admin', 2, 'active'),
-  ('giorgi', 'saghinadze', 'g.saghinadze@freeuni.edu.ge', 'admin', 2, 'active');
+  ('ნინო', 'ხადური', 'nkhad15@freeuni.edu.ge', 'user', 1, 'active'),
+  ('ნიკო', 'ბარათელი', 'nbara15@freeuni.edu.ge', 'admin', 1, 'active'),
+  ('ზაურ', 'მეშველიანი', 'zmesh15@freeuni.edu.ge', 'user', 1, 'active'),
+  ('დავით', 'მაღალთაძე', 'dmagh15@freeuni.edu.ge', 'user', 1, 'active'),
+  ('შოთა', 'ნანუაშვილი', 'snanu15@freeuni.edu.ge', 'user', 1, 'active'),
+  ('ნიკოლოზ', 'მაჭავარიანი', 'n.matchavariani@freeuni.edu.ge', 'admin', 2, 'active'),
+  ('ნიკოლოზ', 'ციმაკურიძე', 'n.tsimakuridze@freeuni.edu.ge', 'admin', 2, 'active'),
+  ('ლია', 'სოლომონია', 'l.solomonia@freeuni.edu.ge', 'admin', 2, 'active'),
+  ('გიორგი', 'საღინაძე', 'g.saghinadze@freeuni.edu.ge', 'admin', 2, 'active');
 
 
 INSERT INTO campus_subject (subject_name) VALUES

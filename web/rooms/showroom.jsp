@@ -27,7 +27,7 @@
   <%!
     private void printAll(List<Lecture> allLecturesAt, JspWriter out) throws Exception {
       for (Lecture lecture : allLecturesAt) {
-        out.println("<tr><form action=\"LectureRemover\" method=\"post\">");
+        out.println("<tr><form action=\"/lectures/removelecture\" method=\"post\">");
         out.println("<input type=\"hidden\" value=\"" + lecture.getID() + "\" name=\"lecture_id\">");
         out.println("<td>" + lecture.getSubject().getName() + "</td>");
         out.println("<td>" + lecture.getLecturer().getFirstName() + " " 

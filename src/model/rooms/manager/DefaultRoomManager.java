@@ -64,7 +64,7 @@ public class DefaultRoomManager implements RoomManager {
                 ", '" + room.getSeatType().toString().toLowerCase() + "') ";
         try {
             //TODO
-            DBConnector.executeUpdate(insertQuery, null);
+            DBConnector.executeUpdate(insertQuery);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -76,7 +76,7 @@ public class DefaultRoomManager implements RoomManager {
                 " WHERE  " + SQL_COLUMN_ROOM_ID + " = " + roomID;
         try {
             //TODO
-            DBConnector.executeUpdate(deleteQuery, null);
+            DBConnector.executeUpdate(deleteQuery);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -202,7 +202,7 @@ public class DefaultRoomManager implements RoomManager {
     public void addImage(Room room, String imageURL) {
         String sql = "INSERT INTO room_image (image_url, room_id) VALUES ('" + imageURL + "', " + room.getID() + ")";
         try {
-            DBConnector.executeUpdate(sql, null);
+            DBConnector.executeUpdate(sql);
         } catch (SQLException e) {
             //doing nothing
         }
