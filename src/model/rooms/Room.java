@@ -87,11 +87,6 @@ public class Room implements CampusObject {
         Room other = (Room) obj;
         if (roomID != other.roomID)
             return false;
-        if (roomName == null) {
-            if (other.roomName != null)
-                return false;
-        } else if (!roomName.equals(other.roomName))
-            return false;
         return true;
     }
 }

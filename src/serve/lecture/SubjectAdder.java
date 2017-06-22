@@ -9,6 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import static misc.WebConstants.FAILED;
+import static misc.WebConstants.SUCCESS;
+
 import java.io.IOException;
 
 /**
@@ -26,13 +30,10 @@ public class SubjectAdder extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-
     /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LectureManager manager = (LectureManager) request.getServletContext().getAttribute(WebConstants.LECTURE_MANAGER);
 
         response.getWriter().append("Served at: ").append(request.getContextPath());
@@ -41,17 +42,11 @@ public class SubjectAdder extends HttpServlet {
         CampusSubject subject = manager.findSubject(subjectName);
         if (subject == null) {
             manager.addSubject(subjectName);
-            System.out.println("I added subject: " + subjectName);
+            response.getWriter().println(SUCCESS);
+            System.out.println("added " + subjectName);
+        } else {
+            response.getWriter().println(FAILED);
         }
-        response.sendRedirect("/data/addingData.jsp");
-    }
-
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-        doGet(request, response);
     }
 
 }

@@ -8,11 +8,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import misc.ModelConstants;
+
 import java.io.IOException;
 
 import static misc.Utils.toRoomType;
 import static misc.Utils.toSeatType;
+import static misc.WebConstants.FAILED;
 import static misc.WebConstants.ROOM_MANAGER;
+import static misc.WebConstants.SUCCESS;
 
 /**
  * Servlet implementation class RoomAdder
@@ -42,12 +47,13 @@ public class RoomAdder extends HttpServlet {
             int capacity = Integer.parseInt(request.getParameter("capacity"));
             Room.RoomType roomType = toRoomType(request.getParameter("room_type"));
             Room.SeatType seatType = toSeatType(request.getParameter("seat_type"));
-            boolean canBeBooked = "true".equalsIgnoreCase(request.getParameter("can_be_booked"));
-            Room newRoom = new Room(-1, capacity, name, roomType, seatType, canBeBooked, floor);
+            boolean canBeBooked = (request.getParameter("can_be_booked") != null);
+            Room newRoom = new Room(ModelConstants.SENTINEL_INT, capacity, name, roomType, 
+                    seatType, canBeBooked, floor);
             manager.add(newRoom);
-            response.getWriter().print("success");
+            response.getWriter().println(SUCCESS);
         } catch (Exception e) {
-            response.getWriter().print("failure");
+            response.getWriter().println(FAILED);
         }
 
     }

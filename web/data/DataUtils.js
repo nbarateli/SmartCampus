@@ -112,6 +112,52 @@ var removeRoom = function (params) {
     http.send(params);
 };
 
+var addRoomFromForm = function () {
+    var params = ($('#add-room-form').serialize());
+
+    addRoom(params);
+};
+
+var addRoom = function (params) {
+	var url = "/rooms/addroom";
+
+    var http = new XMLHttpRequest();
+    http.open("POST", url, true);
+
+    //Send the proper header information along with the request
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    http.onreadystatechange = function (alert) {//Call a function when the state changes.
+        if (http.readyState === 4 && http.status === 200) {
+            window.alert(http.responseText);
+        }
+    };
+    http.send(params);
+};
+
+var addSubjectFromForm = function () {
+    var params = ($('#add-subj-form').serialize());
+
+    addSubject(params);
+};
+
+var addSubject = function (params) {
+	var url = "/lectures/addsubject";
+
+    var http = new XMLHttpRequest();
+    http.open("POST", url, true);
+
+    //Send the proper header information along with the request
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    http.onreadystatechange = function (alert) {//Call a function when the state changes.
+        if (http.readyState === 4 && http.status === 200) {
+            window.alert(http.responseText);
+        }
+    };
+    http.send(params);
+};
+
 function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
     // files is a FileList of File objects. List some properties.

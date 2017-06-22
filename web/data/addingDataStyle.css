@@ -10,7 +10,7 @@ body {
   margin-bottom: 50px;
 }
 
-button {
+.main-button {
   background-color: #58D68D;
   text-align: center;
   padding: 20px 35px;

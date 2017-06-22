@@ -22,7 +22,7 @@
 <body>
 
 <div align="center" id="main-div">
-  <button>ლექციების ცხრილის შეყვანა</button>
+  <button class="main-button">ლექციების ცხრილის შეყვანა</button>
   <div id="schedule" class="to-hide">
     <br><br><br>
     <label id="info-label"><b>შეგიძლიათ მონაცემები შეიყვანოთ ხელით (სათითაოდ):</b></label>
@@ -85,10 +85,10 @@
   </div>
   <br><br><br>
 
-  <button>ოთახის დამატება</button>
+  <button class="main-button">ოთახის დამატება</button>
   <div id="add-room-div" class="to-hide">
     <br><br><br>
-    <form id="add-room-form" action="/rooms/addroom" class="form-vertical" method="post">
+    <form id="add-room-form" class="form-vertical">
 
       <div class="form-group">
         <label class="control-label">ოთახის სახელი</label>
@@ -135,12 +135,13 @@
         </label>
       </div>
 
-      <input type="submit" value="დამატება" class="btn btn-primary btn-lg">
+      <input type="submit" value="დამატება" class="btn btn-primary btn-lg"
+          onclick="addRoomFromForm()">
     </form>
   </div>
   <br><br><br>
 
-  <button>ოთახის წაშლა</button>
+  <button class="main-button">ოთახის წაშლა</button>
   <div id="remove-room-div" class="to-hide">
     <br><br><br>
     <form id="remove-room-form" class="form-vertical">
@@ -156,20 +157,26 @@
   </div>
   <br><br><br>
 
-  <button>საგნის დამატება</button>
+  <button class="main-button">საგნის დამატება</button>
   <div id="add-subj-div" class="to-hide">
     <br><br><br>  
-    <form id="add-subj-form" action="/lectures/addsubject" class="form-vertical" method="get">
+    <form id="add-subj-form" class="form-vertical">
 
       <div class="form-group">
         <input type="text" name="subj_name"
                class="form-control" placeholder="შეიყვანეთ საგნის სახელი">
       </div>
 
-      <input type="submit" value="დამატება" class="btn btn-primary btn-lg">
+      <input type="submit" value="დამატება" class="btn btn-primary btn-lg"
+          onclick="addSubjectFromForm()">
     </form>
   </div>
   <br><br><br>
+  
+  <div>
+    <br><br><br>
+    <a href="/index.jsp">მთავარ გვერდზე დაბრუნება</a>
+  </div>
 </div>
 
 </body>
