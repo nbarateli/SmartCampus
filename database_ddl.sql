@@ -2,25 +2,15 @@ DROP DATABASE IF EXISTS SmartCampus;
 CREATE DATABASE SmartCampus;
 USE SmartCampus;
 
-CREATE TABLE role (
-  role_id INT NOT NULL AUTO_INCREMENT,
-  role_name VARCHAR(45) NOT NULL,
-  PRIMARY KEY (role_id),
-  UNIQUE INDEX role_name_UNIQUE (role_name ASC));
-  
 CREATE TABLE campus_user
 (
-  user_id     INT PRIMARY KEY        NOT NULL AUTO_INCREMENT,
-  first_name  VARCHAR(20)            NOT NULL,
-  last_name   VARCHAR(20)            NOT NULL,
-  user_email  VARCHAR(30)            NOT NULL,
-  user_type   ENUM ('user', 'admin') NOT NULL,
-  user_role   INT,
-  user_status ENUM ('active', 'banned'),
-  img_url     VARCHAR(300),
-  CONSTRAINT user_role_fk
-  FOREIGN KEY (user_role) REFERENCES role (role_id)
-    ON DELETE SET NULL
+  user_id      INT PRIMARY KEY                                             NOT NULL AUTO_INCREMENT,
+  first_name   VARCHAR(20)                                                 NOT NULL,
+  last_name    VARCHAR(20)                                                 NOT NULL,
+  user_email   VARCHAR(30)                                                 NOT NULL,
+  initial_role ENUM ('student', 'lecturer', 'staff', 'admin', 'sys_admin') NOT NULL,
+  user_status  ENUM ('active', 'banned'),
+  img_url      VARCHAR(300)
 );
 CREATE UNIQUE INDEX user_user_email_uindex
   ON campus_user (user_email);
@@ -165,26 +155,93 @@ CREATE TABLE room_image
     ON DELETE CASCADE
 );
 
-CREATE TABLE permission (
-  permission_id INT NOT NULL AUTO_INCREMENT,
-  permission_description VARCHAR(200) NOT NULL,
-  PRIMARY KEY (permission_id),
-  UNIQUE INDEX permission_description_UNIQUE (permission_description ASC));
+CREATE TABLE smartcampus.user_role
+(
+  user_id INT                                                         NOT NULL,
+  role    ENUM ('student', 'lecturer', 'staff', 'admin', 'sys_admin') NOT NULL,
+  CONSTRAINT user_role_campus_user_user_id_fk FOREIGN KEY (user_id) REFERENCES campus_user (user_id)
+    ON DELETE CASCADE
+);
+CREATE TABLE smartcampus.user_permission
+(
+  user_id    INT NOT NULL,
+  permission ENUM
+             ('book_a_room', 'request_booked_room', 'cancel_booking', 'report_room_problem',
+                             'delete_problem', 'lost_found_post', 'lost_found_delete', 'warn_user',
+                             'view_user_warnings', 'delete_user_warnings', 'remove_permission', 'insert_data')
+                 NOT NULL,
+  CONSTRAINT user_permission_campus_user_user_id_fk FOREIGN KEY (user_id) REFERENCES campus_user (user_id)
+    ON DELETE CASCADE
+);
 
-CREATE TABLE role_permission (
-  id INT NOT NULL AUTO_INCREMENT,
-  role_id INT NOT NULL,
-  permission_id INT NOT NULL,
-  PRIMARY KEY (id),
-  INDEX fk_role_permission_role_idx (role_id ASC),
-  INDEX fk_role_permission_permission_idx (permission_id ASC),
-  CONSTRAINT fk_role_permission_role
-    FOREIGN KEY (role_id)
-    REFERENCES smartcampus.role (role_id)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION,
-  CONSTRAINT fk_role_permission_permission
-    FOREIGN KEY (permission_id)
-    REFERENCES smartcampus.permission (permission_id)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION);
+CREATE TRIGGER user_role_trigger
+AFTER INSERT ON campus_user
+FOR EACH ROW
+  BEGIN
+    INSERT INTO user_role (user_id, role) VALUES (NEW.user_id, NEW.initial_role);
+  END;
+
+CREATE TRIGGER user_permission_trigger
+AFTER INSERT ON user_role
+FOR EACH ROW
+  BEGIN
+    IF NEW.role = ('student')
+    THEN
+      BEGIN
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'book_a_room');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'report_room_problem');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'lost_found_post');
+      END;
+    ELSE IF
+    NEW.role = ('lecturer')
+    THEN
+      BEGIN
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'book_a_room');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'report_room_problem');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'lost_found_post');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'request_booked_room');
+      END;
+    ELSE IF
+    NEW.role = ('staff')
+    THEN
+      BEGIN
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'book_a_room');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'report_room_problem');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'lost_found_post');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'request_booked_room');
+      END;
+    ELSE IF
+    NEW.role = ('admin')
+    THEN
+      BEGIN
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'book_a_room');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'report_room_problem');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'delete_problem');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'lost_found_post');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'cancel_booking');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'lost_found_delete');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'warn_user');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'view_user_warnings');
+      END;
+    ELSE IF
+    NEW.role = ('sys_admin')
+    THEN
+      BEGIN
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'book_a_room');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'report_room_problem');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'delete_problem');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'lost_found_post');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'cancel_booking');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'lost_found_delete');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'warn_user');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'view_user_warnings');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'delete_user_warnings');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'remove_permission');
+        INSERT INTO user_permission (user_id, permission) VALUE (NEW.user_id, 'insert_data');
+      END;
+    END IF;
+    END IF;
+    END IF;
+    END IF;
+    END IF;
+  END;
