@@ -71,9 +71,9 @@ public class DefaultRoomManager implements RoomManager {
     }
 
     @Override
-    public void remove(int roomID) {
+    public void remove(int entityId) {
         String deleteQuery = "DELETE  FROM  " + SQL_TABLE_ROOM +
-                " WHERE  " + SQL_COLUMN_ROOM_ID + " = " + roomID;
+                " WHERE  " + SQL_COLUMN_ROOM_ID + " = " + entityId;
         try {
             //TODO
             DBConnector.executeUpdate(deleteQuery);
@@ -83,11 +83,6 @@ public class DefaultRoomManager implements RoomManager {
 
     }
 
-    @Override
-    public int size() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
 
     @Override
     public List<String> getAllImagesOf(Room room) {

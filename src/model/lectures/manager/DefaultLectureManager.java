@@ -129,39 +129,23 @@ public class DefaultLectureManager implements LectureManager {
                 lecture.getDay().name().toLowerCase() + "', '" + lecture.getStartTime() + "', '" +
                 lecture.getEndTime() + "') ";
         try {
-            DBConnector.executeUpdate(insertQuery, null);
+            DBConnector.executeUpdate(insertQuery);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void remove(int lectureID) {
+    public void remove(int entityId) {
         String deleteQuery = "delete from " + SQL_TABLE_LECTURE + " where "
-                + SQL_COLUMN_LECTURE_ID + " = " + lectureID;
+                + SQL_COLUMN_LECTURE_ID + " = " + entityId;
         try {
             //TODO
-            DBConnector.executeUpdate(deleteQuery, null);
+            DBConnector.executeUpdate(deleteQuery);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     * returns number of lectures in the database
-     */
-    @Override
-    public int size() {
-        String query = "select * from " + SQL_TABLE_LECTURE;
-        int count = 0;
-        try {
-            ResultSet res = DBConnector.executeQuery(query);
-            while (res.next())
-                count++;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return count;
-    }
 
 }

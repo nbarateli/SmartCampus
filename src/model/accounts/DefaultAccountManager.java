@@ -48,7 +48,7 @@ public class DefaultAccountManager implements AccountManager {
     }
 
     @Override
-    public List<UserProblem> getAllProblemsOf(User user) {
+    public List<UserWarning> getAllWarningsOf(User user) {
 
 
         return null;
@@ -60,14 +60,25 @@ public class DefaultAccountManager implements AccountManager {
     }
 
     @Override
-    public List<CampusProblem> getAllProblemReportsBy(User user) {
+    public List<CampusProblem> getAllProblemsReportedBy(User user) {
         return null;
     }
 
     @Override
-    public void removeUserProblem(int problemID) {
+    public List<User.UserRole> getAllRolesOF(User user) {
+        return null;
+    }
+
+    @Override
+    public List<User.UserPermission> getAllPermissionsOf(User user) {
+        return null;
+    }
+
+    @Override
+    public void removeUserWarning(UserWarning warning) {
 
     }
+
 
     @Override
     public List<User> find(UserSearchQuery query) {
@@ -80,12 +91,9 @@ public class DefaultAccountManager implements AccountManager {
     }
 
     @Override
-    public void remove(int entityID) {
+    public void remove(int entityId) {
 
     }
 
-    @Override
-    public int size() {
-        return 0;
-    }
+
 }

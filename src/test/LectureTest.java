@@ -1,21 +1,18 @@
 package test;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import model.accounts.User;
-import model.accounts.User.UserStatus;
-import model.accounts.User.UserType;
 import model.lectures.CampusSubject;
 import model.lectures.Lecture;
 import model.lectures.Lecture.WeekDay;
 import model.rooms.Room;
 import model.rooms.Room.RoomType;
 import model.rooms.Room.SeatType;
-
-import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.sql.Time;
+
+import static org.junit.Assert.assertEquals;
 
 public class LectureTest {
 
@@ -24,19 +21,18 @@ public class LectureTest {
     private CampusSubject subject;
     private User user;
     private Time startTime, endTime;
-    
-    @Before 
+
+    @Before
     public void setUp() {
-        user = new User(-1, "mail", "firstName", "lastName", UserStatus.ACTIVE,
-                UserType.USER, 1);
+        user = new User(-1, "mail", "firstName", "lastName", null);
         room = new Room(5, 5, "name", RoomType.AUDITORIUM, SeatType.DESKS, false, 5);
         subject = new CampusSubject(1, "კალკულუსი");
         startTime = new Time(500);
         endTime = new Time(600);
-        
+
         lecture = new Lecture(1, user, room, subject, WeekDay.MONDAY, startTime, endTime);
     }
-    
+
     @Test
     public void test() {
         assertEquals(1, lecture.getID());
@@ -46,7 +42,7 @@ public class LectureTest {
         assertEquals(WeekDay.MONDAY, lecture.getDay());
         assertEquals(startTime, lecture.getStartTime());
         assertEquals(endTime, lecture.getEndTime());
-        assertEquals("Lecture{\nკალკულუსი: ლექტორი: firstName lastName დღე: MONDAY " + 
+        assertEquals("Lecture{\nკალკულუსი: ლექტორი: firstName lastName დღე: MONDAY " +
                 "დასაწყისი 04:00 აუდიტორია name}", lecture.toString());
     }
 

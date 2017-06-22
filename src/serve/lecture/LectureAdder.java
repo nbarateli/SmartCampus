@@ -2,7 +2,7 @@ package serve.lecture;
 
 import misc.ModelConstants;
 import misc.WebConstants;
-import model.accounts.AccountManager;
+import model.accounts.DefaultAccountManager;
 import model.accounts.User;
 import model.lectures.CampusSubject;
 import model.lectures.Lecture;
@@ -44,7 +44,7 @@ public class LectureAdder extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         ServletContext context = request.getServletContext();
         LectureManager manager = (LectureManager) context.getAttribute(WebConstants.LECTURE_MANAGER);
-        AccountManager accountManager = (AccountManager) context.getAttribute(ACCOUNT_MANAGER);
+        DefaultAccountManager accountManager = (DefaultAccountManager) context.getAttribute(ACCOUNT_MANAGER);
         RoomManager roomManager = (RoomManager) context.getAttribute(ROOM_MANAGER);
         String lecturerEmail = request.getParameter("lecturer_email");
 
@@ -53,7 +53,6 @@ public class LectureAdder extends HttpServlet {
         WeekDay weekDay = misc.Utils.toWeekDay(request.getParameter("week_day"));
         Time startTime = misc.Utils.toHHMM(request.getParameter("start_time"));
         Time endTime = misc.Utils.toHHMM(request.getParameter("end_time"));
-
 
         User lecturer = accountManager.getUserViaEMail(lecturerEmail);
         CampusSubject subject = manager.findSubject(subjectName);

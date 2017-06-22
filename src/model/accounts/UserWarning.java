@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * An user problem ADT
  */
-public class UserProblem implements CampusObject {
+public class UserWarning implements CampusObject {
     private final int id;
     private final int userID;
     private final int warnerID;
@@ -15,7 +15,7 @@ public class UserProblem implements CampusObject {
     private final String message;
     private final long dateWarned;
 
-    public UserProblem(int id, int userID, int warnerID, String title, String message, Date dateWarned) {
+    public UserWarning(int id, int userID, int warnerID, String title, String message, Date dateWarned) {
         this.id = id;
         this.userID = userID;
         this.warnerID = warnerID;

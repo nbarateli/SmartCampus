@@ -19,7 +19,6 @@ public interface CampusManager<T extends CampusObject, Q extends CampusSearchQue
 
     void add(T entity);
 
-    void remove(int entityID);
-    
-    int size();
+    void remove(int entityId);
+
 }

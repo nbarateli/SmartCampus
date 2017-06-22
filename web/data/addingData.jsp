@@ -28,7 +28,7 @@
     <label id="info-label"><b>შეგიძლიათ მონაცემები შეიყვანოთ ხელით (სათითაოდ):</b></label>
     <br><br>
 
-    <form id="sched-form" class="form-vertical" onsubmit="foo()">
+    <form id="sched-form" class="form-vertical">
 
       <div class="form-group">
         <input type="email" name="lecturer_email" class="form-control"
@@ -103,7 +103,7 @@
   <button>ოთახის დამატება</button>
   <div id="add-room-div" class="to-hide">
     <br><br><br>
-    <form id="add-room-form" action="/rooms/addroom" class="form-vertical" method="get">
+    <form id="add-room-form" action="/rooms/addroom" class="form-vertical" method="post">
 
       <div class="form-group">
         <label class="control-label">ოთახის სახელი</label>
@@ -158,7 +158,7 @@
   <button>ოთახის წაშლა</button>
   <div id="remove-room-div" class="to-hide">
     <br><br><br>
-    <form id="remove-room-form" action="../RoomRemover" class="form-vertical" method="get">
+    <form id="remove-room-form" action="/rooms/removeroom" class="form-vertical" method="get">
 
       <div class="form-group">
         <input type="text" name="room_name"

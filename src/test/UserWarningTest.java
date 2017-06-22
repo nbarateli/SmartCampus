@@ -1,20 +1,20 @@
 package test;
 
+import model.accounts.UserWarning;
 import org.junit.Before;
 import org.junit.Test;
+
 import java.util.Date;
 
-import model.accounts.UserProblem;
+import static org.junit.Assert.assertEquals;
 
-import static org.junit.Assert.*;
+public class UserWarningTest {
 
-public class UserProblemTest {
-
-    private UserProblem problem;
+    private UserWarning problem;
     
     @Before 
     public void createUserProblem() {
-        problem = new UserProblem(1, 2, 3, "title", "message", new Date(500));
+        problem = new UserWarning(1, 2, 3, "title", "message", new Date(500));
     }
     
     @Test
