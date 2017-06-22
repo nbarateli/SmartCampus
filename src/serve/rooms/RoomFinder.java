@@ -21,7 +21,7 @@ import static misc.WebConstants.*;
  * The sole function of this class is to return a JSON array of
  * <code>{@link model.rooms.Room}</code> objects that match passed parameters
  */
-@WebServlet(name = "RoomFinder", urlPatterns = {"/rooms/findrooms"})
+//@WebServlet(name = "RoomFinder", urlPatterns = {"/rooms/findrooms"})
 public class RoomFinder extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

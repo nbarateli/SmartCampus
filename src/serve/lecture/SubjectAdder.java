@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class SubjectAdder
  */
-@WebServlet(name = "Subject Adder", urlPatterns = {"/lectures/addsubject"})
+//@WebServlet(name = "Subject Adder", urlPatterns = {"/lectures/addsubject"})
 public class SubjectAdder extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

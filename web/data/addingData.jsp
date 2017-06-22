@@ -74,7 +74,7 @@
 
     <br><br><br>
     <label id="info-label2"><b>ან ატვირთოთ Excel-ის ფაილი:</b></label>
-    <div id="info-label3">ექსელის ფორმატის შაბლონი შეგიძლიათ <a href="/excel_template.xlsx">იხილოთ აქ.</a>
+    <div id="info-label3">ექსელის ფორმატის შაბლონი შეგიძლიათ <a href="../excel_template.xlsx">იხილოთ აქ.</a>
       <br>უცვლელი დატოვეთ <b>პირველი მწკრივი!</b></div>
     <br><br>
     <script></script>

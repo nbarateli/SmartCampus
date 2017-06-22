@@ -174,13 +174,18 @@ CREATE TABLE smartcampus.user_permission
     ON DELETE CASCADE
 );
 
+DELIMITER $$
+
 CREATE TRIGGER user_role_trigger
 AFTER INSERT ON campus_user
 FOR EACH ROW
   BEGIN
-    INSERT INTO user_role (user_id, role) VALUES (NEW.user_id, NEW.initial_role);
+    INSERT INTO user_role (user_id, role) VALUES (NEW.user_id, NEW.initial_role );
   END;
+  
+DELIMITER ;
 
+DELIMITER $$
 CREATE TRIGGER user_permission_trigger
 AFTER INSERT ON user_role
 FOR EACH ROW
@@ -245,3 +250,5 @@ FOR EACH ROW
     END IF;
     END IF;
   END;
+  
+  DELIMITER ;
