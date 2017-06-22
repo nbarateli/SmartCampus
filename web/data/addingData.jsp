@@ -105,7 +105,7 @@
   <button>ოთახის დამატება</button>
   <div id="add-room-div" class="to-hide">
     <br><br><br>
-    <form id="add-room-form" action="/rooms/addroom" class="form-vertical" method="get">
+    <form id="add-room-form" action="/rooms/addroom" class="form-vertical" method="post">
 
       <div class="form-group">
         <label class="control-label">ოთახის სახელი</label>
@@ -160,7 +160,7 @@
   <button>ოთახის წაშლა</button>
   <div id="remove-room-div" class="to-hide">
     <br><br><br>
-    <form id="remove-room-form" action="../RoomRemover" class="form-vertical" method="get">
+    <form id="remove-room-form" action="/rooms/removeroom" class="form-vertical" method="get">
 
       <div class="form-group">
         <input type="text" name="room_name"

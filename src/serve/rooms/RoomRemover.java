@@ -16,10 +16,10 @@ import static misc.WebConstants.ROOM_MANAGER;
 /**
  * Servlet implementation class RoomRemover
  */
-@WebServlet("/RoomRemover")
+@WebServlet(urlPatterns = {"/rooms/removeroom"})
 public class RoomRemover extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+    private static final long serialVersionUID = 1L;
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -28,25 +28,20 @@ public class RoomRemover extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RoomManager manager = 
-		        (RoomManager) request.getServletContext().getAttribute(ROOM_MANAGER);
-	    String name = request.getParameter("room_name");
-	    RoomSearchQuery query = new RoomSearchQuery();
-	    query.setName(name);
-	    manager.remove(manager.find(query).size() == 0 ? 
-	            ModelConstants.SENTINEL_INT : manager.find(query).get(0).getID());
-        response.sendRedirect("/data/addingData.jsp");
-    }
-	
-	   /**
+
+    /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
+        request.setCharacterEncoding("UTF-8");
+        RoomManager manager =
+                (RoomManager) request.getServletContext().getAttribute(ROOM_MANAGER);
+        String name = request.getParameter("room_name");
+        RoomSearchQuery query = new RoomSearchQuery();
+        query.setName(name);
+        manager.remove(manager.find(query).size() == 0 ?
+                ModelConstants.SENTINEL_INT : manager.find(query).get(0).getID());
+        response.sendRedirect("/data/addingData.jsp");
         doGet(request, response);
     }
 }

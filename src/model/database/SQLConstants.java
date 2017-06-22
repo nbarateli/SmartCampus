@@ -34,7 +34,7 @@ public class SQLConstants {
     public static final String SQL_COLUMN_USER_LAST_NAME = "last_name";
     public static final String SQL_COLUMN_USER_EMAIL = "user_email";
     public static final String SQL_COLUMN_USER_TYPE = "user_type";
-    public static final String SQL_COLUMN_USER_ROLE = "user_role";
+    public static final String SQL_COLUMN_USER_ROLE = "initial_role";
     public static final String SQL_COLUMN_USER_STATUS = "user_status";
     public static final String SQL_COLUMN_USER_IMAGE = "img_url";
 
