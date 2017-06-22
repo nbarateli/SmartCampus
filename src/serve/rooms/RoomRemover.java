@@ -1,6 +1,7 @@
 package serve.rooms;
 
 import misc.ModelConstants;
+import model.rooms.Room;
 import model.rooms.RoomSearchQuery;
 import model.rooms.manager.RoomManager;
 
@@ -10,8 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
+import static misc.WebConstants.FAILED;
 import static misc.WebConstants.ROOM_MANAGER;
+import static misc.WebConstants.SUCCESS;
 
 /**
  * Servlet implementation class RoomRemover
@@ -39,9 +43,12 @@ public class RoomRemover extends HttpServlet {
         String name = request.getParameter("room_name");
         RoomSearchQuery query = new RoomSearchQuery();
         query.setName(name);
-        manager.remove(manager.find(query).size() == 0 ?
-                ModelConstants.SENTINEL_INT : manager.find(query).get(0).getID());
-        response.sendRedirect("/data/addingData.jsp");
-        doGet(request, response);
+        List<Room> foundRooms = manager.find(query);
+        if(foundRooms.size() != 0) {
+            manager.remove(foundRooms.get(0).getID());
+            response.getWriter().println(SUCCESS);
+        } else {
+            response.getWriter().println(FAILED);
+        }
     }
 }

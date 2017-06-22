@@ -143,21 +143,22 @@
   <button>ოთახის წაშლა</button>
   <div id="remove-room-div" class="to-hide">
     <br><br><br>
-    <form id="remove-room-form" action="/rooms/removeroom" class="form-vertical" method="get">
+    <form id="remove-room-form" class="form-vertical">
 
       <div class="form-group">
         <input type="text" name="room_name"
                class="form-control" placeholder="შეიყვანეთ ოთახის სახელი">
       </div>
 
-      <input type="submit" value="წაშლა" class="btn btn-primary btn-lg">
+      <input type="submit" value="წაშლა" class="btn btn-primary btn-lg" 
+          onclick="removeRoomFromForm()">
     </form>
   </div>
   <br><br><br>
 
   <button>საგნის დამატება</button>
   <div id="add-subj-div" class="to-hide">
-    <br><br><br>
+    <br><br><br>  
     <form id="add-subj-form" action="/lectures/addsubject" class="form-vertical" method="get">
 
       <div class="form-group">

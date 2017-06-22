@@ -89,6 +89,29 @@ var addLecture = function (params, doAlert) {
     http.send(params);
 };
 
+var removeRoomFromForm = function () {
+    var params = ($('#remove-room-form').serialize());
+
+    removeRoom(params);
+};
+
+var removeRoom = function (params) {
+	var url = "/rooms/removeroom";
+
+    var http = new XMLHttpRequest();
+    http.open("POST", url, true);
+
+    //Send the proper header information along with the request
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    http.onreadystatechange = function (alert) {//Call a function when the state changes.
+        if (http.readyState === 4 && http.status === 200) {
+            window.alert(http.responseText);
+        }
+    };
+    http.send(params);
+};
+
 function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
     // files is a FileList of File objects. List some properties.
@@ -100,7 +123,6 @@ function handleFileSelect(evt) {
     document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
 }
 
-document.getElementById('file').addEventListener('change', handleFileSelect, false);
-
-
-
+$(document).ready(function() {
+	document.getElementById('file').addEventListener('change', handleFileSelect, false);
+});
