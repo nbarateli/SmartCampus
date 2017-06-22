@@ -9,11 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 import static misc.WebConstants.FAILED;
 import static misc.WebConstants.SUCCESS;
-
-import java.io.IOException;
 
 /**
  * Servlet implementation class SubjectAdder
@@ -34,8 +33,8 @@ public class SubjectAdder extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         LectureManager manager = (LectureManager) request.getServletContext().getAttribute(WebConstants.LECTURE_MANAGER);
-
         response.getWriter().append("Served at: ").append(request.getContextPath());
         String subjectName = request.getParameter("subj_name");
 
