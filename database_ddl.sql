@@ -125,7 +125,7 @@ CREATE TABLE item_image
 CREATE UNIQUE INDEX item_image_image_url_uindex
   ON item_image (image_url);
 
-CREATE TABLE user_problem
+CREATE TABLE user_warning
 (
   problem_id      INT AUTO_INCREMENT
     PRIMARY KEY,
@@ -134,10 +134,10 @@ CREATE TABLE user_problem
   warning_title   VARCHAR(100) NOT NULL,
   warning_message VARCHAR(500) NOT NULL,
   date_warned     DATE         NOT NULL,
-  CONSTRAINT user_problem_user_user_id_fk
+  CONSTRAINT user_warning_user_user_id_fk
   FOREIGN KEY (user_id) REFERENCES campus_user (user_id)
     ON DELETE CASCADE,
-  CONSTRAINT user_problem_user_warner_id_fk
+  CONSTRAINT user_warning_user_warner_id_fk
   FOREIGN KEY (warner_id) REFERENCES campus_user (user_id)
     ON DELETE CASCADE
 );
@@ -185,7 +185,7 @@ FOR EACH ROW
   
 DELIMITER ;
 
-DELIMITER $$
+DELIMITER //
 CREATE TRIGGER user_permission_trigger
 AFTER INSERT ON user_role
 FOR EACH ROW
@@ -250,5 +250,4 @@ FOR EACH ROW
     END IF;
     END IF;
   END;
-  
-  DELIMITER ;
+DELIMITER ;
