@@ -1,32 +1,27 @@
 package test;
 
-import org.junit.Test;
 import model.accounts.User;
-import model.accounts.User.UserStatus;
-import model.accounts.User.UserType;
 import org.junit.Before;
+import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class UserTest {
-    
+
     private User user;
-    
-    @Before 
+
+    @Before
     public void createUser() {
-        user = new User(-1, "mail", "firstName", "lastName", UserStatus.ACTIVE,
-                UserType.USER, 1);
+        user = new User(-1, "mail", "firstName", "lastName", null);
     }
-    
+
     @Test
     public void test() {
         assertEquals(-1, user.getID());
         assertEquals("mail", user.geteMail());
         assertEquals("firstName", user.getFirstName());
         assertEquals("lastName", user.getLastName());
-        assertEquals(UserStatus.ACTIVE, user.getStatus());
-        assertEquals(UserType.USER, user.getUserType());
-        assertEquals(1, user.getUserRoleId());
+
     }
 
 }

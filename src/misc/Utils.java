@@ -14,12 +14,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import static model.accounts.User.*;
+import static model.accounts.User.UserRole;
 import static model.accounts.User.UserRole.*;
-import static model.accounts.User.UserStatus.ACTIVE;
-import static model.accounts.User.UserStatus.BANNED;
-import static model.accounts.User.UserType.ADMIN;
-import static model.accounts.User.UserType.USER;
 import static model.database.SQLConstants.*;
 import static model.rooms.Room.RoomType.AUDITORIUM;
 import static model.rooms.Room.RoomType.UTILITY;
@@ -94,24 +90,6 @@ public final class Utils {
 
         }
         return null;
-    }
-
-    /**
-     * checks if given string is valid for representing hour or minute
-     */
-    private static boolean numberStringIsValid(String s, boolean checkHour) {
-        try {
-            int numValue = Integer.parseInt(s);
-            //capacity and floor can't be negative
-            //their input types are "number" but some old browsers don't have support for
-            //that and we don't won't any exceptions
-            if (numValue < 0 || (checkHour && numValue >= 24) || (!checkHour && numValue >= 59))
-                return false;
-        } catch (NumberFormatException e) {
-            return false; //the text wasn't a number
-        }
-
-        return true;
     }
 
     /**
@@ -202,18 +180,6 @@ public final class Utils {
     }
 
     /**
-     * Returns whether the first 5 characters of passed {@code String} form a valid time format.
-     *
-     * @param time a {@code String} value of a time to be checked.
-     * @return whether the first 5 characters of the argument form a valid time format.
-     */
-    private static boolean isValidFormat(String time) {
-        return time.length() >= 5 && time.charAt(2) == ':' &&
-                numberStringIsValid(time.substring(0, 2), true) &&
-                numberStringIsValid(time.substring(3, 5), false);
-    }
-
-    /**
      * Returns a user object from current row of the given <code>ResultSet</code>.
      */
     public static User getUserFromResults(ResultSet rs) throws SQLException {
@@ -221,11 +187,9 @@ public final class Utils {
         String eMail = rs.getString(SQL_COLUMN_USER_EMAIL);
         String firstName = rs.getString(SQL_COLUMN_USER_FIRST_NAME);
         String lastName = rs.getString(SQL_COLUMN_USER_LAST_NAME);
-        User.UserStatus status = toUserStatus(rs.getString(SQL_COLUMN_USER_STATUS));
-        User.UserType userType = toUserType(rs.getString(SQL_COLUMN_USER_TYPE));
-        int role = Integer.parseInt(rs.getString(SQL_COLUMN_USER_ROLE));
+        UserRole role = toUserRole(rs.getString(SQL_COLUMN_USER_ROLE));
 
-        return new User(id, eMail, firstName, lastName, status, userType, role);
+        return new User(id, eMail, firstName, lastName, role);
     }
 
     /**
@@ -283,19 +247,6 @@ public final class Utils {
         return new CampusSubject(id, name);
     }
 
-    /**
-     * Returns an associated enum value (if exists) of given string.
-     */
-    public static UserStatus toUserStatus(String s) {
-        switch (s.toLowerCase()) {
-            case "active":
-                return ACTIVE;
-            case "banned":
-                return BANNED;
-        }
-        return null;
-    }
-
     public static String toGeorgian(Lecture.WeekDay day) {
         switch (day) {
             case MONDAY:
@@ -326,22 +277,44 @@ public final class Utils {
                 return LECTURER;
             case "staff":
                 return STAFF;
+            case "admin":
+                return ADMIN;
+            case "sys_admin":
+                return SYS_ADMIN;
         }
         return null;
     }
 
     /**
-     * Returns an associated enum value (if exists) of given string.
+     * checks if given string is valid for representing hour or minute
      */
-    public static UserType toUserType(String s) {
-        switch (s.toLowerCase()) {
-            case "user":
-                return USER;
-            case "admin":
-                return ADMIN;
+    private static boolean numberStringIsValid(String s, boolean checkHour) {
+        try {
+            int numValue = Integer.parseInt(s);
+            //capacity and floor can't be negative
+            //their input types are "number" but some old browsers don't have support for
+            //that and we don't won't any exceptions
+            if (numValue < 0 || (checkHour && numValue >= 24) || (!checkHour && numValue >= 59))
+                return false;
+        } catch (NumberFormatException e) {
+            return false; //the text wasn't a number
         }
-        return null;
+
+        return true;
     }
+
+    /**
+     * Returns whether the first 5 characters of passed {@code String} form a valid time format.
+     *
+     * @param time a {@code String} value of a time to be checked.
+     * @return whether the first 5 characters of the argument form a valid time format.
+     */
+    private static boolean isValidFormat(String time) {
+        return time.length() >= 5 && time.charAt(2) == ':' &&
+                numberStringIsValid(time.substring(0, 2), true) &&
+                numberStringIsValid(time.substring(3, 5), false);
+    }
+
 
     private Utils() {
 

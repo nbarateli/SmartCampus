@@ -25,7 +25,7 @@ import static misc.WebConstants.*;
 /**
  * Servlet implementation class LectureAdder
  */
-//@WebServlet(name = "Lecture Adder", urlPatterns = {"/lectures/addlecture"})
+@WebServlet(name = "Lecture Adder", urlPatterns = {"/lectures/addlecture"})
 public class LectureAdder extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

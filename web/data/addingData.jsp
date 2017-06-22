@@ -28,7 +28,7 @@
     <label id="info-label"><b>შეგიძლიათ მონაცემები შეიყვანოთ ხელით (სათითაოდ):</b></label>
     <br><br>
 
-    <form id="sched-form" class="form-vertical" onsubmit="foo()">
+    <form id="sched-form" class="form-vertical">
 
       <div class="form-group">
         <input type="email" name="lecturer_email" class="form-control"

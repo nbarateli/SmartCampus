@@ -3,8 +3,6 @@ package test;
 import misc.Utils;
 import model.accounts.User;
 import model.accounts.User.UserRole;
-import model.accounts.User.UserStatus;
-import model.accounts.User.UserType;
 import model.lectures.CampusSubject;
 import model.lectures.Lecture;
 import model.lectures.Lecture.WeekDay;
@@ -90,23 +88,6 @@ public class UtilsTest {
         assertEquals(null, Utils.toUserRole("any"));
     }
 
-    @Test
-    public void toUserTypeTest() {
-        UserType type = UserType.valueOf("USER");
-        assertEquals(type, Utils.toUserType("user"));
-        type = UserType.valueOf("ADMIN");
-        assertEquals(type, Utils.toUserType("admin"));
-        assertEquals(null, Utils.toUserType("any"));
-    }
-
-    @Test
-    public void toUserStatusTest() {
-        UserStatus status = UserStatus.valueOf("ACTIVE");
-        assertEquals(status, Utils.toUserStatus("active"));
-        status = UserStatus.valueOf("BANNED");
-        assertEquals(status, Utils.toUserStatus("banned"));
-        assertEquals(null, Utils.toUserStatus("any"));
-    }
 
     @Test
     public void toSeatTypeTest() {
@@ -162,8 +143,7 @@ public class UtilsTest {
     @Test
     public void getUserFromResultsTest() {
         try {
-            assertEquals(new User(5, "name", "name", "name", UserStatus.valueOf("ACTIVE"),
-                            UserType.valueOf("USER"), 1),
+            assertEquals(new User(5, "name", "name", "name", UserRole.STUDENT),
                     Utils.getUserFromResults(new MockResultSet()));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -174,8 +154,7 @@ public class UtilsTest {
     public void getProblemFromResults() {
         try {
             assertEquals(new RoomProblem(5,
-                            new User(5, "name", "name", "name", UserStatus.valueOf("ACTIVE"),
-                                    UserType.valueOf("USER"), 1),
+                            new User(5, "name", "name", "name", UserRole.STUDENT),
                             new Room(5, 5, "name", RoomType.valueOf("AUDITORIUM"),
                                     SeatType.valueOf("DESKS"), false, 5), "name", "name",
                             java.sql.Date.valueOf("2017-07-16")),
@@ -189,8 +168,7 @@ public class UtilsTest {
     public void getLectureFromResultsTest() {
         try {
             assertEquals(new Lecture(5,
-                            new User(5, "name", "name", "name", UserStatus.valueOf("ACTIVE"),
-                                    UserType.valueOf("USER"), 1),
+                            new User(5, "name", "name", "name", UserRole.STUDENT),
                             new Room(5, 5, "name", RoomType.valueOf("AUDITORIUM"),
                                     SeatType.valueOf("DESKS"), false, 5),
                             new CampusSubject(5, "name"), WeekDay.valueOf("MONDAY"),

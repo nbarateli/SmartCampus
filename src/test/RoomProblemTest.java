@@ -1,34 +1,31 @@
 package test;
 
-import java.util.Date;
+import model.accounts.User;
+import model.rooms.Room;
+import model.rooms.Room.RoomType;
+import model.rooms.Room.SeatType;
+import model.rooms.RoomProblem;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.accounts.User;
-import model.accounts.User.UserStatus;
-import model.accounts.User.UserType;
-import model.rooms.Room;
-import model.rooms.RoomProblem;
-import model.rooms.Room.RoomType;
-import model.rooms.Room.SeatType;
+import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class RoomProblemTest {
 
     private RoomProblem problem, problem1;
     private User user;
     private Room room;
-    
-    @Before 
+
+    @Before
     public void createRoomProblem() {
-        user = new User(-1, "mail", "firstName", "lastName", UserStatus.ACTIVE,
-                UserType.USER, 1);
+        user = new User(-1, "mail", "firstName", "lastName", null);
         room = new Room(5, 5, "name", RoomType.AUDITORIUM, SeatType.DESKS, false, 5);
         problem = new RoomProblem(1, user, room, "title", "desc", new Date(500));
         problem1 = new RoomProblem(1, user, room, null, null, new Date(500));
     }
-    
+
     @Test
     public void test1() {
         assertEquals(1, problem.getID());
@@ -38,7 +35,7 @@ public class RoomProblemTest {
         assertEquals("desc", problem.getDescription());
         assertEquals(500, problem.getDateCreated().getTime());
     }
-    
+
     @Test
     public void test2() {
         assertEquals("", problem1.getTitle());
