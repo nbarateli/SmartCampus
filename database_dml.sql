@@ -105,5 +105,3 @@ INSERT INTO room_image (image_url, room_id) VALUES
   ('402-2.jpg', 11),
   ('318.jpg', 12),
   ('103.jpg', 13);
-  
-select * from lectures
