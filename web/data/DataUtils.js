@@ -89,4 +89,18 @@ var addLecture = function (params, doAlert) {
     http.send(params);
 };
 
+function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+    // files is a FileList of File objects. List some properties.
+    var output = [];
+    for (var i = 0, f; f = files[i]; i++) {
+
+        addLecturesFromFile(f);
+    }
+    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+}
+
+document.getElementById('file').addEventListener('change', handleFileSelect, false);
+
+
 
