@@ -74,29 +74,27 @@
 
     <br><br><br>
     <label id="info-label2"><b>ან ატვირთოთ Excel-ის ფაილი:</b></label>
-    <div id="info-label3">ექსელის ფორმატის შაბლონი შეგიძლიათ <a href="/excel_template.xlsx">იხილოთ აქ.</a>
+    <div id="info-label3">ექსელის ფორმატის შაბლონი შეგიძლიათ <a href="../excel_template.xlsx">იხილოთ აქ.</a>
       <br>უცვლელი დატოვეთ <b>პირველი მწკრივი!</b></div>
     <br><br>
     <script></script>
     <div class="form-vertical" id="file">
       <input type="file" name="pic" accept=".xls,.xlsx"><br>
       <output id="list"></output>
-
       <script>
-          function handleFileSelect(evt) {
-              var files = evt.target.files; // FileList object
-              // files is a FileList of File objects. List some properties.
-              var output = [];
-              for (var i = 0, f; f = files[i]; i++) {
+      function handleFileSelect(evt) {
+    	    var files = evt.target.files; // FileList object
+    	    // files is a FileList of File objects. List some properties.
+    	    var output = [];
+    	    for (var i = 0, f; f = files[i]; i++) {
 
-                  addLecturesFromFile(f);
-              }
-              document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
-          }
+    	        addLecturesFromFile(f);
+    	    }
+    	    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+    	}
 
-          document.getElementById('file').addEventListener('change', handleFileSelect, false);
+    	document.getElementById('file').addEventListener('change', handleFileSelect, false);
       </script>
-
     </div>
     <br><br>
   </div>

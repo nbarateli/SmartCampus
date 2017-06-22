@@ -28,11 +28,13 @@ var ExcelToJSON = function (file) {
     };
     this.parseExcel(file);
 };
+
 var addLecturesFromFile = function (file) {
     ExcelToJSON(file);
 
 
 };
+
 var toWeekDay = function (weeknumber) {
     switch (weeknumber) {
         case "1":
@@ -51,6 +53,7 @@ var toWeekDay = function (weeknumber) {
             return "sunday";
     }
 };
+
 var addLectureFromForm = function () {
     var params = ($('#sched-form').serialize());
     console.log(params);
@@ -68,6 +71,7 @@ var addLectureFromJson = function (jsonObject, doAlert) {
     params += "&end_time=" + jsonObject.end_time;
     addLecture(params, doAlert);
 };
+
 var addLecture = function (params, doAlert) {
     var url = "/lectures/addlecture";
     console.log(params);
@@ -84,3 +88,5 @@ var addLecture = function (params, doAlert) {
     };
     http.send(params);
 };
+
+

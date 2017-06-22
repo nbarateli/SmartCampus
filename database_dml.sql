@@ -65,7 +65,7 @@ INSERT INTO lecture (lecturer, room_id, subject_id, day_of_week, start_time, end
   (8, 2, 4, 'saturday', '11:10', '13:20');
 
 
-INSERT INTO smartcampus.item_report (item_name, item_description, author_id, report_type, date_added) VALUES
+INSERT INTO item_report (item_name, item_description, author_id, report_type, date_added) VALUES
   ('ტანსაცმლის კაჟადა', 'ყავისფერი, ხის, პატარა', 2, 'found', '09-05-17'),
   ('უცხო ქვეყნის დროშა', 'დიდი, ლამაზი გაშლილი', 1, 'lost', '11-04-17'),
   ('სათვალე', 'მზის ყავისფერი სათვალე', 5, 'lost', '2-06-17'),
@@ -108,3 +108,4 @@ INSERT INTO room_image (image_url, room_id) VALUES
   ('318.jpg', 12),
   ('103.jpg', 13);
   
+select * from lectures

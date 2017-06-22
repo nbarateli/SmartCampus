@@ -124,6 +124,7 @@ CREATE TABLE item_report
   FOREIGN KEY (author_id) REFERENCES campus_user (user_id)
     ON DELETE CASCADE
 );
+
 CREATE TABLE item_image
 (
   image_id  INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
