@@ -56,7 +56,7 @@ var toWeekDay = function (weeknumber) {
 
 var addLectureFromForm = function () {
     var params = ($('#sched-form').serialize());
-    console.log(params);
+
     addLecture(params, true);
 
 };
@@ -74,7 +74,7 @@ var addLectureFromJson = function (jsonObject, doAlert) {
 
 var addLecture = function (params, doAlert) {
     var url = "/lectures/addlecture";
-    console.log(params);
+
     var http = new XMLHttpRequest();
     http.open("POST", url, true);
 
