@@ -25,7 +25,7 @@
   <button class="main-button">ლექციების ცხრილის შეყვანა</button>
   <div id="schedule" class="to-hide">
     <br><br><br>
-    <label id="info-label"><b>შეგიძლიათ მონაცემები შეიყვანოთ ხელით (სათითაოდ):</b></label>
+    <label class="info-label"><b>შეგიძლიათ მონაცემები შეიყვანოთ ხელით (სათითაოდ):</b></label>
     <br><br>
 
     <form id="sched-form" class="form-vertical">
@@ -88,6 +88,8 @@
   <button class="main-button">ოთახის დამატება</button>
   <div id="add-room-div" class="to-hide">
     <br><br><br>
+    <label class="info-label"><b>შეგიძლიათ მონაცემები შეიყვანოთ ხელით (სათითაოდ):</b></label>
+    <br><br>
     <form id="add-room-form" class="form-vertical">
 
       <div class="form-group">
@@ -138,6 +140,18 @@
       <input type="submit" value="დამატება" class="btn btn-primary btn-lg"
           onclick="addRoomFromForm()">
     </form>
+    
+    <br><br><br>
+    <label id="info-label4"><b>ან ატვირთოთ Excel-ის ფაილი:</b></label>
+    <div id="info-label5">ექსელის ფორმატის შაბლონი შეგიძლიათ 
+      <a href="../room_excel_template.xlsx">იხილოთ აქ.</a>
+      <br>უცვლელი დატოვეთ <b>პირველი მწკრივი!</b></div>
+    <br><br>
+    <div class="form-vertical" id="rooms-file">
+      <input type="file" name="pic" accept=".xls,.xlsx"><br>
+      <output id="room-list"></output>
+    </div>
+    <br><br>
   </div>
   <br><br><br>
 
@@ -159,7 +173,9 @@
 
   <button class="main-button">საგნის დამატება</button>
   <div id="add-subj-div" class="to-hide">
-    <br><br><br>  
+    <br><br><br>
+    <label class="info-label"><b>შეგიძლიათ მონაცემები შეიყვანოთ ხელით (სათითაოდ):</b></label>
+    <br><br> 
     <form id="add-subj-form" class="form-vertical">
 
       <div class="form-group">
@@ -170,6 +186,18 @@
       <input type="submit" value="დამატება" class="btn btn-primary btn-lg"
           onclick="addSubjectFromForm()">
     </form>
+    
+    <br><br><br>
+    <label id="info-label6"><b>ან ატვირთოთ Excel-ის ფაილი:</b></label>
+    <div id="info-label7">ექსელის ფორმატის შაბლონი შეგიძლიათ 
+      <a href="../subj_excel_template.xlsx">იხილოთ აქ.</a>
+      <br>უცვლელი დატოვეთ <b>პირველი მწკრივი!</b></div>
+    <br><br>
+    <div class="form-vertical" id="subj-file">
+      <input type="file" name="pic" accept=".xls,.xlsx"><br>
+      <output id="subj-list"></output>
+    </div>
+    <br><br>
   </div>
   <br><br><br>
   
