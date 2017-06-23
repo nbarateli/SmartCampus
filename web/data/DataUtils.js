@@ -58,7 +58,7 @@ var addLectureFromForm = function () {
     var params = ($('#sched-form').serialize());
 
     addLecture(params, true);
-
+    return false;
 };
 
 var addLectureFromJson = function (jsonObject, doAlert) {
@@ -69,12 +69,11 @@ var addLectureFromJson = function (jsonObject, doAlert) {
     params += "&week_day=" + toWeekDay(jsonObject.week_day);
     params += "&start_time=" + jsonObject.start_time;
     params += "&end_time=" + jsonObject.end_time;
-    addLecture(params, doAlert);
+
+    sendData("/lectures/addlecture", params, doAlert);
 };
 
-var addLecture = function (params, doAlert) {
-    var url = "/lectures/addlecture";
-
+var sendData = function (url, params, doAlert) {
     var http = new XMLHttpRequest();
     http.open("POST", url, true);
 
@@ -92,70 +91,22 @@ var addLecture = function (params, doAlert) {
 var removeRoomFromForm = function () {
     var params = ($('#remove-room-form').serialize());
 
-    removeRoom(params);
-};
-
-var removeRoom = function (params) {
-	var url = "/rooms/removeroom";
-
-    var http = new XMLHttpRequest();
-    http.open("POST", url, true);
-
-    //Send the proper header information along with the request
-    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-    http.onreadystatechange = function (alert) {//Call a function when the state changes.
-        if (http.readyState === 4 && http.status === 200) {
-            window.alert(http.responseText);
-        }
-    };
-    http.send(params);
+    sendData("/rooms/removeroom", params, true);
+    return false;
 };
 
 var addRoomFromForm = function () {
     var params = ($('#add-room-form').serialize());
 
-    addRoom(params);
-};
-
-var addRoom = function (params) {
-	var url = "/rooms/addroom";
-
-    var http = new XMLHttpRequest();
-    http.open("POST", url, true);
-
-    //Send the proper header information along with the request
-    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-    http.onreadystatechange = function (alert) {//Call a function when the state changes.
-        if (http.readyState === 4 && http.status === 200) {
-            window.alert(http.responseText);
-        }
-    };
-    http.send(params);
+    sendData("/rooms/addroom", params, true);
+    return false;
 };
 
 var addSubjectFromForm = function () {
     var params = ($('#add-subj-form').serialize());
 
-    addSubject(params);
-};
-
-var addSubject = function (params) {
-	var url = "/lectures/addsubject";
-
-    var http = new XMLHttpRequest();
-    http.open("POST", url, true);
-
-    //Send the proper header information along with the request
-    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-    http.onreadystatechange = function (alert) {//Call a function when the state changes.
-        if (http.readyState === 4 && http.status === 200) {
-            window.alert(http.responseText);
-        }
-    };
-    http.send(params);
+    sendData("/lectures/addsubject", params, true);
+    return false;
 };
 
 function handleFileSelect(evt) {
@@ -169,6 +120,6 @@ function handleFileSelect(evt) {
     document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
 }
 
-$(document).ready(function() {
-	document.getElementById('file').addEventListener('change', handleFileSelect, false);
+$(document).ready(function () {
+    document.getElementById('file').addEventListener('change', handleFileSelect, false);
 });

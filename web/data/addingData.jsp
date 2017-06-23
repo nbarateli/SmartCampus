@@ -137,8 +137,8 @@
         </label>
       </div>
 
-      <input type="submit" value="დამატება" class="btn btn-primary btn-lg"
-          onclick="addRoomFromForm()">
+      <input type="button" value="დამატება" class="btn btn-primary btn-lg"
+             onclick="addRoomFromForm()">
     </form>
     
     <br><br><br>
@@ -165,8 +165,8 @@
                class="form-control" placeholder="შეიყვანეთ ოთახის სახელი">
       </div>
 
-      <input type="submit" value="წაშლა" class="btn btn-primary btn-lg" 
-          onclick="removeRoomFromForm()">
+      <input type="button" value="წაშლა" class="btn btn-primary btn-lg"
+             onclick="removeRoomFromForm()">
     </form>
   </div>
   <br><br><br>
@@ -183,8 +183,8 @@
                class="form-control" placeholder="შეიყვანეთ საგნის სახელი">
       </div>
 
-      <input type="submit" value="დამატება" class="btn btn-primary btn-lg"
-          onclick="addSubjectFromForm()">
+      <input type="button" value="დამატება" class="btn btn-primary btn-lg"
+             onclick="addSubjectFromForm()">
     </form>
     
     <br><br><br>
