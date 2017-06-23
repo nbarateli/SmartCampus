@@ -200,6 +200,9 @@
     <br><br>
   </div>
   <br><br><br>
+    
+  <button class="main-button" onclick="createDialog()">ლექციების ცხრილის წაშლა</button>
+  <br>
   
   <div>
     <br><br><br>

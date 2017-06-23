@@ -79,12 +79,8 @@ public class DefaultLectureManager implements LectureManager {
 
         return lectures.get(0).getID();
     }
-
-    /**
-     * returns the list of subjects Fetched by given SQL query
-     *
-     * @param subjectName name of the subject to find
-     */
+    
+    @Override
     public CampusSubject findSubject(String subjectName) {
 
         String sql = "SELECT * FROM " + SQL_TABLE_SUBJECT + " WHERE " + SQL_COLUMN_SUBJECT_NAME + " LIKE ?";
@@ -142,6 +138,18 @@ public class DefaultLectureManager implements LectureManager {
         try {
             //TODO
             DBConnector.executeUpdate(deleteQuery);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Override
+    public void removeAllLectures() {
+        String truncateQuery = "truncate table " + SQL_TABLE_LECTURE;
+        try {
+            //TODO
+            DBConnector.executeUpdate(truncateQuery);
         } catch (SQLException e) {
             e.printStackTrace();
         }

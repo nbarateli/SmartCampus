@@ -10,3 +10,10 @@ $(document).ready(function(){
 	});
 
 });
+
+function createDialog() {
+	var conf = confirm("დარწმუნებული ხართ რომ გსურთ ყველა ლექციის შესახებ მონაცემების წაშლა?");
+	if(conf) {
+		//lecture tables gasuftaveba
+	}
+}

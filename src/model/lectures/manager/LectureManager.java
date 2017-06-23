@@ -31,6 +31,16 @@ public interface LectureManager extends CampusManager<Lecture, LectureSearchQuer
      * @param lecture lecture to get id of
      */
     int getLectureId(Lecture lecture);
-
+    
+    /**
+     * returns the list of subjects Fetched by given SQL query
+     *
+     * @param subjectName name of the subject to find
+     */
     CampusSubject findSubject(String subjectName);
+    
+    /**
+     * removes all lectures from database
+     */
+    void removeAllLectures();
 }
