@@ -52,7 +52,7 @@ public class DefaultRoomManager implements RoomManager {
     }
 
     @Override
-    public void add(Room room) {
+    public boolean add(Room room) {
         String insertQuery = "insert into " + SQL_TABLE_ROOM + " (" +
                 SQL_COLUMN_ROOM_NAME + ", " + SQL_COLUMN_ROOM_FLOOR + ", " +
                 SQL_COLUMN_ROOM_TYPE + ", " + SQL_COLUMN_ROOM_CAPACITY +
@@ -62,25 +62,14 @@ public class DefaultRoomManager implements RoomManager {
                 room.getRoomType().toString().toLowerCase() + "', " +
                 room.getCapacity() + ", " + room.isAvailableForStudents() +
                 ", '" + room.getSeatType().toString().toLowerCase() + "') ";
-        try {
-            //TODO
-            DBConnector.executeUpdate(insertQuery);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        return successfulOperation(insertQuery);
     }
 
     @Override
-    public void remove(int entityId) {
+    public boolean remove(int entityId) {
         String deleteQuery = "DELETE  FROM  " + SQL_TABLE_ROOM +
                 " WHERE  " + SQL_COLUMN_ROOM_ID + " = " + entityId;
-        try {
-            //TODO
-            DBConnector.executeUpdate(deleteQuery);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
+        return successfulOperation(deleteQuery);
     }
 
 

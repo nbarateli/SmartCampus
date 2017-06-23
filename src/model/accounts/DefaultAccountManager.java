@@ -86,13 +86,13 @@ public class DefaultAccountManager implements AccountManager {
     }
 
     @Override
-    public void add(User entity) {
-
+    public boolean add(User entity) {
+        return false;
     }
 
     @Override
-    public void remove(int entityId) {
-
+    public boolean remove(int entityId) {
+        return false;
     }
 
 

@@ -10,8 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static misc.Utils.getLectureFromResults;
-import static misc.Utils.getSubjectFromResults;
+import static misc.Utils.*;
 import static model.database.SQLConstants.*;
 
 public class DefaultLectureManager implements LectureManager {
@@ -79,7 +78,7 @@ public class DefaultLectureManager implements LectureManager {
 
         return lectures.get(0).getID();
     }
-    
+
     @Override
     public CampusSubject findSubject(String subjectName) {
 
@@ -114,7 +113,7 @@ public class DefaultLectureManager implements LectureManager {
     }
 
     @Override
-    public void add(Lecture lecture) {
+    public boolean add(Lecture lecture) {
         String insertQuery = "insert into " + SQL_TABLE_LECTURE + " (" +
                 SQL_COLUMN_LECTURE_LECTURER + ", " + SQL_COLUMN_LECTURE_ROOM + ", " +
                 SQL_COLUMN_LECTURE_SUBJECT + ", " + SQL_COLUMN_LECTURE_DAY +
@@ -124,23 +123,14 @@ public class DefaultLectureManager implements LectureManager {
                 lecture.getSubject().getID() + ", '" +
                 lecture.getDay().name().toLowerCase() + "', '" + lecture.getStartTime() + "', '" +
                 lecture.getEndTime() + "') ";
-        try {
-            DBConnector.executeUpdate(insertQuery);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        return successfulOperation(insertQuery);
     }
 
     @Override
-    public void remove(int entityId) {
+    public boolean remove(int entityId) {
         String deleteQuery = "delete from " + SQL_TABLE_LECTURE + " where "
                 + SQL_COLUMN_LECTURE_ID + " = " + entityId;
-        try {
-            //TODO
-            DBConnector.executeUpdate(deleteQuery);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        return successfulOperation(deleteQuery);
     }
 
 

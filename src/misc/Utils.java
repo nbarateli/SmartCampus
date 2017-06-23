@@ -1,6 +1,7 @@
 package misc;
 
 import model.accounts.User;
+import model.database.DBConnector;
 import model.lectures.CampusSubject;
 import model.lectures.Lecture;
 import model.rooms.Room;
@@ -315,6 +316,21 @@ public final class Utils {
                 numberStringIsValid(time.substring(3, 5), false);
     }
 
+    /**
+     * Runs an SQL query and returns whether it was successful
+     *
+     * @param insertQuery a query to be executed
+     * @return status of the operation
+     */
+    public static boolean successfulOperation(String insertQuery) {
+        try {
+            DBConnector.executeUpdate(insertQuery);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     private Utils() {
 

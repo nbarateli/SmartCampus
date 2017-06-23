@@ -17,8 +17,8 @@ public interface CampusManager<T extends CampusObject, Q extends CampusSearchQue
 
     List<T> find(Q query);
 
-    void add(T entity);
+    boolean add(T entity);
 
-    void remove(int entityId);
+    boolean remove(int entityId);
 
 }
