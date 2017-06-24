@@ -43,7 +43,7 @@ public class LectureRemover extends HttpServlet {
         try {
             int id = Integer.parseInt(request.getParameter("lecture_id"));
             if (manager.remove(id)) {
-                out.println(SUCCESS + ": lecture removed");
+                response.sendRedirect("/rooms/showroom.jsp");
             } else {
                 out.println(FAILED + ": lecture not found");
             }

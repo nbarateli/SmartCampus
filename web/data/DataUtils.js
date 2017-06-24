@@ -88,6 +88,14 @@ var sendData = function (url, params, doAlert) {
     http.send(params);
 };
 
+function createDialog() {
+	var conf = confirm("დარწმუნებული ხართ რომ გსურთ ყველა ლექციის შესახებ მონაცემების წაშლა?");
+	if(conf) {
+	    var params = "remove_all=true";
+	    sendData("/lectures/removelecture", params, true);
+	}
+}
+
 var removeRoomFromForm = function () {
     var params = ($('#remove-room-form').serialize());
 

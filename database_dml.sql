@@ -7,11 +7,11 @@ VALUES
   ('ზაურ', 'მეშველიანი', 'zmesh15@freeuni.edu.ge', 'sys_admin', 'active'),
   ('დავით', 'მაღალთაძე', 'dmagh15@freeuni.edu.ge', 'sys_admin', 'active'),
   ('შოთა', 'ნანუაშვილი', 'snanu15@freeuni.edu.ge', 'sys_admin', 'active'),
-  ('ალექსანდრე', 'ცხოვრებოვი', 'atskh15@freeuni.edu.ge', 'student', 'active'),
   ('ნიკოლოზ', 'მაჭავარიანი', 'n.matchavariani@freeuni.edu.ge', 'lecturer', 'active'),
   ('ნიკოლოზ', 'ციმაკურიძე', 'n.tsimakuridze@freeuni.edu.ge', 'lecturer', 'active'),
   ('ლია', 'სოლომონია', 'l.solomonia@freeuni.edu.ge', 'lecturer', 'active'),
-  ('გიორგი', 'საღინაძე', 'g.saghinadze@freeuni.edu.ge', 'lecturer', 'active');
+  ('გიორგი', 'საღინაძე', 'g.saghinadze@freeuni.edu.ge', 'lecturer', 'active'),
+  ('ალექსანდრე', 'ცხოვრებოვი', 'atskh15@freeuni.edu.ge', 'student', 'active');
 
 
 INSERT INTO campus_subject (subject_name) VALUES
