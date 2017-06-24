@@ -76,7 +76,7 @@ public class DefaultRoomManager implements RoomManager {
     @Override
     public List<String> getAllImagesOf(Room room) {
         List<String> images = new LinkedList<>();
-        String sql = "SELECT image_url FROM  room_image WHERE room_image.room_id = room." + room.getID();
+        String sql = "SELECT image_url FROM  room_image WHERE room_image.room_id =" + room.getID();
         //TODO
         try (ResultSet rs = DBConnector.executeQuery(sql)) {
 
