@@ -102,15 +102,15 @@ public class DefaultRoomManager implements RoomManager {
     @Override
     public List<Lecture> findAllLecturesAt(Room room, Lecture.WeekDay day, Time start, Time end) {
         List<Lecture> lectures = new ArrayList<>();
-        String sql = "SELECT * FROM " + SQL_TABLE_LECTURE + " JOIN " + SQL_TABLE_USER + " ON " +
+        String sql = "SELECT * FROM " + SQL_TABLE_LECTURE + " INNER JOIN " + SQL_TABLE_USER + " ON " +
                 SQL_TABLE_LECTURE + "." + SQL_COLUMN_LECTURE_LECTURER + " = " + SQL_TABLE_USER + "." +
                 SQL_COLUMN_USER_ID +
-                " JOIN " + SQL_TABLE_SUBJECT + " ON " + SQL_TABLE_SUBJECT + "." + SQL_COLUMN_SUBJECT_ID +
+                " INNER JOIN " + SQL_TABLE_SUBJECT + " ON " + SQL_TABLE_SUBJECT + "." + SQL_COLUMN_SUBJECT_ID +
                 "= " + SQL_TABLE_LECTURE + "." + SQL_COLUMN_SUBJECT_ID + " \n " +
-                " JOIN " + SQL_TABLE_ROOM + " ON " + SQL_TABLE_LECTURE + "." + SQL_COLUMN_ROOM_ID + "" +
+                " INNER JOIN " + SQL_TABLE_ROOM + " ON " + SQL_TABLE_LECTURE + "." + SQL_COLUMN_ROOM_ID + "" +
                 "= " + SQL_TABLE_ROOM + "." + SQL_COLUMN_ROOM_ID +
                 " WHERE lecture.room_id = " + room.getID() +
-                (day == null ? "" : " AND lecture.day_of_week = " + day.toString()) +
+                (day == null ? "" : " AND lecture.day_of_week = '" + day.toString().toLowerCase() + "'") +
                 (start == null ? "" : " AND start_time >= " + toSqlTime(start)) +
                 (end == null ? "" : " AND end_time <= " + toSqlTime(end));
         //TODO
