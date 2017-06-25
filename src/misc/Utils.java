@@ -107,6 +107,9 @@ public final class Utils {
      * Returns a Georgian string representation of the given <code>RoomType</code>
      */
     public static String roomTypeToString(Room.RoomType roomType) {
+        if (roomType == null) {
+            return "";
+        }
         switch (roomType) {
             case UTILITY:
                 return "სხვა";
@@ -120,7 +123,11 @@ public final class Utils {
      * Returns a Georgian string representation of the given <code>SeatType</code>
      */
     public static String seatTypeToString(Room.SeatType seatType) {
+        if (seatType == null) {
+            return "";
+        }
         switch (seatType) {
+
             case DESKS:
                 return "სკამები და მერხები";
             case TABLES:
