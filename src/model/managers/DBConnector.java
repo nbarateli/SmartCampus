@@ -68,7 +68,6 @@ public class DBConnector {
                     statement.setObject(i + 1, values[i]);
                 }
             }
-            System.out.println(statement.toString());
 
             if (isUpdate)
                 return statement.executeUpdate();
