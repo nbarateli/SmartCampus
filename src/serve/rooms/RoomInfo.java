@@ -2,8 +2,8 @@ package serve.rooms;
 
 import model.lectures.Lecture;
 import model.rooms.Room;
+import model.rooms.RoomManager;
 import model.rooms.RoomProblem;
-import model.rooms.manager.RoomManager;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -61,7 +61,7 @@ public class RoomInfo extends HttpServlet {
      * Adds basic info of the room to the json object builder.
      */
     private void addBasicInfo(JsonObjectBuilder objectBuilder, Room room) {
-        objectBuilder.add(JSON_ROOM_ID, room.getID());
+        objectBuilder.add(JSON_ROOM_ID, room.getId());
         objectBuilder.add(JSON_ROOM_NAME, room.getRoomName());
         objectBuilder.add(JSON_ROOM_FLOOR, room.getFloor());
         objectBuilder.add(JSON_ROOM_CAPACITY, room.getCapacity());

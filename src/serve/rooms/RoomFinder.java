@@ -1,8 +1,8 @@
 package serve.rooms;
 
 import model.rooms.Room;
-import model.rooms.RoomSearchQuery;
-import model.rooms.manager.RoomManager;
+import model.rooms.RoomManager;
+import model.rooms.RoomSearchQueryGenerator;
 
 import javax.json.*;
 import javax.servlet.ServletException;
@@ -32,7 +32,7 @@ public class RoomFinder extends HttpServlet {
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
         for (Room room : rooms) {
             JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-            objectBuilder.add(JSON_ROOM_ID, room.getID());
+            objectBuilder.add(JSON_ROOM_ID, room.getId());
             objectBuilder.add(JSON_ROOM_NAME, room.getRoomName());
             objectBuilder.add(JSON_ROOM_FLOOR, room.getFloor());
             objectBuilder.add(JSON_ROOM_CAPACITY, room.getCapacity());
@@ -54,8 +54,8 @@ public class RoomFinder extends HttpServlet {
         return s == null || s.length() < 1 ? null : Integer.valueOf(s) < 0 ? 0 : Integer.valueOf(s);
     }
 
-    private RoomSearchQuery getQuery(HttpServletRequest request) {
-        RoomSearchQuery query = new RoomSearchQuery();
+    private RoomSearchQueryGenerator getQuery(HttpServletRequest request) {
+        RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();
         if (request.getParameter("search") == null) return query;
         String name = request.getParameter("room_name");
         String floor = request.getParameter("room_floor");

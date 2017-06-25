@@ -1,11 +1,9 @@
 package serve;
 
 import misc.DBInfo;
-import model.accounts.DefaultAccountManager;
-import model.lectures.manager.DefaultLectureManager;
-import model.lectures.manager.LectureManager;
-import model.rooms.manager.DefaultRoomManager;
-import model.rooms.manager.RoomManager;
+import model.lectures.LectureManager;
+import model.managers.ManagerFactory;
+import model.rooms.RoomManager;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -44,13 +42,14 @@ public class OnCreateListener implements ServletContextListener,
         } catch (IllegalAccessException | InstantiationException e) {
             e.printStackTrace();
         }
-        RoomManager roomManager = DefaultRoomManager.getInstance();
-        LectureManager lectureManager = DefaultLectureManager.getInstance();
+        ManagerFactory factory = new ManagerFactory();
+        RoomManager roomManager = factory.getRoomManager();
+        LectureManager lectureManager = factory.getLectureManager();
         ServletContext context = sce.getServletContext();
 
         context.setAttribute(ROOM_MANAGER, roomManager);
         context.setAttribute(LECTURE_MANAGER, lectureManager);
-        context.setAttribute(ACCOUNT_MANAGER, DefaultAccountManager.getInstance());
+        context.setAttribute(ACCOUNT_MANAGER, factory.getAccountManager());
 
     }
 

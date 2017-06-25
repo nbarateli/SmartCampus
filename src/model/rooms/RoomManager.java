@@ -1,10 +1,7 @@
-package model.rooms.manager;
+package model.rooms;
 
 import model.campus.CampusManager;
 import model.lectures.Lecture;
-import model.rooms.Room;
-import model.rooms.RoomProblem;
-import model.rooms.RoomSearchQuery;
 
 import java.sql.Time;
 import java.util.List;
@@ -16,7 +13,7 @@ import java.util.List;
  * Responsible for pulling and pushing information related to user accounts
  * from and into the database.
  */
-public interface RoomManager extends CampusManager<Room, RoomSearchQuery> {
+public interface RoomManager extends CampusManager<Room, RoomSearchQueryGenerator> {
 
     /**
      * Returns a list of URL-s of all the images of given room.

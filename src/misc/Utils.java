@@ -1,9 +1,9 @@
 package misc;
 
 import model.accounts.User;
-import model.database.DBConnector;
 import model.lectures.CampusSubject;
 import model.lectures.Lecture;
+import model.managers.DBConnector;
 import model.rooms.Room;
 import model.rooms.RoomProblem;
 
@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import static model.accounts.User.UserRole;
 import static model.accounts.User.UserRole.*;
@@ -287,6 +288,87 @@ public final class Utils {
     }
 
     /**
+     * Runs an SQL query and returns whether it was successful
+     *
+     * @param insertQuery a query to be executed
+     * @param connector   a database connector
+     * @return status of the operation
+     */
+    public static boolean successfulOperation(String insertQuery, DBConnector connector) {
+        try {
+            connector.executeUpdate(insertQuery);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Generates and returns a part of SQL query. Returns  1 = 1 if the passed field is null.
+     *
+     * @param field  an object of a field. Can be null.
+     * @param column name of the column in the database
+     * @param values a List of objects that contain actual values in the SQL query
+     */
+    public static String generateEqualQuery(Object field, String column, List<Object> values) {
+        if (field == null) return " 1 = 1 ";
+        values.add(field);
+        return column + " = ?";
+    }
+
+    /**
+     * Generates and returns a part of SQL query. Returns  1 = 1 if the passed field is null.
+     *
+     * @param field  an object of a field. Can be null.
+     * @param column name of the column in the database
+     * @param values a List of objects that contain actual values in the SQL query
+     * @param larger whether the returned query should yield >= in it.
+     */
+    public static String generateEqualsOrQuery(Object field, String column, List<Object> values, boolean larger) {
+        if (field == null) return " 1 = 1 ";
+        values.add(field instanceof Time ? Utils.toSqlTime((Time) field) : field);
+        return column + " " + (larger ? ">" : "<") + "= ?";
+    }
+
+    /**
+     * Generates and returns a part of SQL query. Returns  1 = 1 if the passed field is null.
+     *
+     * @param field  an object of a field. Can be null.
+     * @param column name of the column in the database
+     * @param values a List of objects that contain actual values in the SQL query
+     */
+    public static String generateLikeQuery(Object field, String column, List<Object> values) {
+        if (field == null) return " 1 = 1 ";
+        values.add("%" + field + "%");
+        return column + " Like ?";
+    }
+
+    /**
+     * Returns the exact list in the format of java array.
+     */
+    public static Object[] asArray(List<Object> values) {
+        Object[] result = new Object[values.size()];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = values.get(i);
+        }
+        return result;
+    }
+
+    /**
+     * Generates an SQL query line for given boolean value and adds it to the list of values, if it isn't null.
+     *
+     * @param field  a boolean object for a field. Can be null.
+     * @param column name of the column in the database
+     * @param values a List of objects that contain actual values in the SQL query
+     */
+    public static String generateBooleanQuery(Boolean field, String column, List<Object> values) {
+        if (field == null) return " 1 = 1 ";
+        values.add(field ? "TRUE" : "FALSE");
+        return column + " = ?";
+    }
+
+    /**
      * checks if given string is valid for representing hour or minute
      */
     private static boolean numberStringIsValid(String s, boolean checkHour) {
@@ -314,22 +396,6 @@ public final class Utils {
         return time.length() >= 5 && time.charAt(2) == ':' &&
                 numberStringIsValid(time.substring(0, 2), true) &&
                 numberStringIsValid(time.substring(3, 5), false);
-    }
-
-    /**
-     * Runs an SQL query and returns whether it was successful
-     *
-     * @param insertQuery a query to be executed
-     * @return status of the operation
-     */
-    public static boolean successfulOperation(String insertQuery) {
-        try {
-            DBConnector.executeUpdate(insertQuery);
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
     }
 
     private Utils() {

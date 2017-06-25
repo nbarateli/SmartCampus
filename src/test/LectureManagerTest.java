@@ -5,8 +5,8 @@ import model.accounts.User;
 import model.lectures.CampusSubject;
 import model.lectures.Lecture;
 import model.lectures.Lecture.WeekDay;
-import model.lectures.manager.DefaultLectureManager;
-import model.lectures.manager.LectureManager;
+import model.lectures.LectureManager;
+import model.managers.ManagerFactory;
 import model.rooms.Room;
 import model.rooms.Room.RoomType;
 import model.rooms.Room.SeatType;
@@ -25,7 +25,7 @@ public class LectureManagerTest {
     @Before
     public void setUp() throws Exception {
         DBInfo.class.newInstance();
-        manager = DefaultLectureManager.getInstance();
+        manager = new ManagerFactory().getLectureManager();
         numSubjects = manager.numOfSubjects();
 //TODO        numLectures = manager.size();
     }

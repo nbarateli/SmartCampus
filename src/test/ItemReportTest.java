@@ -1,14 +1,13 @@
 package test;
 
-import java.util.Date;
-
+import model.lostandfound.ItemReport;
+import model.lostandfound.ItemReport.ReportType;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.lostandfound.ItemReport;
-import model.lostandfound.ItemReport.ReportType;
+import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ItemReportTest {
 
@@ -22,7 +21,7 @@ public class ItemReportTest {
     
     @Test
     public void test1() {
-        assertEquals(1, report1.getID());
+        assertEquals(1, report1.getId());
         assertEquals(2, report1.getAuthorID());
         assertEquals("name", report1.getItemName());
         assertEquals("description", report1.getItemDescription());
@@ -32,7 +31,7 @@ public class ItemReportTest {
     
     @Test
     public void test2() {
-        assertEquals(4, report2.getID());
+        assertEquals(4, report2.getId());
         assertEquals(7, report2.getAuthorID());
         assertEquals("book", report2.getItemName());
         assertEquals("Cracking the Coding Interview", report2.getItemDescription());

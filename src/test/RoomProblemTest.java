@@ -28,7 +28,7 @@ public class RoomProblemTest {
 
     @Test
     public void test1() {
-        assertEquals(1, problem.getID());
+        assertEquals(1, problem.getId());
         assertEquals(user, problem.getAuthor());
         assertEquals(room, problem.getRoom());
         assertEquals("title", problem.getTitle());

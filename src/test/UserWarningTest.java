@@ -19,7 +19,7 @@ public class UserWarningTest {
     
     @Test
     public void test() {
-        assertEquals(1, problem.getID());
+        assertEquals(1, problem.getId());
         assertEquals(2, problem.getUserID());
         assertEquals(3, problem.getWarnerID());
         assertEquals("title", problem.getTitle());

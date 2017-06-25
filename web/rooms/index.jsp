@@ -1,7 +1,7 @@
 <%@ page import="model.rooms.Room" %>
-<%@ page import="model.rooms.RoomSearchQuery" %>
+<%@ page import="model.rooms.RoomManager" %>
 <%@ page import="static misc.WebConstants.*" %>
-<%@ page import="model.rooms.manager.RoomManager" %>
+<%@ page import="model.rooms.RoomSearchQueryGenerator" %>
 <%@ page import="java.util.List" %>
 <%@ page import="static misc.Utils.*" %><%--
   Created by IntelliJ IDEA.
@@ -16,7 +16,7 @@
     return s == null || s.length() < 1 ? null : Integer.valueOf(s) < 0 ? 0 : Integer.valueOf(s);
   }
 
-  private void buildQuery(HttpServletRequest request, RoomSearchQuery query) {
+  private void buildQuery(HttpServletRequest request, RoomSearchQueryGenerator query) {
     if (request.getParameter("search") == null) return;
     String name = request.getParameter("room_name");
     String floor = request.getParameter("room_floor");
@@ -143,12 +143,12 @@
       <div align="center" id="right-div">
 
         <%
-          RoomSearchQuery query = new RoomSearchQuery();
+          RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();
           buildQuery(request, query);
           List<Room> rooms = manager1.find(query);
           System.out.println(rooms.size());
           for (Room room : rooms) {
-            out.println("<div id=\"room-id-div\">" + "<a href=showroom.jsp?id=" + room.getID() + ">"
+            out.println("<div id=\"room-id-div\">" + "<a href=showroom.jsp?id=" + room.getId() + ">"
                     + room.getRoomName() + "</a></div>");
             out.println("<button>ვრცლად</button>");
 

@@ -1,11 +1,10 @@
 package test;
 
+import model.problems.CampusProblem;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.problems.CampusProblem;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class CampusProblemTest {
 
@@ -21,7 +20,7 @@ public class CampusProblemTest {
     
     @Test
     public void test1() {
-        assertEquals(1, problem1.getID());
+        assertEquals(1, problem1.getId());
         assertEquals(2, problem1.getReporterID());
         assertEquals(3, problem1.getSolverID());
         assertEquals("t", problem1.getTitle());
@@ -30,7 +29,7 @@ public class CampusProblemTest {
     
     @Test
     public void test2() {
-        assertEquals(11, problem2.getID());
+        assertEquals(11, problem2.getId());
         assertEquals(12, problem2.getReporterID());
         assertEquals(13, problem2.getSolverID());
         assertEquals("title", problem2.getTitle());
@@ -39,7 +38,7 @@ public class CampusProblemTest {
     
     @Test
     public void test3() {
-        assertEquals(2, problem3.getID());
+        assertEquals(2, problem3.getId());
         assertEquals(1, problem3.getReporterID());
         assertEquals(1, problem3.getSolverID());
         assertEquals("water", problem3.getTitle());
@@ -48,7 +47,7 @@ public class CampusProblemTest {
     
     @Test
     public void test4() {
-        assertEquals(3, problem4.getID());
+        assertEquals(3, problem4.getId());
         assertEquals(9, problem4.getReporterID());
         assertEquals(1, problem4.getSolverID());
         assertEquals("broken chair", problem4.getTitle());

@@ -24,7 +24,7 @@ public class ItemReport implements CampusObject {
     }
 
     @Override
-    public int getID() {
+    public int getId() {
         return id;
     }
 

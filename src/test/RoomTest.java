@@ -1,13 +1,12 @@
 package test;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import model.rooms.Room;
 import model.rooms.Room.RoomType;
 import model.rooms.Room.SeatType;
+import org.junit.Before;
+import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class RoomTest {
 
@@ -21,7 +20,7 @@ public class RoomTest {
     
     @Test
     public void test1() {
-        assertEquals(1, room1.getID());
+        assertEquals(1, room1.getId());
         assertEquals(2, room1.getCapacity());
         assertEquals("name1", room1.getRoomName());
         assertEquals(RoomType.AUDITORIUM, room1.getRoomType());
@@ -32,7 +31,7 @@ public class RoomTest {
     
     @Test
     public void test2() {
-        assertEquals(3, room2.getID());
+        assertEquals(3, room2.getId());
         assertEquals(4, room2.getCapacity());
         assertEquals("name2", room2.getRoomName());
         assertEquals(RoomType.UTILITY, room2.getRoomType());

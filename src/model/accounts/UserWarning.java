@@ -24,9 +24,6 @@ public class UserWarning implements CampusObject {
         this.dateWarned = dateWarned.getTime();
     }
 
-    public int getId() {
-        return id;
-    }
 
     public int getUserID() {
         return userID;
@@ -49,7 +46,7 @@ public class UserWarning implements CampusObject {
     }
 
     @Override
-    public int getID() {
+    public int getId() {
         return id;
     }
 }

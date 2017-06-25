@@ -50,7 +50,7 @@ public class RoomProblem implements CampusObject {
     }
 
     @Override
-    public int getID() {
+    public int getId() {
         return id;
     }
     

@@ -9,5 +9,5 @@ public interface CampusObject {
      * (Usually the primary key in SQL database)
      *
      */
-    int getID();
+    int getId();
 }

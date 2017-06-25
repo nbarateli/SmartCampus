@@ -1,7 +1,12 @@
 package model.rooms;
 
 import model.campus.CampusSearchQuery;
+import model.campus.CampusSearchQueryGenerator;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static misc.Utils.*;
 import static model.database.SQLConstants.*;
 
 /**
@@ -9,7 +14,7 @@ import static model.database.SQLConstants.*;
  * <p>
  * A class responsible for generating valid SQL queries for searching rooms.
  */
-public class RoomSearchQuery implements CampusSearchQuery<Room> {
+public class RoomSearchQueryGenerator implements CampusSearchQueryGenerator<Room> {
 
     private String name;
     private Integer floor;
@@ -20,9 +25,9 @@ public class RoomSearchQuery implements CampusSearchQuery<Room> {
     private boolean availableForBooking;
     private boolean hasProblems;
 
-    public RoomSearchQuery(String name, Integer floor, Integer capacityFrom, Integer capacityTo,
-                           Room.RoomType roomType, boolean availableForBooking,
-                           Room.SeatType seatType, boolean hasProblems) {
+    public RoomSearchQueryGenerator(String name, Integer floor, Integer capacityFrom, Integer capacityTo,
+                                    Room.RoomType roomType, boolean availableForBooking,
+                                    Room.SeatType seatType, boolean hasProblems) {
         this.name = name;
         this.floor = floor;
         this.capacityFrom = capacityFrom;
@@ -36,7 +41,7 @@ public class RoomSearchQuery implements CampusSearchQuery<Room> {
     /**
      * Default constructor:
      */
-    public RoomSearchQuery() {
+    public RoomSearchQueryGenerator() {
         this(null, null, null, null,
                 null, false, null, true);
     }
@@ -120,22 +125,24 @@ public class RoomSearchQuery implements CampusSearchQuery<Room> {
      *
      * @return a valid sql query.
      */
-    public String generateQuery() {
-        return hasNonNullFields() ? String.format(
-                "SELECT * FROM  " + SQL_TABLE_ROOM + " WHERE " +
-                        "%s%s%s%s%s%s%s%s%s%s%s;", assertAndGetEqualQuery(name, SQL_COLUMN_ROOM_NAME),
-                name == null ? "" : " \nAND ",
-                assertAndGetEqualQuery(floor == null ? null : floor.toString(), SQL_COLUMN_ROOM_FLOOR),
-                floor == null ? "" : " AND ",
-                SQL_COLUMN_ROOM_CAPACITY, capacityFrom == null ? " > 0 " : " >= " + capacityFrom + "\n",
-                capacityTo != null ? " AND " + SQL_COLUMN_ROOM_CAPACITY + " <= " + capacityTo + "\n" : "",
-                roomType != null ? " AND " +
-                        assertAndGetEqualQuery(roomType.toString().toLowerCase(), SQL_COLUMN_ROOM_TYPE) + "\n" : "",
-                seatType != null ? " AND " +
-                        assertAndGetEqualQuery(seatType.toString(), SQL_COLUMN_ROOM_SEAT_TYPE) + "\n" : "",
-                availableForBooking ? " AND " + SQL_COLUMN_ROOM_AVAILABLE + " = TRUE \n" : "", hasProblemsQuery())
-                :
-                "SELECT * FROM room  ";
+    public CampusSearchQuery<Room> generateQuery() {
+        List<Object> values = new ArrayList<>();
+        String sql = hasNonNullFields() ? String.format(
+                "SELECT * FROM  %s\nWHERE\n%s \nAND %s \nAND %s\nAND %s\nAND %s\nAND %s\nAND %s\n%s",
+                SQL_TABLE_ROOM,
+                generateLikeQuery(name, SQL_COLUMN_ROOM_NAME, values),
+                generateEqualQuery(floor, SQL_COLUMN_ROOM_FLOOR, values),
+                generateEqualsOrQuery(capacityFrom, SQL_COLUMN_ROOM_CAPACITY, values, true),
+                generateEqualsOrQuery(capacityTo, SQL_COLUMN_ROOM_CAPACITY, values, false),
+                generateLikeQuery((roomTypeToString(roomType).equals("") ? null : roomTypeToString(roomType)),
+                        SQL_COLUMN_ROOM_TYPE, values),
+                generateLikeQuery((seatTypeToString(seatType).equals("") ? null : seatTypeToString(seatType)),
+                        SQL_COLUMN_ROOM_SEAT_TYPE, values),
+                generateBooleanQuery(availableForBooking ? true : null,
+                        SQL_COLUMN_ROOM_AVAILABLE, values),
+                hasProblemsQuery()) : " SELECT * from " + SQL_TABLE_ROOM;
+        //TODO
+        return new CampusSearchQuery<>(sql, asArray(values));
 
     }
 
@@ -173,4 +180,6 @@ public class RoomSearchQuery implements CampusSearchQuery<Room> {
                 roomType != null || seatType != null;
 
     }
+
+
 }

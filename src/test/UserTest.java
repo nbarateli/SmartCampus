@@ -17,7 +17,7 @@ public class UserTest {
 
     @Test
     public void test() {
-        assertEquals(-1, user.getID());
+        assertEquals(-1, user.getId());
         assertEquals("mail", user.geteMail());
         assertEquals("firstName", user.getFirstName());
         assertEquals("lastName", user.getLastName());

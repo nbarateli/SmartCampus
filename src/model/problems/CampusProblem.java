@@ -35,7 +35,7 @@ public class CampusProblem implements CampusObject {
     }
 
     @Override
-    public int getID() {
+    public int getId() {
         return id;
     }
 }

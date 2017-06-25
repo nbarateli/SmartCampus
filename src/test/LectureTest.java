@@ -35,7 +35,7 @@ public class LectureTest {
 
     @Test
     public void test() {
-        assertEquals(1, lecture.getID());
+        assertEquals(1, lecture.getId());
         assertEquals(user, lecture.getLecturer());
         assertEquals(room, lecture.getRoom());
         assertEquals(subject, lecture.getSubject());

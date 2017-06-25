@@ -1,6 +1,9 @@
-package model.accounts;
+package model.managers;
 
-import model.database.DBConnector;
+import model.accounts.AccountManager;
+import model.accounts.User;
+import model.accounts.UserSearchQueryGenerator;
+import model.accounts.UserWarning;
 import model.lostandfound.ItemReport;
 import model.problems.CampusProblem;
 
@@ -14,12 +17,12 @@ import static model.database.SQLConstants.SQL_TABLE_USER;
 
 public class DefaultAccountManager implements AccountManager {
 
-    public static AccountManager getInstance() {
-        return new DefaultAccountManager();
-    }
 
-    private DefaultAccountManager() {
+    private final DBConnector connector;
 
+    DefaultAccountManager(DBConnector connector) {
+
+        this.connector = connector;
     }
 
     @Override
@@ -33,7 +36,7 @@ public class DefaultAccountManager implements AccountManager {
         String sql = "SELECT * FROM " + SQL_TABLE_USER + " WHERE " + SQL_TABLE_USER +
                 "." + SQL_COLUMN_USER_EMAIL + "= ?";
         Object[] values = {email};
-        try (ResultSet matches = DBConnector.executeQuery(sql, values)) {
+        try (ResultSet matches = connector.executeQuery(sql, values)) {
 
             if (matches.next()) {
                 return getUserFromResults(matches);
@@ -81,7 +84,7 @@ public class DefaultAccountManager implements AccountManager {
 
 
     @Override
-    public List<User> find(UserSearchQuery query) {
+    public List<User> find(UserSearchQueryGenerator queryGenerator) {
         return null;
     }
 

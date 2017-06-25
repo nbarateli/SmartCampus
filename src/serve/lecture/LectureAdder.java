@@ -2,14 +2,14 @@ package serve.lecture;
 
 import misc.ModelConstants;
 import misc.WebConstants;
-import model.accounts.DefaultAccountManager;
 import model.accounts.User;
 import model.lectures.CampusSubject;
 import model.lectures.Lecture;
 import model.lectures.Lecture.WeekDay;
-import model.lectures.manager.LectureManager;
+import model.lectures.LectureManager;
+import model.managers.DefaultAccountManager;
 import model.rooms.Room;
-import model.rooms.manager.RoomManager;
+import model.rooms.RoomManager;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;

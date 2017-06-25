@@ -1,4 +1,4 @@
-package model.database;
+package model.managers;
 
 import java.sql.*;
 
@@ -10,7 +10,7 @@ import static misc.DBInfo.*;
  * Responsible for creating a connecting and executing queries in database.
  */
 public class DBConnector {
-    private DBConnector() {
+    DBConnector() {
 
     }
 
@@ -28,7 +28,7 @@ public class DBConnector {
      *                      <code>ResultSet</code> object, the method is called on a
      *                      <code>PreparedStatement</code> or <code>CallableStatement</code>
      */
-    public static ResultSet executeQuery(String sql, Object... values) throws SQLException {
+    public ResultSet executeQuery(String sql, Object... values) throws SQLException {
         return (ResultSet) execute(sql, values, false);
     }
 
@@ -44,22 +44,10 @@ public class DBConnector {
      *                      this method is called on a closed <code>Statement</code>, the given
      *                      SQL statement produces a <code>ResultSet</code> object, the method is called on a
      */
-    public static int executeUpdate(String sql, Object... values) throws SQLException {
+    public int executeUpdate(String sql, Object... values) throws SQLException {
         return (int) execute(sql, values, true);
     }
 
-    public static PreparedStatement getPreparedStatement(String sql) {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection
-                    (MYSQL_DATABASE_SERVER, MYSQL_USERNAME, MYSQL_PASSWORD);
-            PreparedStatement statement = connection.prepareStatement(sql);
-            return statement;
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     /**
      * Connects to database, executes passed and returns either a <code>ResultSet</code> or an int,
@@ -68,7 +56,7 @@ public class DBConnector {
      * @return a <code>ResultSet</code> if the query type is not update, an int denoting the number of rows if it is.
      * @throws SQLException if database access error occurs.
      */
-    private static Object execute(String sql, Object[] values, boolean isUpdate) throws SQLException {
+    private Object execute(String sql, Object[] values, boolean isUpdate) throws SQLException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection
@@ -80,7 +68,8 @@ public class DBConnector {
                     statement.setObject(i + 1, values[i]);
                 }
             }
-            String s = statement.toString();
+            System.out.println(statement.toString());
+
             if (isUpdate)
                 return statement.executeUpdate();
             else

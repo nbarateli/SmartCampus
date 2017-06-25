@@ -13,7 +13,7 @@ import java.util.List;
  * Responsible for pulling and pushing information related to user accounts
  * from and into the database.
  */
-public interface AccountManager extends CampusManager<User, UserSearchQuery> {
+public interface AccountManager extends CampusManager<User, UserSearchQueryGenerator> {
 
 
     /**

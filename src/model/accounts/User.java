@@ -32,7 +32,7 @@ public class User implements CampusObject {
 
     @Override
 
-    public int getID() {
+    public int getId() {
         return userID;
     }
 
@@ -68,7 +68,7 @@ public class User implements CampusObject {
     }
 
 
-    enum UserPermission {
+    public enum UserPermission {
         BOOK_A_ROOM, REQUEST_BOOKED_ROOM, CANCEL_BOOKING, REPORT_ROOM_PROBLEM,
         DELETE_PROBLEM, LOST_FOUND_POST, LOST_FOUND_DELETE, WARN_USER,
         VIEW_USER_WARNINGS, REMOVE_PERMISSION, INSERT_DATA

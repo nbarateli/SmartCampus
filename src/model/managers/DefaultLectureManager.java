@@ -1,9 +1,10 @@
-package model.lectures.manager;
+package model.managers;
 
-import model.database.DBConnector;
+import model.campus.CampusSearchQuery;
 import model.lectures.CampusSubject;
 import model.lectures.Lecture;
-import model.lectures.LectureSearchQuery;
+import model.lectures.LectureManager;
+import model.lectures.LectureSearchQueryGenerator;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,11 +18,12 @@ public class DefaultLectureManager implements LectureManager {
 
     private static LectureManager instance;
 
-    /***/
-    public static LectureManager getInstance() {
-        return instance == null ? instance = new DefaultLectureManager() : instance;
-    }
 
+    private final DBConnector connector;
+
+    DefaultLectureManager(DBConnector connector) {
+        this.connector = connector;
+    }
 
     @Override
     public void addSubject(String subjectName) {
@@ -29,7 +31,7 @@ public class DefaultLectureManager implements LectureManager {
                 "VALUES (\'" + subjectName + "\')";
         try {
             //TODO
-            DBConnector.executeUpdate(sql);
+            connector.executeUpdate(sql);
         } catch (SQLException e) {
             //ignored
         }
@@ -44,7 +46,7 @@ public class DefaultLectureManager implements LectureManager {
         int count = 0;
         try {
             //TODO
-            ResultSet res = DBConnector.executeQuery(query);
+            ResultSet res = connector.executeQuery(query);
             while (res.next())
                 count++;
         } catch (SQLException e) {
@@ -59,7 +61,7 @@ public class DefaultLectureManager implements LectureManager {
                 SQL_COLUMN_SUBJECT_NAME + " = '?'";
         try {
             //TODO
-            DBConnector.executeUpdate(sql, subjectName);
+            connector.executeUpdate(sql, subjectName);
         } catch (SQLException e) {
             //ignored
         }
@@ -67,16 +69,16 @@ public class DefaultLectureManager implements LectureManager {
 
     @Override
     public int getLectureId(Lecture lecture) {
-        LectureSearchQuery query = new LectureSearchQuery();
-        query.setLecturerID(lecture.getLecturer().getID());
-        query.setRoomID(lecture.getRoom().getID());
-        query.setSubjectID(lecture.getSubject().getID());
+        LectureSearchQueryGenerator query = new LectureSearchQueryGenerator();
+        query.setLecturerId(lecture.getLecturer().getId());
+        query.setRoomID(lecture.getRoom().getId());
+        query.setSubjectID(lecture.getSubject().getId());
         query.setDay(lecture.getDay());
         query.setStartTime(lecture.getStartTime());
         query.setEndTime(lecture.getEndTime());
         List<Lecture> lectures = find(query);
 
-        return lectures.get(0).getID();
+        return lectures.get(0).getId();
     }
 
     @Override
@@ -84,7 +86,7 @@ public class DefaultLectureManager implements LectureManager {
 
         String sql = "SELECT * FROM " + SQL_TABLE_SUBJECT + " WHERE " + SQL_COLUMN_SUBJECT_NAME + " LIKE ?";
         Object[] values = {subjectName};
-        try (ResultSet matches = DBConnector.executeQuery(sql, values)) {
+        try (ResultSet matches = connector.executeQuery(sql, values)) {
 
 
             if (matches.next()) {
@@ -97,11 +99,23 @@ public class DefaultLectureManager implements LectureManager {
     }
 
     @Override
-    public List<Lecture> find(LectureSearchQuery query) {
+    public void removeAllLectures() {
+        String truncateQuery = "truncate table " + SQL_TABLE_LECTURE;
+        try {
+            //TODO
+            connector.executeUpdate(truncateQuery);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<Lecture> find(LectureSearchQueryGenerator queryGenerator) {
         List<Lecture> list = new ArrayList<>();
         try {
             //TODO
-            ResultSet set = DBConnector.executeQuery(query.generateQuery());
+            CampusSearchQuery<Lecture> query = queryGenerator.generateQuery();
+            ResultSet set = connector.executeQuery(query.getQuery(), query.getValues());
 
             while (set.next()) {
                 list.add(getLectureFromResults(set));
@@ -119,30 +133,18 @@ public class DefaultLectureManager implements LectureManager {
                 SQL_COLUMN_LECTURE_SUBJECT + ", " + SQL_COLUMN_LECTURE_DAY +
                 ", " + SQL_COLUMN_LECTURE_START_TIME + ", " +
                 SQL_COLUMN_LECTURE_END_TIME + ") values (" +
-                lecture.getLecturer().getID() + ", " + lecture.getRoom().getID() + ", " +
-                lecture.getSubject().getID() + ", '" +
+                lecture.getLecturer().getId() + ", " + lecture.getRoom().getId() + ", " +
+                lecture.getSubject().getId() + ", '" +
                 lecture.getDay().name().toLowerCase() + "', '" + lecture.getStartTime() + "', '" +
                 lecture.getEndTime() + "') ";
-        return successfulOperation(insertQuery);
+        return successfulOperation(insertQuery, connector);
     }
 
     @Override
     public boolean remove(int entityId) {
         String deleteQuery = "delete from " + SQL_TABLE_LECTURE + " where "
                 + SQL_COLUMN_LECTURE_ID + " = " + entityId;
-        return successfulOperation(deleteQuery);
-    }
-
-
-    @Override
-    public void removeAllLectures() {
-        String truncateQuery = "truncate table " + SQL_TABLE_LECTURE;
-        try {
-            //TODO
-            DBConnector.executeUpdate(truncateQuery);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        return successfulOperation(deleteQuery, connector);
     }
 
 

@@ -1,11 +1,10 @@
 package test;
 
+import model.lectures.CampusSubject;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.lectures.CampusSubject;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class CampusSubjectTest {
     
@@ -19,13 +18,13 @@ public class CampusSubjectTest {
     
     @Test
     public void test1() {
-        assertEquals(1, subject1.getID());
+        assertEquals(1, subject1.getId());
         assertEquals("áƒ™áƒ�áƒšáƒ™áƒ£áƒšáƒ£áƒ¡áƒ˜", subject1.getName());
     }
 
     @Test
     public void test2() {
-        assertEquals(2, subject2.getID());
+        assertEquals(2, subject2.getId());
         assertEquals("Calculus 1", subject2.getName());
     }
 

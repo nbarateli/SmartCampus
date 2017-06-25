@@ -1,23 +1,19 @@
 package serve.rooms;
 
+import misc.ModelConstants;
 import model.rooms.Room;
-import model.rooms.manager.RoomManager;
+import model.rooms.RoomManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import misc.ModelConstants;
-
 import java.io.IOException;
 
 import static misc.Utils.toRoomType;
 import static misc.Utils.toSeatType;
-import static misc.WebConstants.FAILED;
-import static misc.WebConstants.ROOM_MANAGER;
-import static misc.WebConstants.SUCCESS;
+import static misc.WebConstants.*;
 
 /**
  * Servlet implementation class RoomAdder

@@ -2,7 +2,7 @@ package serve.lecture;
 
 import misc.WebConstants;
 import model.lectures.CampusSubject;
-import model.lectures.manager.LectureManager;
+import model.lectures.LectureManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

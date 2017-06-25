@@ -2,7 +2,7 @@
 <%@ page import="static misc.WebConstants.ROOM_MANAGER" %>
 <%@ page import="model.lectures.Lecture" %>
 <%@ page import="model.rooms.Room" %>
-<%@ page import="model.rooms.manager.RoomManager" %>
+<%@ page import="model.rooms.RoomManager" %>
 <%@ page import="java.util.List" %>
 <%@ page import="static misc.Utils.roomTypeToString" %>
 <%@ page import="static misc.Utils.toSeatType" %>
@@ -28,7 +28,7 @@
     private void printAll(List<Lecture> allLecturesAt, JspWriter out) throws Exception {
       for (Lecture lecture : allLecturesAt) {
         out.println("<tr><form action=\"/lectures/removelecture\" method=\"post\">");
-        out.println("<input type=\"hidden\" value=\"" + lecture.getID() + "\" name=\"lecture_id\">");
+        out.println("<input type=\"hidden\" value=\"" + lecture.getId() + "\" name=\"lecture_id\">");
         out.println("<td>" + lecture.getSubject().getName() + "</td>");
         out.println("<td>" + lecture.getLecturer().getFirstName() + " " 
               + lecture.getLecturer().getLastName() + "</td>");

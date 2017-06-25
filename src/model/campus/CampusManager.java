@@ -12,10 +12,10 @@ import java.util.List;
  * @param <T> an abstract data type (database entry) the manager will store and access.
  * @param <Q> a SQL query generator related to the given data type.
  */
-public interface CampusManager<T extends CampusObject, Q extends CampusSearchQuery<T>> {
+public interface CampusManager<T extends CampusObject, Q extends CampusSearchQueryGenerator<T>> {
 
 
-    List<T> find(Q query);
+    List<T> find(Q queryGenerator);
 
     boolean add(T entity);
 

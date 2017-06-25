@@ -1,9 +1,8 @@
 package serve.rooms;
 
-import misc.ModelConstants;
 import model.rooms.Room;
-import model.rooms.RoomSearchQuery;
-import model.rooms.manager.RoomManager;
+import model.rooms.RoomManager;
+import model.rooms.RoomSearchQueryGenerator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,9 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import static misc.WebConstants.FAILED;
-import static misc.WebConstants.ROOM_MANAGER;
-import static misc.WebConstants.SUCCESS;
+import static misc.WebConstants.*;
 
 /**
  * Servlet implementation class RoomRemover
@@ -41,11 +38,11 @@ public class RoomRemover extends HttpServlet {
         RoomManager manager =
                 (RoomManager) request.getServletContext().getAttribute(ROOM_MANAGER);
         String name = request.getParameter("room_name");
-        RoomSearchQuery query = new RoomSearchQuery();
+        RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();
         query.setName(name);
         List<Room> foundRooms = manager.find(query);
         if(foundRooms.size() != 0) {
-            manager.remove(foundRooms.get(0).getID());
+            manager.remove(foundRooms.get(0).getId());
             response.getWriter().println(SUCCESS);
         } else {
             response.getWriter().println(FAILED);
