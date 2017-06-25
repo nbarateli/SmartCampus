@@ -26,22 +26,6 @@ button:hover {
   background-color: #229954;
 }
 
-#schedule {
-  width: 500px;
-}
-
-#add-room-div {
-  width: 500px;
-}
-
-#remove-room-div {
-  width: 500px;
-}
-
-#add-subj-div {
-  width: 500px;
-}
-
 .info-label {
   font-size: 20px;
 }

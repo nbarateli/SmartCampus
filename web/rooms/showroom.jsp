@@ -63,7 +63,7 @@
 
   <div class="to-hide">
     <div style="font-size: 25px"><%out.println(room.getRoomName());%></div>
-    <div><img src="<%out.print(images.size()>0?images.get(1):WebConstants.NO_IMAGE);%>" style="width: 25%">
+    <div><img src="<%out.print(images.size()>0?images.get(0):WebConstants.NO_IMAGE);%>" style="width: 25%">
     </div>
     <div id="room-info-div">
       <div>სართული: <%out.print(room.getFloor());%>.</div>
