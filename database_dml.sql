@@ -75,33 +75,3 @@ INSERT INTO item_report (item_name, item_description, author_id, report_type, da
   ('საფულე', 'შავი, ტყავის', 6, 'lost', '17-05-17'),
   ('ყურსასმენი', 'მწვანე, Panasonic-ის', 3, 'found', '16-05-17');
 
-
-INSERT INTO item_image (image_url, report_id) VALUES
-  ('wardrobe.jpg', 1),
-  ('flag.jpg', 2),
-  ('sunglasses.jpg', 3),
-  ('pen.jpg', 4),
-  ('headphones.jpg', 5),
-  ('notebook1.jpg', 6),
-  ('notebook2.jpg', 6),
-  ('notebook3.jpg', 6),
-  ('latpop1.jpg', 7),
-  ('laptop2.jpg', 7),
-  ('hat.jpg', 8),
-  ('wallet.jpg', 9),
-  ('headphones5.jpg', 10);
-
-INSERT INTO room_image (image_url, room_id) VALUES
-  ('200.jpg', 1),
-  ('401.jpg', 2),
-  ('216.jpg', 3),
-  ('307-1.jpg', 4),
-  ('412-2.jpg', 5),
-  ('420.jpg', 6),
-  ('309.jpg', 7),
-  ('410.jpg', 8),
-  ('417.jpg', 9),
-  ('cafeteria.jpg', 10),
-  ('402-2.jpg', 11),
-  ('318.jpg', 12),
-  ('103.jpg', 13);
