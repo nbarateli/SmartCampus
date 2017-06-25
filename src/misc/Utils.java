@@ -52,8 +52,9 @@ public final class Utils {
      * to its String representation
      */
     public static Time toHHMM(String time) {
-        if (!isValidFormat(time))
+        if (!isValidFormat(time)) {
             return null;
+        }
 
         int hour = Integer.valueOf(time.substring(0, 2));
         int min = Integer.valueOf(time.substring(3, 5));
@@ -384,8 +385,9 @@ public final class Utils {
             //capacity and floor can't be negative
             //their input types are "number" but some old browsers don't have support for
             //that and we don't won't any exceptions
-            if (numValue < 0 || (checkHour && numValue >= 24) || (!checkHour && numValue >= 59))
+            if (numValue < 0 || (checkHour && numValue >= 24) || (!checkHour && numValue > 59)) {
                 return false;
+            }
         } catch (NumberFormatException e) {
             return false; //the text wasn't a number
         }
