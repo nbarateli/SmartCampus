@@ -18,7 +18,8 @@ INSERT INTO campus_subject (subject_name) VALUES
   ('კალკულუსი II'),
   ('თეორიული ინფორმატიკა'),
   ('გაძლიერებული ალგორითმები I'),
-  ('გერმანული II');
+  ('გერმანული II'),
+  ('წყლის ნაყვის პატერნები');
 
 INSERT INTO room (room_name, room_floor, room_type, capacity, available_for_students, seat_type) VALUES
   ('200', 2, 'auditorium', 200, FALSE, 'DESKS'),
