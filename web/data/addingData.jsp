@@ -89,9 +89,9 @@
             </div>
             <br>
             <br>
-            <div class="form-vertical" id="file">
+            <div class="form-vertical" id="lect-file">
               <input type="file" name="pic" accept=".xls,.xlsx"><br>
-              <output id="list"></output>
+              <output id="lect-list"></output>
             </div>
             <br>
             <br>

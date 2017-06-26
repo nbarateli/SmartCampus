@@ -42,7 +42,6 @@ public class SubjectAdder extends HttpServlet {
         if (subject == null) {
             manager.addSubject(subjectName);
             response.getWriter().println(SUCCESS);
-            System.out.println("added " + subjectName);
         } else {
             response.getWriter().println(FAILED);
         }
