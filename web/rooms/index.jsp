@@ -44,6 +44,7 @@
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="SearchPageStyle.css">
+    <link rel="stylesheet" href="Floors.css">
   <script
           src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script
@@ -296,9 +297,14 @@
         <area id="423" shape="rect" coords="338,2,366,42" />
       </map>
     </div>
-
     </td>
   </tr>
 </table>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span id="closeModal" class="close">&times;</span>
+        <p>Some text in the Modal..</p>
+    </div>
+</div>
 </body>
 </html>
