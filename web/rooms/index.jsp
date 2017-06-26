@@ -51,7 +51,29 @@
   <script src="RoomsSearch.js"></script>
 </head>
 <body>
-
+<script type="text/javascript">
+    window.addEventListener('load', load, false);
+    function load() {
+        var map = document.getElementById("map1");
+        var areas = map.childNodes;
+        for (i = 0; i < areas.length; i++) {
+            areas[i].addEventListener("mouseover", myHover);
+            areas[i].addEventListener("click",myClick);
+        }
+        function myHover(){
+            //testing hover
+            var id = this.id;
+            document.getElementById("par").innerHTML = id;
+            //to do hover functionality 
+        }
+        function myClick(){
+            //testing click
+            var id = this.id;
+            alert(id);
+            //to do click functionality
+        }
+    };
+</script>
 <table id="full-table">
   <tr>
     <td id="left-td">
@@ -126,7 +148,7 @@
                   return decodeURIComponent(name[1]);
           }
 
-          let array;
+          var array;
           $.getJSON("findrooms", function (result) {
               for (i in array) {
                   array.append(result);
@@ -140,7 +162,7 @@
       </script>
 
     <td id="right-td">
-      <div align="center" id="right-div">
+      <div align="center" id="right-div" style="display:none">
 
         <%
           RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();
@@ -172,6 +194,31 @@
           }
         %>
       </div>
+    <h1 id="par">This is a Heading</h1>
+
+    <img src="map1-4.jpg" width="640" height="390" alt="map1" usemap="#map1"/>
+    <map name="map1" id="map1">
+      <area id="101" shape="rect" coords="2,295,87,331" />
+      <area id="102" shape="rect" coords="4,355,87,387" />
+      <area id="103" shape="rect" coords="88,355,127,387" />
+      <area id="104" shape="rect" coords="128,355,212,387" />
+      <area id="105" shape="rect" coords="126,296,212,332" />
+      <area id="106" shape="rect" coords="213,354,276,387" />
+      <area id="107" shape="rect" coords="314,352,400,388" />
+      <area id="108" shape="rect" coords="315,295,400,333" />
+      <area id="109" shape="rect" coords="401,354,440,387" />
+      <area id="110" shape="rect" coords="440,352,524,386" />
+      <area id="111" shape="rect" coords="438,294,524,333" />
+      <area id="112" shape="rect" coords="524,354,584,388" />
+      <area id="113" shape="rect" coords="584,324,638,384" />
+      <area id="114" shape="rect" coords="256,192,293,256" />
+      <area id="115" shape="rect" coords="198,192,236,258" />
+      <area id="116" shape="rect" coords="256,150,292,191" />
+      <area id="117" shape="rect" coords="256,84,293,150" />
+      <area id="118" shape="rect" coords="198,87,234,150" />
+      <area id="119" shape="rect" coords="256,43,293,84" />
+      <area id="120" shape="rect" coords="256,3,294,44" />
+    </map>
     </td>
   </tr>
 </table>
