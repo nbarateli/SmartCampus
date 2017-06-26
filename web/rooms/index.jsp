@@ -54,24 +54,29 @@
 <script type="text/javascript">
     window.addEventListener('load', load, false);
     function load() {
-        var map = document.getElementById("map1");
+        var map1 = document.getElementById("map1");
+        var map2 = document.getElementById("map2");
+        loadMap(map1);
+        loadMap(map2);
+    };
+    function loadMap(map) {
         var areas = map.childNodes;
         for (i = 0; i < areas.length; i++) {
             areas[i].addEventListener("mouseover", myHover);
             areas[i].addEventListener("click",myClick);
         }
-        function myHover(){
-            //testing hover
-            var id = this.id;
-            document.getElementById("par").innerHTML = id;
-            //to do hover functionality 
-        }
-        function myClick(){
-            //testing click
-            var id = this.id;
-            alert(id);
-            //to do click functionality
-        }
+    };
+    function myHover(){
+        //testing hover
+        var id = this.id;
+        document.getElementById("par").innerHTML = id;
+        //to do hover functionality
+    };
+    function myClick(){
+        //testing click
+        var id = this.id;
+        alert(id);
+        //to do click functionality
     };
 </script>
 <table id="full-table">
@@ -219,6 +224,37 @@
       <area id="119" shape="rect" coords="256,43,293,84" />
       <area id="120" shape="rect" coords="256,3,294,44" />
     </map>
+
+    <img src="map2-3.jpg" width="640" height="390" alt="map2" usemap="#map2" />
+    <map name="map2" id="map2">
+      <area id="200" shape="rect" coords="2,293,75,384" />
+      <area id="201" shape="rect" coords="75,352,107,384" />
+      <area id="202" shape="rect" coords="108,353,139,385" />
+      <area id="203" shape="rect" coords="140,352,207,384" />
+      <area id="204" shape="rect" coords="139,293,207,328" />
+      <area id="205" shape="rect" coords="204,352,237,384" />
+      <area id="206" shape="rect" coords="237,352,304,384" />
+      <area id="207" shape="rect" coords="238,292,303,330" />
+      <area id="208" shape="rect" coords="304,352,354,384" />
+      <area id="209" shape="rect" coords="384,352,402,387" />
+      <area id="210" shape="rect" coords="383,292,401,332" />
+      <area id="211" shape="rect" coords="400,352,450,386" />
+      <area id="212" shape="rect" coords="401,295,450,330" />
+      <area id="213" shape="rect" coords="452,352,483,384" />
+      <area id="214" shape="rect" coords="482,351,550,388" />
+      <area id="215" shape="rect" coords="483,293,498,333" />
+      <area id="216" shape="rect" coords="499,294,550,333" />
+      <area id="217" shape="rect" coords="550,353,598,385" />
+      <area id="218" shape="rect" coords="599,322,638,388" />
+      <area id="219" shape="rect" coords="336,195,367,254" />
+      <area id="220" shape="rect" coords="292,191,320,256" />
+      <area id="221" shape="rect" coords="336,152,366,192" />
+      <area id="222" shape="rect" coords="336,85,379,149" />
+      <area id="223" shape="rect" coords="292,86,322,148" />
+      <area id="224" shape="rect" coords="336,43,366,84" />
+      <area id="225" shape="rect" coords="335,3,366,42" />
+    </map>
+
     </td>
   </tr>
 </table>
