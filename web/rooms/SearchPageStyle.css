@@ -49,3 +49,13 @@ td, tr {
   color: #cc0000;
   padding-right: 5px;
 }
+
+#popup-div {
+	display: none;
+	z-index: 1;
+	height: 1px;
+	width: 1px;
+	position: absolute;
+	right:0; left:0; top:0; bottom:0;
+	background-color: yellow;
+}

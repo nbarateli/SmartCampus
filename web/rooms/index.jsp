@@ -44,6 +44,7 @@
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="SearchPageStyle.css">
+  <link rel="stylesheet" href="Zaura.css">
   <script
           src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script
@@ -172,6 +173,7 @@
           }
         %>
       </div>
+		<div id="popup-div"> blank </div> 
     <h1 id="par">FLOOR</h1>
     <select name="floors" onchange="floorChange()" id="floors">
       <option value="first">პირველი სართული</option>
@@ -182,118 +184,118 @@
     <div>
       <img src="map1-4.jpg" width="640" height="390" alt="map1" usemap="#map1" id="imgmap1" />
       <map name="map1" id="map1">
-        <area id="101" shape="rect" coords="2,295,87,331" />
-        <area id="102" shape="rect" coords="4,355,87,387" />
-        <area id="103" shape="rect" coords="88,355,127,387" />
-        <area id="104" shape="rect" coords="128,355,212,387" />
-        <area id="105" shape="rect" coords="126,296,212,332" />
-        <area id="106" shape="rect" coords="213,354,276,387" />
-        <area id="107" shape="rect" coords="314,352,400,388" />
-        <area id="108" shape="rect" coords="315,295,400,333" />
-        <area id="109" shape="rect" coords="401,354,440,387" />
-        <area id="110" shape="rect" coords="440,352,524,386" />
-        <area id="111" shape="rect" coords="438,294,524,333" />
-        <area id="112" shape="rect" coords="524,354,584,388" />
-        <area id="113" shape="rect" coords="584,324,638,384" />
-        <area id="114" shape="rect" coords="256,192,293,256" />
-        <area id="115" shape="rect" coords="198,192,236,258" />
-        <area id="116" shape="rect" coords="256,150,292,191" />
-        <area id="117" shape="rect" coords="256,84,293,150" />
-        <area id="118" shape="rect" coords="198,87,234,150" />
-        <area id="119" shape="rect" coords="256,43,293,84" />
-        <area id="120" shape="rect" coords="256,3,294,44" />
+        <area class="popup" id="101" shape="rect" coords="2,295,87,331" />
+        <area class="popup" id="102" shape="rect" coords="4,355,87,387" />
+        <area class="popup" id="103" shape="rect" coords="88,355,127,387" />
+        <area class="popup" id="104" shape="rect" coords="128,355,212,387" />
+        <area class="popup" id="105" shape="rect" coords="126,296,212,332" />
+        <area class="popup" id="106" shape="rect" coords="213,354,276,387" />
+        <area class="popup" id="107" shape="rect" coords="314,352,400,388" />
+        <area class="popup" id="108" shape="rect" coords="315,295,400,333" />
+        <area class="popup" id="109" shape="rect" coords="401,354,440,387" />
+        <area class="popup" id="110" shape="rect" coords="440,352,524,386" />
+        <area class="popup" id="111" shape="rect" coords="438,294,524,333" />
+        <area class="popup" id="112" shape="rect" coords="524,354,584,388" />
+        <area class="popup" id="113" shape="rect" coords="584,324,638,384" />
+        <area class="popup" id="114" shape="rect" coords="256,192,293,256" />
+        <area class="popup" id="115" shape="rect" coords="198,192,236,258" />
+        <area class="popup" id="116" shape="rect" coords="256,150,292,191" />
+        <area class="popup" id="117" shape="rect" coords="256,84,293,150" />
+        <area class="popup" id="118" shape="rect" coords="198,87,234,150" />
+        <area class="popup" id="119" shape="rect" coords="256,43,293,84" />
+        <area class="popup" id="120" shape="rect" coords="256,3,294,44" />
       </map>
       <img src="map2-3.jpg" width="640" height="390" alt="map2" usemap="#map2" style="display:none" id="imgmap2" />
       <map name="map2" id="map2">
-        <area id="200" shape="rect" coords="2,293,75,384" />
-        <area id="201" shape="rect" coords="75,352,107,384" />
-        <area id="202" shape="rect" coords="108,353,139,385" />
-        <area id="203" shape="rect" coords="140,352,207,384" />
-        <area id="204" shape="rect" coords="139,293,207,328" />
-        <area id="205" shape="rect" coords="204,352,237,384" />
-        <area id="206" shape="rect" coords="237,352,304,384" />
-        <area id="207" shape="rect" coords="238,292,303,330" />
-        <area id="208" shape="rect" coords="304,352,354,384" />
-        <area id="209" shape="rect" coords="384,352,402,387" />
-        <area id="210" shape="rect" coords="383,292,401,332" />
-        <area id="211" shape="rect" coords="400,352,450,386" />
-        <area id="212" shape="rect" coords="401,295,450,330" />
-        <area id="213" shape="rect" coords="452,352,483,384" />
-        <area id="214" shape="rect" coords="482,351,550,388" />
-        <area id="215" shape="rect" coords="483,293,498,333" />
-        <area id="216" shape="rect" coords="499,294,550,333" />
-        <area id="217" shape="rect" coords="550,353,598,385" />
-        <area id="218" shape="rect" coords="599,322,638,388" />
-        <area id="219" shape="rect" coords="336,195,367,254" />
-        <area id="220" shape="rect" coords="292,191,320,256" />
-        <area id="221" shape="rect" coords="336,152,366,192" />
-        <area id="222" shape="rect" coords="336,85,379,149" />
-        <area id="223" shape="rect" coords="292,86,322,148" />
-        <area id="224" shape="rect" coords="336,43,366,84" />
-        <area id="225" shape="rect" coords="335,3,366,42" />
+        <area class="popup" id="200" shape="rect" coords="2,293,75,384" />
+        <area class="popup" id="201" shape="rect" coords="75,352,107,384" />
+        <area class="popup" id="202" shape="rect" coords="108,353,139,385" />
+        <area class="popup" id="203" shape="rect" coords="140,352,207,384" />
+        <area class="popup" id="204" shape="rect" coords="139,293,207,328" />
+        <area class="popup" id="205" shape="rect" coords="204,352,237,384" />
+        <area class="popup" id="206" shape="rect" coords="237,352,304,384" />
+        <area class="popup" id="207" shape="rect" coords="238,292,303,330" />
+        <area class="popup" id="208" shape="rect" coords="304,352,354,384" />
+        <area class="popup" id="209" shape="rect" coords="384,352,402,387" />
+        <area class="popup" id="210" shape="rect" coords="383,292,401,332" />
+        <area class="popup" id="211" shape="rect" coords="400,352,450,386" />
+        <area class="popup" id="212" shape="rect" coords="401,295,450,330" />
+        <area class="popup" id="213" shape="rect" coords="452,352,483,384" />
+        <area class="popup" id="214" shape="rect" coords="482,351,550,388" />
+        <area class="popup" id="215" shape="rect" coords="483,293,498,333" />
+        <area class="popup" id="216" shape="rect" coords="499,294,550,333" />
+        <area class="popup" id="217" shape="rect" coords="550,353,598,385" />
+        <area class="popup" id="218" shape="rect" coords="599,322,638,388" />
+        <area class="popup" id="219" shape="rect" coords="336,195,367,254" />
+        <area class="popup" id="220" shape="rect" coords="292,191,320,256" />
+        <area class="popup" id="221" shape="rect" coords="336,152,366,192" />
+        <area class="popup" id="222" shape="rect" coords="336,85,379,149" />
+        <area class="popup" id="223" shape="rect" coords="292,86,322,148" />
+        <area class="popup" id="224" shape="rect" coords="336,43,366,84" />
+        <area class="popup" id="225" shape="rect" coords="335,3,366,42" />
       </map>
       <img src="map3-2.jpg" width="640" height="390" alt="map3" usemap="#map3" style="display:none" id="imgmap3" />
       <map name="map3" id="map3">
-        <area id="301" shape="rect" coords="32,351,67,386" />
-        <area id="302" shape="rect" coords="67,351,102,387" />
-        <area id="303" shape="rect" coords="102,352,173,386" />
-        <area id="304" shape="rect" coords="101,295,118,332" />
-        <area id="305" shape="rect" coords="119,296,172,331" />
-        <area id="306" shape="rect" coords="173,352,207,386" />
-        <area id="307-1" shape="rect" coords="206,352,243,386" />
-        <area id="307-2" shape="rect" coords="243,352,278,387" />
-        <area id="308" shape="rect" coords="205,297,224,330" />
-        <area id="309" shape="rect" coords="225,295,279,330" />
-        <area id="310" shape="rect" coords="278,352,329,387" />
-        <area id="311" shape="rect" coords="365,352,384,387" />
-        <area id="312" shape="rect" coords="362,292,382,331" />
-        <area id="313" shape="rect" coords="385,352,435,387" />
-        <area id="314" shape="rect" coords="383,293,437,330" />
-        <area id="315" shape="rect" coords="436,354,471,387" />
-        <area id="316" shape="rect" coords="472,354,489,386" />
-        <area id="317" shape="rect" coords="471,293,487,331" />
-        <area id="318" shape="rect" coords="491,353,541,388" />
-        <area id="319" shape="rect" coords="487,294,541,330" />
-        <area id="320" shape="rect" coords="540,352,591,386" />
-        <area id="321" shape="rect" coords="591,320,638,387" />
-        <area id="322" shape="rect" coords="314,192,347,256" />
-        <area id="323" shape="rect" coords="265,192,299,256" />
-        <area id="324" shape="rect" coords="314,150,347,191" />
-        <area id="325" shape="rect" coords="314,88,357,149" />
-        <area id="326" shape="rect" coords="265,84,299,149" />
-        <area id="327" shape="rect" coords="314,47,346,86" />
-        <area id="328" shape="rect" coords="314,3,346,46" />
+        <area class="popup" id="301" shape="rect" coords="32,351,67,386" />
+        <area class="popup" id="302" shape="rect" coords="67,351,102,387" />
+        <area class="popup" id="303" shape="rect" coords="102,352,173,386" />
+        <area class="popup" id="304" shape="rect" coords="101,295,118,332" />
+        <area class="popup" id="305" shape="rect" coords="119,296,172,331" />
+        <area class="popup" id="306" shape="rect" coords="173,352,207,386" />
+        <area class="popup" id="307-1" shape="rect" coords="206,352,243,386" />
+        <area class="popup" id="307-2" shape="rect" coords="243,352,278,387" />
+        <area class="popup" id="308" shape="rect" coords="205,297,224,330" />
+        <area class="popup" id="309" shape="rect" coords="225,295,279,330" />
+        <area class="popup" id="310" shape="rect" coords="278,352,329,387" />
+        <area class="popup" id="311" shape="rect" coords="365,352,384,387" />
+        <area class="popup" id="312" shape="rect" coords="362,292,382,331" />
+        <area class="popup" id="313" shape="rect" coords="385,352,435,387" />
+        <area class="popup" id="314" shape="rect" coords="383,293,437,330" />
+        <area class="popup" id="315" shape="rect" coords="436,354,471,387" />
+        <area class="popup" id="316" shape="rect" coords="472,354,489,386" />
+        <area class="popup" id="317" shape="rect" coords="471,293,487,331" />
+        <area class="popup" id="318" shape="rect" coords="491,353,541,388" />
+        <area class="popup" id="319" shape="rect" coords="487,294,541,330" />
+        <area class="popup" id="320" shape="rect" coords="540,352,591,386" />
+        <area class="popup" id="321" shape="rect" coords="591,320,638,387" />
+        <area class="popup" id="322" shape="rect" coords="314,192,347,256" />
+        <area class="popup" id="323" shape="rect" coords="265,192,299,256" />
+        <area class="popup" id="324" shape="rect" coords="314,150,347,191" />
+        <area class="popup" id="325" shape="rect" coords="314,88,357,149" />
+        <area class="popup" id="326" shape="rect" coords="265,84,299,149" />
+        <area class="popup" id="327" shape="rect" coords="314,47,346,86" />
+        <area class="popup" id="328" shape="rect" coords="314,3,346,46" />
       </map>
       <img src="map4.jpg" width="640" height="390" alt="map4" usemap="#map4" style="display:none" id="imgmap4" />
       <map name="map4" id="map4">
-        <area id="400" shape="rect" coords="2,90,108,388" />
-        <area id="401" shape="rect" coords="109,351,140,386" />
-        <area id="402-1" shape="rect" coords="140,353,176,387" />
-        <area id="402-2" shape="rect" coords="174,354,206,387" />
-        <area id="403-1" shape="rect" coords="139,291,187,330" />
-        <area id="403-2" shape="rect" coords="187,292,206,330" />
-        <area id="404" shape="rect" coords="206,352,223,387" />
-        <area id="405" shape="rect" coords="224,352,240,387" />
-        <area id="406" shape="rect" coords="240,352,303,386" />
-        <area id="407-1" shape="rect" coords="238,292,270,332" />
-        <area id="407-2" shape="rect" coords="271,292,303,331" />
-        <area id="408" shape="rect" coords="304,352,352,386" />
-        <area id="409" shape="rect" coords="384,351,450,388" />
-        <area id="410" shape="rect" coords="382,296,450,330" />
-        <area id="411" shape="rect" coords="450,352,482,387" />
-        <area id="412" shape="rect" coords="481,352,546,387" />
-        <area id="413-1" shape="rect" coords="482,296,528,333" />
-        <area id="413-2" shape="rect" coords="530,296,546,332" />
-        <area id="414" shape="rect" coords="546,352,594,387" />
-        <area id="415" shape="rect" coords="595,322,637,387" />
-        <area id="416" shape="rect" coords="338,190,366,257" />
-        <area id="417" shape="rect" coords="291,190,322,254" />
-        <area id="418" shape="rect" coords="338,171,366,190" />
-        <area id="419" shape="rect" coords="338,149,367,169" />
-        <area id="420" shape="rect" coords="336,86,380,150" />
-        <area id="421" shape="rect" coords="292,85,323,147" />
-        <area id="422" shape="rect" coords="338,46,366,84" />
-        <area id="423" shape="rect" coords="338,2,366,42" />
+        <area class="popup" id="400" shape="rect" coords="2,90,108,388" />
+        <area class="popup" id="401" shape="rect" coords="109,351,140,386" />
+        <area class="popup" id="402-1" shape="rect" coords="140,353,176,387" />
+        <area class="popup" id="402-2" shape="rect" coords="174,354,206,387" />
+        <area class="popup" id="403-1" shape="rect" coords="139,291,187,330" />
+        <area class="popup" id="403-2" shape="rect" coords="187,292,206,330" />
+        <area class="popup" id="404" shape="rect" coords="206,352,223,387" />
+        <area class="popup" id="405" shape="rect" coords="224,352,240,387" />
+        <area class="popup" id="406" shape="rect" coords="240,352,303,386" />
+        <area class="popup" id="407-1" shape="rect" coords="238,292,270,332" />
+        <area class="popup" id="407-2" shape="rect" coords="271,292,303,331" />
+        <area class="popup" id="408" shape="rect" coords="304,352,352,386" />
+        <area class="popup" id="409" shape="rect" coords="384,351,450,388" />
+        <area class="popup" id="410" shape="rect" coords="382,296,450,330" />
+        <area class="popup" id="411" shape="rect" coords="450,352,482,387" />
+        <area class="popup" id="412" shape="rect" coords="481,352,546,387" />
+        <area class="popup" id="413-1" shape="rect" coords="482,296,528,333" />
+        <area class="popup" id="413-2" shape="rect" coords="530,296,546,332" />
+        <area class="popup" id="414" shape="rect" coords="546,352,594,387" />
+        <area class="popup" id="415" shape="rect" coords="595,322,637,387" />
+        <area class="popup" id="416" shape="rect" coords="338,190,366,257" />
+        <area class="popup" id="417" shape="rect" coords="291,190,322,254" />
+        <area class="popup" id="418" shape="rect" coords="338,171,366,190" />
+        <area class="popup" id="419" shape="rect" coords="338,149,367,169" />
+        <area class="popup" id="420" shape="rect" coords="336,86,380,150" />
+        <area class="popup" id="421" shape="rect" coords="292,85,323,147" />
+        <area class="popup" id="422" shape="rect" coords="338,46,366,84" />
+        <area class="popup" id="423" shape="rect" coords="338,2,366,42" />
       </map>
     </div>
 
