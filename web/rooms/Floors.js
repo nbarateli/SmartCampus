@@ -11,6 +11,16 @@ function load() {
     workMaps(map2);
     workMaps(map3);
     workMaps(map4);
+    var span = document.getElementById("closeModal");
+    var modal = document.getElementById('myModal');
+    span.onclick = function () {
+        modal.style.display = "none";
+    };
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 };
 function workMaps(map) {
     var areas = map.childNodes;
@@ -19,12 +29,15 @@ function workMaps(map) {
         areas[i].addEventListener("click", myClick);
     }
 }
-function myClick(){
+
+
+function myClick() {
     //testing
     var id = this.id;
-    alert(id);
-    //to do implementation
+    var modal = document.getElementById('myModal');
+    modal.style.display = "block";
 }
+
 function myHover() {
 	var id = this.id;
     var rect = document.getElementById(id).getBoundingClientRect();

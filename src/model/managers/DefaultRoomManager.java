@@ -3,6 +3,7 @@ package model.managers;
 import misc.Utils;
 import model.campus.CampusSearchQuery;
 import model.lectures.Lecture;
+import model.lectures.Lecture.WeekDay;
 import model.rooms.Room;
 import model.rooms.RoomManager;
 import model.rooms.RoomProblem;
@@ -12,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class DefaultRoomManager implements RoomManager {
     @Override
     public List<Room> find(RoomSearchQueryGenerator queryGenerator) {
         List<Room> rooms = new ArrayList<>();
-        CampusSearchQuery<Room> query = queryGenerator.generateQuery();
+        CampusSearchQuery query = queryGenerator.generateQuery();
         try (ResultSet matches = connector.executeQuery(query.getQuery(), query.getValues())) {
             while (matches.next()) {
                 rooms.add(getRoomFromResults(matches));
@@ -123,6 +125,37 @@ public class DefaultRoomManager implements RoomManager {
             //ignored
         }
         return lectures;
+    }
+    
+    @Override
+    public boolean isLectureAt(Room room, Date date, Time current) {
+        WeekDay day = toWeekDay(date);
+        
+        String sql = "SELECT * FROM " + SQL_TABLE_LECTURE + " INNER JOIN " + SQL_TABLE_USER + " ON " +
+                SQL_TABLE_LECTURE + "." + SQL_COLUMN_LECTURE_LECTURER + " = " + SQL_TABLE_USER + "." +
+                SQL_COLUMN_USER_ID +
+                " INNER JOIN " + SQL_TABLE_SUBJECT + " ON " + SQL_TABLE_SUBJECT + "." + SQL_COLUMN_SUBJECT_ID +
+                "= " + SQL_TABLE_LECTURE + "." + SQL_COLUMN_SUBJECT_ID + " \n " +
+                " INNER JOIN " + SQL_TABLE_ROOM + " ON " + SQL_TABLE_LECTURE + "." + SQL_COLUMN_ROOM_ID + "" +
+                "= " + SQL_TABLE_ROOM + "." + SQL_COLUMN_ROOM_ID +
+                " WHERE lecture.room_id = " + room.getId() +
+                " AND lecture.day_of_week = '" + day.toString().toLowerCase() + "'" +
+                " AND start_time <= " + toSqlTime(current) +
+                " AND end_time >= " + toSqlTime(current);
+        //TODO
+        
+        int count = 0;
+        
+        try (ResultSet rs = connector.executeQuery(sql)) {
+            
+            while (rs.next()) {
+                count++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            //ignored
+        }
+        return (count != 0);
     }
 
     @Override

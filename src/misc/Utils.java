@@ -64,9 +64,9 @@ public final class Utils {
         return new Time(calendar.getTimeInMillis());
     }
 
-    /*
+    /**
     * Converts given String to WeekDay format.
-    * */
+    */
     public static Lecture.WeekDay toWeekDay(String day) {
         switch (day.toLowerCase()) {
             case "ორშაბათი":
@@ -94,6 +94,34 @@ public final class Utils {
         }
         return null;
     }
+    
+    /**
+     * Given a date returns respective weekday
+     */
+     public static Lecture.WeekDay toWeekDay(Date date) {
+         Calendar cal = Calendar.getInstance();
+         cal.setTime(date);
+         int day = cal.get(Calendar.DAY_OF_WEEK);
+         
+         switch (day) {
+             case 2:
+                 return Lecture.WeekDay.MONDAY;
+             case 3:
+                 return Lecture.WeekDay.TUESDAY;
+             case 4:
+                 return Lecture.WeekDay.WEDNESDAY;
+             case 5:
+                 return Lecture.WeekDay.THURSDAY;
+             case 6:
+                 return Lecture.WeekDay.FRIDAY;
+             case 7:
+                 return Lecture.WeekDay.SATURDAY;
+             case 1:
+                 return Lecture.WeekDay.SUNDAY;
+
+         }
+         return null;
+     }
 
     /**
      * return sql format of given time
