@@ -2,8 +2,23 @@ package model.rooms;
 
 import model.campus.CampusManager;
 import model.lectures.Lecture;
+import model.lectures.Lecture.WeekDay;
 
+import static misc.Utils.toSqlTime;
+import static misc.Utils.toWeekDay;
+import static model.database.SQLConstants.SQL_COLUMN_LECTURE_LECTURER;
+import static model.database.SQLConstants.SQL_COLUMN_ROOM_ID;
+import static model.database.SQLConstants.SQL_COLUMN_SUBJECT_ID;
+import static model.database.SQLConstants.SQL_COLUMN_USER_ID;
+import static model.database.SQLConstants.SQL_TABLE_LECTURE;
+import static model.database.SQLConstants.SQL_TABLE_ROOM;
+import static model.database.SQLConstants.SQL_TABLE_SUBJECT;
+import static model.database.SQLConstants.SQL_TABLE_USER;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Time;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,7 +55,7 @@ public interface RoomManager extends CampusManager<Room, RoomSearchQueryGenerato
 
     /**
      * Returns a list of all the lectures that take place in the room
-     * at given day and start within he range of start and end times.
+     * at given day and start within the range of start and end times.
      *
      * @param room  a room where the lectures take place
      * @param day   the day on which the lectures take place
@@ -48,6 +63,16 @@ public interface RoomManager extends CampusManager<Room, RoomSearchQueryGenerato
      * @param end   end of the time range when the lectures start
      */
     List<Lecture> findAllLecturesAt(Room room, Lecture.WeekDay day, Time start, Time end);
+    
+    /**
+     * Tells if there is a lecture that takes place in the room
+     * at given date and on given current time.
+     *
+     * @param room  a room we are interested in
+     * @param date  the date we are interested in
+     * @param current time we are interested in
+     */
+    boolean isLectureAt(Room room, Date date, Time current);
 
     /**
      * returns room with given id from the database
@@ -77,5 +102,5 @@ public interface RoomManager extends CampusManager<Room, RoomSearchQueryGenerato
      * @param imageURL an URL to the image
      */
     void addImage(Room room, String imageURL);
-
+    
 }
