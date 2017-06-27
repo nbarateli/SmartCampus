@@ -6,7 +6,7 @@ package model.campus;
  * An immutable structure that contains an SQL query for {@code PreparedStatement} and relevant values array
  * that denote all the objects that are represented as "?"-s in given query.
  */
-public class CampusSearchQuery<T extends CampusObject> {
+public class CampusSearchQuery {
     private final String query;
     private final Object[] values;
 
