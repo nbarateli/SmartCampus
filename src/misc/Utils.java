@@ -8,8 +8,6 @@ import model.rooms.Room;
 import model.rooms.RoomProblem;
 
 import java.io.*;
-import java.net.URL;
-import java.net.URLConnection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -19,6 +17,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static model.accounts.User.UserPermission.*;
 import static model.accounts.User.UserRole;
 import static model.accounts.User.UserRole.*;
 import static model.database.SQLConstants.*;
@@ -68,8 +67,8 @@ public final class Utils {
     }
 
     /**
-    * Converts given String to WeekDay format.
-    */
+     * Converts given String to WeekDay format.
+     */
     public static Lecture.WeekDay toWeekDay(String day) {
         switch (day.toLowerCase()) {
             case "ორშაბათი":
@@ -97,34 +96,34 @@ public final class Utils {
         }
         return null;
     }
-    
+
     /**
      * Given a date returns respective weekday
      */
-     public static Lecture.WeekDay toWeekDay(Date date) {
-         Calendar cal = Calendar.getInstance();
-         cal.setTime(date);
-         int day = cal.get(Calendar.DAY_OF_WEEK);
-         
-         switch (day) {
-             case 2:
-                 return Lecture.WeekDay.MONDAY;
-             case 3:
-                 return Lecture.WeekDay.TUESDAY;
-             case 4:
-                 return Lecture.WeekDay.WEDNESDAY;
-             case 5:
-                 return Lecture.WeekDay.THURSDAY;
-             case 6:
-                 return Lecture.WeekDay.FRIDAY;
-             case 7:
-                 return Lecture.WeekDay.SATURDAY;
-             case 1:
-                 return Lecture.WeekDay.SUNDAY;
+    public static Lecture.WeekDay toWeekDay(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int day = cal.get(Calendar.DAY_OF_WEEK);
 
-         }
-         return null;
-     }
+        switch (day) {
+            case 2:
+                return Lecture.WeekDay.MONDAY;
+            case 3:
+                return Lecture.WeekDay.TUESDAY;
+            case 4:
+                return Lecture.WeekDay.WEDNESDAY;
+            case 5:
+                return Lecture.WeekDay.THURSDAY;
+            case 6:
+                return Lecture.WeekDay.FRIDAY;
+            case 7:
+                return Lecture.WeekDay.SATURDAY;
+            case 1:
+                return Lecture.WeekDay.SUNDAY;
+
+        }
+        return null;
+    }
 
     /**
      * return sql format of given time
@@ -408,6 +407,61 @@ public final class Utils {
     }
 
     /**
+     * Returns content of a file in passed path
+     */
+    public static String getContent(String path) {
+        StringBuilder contents = new StringBuilder();
+        File f = new File(path);
+        try (
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(new FileInputStream(f), "UTF-8"))) {
+            for (String line = in.readLine(); line != null; line = in.readLine()) {
+                contents.append(line).append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return contents.toString();
+
+    }
+
+    /**
+     * Returns a {@code UserPermission} value of a given string
+     */
+    public static User.UserPermission toUserPermission(String permission) {
+        switch (permission.toLowerCase()) {
+            case "book_a_room":
+                return BOOK_A_ROOM;
+          /*  ('book_a_room', 'request_booked_room', 'cancel_booking', 'report_room_problem',
+                    'delete_problem', 'lost_found_post', 'lost_found_delete', 'warn_user',
+                    'view_user_warnings', 'delete_user_warnings', 'remove_permission', 'insert_data')*/
+            case "request_booked_room":
+                return REQUEST_BOOKED_ROOM;
+            case "cancel_booking":
+                return CANCEL_BOOKING;
+            case "report_room_problem":
+                return REPORT_ROOM_PROBLEM;
+            case "delete_problem":
+                return DELETE_PROBLEM;
+            case "lost_found_post":
+                return LOST_FOUND_POST;
+            case "lost_found_delete":
+                return LOST_FOUND_DELETE;
+            case "warn_user":
+                return WARN_USER;
+            case "view_user_warnings":
+                return VIEW_USER_WARNINGS;
+            case "delete_user_warnings":
+                return DELETE_USER_WARNINGS;
+            case "remove_permission":
+                return REMOVE_PERMISSION;
+            case "insert_data":
+                return INSERT_DATA;
+        }
+        return null;
+    }
+
+    /**
      * checks if given string is valid for representing hour or minute
      */
     private static boolean numberStringIsValid(String s, boolean checkHour) {
@@ -436,22 +490,6 @@ public final class Utils {
         return time.length() >= 5 && time.charAt(2) == ':' &&
                 numberStringIsValid(time.substring(0, 2), true) &&
                 numberStringIsValid(time.substring(3, 5), false);
-    }
-
-    public static String getContent(String path) {
-        StringBuilder contents = new StringBuilder();
-        File f = new File(path);
-        try (
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(new FileInputStream(f), "UTF-8"))) {
-            for (String line = in.readLine(); line != null; line = in.readLine()) {
-                contents.append(line).append("\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return contents.toString();
-
     }
 
     private Utils() {

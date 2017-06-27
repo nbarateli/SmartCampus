@@ -9,11 +9,11 @@ import model.problems.CampusProblem;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-import static misc.Utils.getUserFromResults;
-import static model.database.SQLConstants.SQL_COLUMN_USER_EMAIL;
-import static model.database.SQLConstants.SQL_TABLE_USER;
+import static misc.Utils.*;
+import static model.database.SQLConstants.*;
 
 public class DefaultAccountManager implements AccountManager {
 
@@ -69,12 +69,30 @@ public class DefaultAccountManager implements AccountManager {
 
     @Override
     public List<User.UserRole> getAllRolesOF(User user) {
-        return null;
+        List<User.UserRole> roles = new ArrayList<>();
+        String sql = String.format("SELECT * FROM %s\n  WHERE %s = ?", SQL_TABLE_USER_ROLE, SQL_COLUMN_USER_ROLE_USER);
+        try (ResultSet results = connector.executeQuery(sql, user.getId())) {
+            while (results.next()) {
+                roles.add(toUserRole(results.getString(SQL_COLUMN_USER_ROLE_NAME)));
+            }
+        } catch (SQLException e) {
+            //ignored
+        }
+        return roles;
     }
 
     @Override
     public List<User.UserPermission> getAllPermissionsOf(User user) {
-        return null;
+        List<User.UserPermission> permissions = new ArrayList<>();
+        String sql = String.format("SELECT * FROM %s WHERE %s = ?", SQL_TABLE_USER_PERMISSION, SQL_COLUMN_USER_PERMISSION_USER);
+        try (ResultSet resultSet = connector.executeQuery(sql, user.getId())) {
+            while (resultSet.next()) {
+                permissions.add(toUserPermission(resultSet.getString(SQL_COLUMN_USER_PERMISSION_NAME)));
+            }
+        } catch (SQLException e) {
+            //ignored
+        }
+        return permissions;
     }
 
     @Override
