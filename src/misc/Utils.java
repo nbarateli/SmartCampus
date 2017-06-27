@@ -7,6 +7,9 @@ import model.managers.DBConnector;
 import model.rooms.Room;
 import model.rooms.RoomProblem;
 
+import java.io.*;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -433,6 +436,22 @@ public final class Utils {
         return time.length() >= 5 && time.charAt(2) == ':' &&
                 numberStringIsValid(time.substring(0, 2), true) &&
                 numberStringIsValid(time.substring(3, 5), false);
+    }
+
+    public static String getContent(String path) {
+        StringBuilder contents = new StringBuilder();
+        File f = new File(path);
+        try (
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(new FileInputStream(f), "UTF-8"))) {
+            for (String line = in.readLine(); line != null; line = in.readLine()) {
+                contents.append(line).append("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return contents.toString();
+
     }
 
     private Utils() {

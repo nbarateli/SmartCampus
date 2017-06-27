@@ -2,6 +2,7 @@
  * Created by Shota on 6/26/2017.
  */
 window.addEventListener('load', load, false);
+
 function load() {
     var map1 = document.getElementById("map1");
     var map2 = document.getElementById("map2");
@@ -14,14 +15,16 @@ function load() {
     var span = document.getElementById("closeModal");
     var modal = document.getElementById('myModal');
     span.onclick = function () {
+
         modal.style.display = "none";
     };
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = "none";
         }
     }
 };
+
 function workMaps(map) {
     var areas = map.childNodes;
     for (i = 0; i < areas.length; i++) {
@@ -35,6 +38,18 @@ function myClick() {
     //testing
     var id = this.id;
     var modal = document.getElementById('myModal');
+    $.ajax({
+        type: "POST",
+        url: '/rooms/room',
+        data: id,
+        parameterNames: 'id',
+        success: function (data) {
+            var parsedData = JSON.parse(data);
+            console.log(parsedData);
+        }
+    })
+
+
     modal.style.display = "block";
 }
 
@@ -60,6 +75,7 @@ function myHover() {
 
     document.getElementById("par").innerHTML = id;
 }
+
 function floorChange() {
     var x = document.getElementById("floors").value;
     if (x === "first") showFirst();
@@ -67,24 +83,28 @@ function floorChange() {
     if (x === "third") showThird();
     if (x === "fourth") showFourth();
 }
+
 function showFirst() {
     document.getElementById("imgmap2").style.display = "none";
     document.getElementById("imgmap3").style.display = "none";
     document.getElementById("imgmap4").style.display = "none";
     document.getElementById("imgmap1").style.display = "unset";
 }
+
 function showSecond() {
     document.getElementById("imgmap1").style.display = "none";
     document.getElementById("imgmap3").style.display = "none";
     document.getElementById("imgmap4").style.display = "none";
     document.getElementById("imgmap2").style.display = "unset";
 }
+
 function showThird() {
     document.getElementById("imgmap1").style.display = "none";
     document.getElementById("imgmap2").style.display = "none";
     document.getElementById("imgmap4").style.display = "none";
     document.getElementById("imgmap3").style.display = "unset";
 }
+
 function showFourth() {
     document.getElementById("imgmap1").style.display = "none";
     document.getElementById("imgmap2").style.display = "none";
@@ -92,3 +112,9 @@ function showFourth() {
     document.getElementById("imgmap4").style.display = "unset";
 }
 
+function displayRoom(data, id) {
+    var tmp = document.getElementById("mustmpl").innerHTML;
+    html = Mustache.to_html(tmp, data);
+    var box = document.getElementById(id);
+    box.innerHTML = html;
+}

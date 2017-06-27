@@ -1,26 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-  <link rel="stylesheet:" href="SearchPageStyle.css">
-</head>
-<body>
-<script src="RoomsSearch.js"></script>
-<div id="room-id-div"><a href="showroom.jsp?id=12">402-2</a></div>
-<button>ვრცლად</button>
-<div class="to-hide">
-  <div><img src="http://i.imgur.com/wpwWazp.png" height="60%"></div>
-  <div id="room-info-div">
-    <div>სართული: %floor.</div>
-    <div>ოთახის ტიპი: %auditoria.</div>
-    <div>ადგილები: %numplaces.</div>
-    <div>შეიძლება დაჯავშნა:
-      <span id="yes-span">კი</span>
+<script type="mustache/x-tmpl" id="mustmpl" charset="UTF-8">
+  <div id="room-id-div"><a href="showroom.jsp?id={{id}}">{{name}}</a></div>
+  <button>ვრცლად</button>
+  <div class="to-hide">
+    <div><img src={{mainimage}} height="60%"></div>
+    <div id="room-info-div">
+      <div>სართული: {{floor}}.</div>
+      <div>ოთახის ტიპი: {{roomtype}}.</div>
+      <div>ადგილები: {{seattype}}.</div>
+      <div>შეიძლება დაჯავშნა:
+        <span id="yes-span">კი</span>
+      </div>
+      <div>ადგილის ტიპი: სკამ-მერხები (პლასტმასის).</div>
     </div>
-    <div>ადგილის ტიპი: სკამ-მერხები (პლასტმასის).</div>
   </div>
-</div>
 
-</body>
-</html>
+</script>
