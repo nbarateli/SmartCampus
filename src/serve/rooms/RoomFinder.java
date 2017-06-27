@@ -28,6 +28,7 @@ public class RoomFinder extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         RoomManager manager = ((RoomManager) request.getServletContext().getAttribute(ROOM_MANAGER));
+
         List<Room> rooms = manager.find(getQuery(request));
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
         for (Room room : rooms) {
