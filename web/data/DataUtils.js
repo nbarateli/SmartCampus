@@ -150,7 +150,7 @@ function createDialog() {
 var addLectureFromForm = function () {
     var params = ($('#sched-form').serialize());
     
-//    clearFormInputs(getElementById("sched-form"));
+    clearFormInputs(document.getElementById("sched-form"));
     
     sendData("/lectures/addlecture", params, true);
     return false;
@@ -159,7 +159,7 @@ var addLectureFromForm = function () {
 var removeRoomFromForm = function () {
     var params = ($('#remove-room-form').serialize());
     
-//    clearFormInputs(getElementById("remove-room-form"));
+    clearFormInputs(document.getElementById("remove-room-form"));
     
     sendData("/rooms/removeroom", params, true);
     return false;
@@ -168,7 +168,7 @@ var removeRoomFromForm = function () {
 var addRoomFromForm = function () {
     var params = ($('#add-room-form').serialize());
     
-//    clearFormInputs(getElementById("add-room-form"));
+    clearFormInputs(document.getElementById("add-room-form"));
     
     sendData("/rooms/addroom", params, true);
     return false;
@@ -177,7 +177,7 @@ var addRoomFromForm = function () {
 var addSubjectFromForm = function () {
     var params = ($('#add-subj-form').serialize());
     
-//    clearFormInputs(getElementById("add-subj-form"));
+    clearFormInputs(document.getElementById("add-subj-form"));
     
     sendData("/lectures/addsubject", params, true);
     return false;
@@ -196,7 +196,7 @@ function clearFormInputs(formToClear) {
 			elems[i].checked = false;
 		else if (fieldType === "select")
 			elems[i].selectedIndex = 1;
-		else
+		else if (fieldType != "button" && fieldType != "submit")
 			elems[i].value = "";
 	}
 }
