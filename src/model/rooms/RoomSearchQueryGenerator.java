@@ -125,7 +125,7 @@ public class RoomSearchQueryGenerator implements CampusSearchQueryGenerator<Room
      *
      * @return a valid sql query.
      */
-    public CampusSearchQuery<Room> generateQuery() {
+    public CampusSearchQuery generateQuery() {
         List<Object> values = new ArrayList<>();
         String sql = hasNonNullFields() ? String.format(
                 "SELECT * FROM  %s\nWHERE\n%s \nAND %s \nAND %s\nAND %s\nAND %s\nAND %s\nAND %s\n%s",
@@ -142,7 +142,7 @@ public class RoomSearchQueryGenerator implements CampusSearchQueryGenerator<Room
                         SQL_COLUMN_ROOM_AVAILABLE, values),
                 hasProblemsQuery()) : " SELECT * from " + SQL_TABLE_ROOM;
         //TODO
-        return new CampusSearchQuery<>(sql, asArray(values));
+        return new CampusSearchQuery(sql, asArray(values));
 
     }
 

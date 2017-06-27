@@ -114,7 +114,7 @@ public class DefaultLectureManager implements LectureManager {
         List<Lecture> list = new ArrayList<>();
         try {
             //TODO
-            CampusSearchQuery<Lecture> query = queryGenerator.generateQuery();
+            CampusSearchQuery query = queryGenerator.generateQuery();
             ResultSet set = connector.executeQuery(query.getQuery(), query.getValues());
 
             while (set.next()) {

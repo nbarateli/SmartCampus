@@ -38,7 +38,7 @@ public class DefaultRoomManager implements RoomManager {
     @Override
     public List<Room> find(RoomSearchQueryGenerator queryGenerator) {
         List<Room> rooms = new ArrayList<>();
-        CampusSearchQuery<Room> query = queryGenerator.generateQuery();
+        CampusSearchQuery query = queryGenerator.generateQuery();
         try (ResultSet matches = connector.executeQuery(query.getQuery(), query.getValues())) {
             while (matches.next()) {
                 rooms.add(getRoomFromResults(matches));

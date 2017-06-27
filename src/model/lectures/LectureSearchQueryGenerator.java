@@ -94,7 +94,7 @@ public class LectureSearchQueryGenerator implements CampusSearchQueryGenerator<L
     }
 
     @Override
-    public CampusSearchQuery<Lecture> generateQuery() {
+    public CampusSearchQuery generateQuery() {
         List<Object> values = new ArrayList<>();
         String sql = hasNonNullFields() ? String.format("SELECT * FROM %s JOIN %s ON %s.%s = %s.%s" +
                         " JOIN %s ON %s.%s = %s.%s " +
@@ -113,7 +113,7 @@ public class LectureSearchQueryGenerator implements CampusSearchQueryGenerator<L
                 generateEqualsOrQuery(startTime, SQL_COLUMN_LECTURE_START_TIME, values, true) + " AND ",
                 generateEqualsOrQuery(endTime, SQL_COLUMN_LECTURE_END_TIME, values, false)
         ) : "SELECT * FROM " + SQL_TABLE_LECTURE;
-        return new CampusSearchQuery<>(sql, asArray(values));
+        return new CampusSearchQuery(sql, asArray(values));
     }
 
     private boolean hasNonNullFields() {

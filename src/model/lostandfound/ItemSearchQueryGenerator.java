@@ -6,7 +6,7 @@ import model.campus.CampusSearchQueryGenerator;
 public class ItemSearchQueryGenerator implements CampusSearchQueryGenerator<ItemReport> {
     //TODO: implement
     @Override
-    public CampusSearchQuery<ItemReport> generateQuery() {
+    public CampusSearchQuery generateQuery() {
         return null;
     }
 }

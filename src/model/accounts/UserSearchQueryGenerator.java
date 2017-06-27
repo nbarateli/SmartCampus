@@ -5,7 +5,7 @@ import model.campus.CampusSearchQueryGenerator;
 
 public class UserSearchQueryGenerator implements CampusSearchQueryGenerator<User> {
     @Override
-    public CampusSearchQuery<User> generateQuery() {
+    public CampusSearchQuery generateQuery() {
         return null;
     }
 
