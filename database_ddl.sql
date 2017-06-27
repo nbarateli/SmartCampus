@@ -128,7 +128,7 @@ CREATE UNIQUE INDEX item_image_image_url_uindex
 
 CREATE TABLE user_warning
 (
-  problem_id      INT AUTO_INCREMENT
+  warning_id      INT AUTO_INCREMENT
     PRIMARY KEY,
   user_id         INT          NOT NULL,
   warner_id       INT          NOT NULL,

@@ -16,7 +16,7 @@ public class SQLConstants {
 
     public static final String SQL_TABLE_ROOM_PROBLEM = "room_problem";
 
-    public static final String SQL_TABLE_USER_PROBLEM = "user_problem";
+    public static final String SQL_TABLE_USER_WARNING = "user_warning";
 
     public static final String SQL_TABLE_CORRIDOR_PROBLEM = "corridor_problem";
 
@@ -28,6 +28,9 @@ public class SQLConstants {
 
     public static final String SQL_TABLE_SUBJECT = "campus_subject";
 
+    public static final String SQL_TABLE_USER_ROLE = "user_role";
+
+    public static final String SQL_TABLE_USER_PERMISSION = "user_permission";
 
     public static final String SQL_COLUMN_USER_ID = "user_id";
     public static final String SQL_COLUMN_USER_FIRST_NAME = "first_name";
@@ -91,4 +94,18 @@ public class SQLConstants {
     public static final String SQL_COLUMN_ROOM_IMAGE_ID = "image_id";
     public static final String SQL_COLUMN_ROOM_IMAGE_URL = "image_url";
     public static final String SQL_COLUMN_ROOM_IMAGE_ROOM_ID = "room_id";
+
+    public static final String SQL_COLUMN_USER_ROLE_NAME = "role";
+    public static final String SQL_COLUMN_USER_ROLE_USER = "user_id";
+
+    public static final String SQL_COLUMN_USER_PERMISSION_NAME = "permission";
+    public static final String SQL_COLUMN_USER_PERMISSION_USER = "user_id";
+
+
+    public static final String SQL_COLUMN_USER_WARNING_ID = "warning_id";
+    public static final String SQL_COLUMN_USER_WARNING_WARNER = "warner_id";
+    public static final String SQL_COLUMN_USER_WARNING_USER = "user_id";
+    public static final String SQL_COLUMN_USER_WARNING_TITLE = "warning_title";
+    public static final String SQL_COLUMN_USER_WARNING_MESSAGE = "warning_messages";
+    public static final String SQL_COLUMN_USER_WARNING_DATE = "date_warned";
 }
