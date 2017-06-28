@@ -21,8 +21,7 @@ import static model.accounts.User.UserPermission.*;
 import static model.accounts.User.UserRole;
 import static model.accounts.User.UserRole.*;
 import static model.database.SQLConstants.*;
-import static model.rooms.Room.RoomType.AUDITORIUM;
-import static model.rooms.Room.RoomType.UTILITY;
+import static model.rooms.Room.RoomType.*;
 import static model.rooms.Room.SeatType.*;
 
 public final class Utils {
@@ -135,17 +134,19 @@ public final class Utils {
     }
 
     /**
-     * Returns a Georgian string representation of the given <code>RoomType</code>
+     * Returns a string representation of the given <code>RoomType</code>
      */
-    public static String roomTypeToString(Room.RoomType roomType) {
+    public static String roomTypeToString(Room.RoomType roomType, boolean isGeorgian) {
         if (roomType == null) {
             return "";
         }
         switch (roomType) {
             case UTILITY:
-                return "სხვა";
+                return isGeorgian ? "სხვა" : "utility";
             case AUDITORIUM:
-                return "აუდიტორია";
+                return isGeorgian ? "აუდიტორია" : "auditorium";
+            case LABORATORY:
+                return isGeorgian ? "ლაბორატორია" : "laboratory";
         }
         return "";
     }
@@ -153,22 +154,20 @@ public final class Utils {
     /**
      * Returns a Georgian string representation of the given <code>SeatType</code>
      */
-    public static String seatTypeToString(Room.SeatType seatType) {
+    public static String seatTypeToString(Room.SeatType seatType, boolean isGeorgian) {
         if (seatType == null) {
             return "";
         }
         switch (seatType) {
 
             case DESKS:
-                return "სკამები და მერხები";
+                return isGeorgian ? "სკამები და მერხები" : "desks";
             case TABLES:
-                return "მაგიდები";
+                return isGeorgian ? "მაგიდები" : "tables";
             case COMPUTERS:
-                return "კომპიუტერები";
-            case WOODEN_CHAIR:
-                return "სკამ-მერხები (ხის)";
-            case PLASTIC_CHAIR:
-                return "სკამ-მერხები (პლასტმასის)";
+                return isGeorgian ? "კომპიუტერები" : "computers";
+            case CHAIRS:
+                return isGeorgian ? "სკამები" : "chairs";
 
         }
         return "";
@@ -187,6 +186,9 @@ public final class Utils {
                 return AUDITORIUM;
             case "utility":
                 return UTILITY;
+            case "lab":
+            case "laboratory":
+                return LABORATORY;
             case "any":
                 return null;
         }
@@ -204,10 +206,8 @@ public final class Utils {
         switch (s.toLowerCase()) {
             case "desks":
                 return DESKS;
-            case "wooden_chair":
-                return WOODEN_CHAIR;
-            case "plastic_chair":
-                return PLASTIC_CHAIR;
+            case "chairs":
+                return CHAIRS;
             case "computers":
                 return COMPUTERS;
             case "tables":

@@ -8,7 +8,7 @@ import model.campus.CampusObject;
  * The SmartCampus Room ADT (Immutable)
  */
 public class Room implements CampusObject {
-    
+
     private final int roomID;
     private final int capacity;
     private final String roomName;
@@ -83,10 +83,10 @@ public class Room implements CampusObject {
     }
 
     public enum RoomType {
-        AUDITORIUM, UTILITY
+        AUDITORIUM, UTILITY, LABORATORY
     }
 
     public enum SeatType {
-        DESKS, WOODEN_CHAIR, PLASTIC_CHAIR, COMPUTERS, TABLES
+        DESKS, CHAIRS, COMPUTERS, TABLES
     }
 }

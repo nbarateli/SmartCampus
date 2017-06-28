@@ -20,10 +20,10 @@ CREATE TABLE room
   room_id                INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   room_name              VARCHAR(40)     NOT NULL,
   room_floor             INT             NOT NULL,
-  room_type              ENUM ('auditorium', 'utility'),
+  room_type              ENUM ('auditorium', 'utility', 'laboratory'),
   capacity               INT,
   available_for_students BOOLEAN         NOT NULL,
-  seat_type              ENUM ('DESKS', 'WOODEN_CHAIR', 'PLASTIC_CHAIR', 'COMPUTERS', 'TABLES')
+  seat_type              ENUM ('DESKS', 'CHAIRS', 'COMPUTERS', ' TABLES ')
 );
 
 CREATE TABLE room_problem
@@ -105,11 +105,11 @@ CREATE TABLE item_report
 (
   report_id        INT AUTO_INCREMENT
     PRIMARY KEY,
-  item_name        VARCHAR(50)            NULL,
-  item_description VARCHAR(500)           NOT NULL,
-  author_id        INT                    NOT NULL,
-  report_type      ENUM ('lost', 'found') NOT NULL,
-  date_added       DATE                   NOT NULL,
+  item_name        VARCHAR(50)              NULL,
+  item_description VARCHAR(500)             NOT NULL,
+  author_id        INT                      NOT NULL,
+  report_type      ENUM ('lost', ' FOUND ') NOT NULL,
+  date_added       DATE                     NOT NULL,
   CONSTRAINT item_report_user_user_id_fk
   FOREIGN KEY (author_id) REFERENCES campus_user (user_id)
     ON DELETE CASCADE
@@ -181,9 +181,9 @@ CREATE TRIGGER user_role_trigger
 AFTER INSERT ON campus_user
 FOR EACH ROW
   BEGIN
-    INSERT INTO user_role (user_id, role) VALUES (NEW.user_id, NEW.initial_role );
+    INSERT INTO user_role (user_id, role) VALUES (NEW.user_id, NEW.initial_role);
   END;
-  
+
 DELIMITER ;
 
 DELIMITER //

@@ -49,23 +49,23 @@ public class UtilsTest {
     @Test
     public void roomTypeToStringTest() {
         RoomType type = RoomType.valueOf("UTILITY");
-        assertEquals("სხვა", Utils.roomTypeToString(type));
+        assertEquals("სხვა", Utils.roomTypeToString(type, true));
         type = RoomType.valueOf("AUDITORIUM");
-        assertEquals("აუდიტორია", Utils.roomTypeToString(type));
+        assertEquals("აუდიტორია", Utils.roomTypeToString(type, true));
     }
 
     @Test
     public void seatTypeToStringTest() {
         SeatType type = SeatType.valueOf("DESKS");
-        assertEquals("სკამები და მერხები", Utils.seatTypeToString(type));
+        assertEquals("სკამები და მერხები", Utils.seatTypeToString(type, true));
         type = SeatType.valueOf("TABLES");
-        assertEquals("მაგიდები", Utils.seatTypeToString(type));
+        assertEquals("მაგიდები", Utils.seatTypeToString(type, true));
         type = SeatType.valueOf("COMPUTERS");
-        assertEquals("კომპიუტერები", Utils.seatTypeToString(type));
+        assertEquals("კომპიუტერები", Utils.seatTypeToString(type, true));
         type = SeatType.valueOf("WOODEN_CHAIR");
-        assertEquals("სკამ-მერხები (ხის)", Utils.seatTypeToString(type));
+        assertEquals("სკამ-მერხები (ხის)", Utils.seatTypeToString(type, true));
         type = SeatType.valueOf("PLASTIC_CHAIR");
-        assertEquals("სკამ-მერხები (პლასტმასის)", Utils.seatTypeToString(type));
+        assertEquals("სკამ-მერხები (პლასტმასის)", Utils.seatTypeToString(type, true));
     }
 
     @Test
