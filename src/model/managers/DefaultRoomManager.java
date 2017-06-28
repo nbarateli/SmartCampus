@@ -177,7 +177,7 @@ public class DefaultRoomManager implements RoomManager {
     public Room getRoomByName(String roomName) {
 
         String sql = "SELECT * FROM " + SQL_TABLE_ROOM + " WHERE " +
-                SQL_COLUMN_ROOM_NAME + " = ?";
+                SQL_COLUMN_ROOM_NAME + " like ?";
         try {
             ResultSet results = connector.executeQuery(sql, roomName);
             if (results.next()) {

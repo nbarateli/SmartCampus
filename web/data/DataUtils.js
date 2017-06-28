@@ -112,7 +112,7 @@ var addSubjectFromJson = function (jsonObject, doAlert) {
 };
 
 var addRoomFromJson = function (jsonObject, doAlert) {
-    var name = jsonObject['ოთახის N'];
+    var name = jsonObject['ოთახის N'].toString();
     var typePure = jsonObject['ტიპი'];
 
     function getFloorViaName(name) {
@@ -122,8 +122,10 @@ var addRoomFromJson = function (jsonObject, doAlert) {
         }
 
         switch (name) {
+
             case "ST1":
                 return 1;
+            case "1":
             case "ST2":
             case "AMP 0":
             case "AMP 13":
@@ -142,7 +144,7 @@ var addRoomFromJson = function (jsonObject, doAlert) {
             case "139":
                 return 3;
             default:
-                return isDigit(name[1]) ? name[1] : 2;
+                return isDigit(name[0]) ? name[0] : 2;
         }
 
 
