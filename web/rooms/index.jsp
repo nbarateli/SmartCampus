@@ -1,10 +1,10 @@
+<%@ page import="misc.Utils" %>
 <%@ page import="model.rooms.Room" %>
-<%@ page import="model.rooms.RoomManager" %>
 <%@ page import="static misc.WebConstants.*" %>
+<%@ page import="model.rooms.RoomManager" %>
 <%@ page import="model.rooms.RoomSearchQueryGenerator" %>
-<%@ page import="java.util.List" %>
 <%@ page import="static misc.Utils.*" %>
-<%@ page import="misc.Utils" %><%--
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Niko
   Date: 09.06.2017
@@ -167,13 +167,13 @@
 
             out.println("<div id=\"room-info-div\">");
             out.println("<div>სართული: " + room.getFloor() + ".</div>");
-            out.println("<div>ოთახის ტიპი: " + roomTypeToString(room.getRoomType()) + ".</div>");
+            out.println("<div>ოთახის ტიპი: " + roomTypeToString(room.getRoomType(), true) + ".</div>");
             out.println("<div>ადგილები: " + room.getCapacity() + ".</div>");
             out.println("<div>შეიძლება დაჯავშნა: ");
             out.println(room.isAvailableForStudents() ? "<span id=\"yes-span\">კი</span>"
                     : "<span id=\"no-span\">არა</span>");
             out.println("</div>");
-            out.println("<div>ადგილის ტიპი: " + seatTypeToString(room.getSeatType()) + ".</div>");
+            out.println("<div>ადგილის ტიპი: " + seatTypeToString(room.getSeatType(), true) + ".</div>");
             out.println("</div>");
             out.println("</div>");
 

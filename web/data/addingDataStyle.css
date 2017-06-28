@@ -1,31 +1,41 @@
 @CHARSET "UTF-8";
 
+.dragDrop {
+    padding: 10px;
+    border: 1px solid #cccccc;
+}
+
+.dragFile {
+    padding: 5px;
+    border: 1px dashed;
+}
+
 body {
-  background-color: #AED6F1;  
+    background-color: #AED6F1;
 }
 
 #main-div {
-  align-items: center;
-  margin-top: 100px;
-  margin-bottom: 50px;
+    align-items: center;
+    margin-top: 100px;
+    margin-bottom: 50px;
 }
 
 .main-button {
-  background-color: #58D68D;
-  text-align: center;
-  padding: 20px 35px;
-  border-radius: 8px;
-  border: none;
-  font-size: 20px;
-  width: 300px;
-  -webkit-transition-duration: 0.35s;
-  transition-duration: 0.35s;
+    background-color: #58D68D;
+    text-align: center;
+    padding: 20px 35px;
+    border-radius: 8px;
+    border: none;
+    font-size: 20px;
+    width: 300px;
+    -webkit-transition-duration: 0.35s;
+    transition-duration: 0.35s;
 }
 
 button:hover {
-  background-color: #229954;
+    background-color: #229954;
 }
 
 .info-label {
-  font-size: 20px;
+    font-size: 20px;
 }

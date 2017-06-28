@@ -67,7 +67,7 @@
     </div>
     <div id="room-info-div">
       <div>სართული: <%out.print(room.getFloor());%>.</div>
-      <div>ოთახის ტიპი: <%out.print(roomTypeToString(room.getRoomType()));%>.</div>
+      <div>ოთახის ტიპი: <%out.print(roomTypeToString(room.getRoomType(), true));%>.</div>
       <div>ადგილები: <%out.println(room.getCapacity());%>.</div>
       <div>შეიძლება დაჯავშნა:
         <%
@@ -75,7 +75,7 @@
                   : "<span id=\"no-span\">არა</span>");
         %>
       </div>
-      <div>ადგილის ტიპი: <%out.print(seatTypeToString(room.getSeatType()));%>.</div>
+      <div>ადგილის ტიპი: <%out.print(seatTypeToString(room.getSeatType(), true));%>.</div>
     </div>
     <div>ლექციები:</div>
 

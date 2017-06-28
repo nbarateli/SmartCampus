@@ -12,16 +12,17 @@ var ExcelToJSON = function (file, type) {
                 // Here is your object
                 var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
                 var json_object = JSON.stringify(XL_row_object);
+
                 for (i in XL_row_object) {
-                	if(type === "lecture") {
-                		addLectureFromJson(XL_row_object[i], false);
-                	} else if (type === "subject") {
-                		
-                		addSubjectFromJson(XL_row_object[i], false);
-                	} else {
-                		addRoomFromJson(XL_row_object[i], false);
-                	}
-                    
+                    if (type === "lecture") {
+                        addLectureFromJson(XL_row_object[i], false);
+                    } else if (type === "subject") {
+
+                        addSubjectFromJson(XL_row_object[i], false);
+                    } else {
+                        addRoomFromJson(XL_row_object[i], false);
+                    }
+
                 }
             })
 
@@ -111,15 +112,115 @@ var addSubjectFromJson = function (jsonObject, doAlert) {
 };
 
 var addRoomFromJson = function (jsonObject, doAlert) {
+    var name = jsonObject['ოთახის N'];
+    var typePure = jsonObject['ტიპი'];
+
+    function getFloorViaName(name) {
+
+        function isDigit(c) {
+            return c >= '0' && c <= '9';
+        }
+
+        switch (name) {
+            case "ST1":
+                return 1;
+            case "ST2":
+            case "AMP 0":
+            case "AMP 13":
+            case "AMP 21":
+            case "AMP2 3":
+            case "AMP 24":
+            case "AMP 25":
+                return 1;
+            case "B1":
+                return 2;
+            case "VC1":
+            case "VC2":
+            case "VC3":
+            case "VC4":
+            case "79":
+            case "139":
+                return 3;
+            default:
+                return isDigit(name[1]) ? name[1] : 2;
+        }
+
+
+    }
+
+    var floor = getFloorViaName(name);
+
+    function contains(str, substring) {
+        return str.indexOf(substring) !== -1;
+    }
+
+    function getRoomType(typevar) {
+
+        if (contains(typevar, "ლაბ")) return "laboratory";
+        switch (typevar.toString()) {
+            case "PMC/მაგიდიანი/WiFi":
+            case "კულინარია":
+            case "მარანი":
+            case "მასალათა ლაბორატორია":
+            case "მექანიკური ქარხანა":
+            case "მიკრობიოლოგიის ლაბ":
+            case "მიკროსკოპების ლან":
+            case "ორგანული ქიმიის ლაბ":
+            case "პერფომანსი 2":
+            case "პერფორმანსი 1":
+            case "პროზექტურა, პათანატომიის ლექცია/სემინარები":
+            case "რობოტიკის ლაბ":
+            case "სამართლის დარბაზი/მაგიდებიანი":
+            case "სტუდია 1":
+            case "სტუდია 2":
+            case "სტუდია 3":
+            case "ქანდაკება":
+                return "utility";
+            default:
+
+                return "auditorium";
+        }
+    }
+
+    var type = getRoomType(typePure);
     var params = "";
-    params += "room_name=" + jsonObject.room_name;
-    params += "&room_floor=" + jsonObject.room_floor;
-    params += "&capacity=" + jsonObject.capacity;
-    params += "&room_type=" + toRoomType(jsonObject.room_type);
-    params += "&seat_type=" + toSeatType(jsonObject.seat_type);
-    
-    if(jsonObject.cen_be_booked === 1)
-    	params += "&can_be_booked=true";
+    params += "room_name=" + name;
+    params += "&room_floor=" + floor;
+    params += "&capacity=" + jsonObject['სტუდ. ტევადობა'];
+    params += "&room_type=" + type;
+
+    function getSeatType(typevar) {
+
+        switch (typevar.toString()) {
+            case "არაბული":
+            case "თურქეთი":
+            case "იაპონია":
+            case "ირანი":
+            case "მაგიდიანი":
+            case "ჩინური":
+                return "desks";
+            case "კკლ":
+            case "PMC/მაგიდიანი/WiFi":
+                return "computers";
+            case "ლ/სკამიანი":
+            case "სკამიანი":
+                return "chairs";
+
+        }
+        return "tables";
+    }
+
+    params += "&seat_type=" + getSeatType(typePure);
+
+    function canBeBooked(typevar) {
+        typevar = typevar.toString();
+        if (typevar === "ლ/სკამიანი" || typevar === "სკამიანი" || typevar === "მაგიდიანი") {
+            return "true";
+        }
+        return "false";
+    }
+
+    params += "&can_be_booked=" + canBeBooked(typePure);
 
     sendData("/rooms/addroom", params, doAlert);
 };
@@ -140,100 +241,100 @@ var sendData = function (url, params, doAlert) {
 };
 
 function createDialog() {
-	var conf = confirm("დარწმუნებული ხართ რომ გსურთ ყველა ლექციის შესახებ მონაცემების წაშლა?");
-	if(conf) {
-	    var params = "remove_all=true";
-	    sendData("/lectures/removelecture", params, true);
-	}
+    var conf = confirm("დარწმუნებული ხართ რომ გსურთ ყველა ლექციის შესახებ მონაცემების წაშლა?");
+    if (conf) {
+        var params = "remove_all=true";
+        sendData("/lectures/removelecture", params, true);
+    }
 }
 
 var addLectureFromForm = function () {
     var params = ($('#sched-form').serialize());
-    
+
     clearFormInputs(document.getElementById("sched-form"));
-    
+
     sendData("/lectures/addlecture", params, true);
     return false;
 };
 
 var removeRoomFromForm = function () {
     var params = ($('#remove-room-form').serialize());
-    
+
     clearFormInputs(document.getElementById("remove-room-form"));
-    
+
     sendData("/rooms/removeroom", params, true);
     return false;
 };
 
 var addRoomFromForm = function () {
     var params = ($('#add-room-form').serialize());
-    
+
     clearFormInputs(document.getElementById("add-room-form"));
-    
+
     sendData("/rooms/addroom", params, true);
     return false;
 };
 
 var addSubjectFromForm = function () {
     var params = ($('#add-subj-form').serialize());
-    
+
     clearFormInputs(document.getElementById("add-subj-form"));
-    
+
     sendData("/lectures/addsubject", params, true);
     return false;
 };
 
 function clearFormInputs(formToClear) {
 
-	var elems = formToClear.elements;
-	formToClear.reset();
+    var elems = formToClear.elements;
+    formToClear.reset();
 
-	for (i = 0; i < elems.length; i++) {
+    for (i = 0; i < elems.length; i++) {
 
-		fieldType = elems[i].type.toLowerCase();
+        fieldType = elems[i].type.toLowerCase();
 
-		if (fieldType === "checkbox")
-			elems[i].checked = false;
-		else if (fieldType === "select")
-			elems[i].selectedIndex = 1;
-		else if (fieldType != "button" && fieldType != "submit")
-			elems[i].value = "";
-	}
+        if (fieldType === "checkbox")
+            elems[i].checked = false;
+        else if (fieldType === "select")
+            elems[i].selectedIndex = 1;
+        else if (fieldType != "button" && fieldType != "submit")
+            elems[i].value = "";
+    }
 }
 
 function handleFileSelect(evt, type) {
-	var files = evt.target.files; // FileList object
-	// files is a FileList of File objects. List some properties.
-	for (var i = 0, f; f = files[i]; i++) {
-		if (type === "lecture") {
-			addLecturesFromFile(f);
-		} else if (type === "subject") {
-			addSubjectsFromFile(f);
-		} else {
-			addRoomsFromFile(f);
-		}
-	}
+    var files = evt.target.files; // FileList object
+    // files is a FileList of File objects. List some properties.
+    for (var i = 0, f; f = files[i]; i++) {
+        if (type === "lecture") {
+            addLecturesFromFile(f);
+        } else if (type === "subject") {
+            addSubjectsFromFile(f);
+        } else {
+            addRoomsFromFile(f);
+        }
+    }
 }
 
 function handleFileSelectLect(evt) {
     handleFileSelect(evt, "lecture");
-    
+
     var output = [];
     document.getElementById('lect-list').innerHTML = '<ul>' + output.join('') + '</ul>';
 }
 
 function handleFileSelectSubj(evt) {
-	handleFileSelect(evt, "subject");
-	
-	var output = [];
+    handleFileSelect(evt, "subject");
+
+    var output = [];
     document.getElementById('subj-list').innerHTML = '<ul>' + output.join('') + '</ul>';
 }
 
 function handleFileSelectRoom(evt) {
-	handleFileSelect(evt, "room");    
-	
-	var output = [];
-	document.getElementById('room-list').innerHTML = '<ul>' + output.join('') + '</ul>';
+    handleFileSelect(evt, "room");
+
+    var output = [];
+    document.getElementById('room-list').innerHTML = '<ul>' + output.join('') + '</ul>';
 }
 
 $(document).ready(function () {

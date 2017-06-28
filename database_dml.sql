@@ -21,28 +21,6 @@ INSERT INTO campus_subject (subject_name) VALUES
   ('გერმანული II'),
   ('წყლის ნაყვის პატერნები');
 
-INSERT INTO room (room_name, room_floor, room_type, capacity, available_for_students, seat_type) VALUES
-  ('200', 2, 'auditorium', 200, FALSE, 'DESKS'),
-  ('401', 4, 'auditorium', 50, TRUE, 'DESKS'),
-  ('408', 4, 'auditorium', 70, TRUE, 'DESKS'),
-  ('216', 2, 'auditorium', 70, TRUE, 'DESKS'),
-  ('307-1', 3, 'auditorium', 40, TRUE, 'CHAIRS'),
-  ('412-2', 4, 'auditorium', 40, TRUE, 'CHAIRS'),
-  ('420', 4, 'auditorium', 100, FALSE, 'DESKS'),
-  ('309', 3, 'auditorium', 70, TRUE, 'DESKS'),
-  ('410', 4, 'auditorium', 100, TRUE, 'CHAIRS'),
-  ('417', 4, 'auditorium', 70, TRUE, 'DESKS'),
-  ('კაფეტერია', 2, 'utility', 200, FALSE, 'TABLES'),
-  ('402-2', 4, 'auditorium', 40, TRUE, 'CHAIRS'),
-  ('318', 3, 'auditorium', 70, TRUE, 'DESKS'),
-  ('103', 1, 'auditorium', 30, FALSE, 'DESKS'),
-  ('ქვედა სტუდენტური', 0, 'utility', 20, FALSE, 'CHAIRS'),
-  ('ზედა სტუდენტური', 1, 'utility', 30, FALSE, 'CHAIRS'),
-  ('ბიბლიოთეკა', 1, 'utility', 150, FALSE, 'TABLES'),
-  ('301', 3, 'auditorium', 40, FALSE, 'COMPUTERS'),
-  ('001', 0, 'utility', 30, FALSE, 'TABLES'),
-  ('217', 0, 'auditorium', 70, TRUE, 'DESKS');
-
 INSERT INTO room_problem (room_id, reported_by, description, date_created) VALUES
   (11, 1, 'ფანჯარა არ იხურება', str_to_date('07-06-2017', '%d-%m-%Y')),
   (6, 3, 'კონდიციონერი არ არის', str_to_date('06-06-2017', '%d-%m-%Y'));
