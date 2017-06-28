@@ -23,7 +23,7 @@ CREATE TABLE room
   room_type              ENUM ('auditorium', 'utility', 'laboratory'),
   capacity               INT,
   available_for_students BOOLEAN         NOT NULL,
-  seat_type              ENUM ('DESKS', 'CHAIRS', 'COMPUTERS', ' TABLES ')
+  seat_type              ENUM ('DESKS', 'CHAIRS', 'COMPUTERS', 'TABLES')
 );
 
 CREATE TABLE room_problem
