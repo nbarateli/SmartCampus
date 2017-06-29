@@ -46,13 +46,13 @@
             </div>
 
             <div class="form-group">
-              <input name="subject_name" class="form-control"
+              <input type="text" name="subject_name" class="form-control"
                      placeholder="შეიყვანეთ საგნის სახელი">
             </div>
 
             <div class="select">
-              <label class="control-label">ლექციის დრო</label> <select
-                    name="week_day" class="form-control">
+              <label class="control-label">ლექციის დრო</label> 
+              <select name="week_day" class="form-control">
               <option value="monday">ორშაბათი</option>
               <option value="tuesday">სამშაბათი</option>
               <option value="wednesday">ოთხშაბათი</option>
@@ -63,6 +63,22 @@
             </select>
             </div>
             <br>
+            
+            <div class="select">
+              <select name="repetition" class="form-control">
+              <option value="one_week">კვირაში ერთხელ</option>
+              <option value="two_weeks">ორ კვირაში ერთხელ</option>
+              <option value="three_weeks">სამ კვირაში ერთხელ</option>
+              <option value="four_weeks">ოთხ კვირაში ერთხელ</option>
+            </select>
+            </div>
+            <br>
+            
+            <input type="number" name="num_weeks" class="form-control"
+                    placeholder="კვირების რაოდენობა" min=1 max=16>
+                    
+            <br>
+            
             <div class="form-group">
 
               <input type="text" name="start_time" class="form-control"
@@ -73,7 +89,14 @@
               <input type="text" name="end_time" class="form-control"
                      placeholder="შეიყვანეთ ლექციის დასრულების დრო(HH:mm 24-საათიანი ფორმატით)">
             </div>
-
+            
+            <div class="form-group">
+              <label class="control-label">ლექციის დაწყების თარიღი</label> 
+              <input type="date" name="start_date" class="form-control">
+            </div>
+            
+            <br>
+            
             <input type="button" value="დამატება"
                    class="btn btn-primary btn-lg"
                    onclick="addLectureFromForm()">
