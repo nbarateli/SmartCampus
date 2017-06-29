@@ -8,10 +8,12 @@
 	.st2{fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;}
 	.st3{fill:#EB42F4;stroke:#000000;stroke-width:2;stroke-miterlimit:10;}
 	.st4{fill:#FFFF00;stroke:#000000;stroke-width:2;stroke-miterlimit:10;}
+	.st5{font-family:'Sylfaen';}
+	.st6{font-size:24px;}
 </style>
 <path id="x200" class="st0" d="M27.7,1471h180v-65.3H181c-2.3-0.1-7.8-0.6-8.6-3.3c0-0.1,0-0.2-0.1-0.3c0-1.9,0-3.9,0-5.8v-110H27.7
 	V1471L27.7,1471z"/>
-<line id="C_PathE__1_" class="st1" x1="205.4" y1="1471" x2="1590.4" y2="1471"/>
+<path id="C_PathE__1_" class="st1" d="M205.4,1471"/>
 <polyline class="st2" points="172.3,1286.3 172.3,1231.3 217.4,1231.3 217.4,1221.3 237.4,1221.3 237.4,1231 282.4,1231 282.4,1326 
 	282.4,1286.3 352.4,1286.3 "/>
 <rect id="x204" x="352.4" y="1286.3" class="st0" width="155" height="65"/>
@@ -24,18 +26,18 @@
 <rect id="x206" x="577.4" y="1406" class="st0" width="155" height="65"/>
 <rect id="x208" x="732.4" y="1406" class="st4" width="115" height="65"/>
 <rect id="x209" x="917.4" y="1405.6" class="st4" width="40" height="65"/>
-<rect id="x218" x="1490.1" y="1346.3" class="st0" width="100" height="125"/>
-<rect id="x217" x="1375.1" y="1405.3" class="st4" width="115" height="65"/>
+<rect id="x218" x="1447.7" y="1345.4" class="st0" width="100" height="125"/>
+<rect id="x217" x="1332.7" y="1405.5" class="st4" width="115" height="65.1"/>
 <polyline class="st1" points="732.4,1286.3 732.4,1231.3 777.4,1231.3 777.4,1215.8 712.4,1215.8 "/>
-<polyline class="st1" points="847.4,1286.3 1375.1,1285.3 1375.1,1230.3 1424.9,1230.8 1424.9,1215.8 1454.9,1215.8 1454.9,1231.3 
-	1490.1,1231.3 1490.1,1286.3 1590.1,1286.3 1590.1,1471.3 "/>
+<polyline class="st1" points="1332.7,1285.3 1332.7,1229.3 1382.5,1228.8 1382.5,1213.8 1412.5,1213.8 1412.5,1229.3 1447.7,1229.3 
+	1447.7,1284.3 1547.7,1284.3 1547.7,1469.3 "/>
 <rect id="x210" x="917.4" y="1286.2" class="st4" width="40" height="65"/>
 <rect id="x212" x="957.4" y="1286.2" class="st4" width="115" height="65"/>
 <rect id="x211" x="957.4" y="1405.6" class="st4" width="115" height="65"/>
 <rect id="x213" x="1072.4" y="1405.6" class="st4" width="75" height="65"/>
-<rect id="x214" x="1147.4" y="1405.6" class="st4" width="227.7" height="65"/>
+<rect id="x214" x="1147.4" y="1405.6" class="st4" width="185.3" height="65"/>
 <rect id="x215" x="1147.4" y="1285.7" class="st4" width="40" height="65"/>
-<rect id="x216" x="1187.4" y="1285.7" class="st4" width="187.7" height="65"/>
+<rect id="x216" x="1187.4" y="1285.7" class="st4" width="145.3" height="65"/>
 <rect id="x220" x="712.4" y="1100.6" class="st4" width="65" height="115"/>
 <rect id="x219" x="808.1" y="1100.6" class="st4" width="65" height="115"/>
 <polyline class="st1" points="808.1,1215.6 808.1,1231.3 847.4,1231.3 847.4,1286.3 847.4,1331.3 "/>
@@ -48,12 +50,43 @@
 <path class="st2" d="M2041.4,896.3"/>
 <polyline class="st1" points="712.4,915 712.4,775.3 777.4,775.3 777.4,475.3 712.4,475.3 712.4,315.5 873.1,315.5 873.1,416 "/>
 <line class="st1" x1="712.4" y1="1030" x2="712.4" y2="1100.6"/>
-<rect id="B1" x="873.1" y="315.5" class="st1" width="140" height="60"/>
-<rect id="ტ1_x2C_4" x="1013.1" y="315.5" class="st1" width="140" height="60"/>
+<rect id="xB1" x="873.1" y="315.5" class="st1" width="140" height="60"/>
+<rect id="xტ1_x2C_4" x="1013.1" y="315.5" class="st1" width="140" height="60"/>
 <polyline class="st1" points="1153.1,315.5 1223,315.5 1223,405.7 1188,405.7 "/>
-<polygon id="კულინარიის_აკადემია" class="st1" points="1243,405.7 1332.7,405.7 1332.7,440 
-	1598,440 1598,485.7 1668,485.7 1668,415.7 1598,415.7 1668,415.7 1668,185.7 1683,185.7 1683,75.7 1243,75.7 "/>
+<polygon id="xკულინარიის_x5F_აკადემია" class="st1" points="1243,405.7 1332.7,405.7 
+	1332.7,440 1598,440 1598,485.7 1668,485.7 1668,415.7 1598,415.7 1668,415.7 1668,185.7 1683,185.7 1683,75.7 1243,75.7 "/>
 <path class="st1" d="M873.1,775.3"/>
 <polyline class="st1" points="1332.7,440 873.1,440 873.1,475.3 808.1,475.3 808.1,775.3 "/>
 <line class="st1" x1="1223" y1="315.5" x2="1243" y2="315.5"/>
+<text transform="matrix(1 0 0 1 73 1403)" class="st5 st6">200</text>
+<text transform="matrix(1 0 0 1 228.2 1445.1)" class="st5 st6">201</text>
+<text transform="matrix(1 0 0 1 293.2001 1442.6)" class="st5 st6">202</text>
+<text transform="matrix(1 0 0 1 406.9 1443.1)" class="st5 st6">203</text>
+<text transform="matrix(1 0 0 1 409.9 1324)" class="st5 st6">204</text>
+<text transform="matrix(1 0 0 1 521 1440)" class="st5 st6">205</text>
+<text transform="matrix(1 0 0 1 630.9 1442.1)" class="st5 st6">206</text>
+<text transform="matrix(1 0 0 1 627.9 1324.2)" class="st5 st6">207</text>
+<text transform="matrix(1 0 0 1 769.9 1439.5)" class="st5 st6">208</text>
+<text transform="matrix(2.244830e-010 -1 1 2.244830e-010 944.8965 1452.6016)" class="st5 st6">209</text>
+<text transform="matrix(2.244830e-010 -1 1 2.244830e-010 945.8965 1338.3027)" class="st5 st6">210</text>
+<text transform="matrix(1 0 0 1 991.9 1327.8)" class="st5 st6">212</text>
+<text transform="matrix(1 0 0 1 993.9 1442.1)" class="st5 st6">211</text>
+<text transform="matrix(1 0 0 1 1088.2334 1439.5833)" class="st5 st6">213</text>
+<text transform="matrix(1 0 0 1 1214.9166 1437.5333)" class="st5 st6">214</text>
+<text transform="matrix(4.489659e-011 -1 1 4.489659e-011 1174.498 1334.8691)" class="st5 st6">215</text>
+<text transform="matrix(1 0 0 1 1370.1996 1444.0004)" class="st5 st6">217</text>
+<text transform="matrix(1 0 0 1 1230 1326.6664)" class="st5 st6">216</text>
+<text transform="matrix(1 0 0 1 1468.667 1414.667)" class="st5 st6">218</text>
+<line class="st1" x1="847.4" y1="1471" x2="917.4" y2="1470.6"/>
+<line class="st1" x1="847.4" y1="1286.3" x2="1332.7" y2="1285.7"/>
+<text transform="matrix(1 0 0 1 726.6665 1158)" class="st5 st6">220</text>
+<text transform="matrix(1 0 0 1 822 1156)" class="st5 st6">219</text>
+<text transform="matrix(1 0 0 1 822.6665 1066.667)" class="st5 st6">221</text>
+<text transform="matrix(1 0 0 1 824.7332 975.333)" class="st5 st6">222</text>
+<text transform="matrix(1 0 0 1 723.5668 974)" class="st5 st6">223</text>
+<text transform="matrix(1 0 0 1 823.2001 890.6667)" class="st5 st6">224</text>
+<text transform="matrix(1 0 0 1 821.9333 815.6333)" class="st5 st6">225</text>
+<text transform="matrix(1 0 0 1 931.7663 355.3332)" class="st5 st6">B1</text>
+<text transform="matrix(1 0 0 1 1060 351.3335)" class="st5 st6">ტ1,4</text>
+<text transform="matrix(1 0 0 1 1338.6666 265.3332)" class="st5 st6">კულინარიის აკადემია</text>
 </svg>
