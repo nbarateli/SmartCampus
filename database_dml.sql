@@ -25,6 +25,7 @@ INSERT INTO room_problem (room_id, reported_by, description, date_created) VALUE
   (11, 1, 'ფანჯარა არ იხურება', str_to_date('07-06-2017', '%d-%m-%Y')),
   (6, 3, 'კონდიციონერი არ არის', str_to_date('06-06-2017', '%d-%m-%Y'));
 
+/*
 INSERT INTO lecture (lecturer, room_id, subject_id, day_of_week, start_time, end_time) VALUES
   (6, 4, 1, 'monday', '10:00', '12:10'),
   (6, 4, 1, 'monday', '13:30', '15:40'),
@@ -40,7 +41,7 @@ INSERT INTO lecture (lecturer, room_id, subject_id, day_of_week, start_time, end
   (8, 2, 4, 'tuesday', '17:00', '19:10'),
   (8, 2, 4, 'wednesday', '17:00', '19:10'),
   (8, 2, 4, 'saturday', '11:10', '13:20');
-
+*/
 
 INSERT INTO item_report (item_name, item_description, author_id, report_type, date_added) VALUES
   ('ტანსაცმლის კაჟადა', 'ყავისფერი, ხის, პატარა', 2, 'found', '09-05-17'),

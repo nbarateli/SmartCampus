@@ -46,12 +46,27 @@ CREATE TABLE room_problem
     ON DELETE CASCADE
 );
 
+CREATE TABLE campus_subject
+(
+  subject_id   INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  subject_name VARCHAR(100)    NOT NULL
+);
+
 CREATE TABLE booking
 (
   booking_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   room_id    INT             NOT NULL,
   booker_id  INT             NOT NULL,
-  start_date DATE            NOT NULL,
+  booking_date DATE NOT NULL ,
+  subject_id INT 			 NULL,
+  description VARCHAR(100) NULL DEFAULT NULL,
+  start_time TIME NOT NULL,
+  end_time TIME NOT NULL,
+  CONSTRAINT booking_subject_fk
+  FOREIGN KEY (subject_id)
+  REFERENCES smartcampus.campus_subject (subject_id)
+  ON DELETE CASCADE
+  ON UPDATE NO ACTION,
   CONSTRAINT booking_room_fk
   FOREIGN KEY (room_id) REFERENCES room (room_id)
     ON DELETE CASCADE,
@@ -78,12 +93,7 @@ CREATE TABLE corridor_problem
     ON DELETE CASCADE
 );
 
-CREATE TABLE campus_subject
-(
-  subject_id   INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  subject_name VARCHAR(100)    NOT NULL
-);
-
+/**
 CREATE TABLE lecture
 (
   lecture_id  INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -99,7 +109,8 @@ CREATE TABLE lecture
     ON DELETE CASCADE,
   CONSTRAINT lecture_subject_subject_id_fk FOREIGN KEY (subject_id) REFERENCES campus_subject (subject_id)
     ON DELETE CASCADE
-);
+); */
+
 
 CREATE TABLE item_report
 (
