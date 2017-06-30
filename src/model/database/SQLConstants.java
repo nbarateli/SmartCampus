@@ -52,7 +52,12 @@ public class SQLConstants {
     public static final String SQL_COLUMN_BOOKING_ID = "booking_id";
     public static final String SQL_COLUMN_BOOKING_ROOM = "room_id";
     public static final String SQL_COLUMN_BOOKING_BOOKER = "booker_id";
-    public static final String SQL_COLUMN_BOOKING_START_DATE = "start_date";
+    public static final String SQL_COLUMN_BOOKING_WEEK_DAY = "day_of_week";
+    public static final String SQL_COLUMN_BOOKING_START_TIME = "start_time";
+    public static final String SQL_COLUMN_BOOKING_END_TIME = "end_time";
+    public static final String SQL_COLUMN_BOOKING_SUBJECT_ID = "subject_id";
+    public static final String SQL_COLUMN_BOOKING_DATE = "booking_date";
+    public static final String SQL_COLUMN_BOOKING_DESCRIPTION = "description";
 
     public static final String SQL_COLUMN_LECTURE_ID = "lecture_id";
     public static final String SQL_COLUMN_LECTURE_LECTURER = "lecturer";
