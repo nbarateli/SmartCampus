@@ -51,7 +51,7 @@ public class OnCreateListener implements ServletContextListener,
         context.setAttribute(ROOM_MANAGER, roomManager);
         context.setAttribute(LECTURE_MANAGER, lectureManager);
         context.setAttribute(ACCOUNT_MANAGER, factory.getAccountManager());
-
+        context.setAttribute(BOOKING_MANAGER, factory.getBookingManager());
     }
 
     public void contextDestroyed(ServletContextEvent sce) {

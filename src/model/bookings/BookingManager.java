@@ -11,14 +11,19 @@ import model.campus.CampusManager;
 public interface BookingManager extends CampusManager<Booking, BookingSearchQueryGenerator>{
     
     /**
-     * removes booking with given id from database
-     * @param bookingId id of the booking needed to be removed
-     */
-    void deleteThisOccurrence(int bookingId);
-    
-    /**
-     * removes all the occurrence of the lecture associated with this booking  
+     * removes all the occurrence of the lecture (with same weekday and time) 
+     * associated with this booking  
      * @param bookingId id of the booking (lecture) we should remove occurrences of
      */
     void deleteAllOccurrences(int bookingId);
+    
+    /**
+     * removes all bookings from database
+     */
+    void removeAllBookings();
+    
+    /**
+     * removes all lectures from database
+     */
+    void removeAllLectures();
 }

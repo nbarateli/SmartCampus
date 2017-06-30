@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -460,23 +461,67 @@ public final class Utils {
         }
         return null;
     }
+    
+    /**
+     * converts given string in MM/dd/yyyy format to Date
+     * @param toConvert string needed to be converted
+     * @return respective date
+     */
+    public static Date stringToDate(String toConvert){
+        DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        
+        try {
+            return format.parse(toConvert);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        
+        return null;
+    }
+    
+    /**
+     * checks if given string is a valid number and falls in given range
+     * @param number string needed to be parsed
+     * @param min minimum value this integer should be
+     * @param max maximum value this integer should be
+     * @return integer representation of this string if it does, else null 
+     */
+    public static Integer validateNumber(String number, int min, int max) {
+        int numValue;
+        try {
+            numValue = Integer.parseInt(number);
+            if(numValue < min && numValue > max)
+                return null;
+        } catch (NumberFormatException e) {
+            return null; //the text wasn't a number
+        }
+        
+        return numValue;
+    }
+    
+    /**
+     * adds given number of days to given date
+     * @param date date to add days to
+     * @param numDays number of days to add
+     * @return date gotten by adding days
+     */
+    public static Date addDaysToDate(Date date, int numDays) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.DATE, numDays);
+        
+        return c.getTime();
+    }
 
     /**
      * checks if given string is valid for representing hour or minute
      */
     private static boolean numberStringIsValid(String s, boolean checkHour) {
-        try {
-            int numValue = Integer.parseInt(s);
-            //capacity and floor can't be negative
-            //their input types are "number" but some old browsers don't have support for
-            //that and we don't won't any exceptions
-            if (numValue < 0 || (checkHour && numValue >= 24) || (!checkHour && numValue > 59)) {
-                return false;
-            }
-        } catch (NumberFormatException e) {
-            return false; //the text wasn't a number
-        }
-
+        if(!checkHour && validateNumber(s, 0, 59) == null)
+            return false;
+        if(checkHour && validateNumber(s, 0, 23) == null)
+            return false;
+        
         return true;
     }
 
