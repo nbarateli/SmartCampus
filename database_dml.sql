@@ -21,10 +21,6 @@ INSERT INTO campus_subject (subject_name) VALUES
   ('გერმანული II'),
   ('წყლის ნაყვის პატერნები');
 
-INSERT INTO room_problem (room_id, reported_by, description, date_created) VALUES
-  (11, 1, 'ფანჯარა არ იხურება', str_to_date('07-06-2017', '%d-%m-%Y')),
-  (6, 3, 'კონდიციონერი არ არის', str_to_date('06-06-2017', '%d-%m-%Y'));
-
 /*
 INSERT INTO lecture (lecturer, room_id, subject_id, day_of_week, start_time, end_time) VALUES
   (6, 4, 1, 'monday', '10:00', '12:10'),
