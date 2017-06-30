@@ -115,11 +115,11 @@ CREATE TABLE item_report
 (
   report_id        INT AUTO_INCREMENT
     PRIMARY KEY,
-  item_name        VARCHAR(50)              NULL,
-  item_description VARCHAR(500)             NOT NULL,
-  author_id        INT                      NOT NULL,
-  report_type      ENUM ('lost', ' FOUND ') NOT NULL,
-  date_added       DATE                     NOT NULL,
+  item_name        VARCHAR(50)            NULL,
+  item_description VARCHAR(500)           NOT NULL,
+  author_id        INT                    NOT NULL,
+  report_type      ENUM ('lost', 'FOUND') NOT NULL,
+  date_added       DATE                   NOT NULL,
   CONSTRAINT item_report_user_user_id_fk
   FOREIGN KEY (author_id) REFERENCES campus_user (user_id)
     ON DELETE CASCADE
