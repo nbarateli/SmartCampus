@@ -9,7 +9,6 @@ CREATE TABLE campus_user
   last_name    VARCHAR(20)                                                 NOT NULL,
   user_email   VARCHAR(30)                                                 NOT NULL,
   initial_role ENUM ('student', 'lecturer', 'staff', 'admin', 'sys_admin') NOT NULL,
-  user_status  ENUM ('active', 'banned'),
   img_url      VARCHAR(300)
 );
 CREATE UNIQUE INDEX user_user_email_uindex
@@ -54,19 +53,19 @@ CREATE TABLE campus_subject
 
 CREATE TABLE booking
 (
-  booking_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  room_id    INT             NOT NULL,
-  booker_id  INT             NOT NULL,
-  booking_date DATE NOT NULL ,
-  subject_id INT 			 NULL,
-  description VARCHAR(100) NULL DEFAULT NULL,
-  start_time TIME NOT NULL,
-  end_time TIME NOT NULL,
+  booking_id   INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  room_id      INT             NOT NULL,
+  booker_id    INT             NOT NULL,
+  booking_date DATE            NOT NULL,
+  subject_id   INT             NULL,
+  description  VARCHAR(100)    NULL     DEFAULT NULL,
+  start_time   TIME            NOT NULL,
+  end_time     TIME            NOT NULL,
   CONSTRAINT booking_subject_fk
   FOREIGN KEY (subject_id)
   REFERENCES smartcampus.campus_subject (subject_id)
-  ON DELETE CASCADE
-  ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
   CONSTRAINT booking_room_fk
   FOREIGN KEY (room_id) REFERENCES room (room_id)
     ON DELETE CASCADE,

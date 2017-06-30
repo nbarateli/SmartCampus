@@ -1,17 +1,17 @@
 USE smartcampus;
 
-INSERT INTO campus_user (first_name, last_name, user_email, initial_role, user_status)
+INSERT INTO campus_user (first_name, last_name, user_email, initial_role)
 VALUES
-  ('ნინო', 'ხადური', 'nkhad15@freeuni.edu.ge', 'sys_admin', 'active'),
-  ('ნიკო', 'ბარათელი', 'nbara15@freeuni.edu.ge', 'sys_admin', 'active'),
-  ('ზაურ', 'მეშველიანი', 'zmesh15@freeuni.edu.ge', 'sys_admin', 'active'),
-  ('დავით', 'მაღალთაძე', 'dmagh15@freeuni.edu.ge', 'sys_admin', 'active'),
-  ('შოთა', 'ნანუაშვილი', 'snanu15@freeuni.edu.ge', 'sys_admin', 'active'),
-  ('ნიკოლოზ', 'მაჭავარიანი', 'n.matchavariani@freeuni.edu.ge', 'lecturer', 'active'),
-  ('ნიკოლოზ', 'ციმაკურიძე', 'n.tsimakuridze@freeuni.edu.ge', 'lecturer', 'active'),
-  ('ლია', 'სოლომონია', 'l.solomonia@freeuni.edu.ge', 'lecturer', 'active'),
-  ('გიორგი', 'საღინაძე', 'g.saghinadze@freeuni.edu.ge', 'lecturer', 'active'),
-  ('ალექსანდრე', 'ცხოვრებოვი', 'atskh15@freeuni.edu.ge', 'student', 'active');
+  ('ნინო', 'ხადური', 'nkhad15@freeuni.edu.ge', 'sys_admin'),
+  ('ნიკო', 'ბარათელი', 'nbara15@freeuni.edu.ge', 'sys_admin'),
+  ('ზაურ', 'მეშველიანი', 'zmesh15@freeuni.edu.ge', 'sys_admin'),
+  ('დავით', 'მაღალთაძე', 'dmagh15@freeuni.edu.ge', 'sys_admin'),
+  ('შოთა', 'ნანუაშვილი', 'snanu15@freeuni.edu.ge', 'sys_admin'),
+  ('ნიკოლოზ', 'მაჭავარიანი', 'n.matchavariani@freeuni.edu.ge', 'lecturer'),
+  ('ნიკოლოზ', 'ციმაკურიძე', 'n.tsimakuridze@freeuni.edu.ge', 'lecturer'),
+  ('ლია', 'სოლომონია', 'l.solomonia@freeuni.edu.ge', 'lecturer'),
+  ('გიორგი', 'საღინაძე', 'g.saghinadze@freeuni.edu.ge', 'lecturer'),
+  ('ალექსანდრე', 'ცხოვრებოვი', 'atskh15@freeuni.edu.ge', 'student');
 
 
 INSERT INTO campus_subject (subject_name) VALUES
