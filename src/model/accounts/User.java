@@ -9,22 +9,36 @@ import model.campus.CampusObject;
  * (immutable)
  */
 public class User implements CampusObject {
+    private final String imageURL;
 
     private final int userID;
     private final String eMail;
     private final String firstName;
     private final String lastName;
     private final UserRole initialRole;
-
     public User(int userID, String eMail, String firstName, String lastName,
-                UserRole initialRole) {
+                UserRole initialRole, String imageURL) {
         this.userID = userID;
         this.eMail = eMail;
         this.firstName = firstName;
         this.lastName = lastName;
         this.initialRole = initialRole;
+        this.imageURL = imageURL;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "eMail='" + eMail + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", initialRole=" + initialRole +
+                '}';
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
 
     public UserRole getInitialRole() {
         return initialRole;

@@ -229,7 +229,7 @@ public final class Utils {
         String lastName = rs.getString(SQL_COLUMN_USER_LAST_NAME);
         UserRole role = toUserRole(rs.getString(SQL_COLUMN_USER_ROLE));
 
-        return new User(id, eMail, firstName, lastName, role);
+        return new User(id, eMail, firstName, lastName, role, "");
     }
 
     /**
@@ -490,6 +490,22 @@ public final class Utils {
         return time.length() >= 5 && time.charAt(2) == ':' &&
                 numberStringIsValid(time.substring(0, 2), true) &&
                 numberStringIsValid(time.substring(3, 5), false);
+    }
+
+    public static String roleToString(UserRole role) {
+        switch (role) {
+            case STUDENT:
+                return "student";
+            case ADMIN:
+                return "admin";
+            case STAFF:
+                return "staff";
+            case LECTURER:
+                return "lecturer";
+            case SYS_ADMIN:
+                return "sys_admin";
+        }
+        return "";
     }
 
     private Utils() {

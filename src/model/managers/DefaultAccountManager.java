@@ -1,5 +1,6 @@
 package model.managers;
 
+import misc.Utils;
 import model.accounts.AccountManager;
 import model.accounts.User;
 import model.accounts.UserSearchQueryGenerator;
@@ -108,7 +109,19 @@ public class DefaultAccountManager implements AccountManager {
 
     @Override
     public boolean add(User entity) {
-        return false;
+
+        String sql = String.format("INSERT  INTO %s " +
+                        "(%s, %s, %s, %s, %s) \n" +
+                        "VALUE (?, ?, ?, ?, ?)",
+                SQL_TABLE_USER, SQL_COLUMN_USER_FIRST_NAME, SQL_COLUMN_USER_LAST_NAME,
+                SQL_COLUMN_USER_EMAIL, SQL_COLUMN_USER_ROLE, SQL_COLUMN_USER_IMAGE);
+        try {
+            connector.executeUpdate(sql, entity.getFirstName(), entity.getLastName(), entity.geteMail(), Utils.roleToString(entity.getInitialRole()), entity.getImageURL());
+            return true;
+        } catch (Exception e) {
+
+            return false;
+        }
     }
 
     @Override

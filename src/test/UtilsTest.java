@@ -143,7 +143,7 @@ public class UtilsTest {
     @Test
     public void getUserFromResultsTest() {
         try {
-            assertEquals(new User(5, "name", "name", "name", UserRole.STUDENT),
+            assertEquals(new User(5, "name", "name", "name", UserRole.STUDENT, ""),
                     Utils.getUserFromResults(new MockResultSet()));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -154,7 +154,7 @@ public class UtilsTest {
     public void getProblemFromResults() {
         try {
             assertEquals(new RoomProblem(5,
-                            new User(5, "name", "name", "name", UserRole.STUDENT),
+                            new User(5, "name", "name", "name", UserRole.STUDENT, ""),
                             new Room(5, 5, "name", RoomType.valueOf("AUDITORIUM"),
                                     SeatType.valueOf("DESKS"), false, 5), "name", "name",
                             java.sql.Date.valueOf("2017-07-16")),
@@ -168,7 +168,7 @@ public class UtilsTest {
     public void getLectureFromResultsTest() {
         try {
             assertEquals(new Lecture(5,
-                            new User(5, "name", "name", "name", UserRole.STUDENT),
+                            new User(5, "name", "name", "name", UserRole.STUDENT, ""),
                             new Room(5, 5, "name", RoomType.valueOf("AUDITORIUM"),
                                     SeatType.valueOf("DESKS"), false, 5),
                             new CampusSubject(5, "name"), WeekDay.valueOf("MONDAY"),

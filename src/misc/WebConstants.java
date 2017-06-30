@@ -1,5 +1,7 @@
 package misc;
 
+import model.accounts.User;
+
 /**
  * Created by Niko on 10.06.2017.
  * <p>
@@ -45,6 +47,8 @@ public class WebConstants {
     public static final String JSON_ROOM_ERROR_NOT_FOUND = "room not found";
 
     public static final String JSON_ERROR = "error";
+    public static final String SIGNED_ACCOUNT = "signed_account";
+    public static final User.UserRole DEFAULT_USER_ROLE = User.UserRole.STUDENT;
 }
 
 

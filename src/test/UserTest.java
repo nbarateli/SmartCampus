@@ -12,7 +12,7 @@ public class UserTest {
 
     @Before
     public void createUser() {
-        user = new User(-1, "mail", "firstName", "lastName", null);
+        user = new User(-1, "mail", "firstName", "lastName", null, "");
     }
 
     @Test

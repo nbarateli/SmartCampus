@@ -27,6 +27,7 @@ public class OnCreateListener implements ServletContextListener,
 
     // Public constructor is required by servlet spec
     public OnCreateListener() {
+
     }
 
     // -------------------------------------------------------

@@ -20,7 +20,7 @@ public class RoomProblemTest {
 
     @Before
     public void createRoomProblem() {
-        user = new User(-1, "mail", "firstName", "lastName", null);
+        user = new User(-1, "mail", "firstName", "lastName", null, "");
         room = new Room(5, 5, "name", RoomType.AUDITORIUM, SeatType.DESKS, false, 5);
         problem = new RoomProblem(1, user, room, "title", "desc", new Date(500));
         problem1 = new RoomProblem(1, user, room, null, null, new Date(500));

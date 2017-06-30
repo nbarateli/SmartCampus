@@ -40,7 +40,7 @@ public class LectureManagerTest {
 
     @Test
     public void test2() {
-        User user = new User(6, "mail", "firstName", "lastName", null);
+        User user = new User(6, "mail", "firstName", "lastName", null, "");
         Room room = new Room(5, 5, "name", RoomType.AUDITORIUM, SeatType.DESKS, false, 5);
         CampusSubject subject = new CampusSubject(1, "კალკულუსი");
         Time startTime = new Time(500);

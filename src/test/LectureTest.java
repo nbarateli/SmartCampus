@@ -24,7 +24,7 @@ public class LectureTest {
 
     @Before
     public void setUp() {
-        user = new User(-1, "mail", "firstName", "lastName", null);
+        user = new User(-1, "mail", "firstName", "lastName", null, "");
         room = new Room(5, 5, "name", RoomType.AUDITORIUM, SeatType.DESKS, false, 5);
         subject = new CampusSubject(1, "კალკულუსი");
         startTime = new Time(500);
