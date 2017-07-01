@@ -38,39 +38,50 @@ function myClick() {
     //testing
     var id = this.id;
     var modal = document.getElementById('myModal');
-    $.ajax({
-        type: "POST",
-        url: '/rooms/room',
-        data: id,
-        parameterNames: 'id',
-        success: function (data) {
-            var parsedData = JSON.parse(data);
-            console.log(parsedData);
-        }
-    })
+    console.log(id);
+    $.get('/rooms/room', {name: id},
+        function (returnedData) {
+            displayRoom(returnedData, 'mod-cont');
+        }).fail(function () {
+        console.log("error");
+    });
+    // $.ajax({
+    //     type: 'POST',
+    //     url: '/rooms/room',
+    //     data: id,
+    //     parameterNames: 'id',
+    //     success: function (data) {
+    //         var parsedData = JSON.parse(data);
+    //         console.log(parsedData);
+    //     }
+    // })
 
 
     modal.style.display = "block";
 }
 
 function myHover() {
-	var id = this.id;
+    return;
+    var id = this.id;
     var rect = document.getElementById(id).getBoundingClientRect();
     var coords = this.getAttribute("coords").split(",");
     var leftPos = +rect.left + 130 + +coords[2];
     var topPos = +rect.top + +coords[3];
 
-    console.log("sum is: "+ leftPos +" "+ topPos);
-    console.log(leftPos +" "+ topPos);
+    console.log("sum is: " + leftPos + " " + topPos);
+    console.log(leftPos + " " + topPos);
     var div = document.getElementById("popup-div");
     div.removeChild(div.childNodes[0]);
-    var text = document.createTextNode("this room is: " + id); div.appendChild(text);
-    
+    var text = document.createTextNode("this room is: " + id);
+    div.appendChild(text);
+
     div.style.backgroundColor = "yellow";
     div.style.border = "1px";
     div.style.position = "absolute";
-    div.style.left = leftPos+"px"; div.style.top = topPos+"px"; //div.style.right = "2px"; div.style.bottom = "2px";
-    div.style.height = "100px"; div.style.width = "100px";
+    div.style.left = leftPos + "px";
+    div.style.top = topPos + "px"; //div.style.right = "2px"; div.style.bottom = "2px";
+    div.style.height = "100px";
+    div.style.width = "100px";
     document.body.appendChild(div);
 
     document.getElementById("par").innerHTML = id;

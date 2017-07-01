@@ -19,7 +19,7 @@
   }
 
   private void buildQuery(HttpServletRequest request, RoomSearchQueryGenerator query) {
-    if (request.getParameter("search") == null) return;
+    if (!"true".equals(request.getParameter("search"))) return;
     String name = request.getParameter("room_name");
     String floor = request.getParameter("room_floor");
     String roomType = request.getParameter("room_type");
@@ -57,6 +57,7 @@
           src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script
           src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
   <script src="RoomsSearch.js"></script>
   <script src="Floors.js"></script>
 </head>
@@ -104,10 +105,7 @@
           <select name="seat_type" class="form-control">
             <option value="any">ყველანაირი</option>
             <option value="desks">სკამები და მერხები</option>
-            <option value="wooden_chair">სკამ-მერხები (ხის)</option>
-            <option value="plastic_chair">სკამ-მერხები
-              (პლასტმასის)
-            </option>
+            <option value="chairs">სკამ-მერხები (ხის)</option>
             <option value="computers">კომპიუტერები</option>
             <option value="tables">მაგიდები</option>
           </select>
@@ -309,7 +307,7 @@
   </tr>
 </table>
 <div id="myModal" class="modal">
-  <div class="modal-content">
+  <div class="modal-content" id="mod-cont">
     <span id="closeModal" class="close">&times;</span>
     <div id="roomForm"></div>
   </div>

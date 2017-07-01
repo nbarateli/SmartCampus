@@ -216,7 +216,7 @@ public final class Utils {
             case "any":
                 return null;
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("caused by: " + s);
 
     }
 
@@ -513,30 +513,6 @@ public final class Utils {
         return c.getTime();
     }
 
-    /**
-     * checks if given string is valid for representing hour or minute
-     */
-    private static boolean numberStringIsValid(String s, boolean checkHour) {
-        if(!checkHour && validateNumber(s, 0, 59) == null)
-            return false;
-        if(checkHour && validateNumber(s, 0, 23) == null)
-            return false;
-        
-        return true;
-    }
-
-    /**
-     * Returns whether the first 5 characters of passed {@code String} form a valid time format.
-     *
-     * @param time a {@code String} value of a time to be checked.
-     * @return whether the first 5 characters of the argument form a valid time format.
-     */
-    private static boolean isValidFormat(String time) {
-        return time.length() >= 5 && time.charAt(2) == ':' &&
-                numberStringIsValid(time.substring(0, 2), true) &&
-                numberStringIsValid(time.substring(3, 5), false);
-    }
-
     public static String roleToString(UserRole role) {
         switch (role) {
             case STUDENT:
@@ -551,6 +527,30 @@ public final class Utils {
                 return "sys_admin";
         }
         return "";
+    }
+
+    /**
+     * checks if given string is valid for representing hour or minute
+     */
+    private static boolean numberStringIsValid(String s, boolean checkHour) {
+        if(!checkHour && validateNumber(s, 0, 59) == null)
+            return false;
+        if(checkHour && validateNumber(s, 0, 23) == null)
+            return false;
+
+        return true;
+    }
+
+    /**
+     * Returns whether the first 5 characters of passed {@code String} form a valid time format.
+     *
+     * @param time a {@code String} value of a time to be checked.
+     * @return whether the first 5 characters of the argument form a valid time format.
+     */
+    private static boolean isValidFormat(String time) {
+        return time.length() >= 5 && time.charAt(2) == ':' &&
+                numberStringIsValid(time.substring(0, 2), true) &&
+                numberStringIsValid(time.substring(3, 5), false);
     }
 
     private Utils() {
