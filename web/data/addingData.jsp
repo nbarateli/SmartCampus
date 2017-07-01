@@ -1,9 +1,21 @@
+<%@ page import="model.accounts.User" %>
+<%@ page import="serve.managers.ManagerFactory" %>
+<%@ page import="static misc.WebConstants.SIGNED_ACCOUNT" %>
+<%@ page import="static misc.WebConstants.MANAGER_FACTORY" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
-<head>
+<%
+  ManagerFactory factory = (ManagerFactory) request.getServletContext().getAttribute(MANAGER_FACTORY);
+  User currentUser = (User) request.getSession().getAttribute(SIGNED_ACCOUNT);
 
+  if (currentUser == null || !factory.getAccountManager().
+          getAllPermissionsOf(currentUser).contains(User.UserPermission.INSERT_DATA)) {
+    response.sendRedirect("/unallowed_operation.html");
+  }
+%>
+<head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>მონაცემების შეყვანა</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -51,34 +63,34 @@
             </div>
 
             <div class="select">
-              <label class="control-label">ლექციის დრო</label> 
+              <label class="control-label">ლექციის დრო</label>
               <select name="week_day" class="form-control">
-              <option value="monday">ორშაბათი</option>
-              <option value="tuesday">სამშაბათი</option>
-              <option value="wednesday">ოთხშაბათი</option>
-              <option value="thursday">ხუთშაბათი</option>
-              <option value="friday">პარასკევი</option>
-              <option value="saturday">შაბათი</option>
-              <option value="sunday">კვირა</option>
-            </select>
+                <option value="monday">ორშაბათი</option>
+                <option value="tuesday">სამშაბათი</option>
+                <option value="wednesday">ოთხშაბათი</option>
+                <option value="thursday">ხუთშაბათი</option>
+                <option value="friday">პარასკევი</option>
+                <option value="saturday">შაბათი</option>
+                <option value="sunday">კვირა</option>
+              </select>
             </div>
             <br>
-            
+
             <div class="select">
               <select name="repetition" class="form-control">
-              <option value="one_week">კვირაში ერთხელ</option>
-              <option value="two_weeks">ორ კვირაში ერთხელ</option>
-              <option value="three_weeks">სამ კვირაში ერთხელ</option>
-              <option value="four_weeks">ოთხ კვირაში ერთხელ</option>
-            </select>
+                <option value="one_week">კვირაში ერთხელ</option>
+                <option value="two_weeks">ორ კვირაში ერთხელ</option>
+                <option value="three_weeks">სამ კვირაში ერთხელ</option>
+                <option value="four_weeks">ოთხ კვირაში ერთხელ</option>
+              </select>
             </div>
             <br>
-            
+
             <input type="number" name="num_weeks" class="form-control"
-                    placeholder="კვირების რაოდენობა" min=1 max=16>
-                    
+                   placeholder="კვირების რაოდენობა" min=1 max=16>
+
             <br>
-            
+
             <div class="form-group">
 
               <input type="text" name="start_time" class="form-control"
@@ -89,14 +101,14 @@
               <input type="text" name="end_time" class="form-control"
                      placeholder="შეიყვანეთ ლექციის დასრულების დრო(HH:mm 24-საათიანი ფორმატით)">
             </div>
-            
+
             <div class="form-group">
-              <label class="control-label">ლექციის დაწყების თარიღი</label> 
+              <label class="control-label">ლექციის დაწყების თარიღი</label>
               <input type="date" name="start_date" class="form-control">
             </div>
-            
+
             <br>
-            
+
             <input type="button" value="დამატება"
                    class="btn btn-primary btn-lg"
                    onclick="addLectureFromForm()">

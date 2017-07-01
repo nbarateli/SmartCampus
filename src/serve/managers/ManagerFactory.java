@@ -1,4 +1,4 @@
-package model.managers;
+package serve.managers;
 
 import model.accounts.AccountManager;
 import model.bookings.BookingManager;
@@ -18,6 +18,10 @@ public class ManagerFactory {
     private LectureManager lectureManager;
     private BookingManager bookingManager;
 
+    public ManagerFactory() {
+
+    }
+
     public DBConnector getConnector() {
         return connector == null ? connector = new DBConnector() : connector;
     }
@@ -33,9 +37,9 @@ public class ManagerFactory {
     public LectureManager getLectureManager() {
         return lectureManager == null ? lectureManager = new DefaultLectureManager(getConnector()) : lectureManager;
     }
-    
+
     public BookingManager getBookingManager() {
-        return roomManager == null ? bookingManager = new DefaultBookingManager(getConnector()) 
+        return roomManager == null ? bookingManager = new DefaultBookingManager(getConnector())
                 : bookingManager;
     }
 }

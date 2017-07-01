@@ -1,6 +1,7 @@
 package serve.lecture;
 
 import model.lectures.LectureManager;
+import serve.managers.ManagerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +33,9 @@ public class LectureRemover extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
-        LectureManager manager = (LectureManager) request.getServletContext().getAttribute(LECTURE_MANAGER);
+
+        LectureManager manager = ((ManagerFactory) request.getServletContext().getAttribute
+                (MANAGER_FACTORY)).getLectureManager();
         PrintWriter out = response.getWriter();
         if ("true".equals(request.getParameter("remove_all"))) {
             manager.removeAllLectures();

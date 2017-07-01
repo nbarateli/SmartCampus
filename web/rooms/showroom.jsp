@@ -1,13 +1,14 @@
 <%@ page import="misc.WebConstants" %>
-<%@ page import="static misc.WebConstants.ROOM_MANAGER" %>
 <%@ page import="model.lectures.Lecture" %>
 <%@ page import="model.rooms.Room" %>
 <%@ page import="model.rooms.RoomManager" %>
-<%@ page import="java.util.List" %>
+<%@ page import="serve.managers.ManagerFactory" %>
 <%@ page import="static misc.Utils.roomTypeToString" %>
 <%@ page import="static misc.Utils.toSeatType" %>
 <%@ page import="static misc.Utils.toGeorgian" %>
-<%@ page import="static misc.Utils.seatTypeToString" %><%--
+<%@ page import="static misc.Utils.seatTypeToString" %>
+<%@ page import="static misc.WebConstants.MANAGER_FACTORY" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Niko
   Date: 11.06.2017
@@ -30,8 +31,8 @@
         out.println("<tr><form action=\"/lectures/removelecture\" method=\"post\">");
         out.println("<input type=\"hidden\" value=\"" + lecture.getId() + "\" name=\"lecture_id\">");
         out.println("<td>" + lecture.getSubject().getName() + "</td>");
-        out.println("<td>" + lecture.getLecturer().getFirstName() + " " 
-              + lecture.getLecturer().getLastName() + "</td>");
+        out.println("<td>" + lecture.getLecturer().getFirstName() + " "
+                + lecture.getLecturer().getLastName() + "</td>");
         out.println("<td>" + toGeorgian(lecture.getDay()) + " " + lecture.getStartTime() + "</td>");
         out.println("<td><input type=\"submit\" value=\"წაშლა\"></td>");
         out.println("</tr>");
@@ -45,8 +46,8 @@
   <%
 
     try {
-      manager = ((RoomManager) request.getServletContext()
-              .getAttribute(ROOM_MANAGER));
+      manager = ((ManagerFactory) request.getServletContext()
+              .getAttribute(MANAGER_FACTORY)).getRoomManager();
       room = manager.getRoomById(Integer.valueOf(request.getParameter("id")));
       images = manager.getAllImagesOf(room);
     } catch (Exception e) {
@@ -81,12 +82,12 @@
 
     <div>
       <table>
-          <tr>
-            <th>სახელი</th>
-            <th>ლექტორი</th>
-            <th>დაწყების დრო</th>
-          </tr>
-          <%
+        <tr>
+          <th>სახელი</th>
+          <th>ლექტორი</th>
+          <th>დაწყების დრო</th>
+        </tr>
+        <%
           if (room != null && room.getRoomType() != Room.RoomType.UTILITY) {
             try {
               printAll(manager.findAllLecturesAt(room), out);

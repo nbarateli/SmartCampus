@@ -3,9 +3,9 @@ package misc;
 import model.accounts.User;
 import model.lectures.CampusSubject;
 import model.lectures.Lecture;
-import model.managers.DBConnector;
 import model.rooms.Room;
 import model.rooms.RoomProblem;
+import serve.managers.DBConnector;
 
 import java.io.*;
 import java.sql.ResultSet;

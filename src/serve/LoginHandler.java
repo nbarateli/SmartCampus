@@ -8,7 +8,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import misc.WebConstants;
 import model.accounts.AccountManager;
 import model.accounts.User;
-import model.managers.ManagerFactory;
+import serve.managers.ManagerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +20,7 @@ import java.io.PrintWriter;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
 
+import static misc.WebConstants.MANAGER_FACTORY;
 import static misc.WebConstants.SIGNED_ACCOUNT;
 
 @WebServlet(name = "LoginHandler", urlPatterns = {"/tokensignin"})
@@ -45,7 +46,8 @@ public class LoginHandler extends HttpServlet {
                 //.setAudience(Arrays.asList(CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3))
                 .build();
         try {
-            User user = verifyLogin(verifier, idTokenString, response.getWriter());
+            User user = verifyLogin(verifier, idTokenString, response.getWriter(),
+                    (ManagerFactory) getServletContext().getAttribute(MANAGER_FACTORY));
             if (user != null) {
                 request.getSession().setAttribute(SIGNED_ACCOUNT, user);
                 response.getWriter().println("signed in as " + user);
@@ -60,9 +62,10 @@ public class LoginHandler extends HttpServlet {
 
     }
 
-    private User verifyLogin(GoogleIdTokenVerifier verifier, String idTokenString, PrintWriter out) throws GeneralSecurityException, IOException {
+    private User verifyLogin(GoogleIdTokenVerifier verifier, String idTokenString,
+                             PrintWriter out, ManagerFactory factory) throws GeneralSecurityException, IOException {
         GoogleIdToken idToken = verifier.verify(idTokenString);
-        ManagerFactory factory = new ManagerFactory();
+
         AccountManager accountManager = factory.getAccountManager();
         if (idToken != null) {
             GoogleIdToken.Payload payload = idToken.getPayload();

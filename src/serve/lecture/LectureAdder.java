@@ -1,16 +1,16 @@
 package serve.lecture;
 
 import misc.ModelConstants;
-import misc.WebConstants;
+import model.accounts.AccountManager;
 import model.accounts.User;
 import model.bookings.Booking;
 import model.bookings.BookingManager;
 import model.lectures.CampusSubject;
 import model.lectures.Lecture.WeekDay;
 import model.lectures.LectureManager;
-import model.managers.DefaultAccountManager;
 import model.rooms.Room;
 import model.rooms.RoomManager;
+import serve.managers.ManagerFactory;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -22,8 +22,8 @@ import java.io.IOException;
 import java.sql.Time;
 import java.util.Date;
 
-import static misc.WebConstants.*;
 import static misc.ModelConstants.DAYS_IN_WEEK;
+import static misc.WebConstants.*;
 
 /**
  * Servlet implementation class LectureAdder
@@ -46,14 +46,12 @@ public class LectureAdder extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         ServletContext context = request.getServletContext();
-        BookingManager manager = 
-                (BookingManager) context.getAttribute(WebConstants.BOOKING_MANAGER);
-        LectureManager lectManager = 
-                (LectureManager) context.getAttribute(WebConstants.LECTURE_MANAGER);
-        DefaultAccountManager accountManager = 
-                (DefaultAccountManager) context.getAttribute(ACCOUNT_MANAGER);
-        RoomManager roomManager = (RoomManager) context.getAttribute(ROOM_MANAGER);
-        
+        ManagerFactory factory = (ManagerFactory) context.getAttribute(MANAGER_FACTORY);
+        BookingManager manager = factory.getBookingManager();
+        LectureManager lectureManager = factory.getLectureManager();
+        AccountManager accountManager = factory.getAccountManager();
+        RoomManager roomManager = factory.getRoomManager();
+
         String lecturerEmail = request.getParameter("lecturer_email");
         String subjectName = request.getParameter("subject_name");
         String roomName = request.getParameter("room_name");
@@ -63,21 +61,21 @@ public class LectureAdder extends HttpServlet {
         Time endTime = misc.Utils.toHHMM(request.getParameter("end_time"));
         Integer numWeeks = misc.Utils.validateNumber(request.getParameter("num_weeks"), 1, 16);
         int rep = Integer.parseInt(request.getParameter("repetition"));
-        
+
         User lecturer = accountManager.getUserViaEMail(lecturerEmail);
-        CampusSubject subject = lectManager.findSubject(subjectName);
+        CampusSubject subject = lectureManager.findSubject(subjectName);
         Room room = roomManager.getRoomByName(roomName);
 
         if (lecturer != null && room != null && subject != null
                 && startTime != null && endTime != null && date != null && numWeeks != null) {
-            
-            for(int i = 0; i < numWeeks; i += DAYS_IN_WEEK * rep) {
+
+            for (int i = 0; i < numWeeks; i += DAYS_IN_WEEK * rep) {
                 Booking thisBooking = new Booking(
-                        ModelConstants.SENTINEL_INT, lecturer, room, subject, weekDay, startTime, 
+                        ModelConstants.SENTINEL_INT, lecturer, room, subject, weekDay, startTime,
                         endTime, null, misc.Utils.addDaysToDate(date, i));
                 manager.add(thisBooking);
             }
-            
+
             response.getWriter().println(SUCCESS);
         } else {
             response.getWriter().println(FAILED);

@@ -4,6 +4,7 @@
 <%@ page import="model.rooms.RoomManager" %>
 <%@ page import="model.rooms.RoomSearchQueryGenerator" %>
 <%@ page import="static misc.Utils.*" %>
+<%@ page import="serve.managers.ManagerFactory" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Niko
@@ -35,7 +36,7 @@
 
 %>
 <%
-  RoomManager manager1 = (RoomManager) request.getServletContext().getAttribute(ROOM_MANAGER);
+  RoomManager manager1 = ((ManagerFactory) request.getServletContext().getAttribute(MANAGER_FACTORY)).getRoomManager();
 %>
 <html>
 <%

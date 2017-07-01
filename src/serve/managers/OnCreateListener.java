@@ -1,9 +1,6 @@
-package serve;
+package serve.managers;
 
 import misc.DBInfo;
-import model.lectures.LectureManager;
-import model.managers.ManagerFactory;
-import model.rooms.RoomManager;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -14,7 +11,7 @@ import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import static misc.WebConstants.*;
+import static misc.WebConstants.MANAGER_FACTORY;
 
 /**
  * Created by Niko on 10.06.2017.
@@ -44,14 +41,9 @@ public class OnCreateListener implements ServletContextListener,
             e.printStackTrace();
         }
         ManagerFactory factory = new ManagerFactory();
-        RoomManager roomManager = factory.getRoomManager();
-        LectureManager lectureManager = factory.getLectureManager();
         ServletContext context = sce.getServletContext();
+        context.setAttribute(MANAGER_FACTORY, factory);
 
-        context.setAttribute(ROOM_MANAGER, roomManager);
-        context.setAttribute(LECTURE_MANAGER, lectureManager);
-        context.setAttribute(ACCOUNT_MANAGER, factory.getAccountManager());
-        context.setAttribute(BOOKING_MANAGER, factory.getBookingManager());
     }
 
     public void contextDestroyed(ServletContextEvent sce) {

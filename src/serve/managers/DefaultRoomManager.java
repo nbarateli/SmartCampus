@@ -1,4 +1,4 @@
-package model.managers;
+package serve.managers;
 
 import misc.Utils;
 import model.campus.CampusSearchQuery;

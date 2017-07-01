@@ -2,14 +2,14 @@ package test;
 
 import model.lectures.Lecture;
 import model.lectures.Lecture.WeekDay;
-import model.managers.DefaultRoomManager;
-import model.managers.ManagerFactory;
 import model.rooms.Room;
 import model.rooms.Room.RoomType;
 import model.rooms.Room.SeatType;
 import model.rooms.RoomSearchQueryGenerator;
 import org.junit.Before;
 import org.junit.Test;
+import serve.managers.DefaultRoomManager;
+import serve.managers.ManagerFactory;
 
 import java.util.List;
 

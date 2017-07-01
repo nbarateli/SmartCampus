@@ -1,8 +1,8 @@
 package serve.lecture;
 
-import misc.WebConstants;
 import model.lectures.CampusSubject;
 import model.lectures.LectureManager;
+import serve.managers.ManagerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static misc.WebConstants.FAILED;
-import static misc.WebConstants.SUCCESS;
+import static misc.WebConstants.*;
 
 /**
  * Servlet implementation class SubjectAdder
@@ -34,8 +33,9 @@ public class SubjectAdder extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        LectureManager manager = (LectureManager) request.getServletContext().getAttribute(WebConstants.LECTURE_MANAGER);
-        response.getWriter().append("Served at: ").append(request.getContextPath());
+        ManagerFactory factory = (ManagerFactory) getServletContext().getAttribute(MANAGER_FACTORY);
+        LectureManager manager = factory.getLectureManager();
+
         String subjectName = request.getParameter("subj_name");
 
         CampusSubject subject = manager.findSubject(subjectName);

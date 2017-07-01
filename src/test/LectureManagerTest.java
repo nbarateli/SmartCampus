@@ -6,12 +6,12 @@ import model.lectures.CampusSubject;
 import model.lectures.Lecture;
 import model.lectures.Lecture.WeekDay;
 import model.lectures.LectureManager;
-import model.managers.ManagerFactory;
 import model.rooms.Room;
 import model.rooms.Room.RoomType;
 import model.rooms.Room.SeatType;
 import org.junit.Before;
 import org.junit.Test;
+import serve.managers.ManagerFactory;
 
 import java.sql.Time;
 

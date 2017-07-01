@@ -4,6 +4,7 @@ import model.lectures.Lecture;
 import model.rooms.Room;
 import model.rooms.RoomManager;
 import model.rooms.RoomProblem;
+import serve.managers.ManagerFactory;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -32,7 +33,8 @@ public class RoomInfo extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         JsonObjectBuilder builder = Json.createObjectBuilder();
-        RoomManager manager = ((RoomManager) request.getServletContext().getAttribute(ROOM_MANAGER));
+        RoomManager manager = ((ManagerFactory) request.getServletContext()
+                .getAttribute(MANAGER_FACTORY)).getRoomManager();
         String id = request.getParameter("id");
         Room room;
         try {

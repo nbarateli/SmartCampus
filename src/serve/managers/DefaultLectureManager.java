@@ -1,4 +1,4 @@
-package model.managers;
+package serve.managers;
 
 import model.campus.CampusSearchQuery;
 import model.lectures.CampusSubject;

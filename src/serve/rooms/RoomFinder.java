@@ -3,6 +3,7 @@ package serve.rooms;
 import model.rooms.Room;
 import model.rooms.RoomManager;
 import model.rooms.RoomSearchQueryGenerator;
+import serve.managers.ManagerFactory;
 
 import javax.json.*;
 import javax.servlet.ServletException;
@@ -27,7 +28,7 @@ public class RoomFinder extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        RoomManager manager = ((RoomManager) request.getServletContext().getAttribute(ROOM_MANAGER));
+        RoomManager manager = ((ManagerFactory) request.getServletContext().getAttribute(MANAGER_FACTORY)).getRoomManager();
 
         List<Room> rooms = manager.find(getQuery(request));
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();

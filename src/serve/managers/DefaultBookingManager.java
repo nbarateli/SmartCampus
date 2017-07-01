@@ -1,20 +1,10 @@
-package model.managers;
+package serve.managers;
 
-import static misc.Utils.getLectureFromResults;
-import static misc.Utils.getSubjectFromResults;
-import static misc.Utils.successfulOperation;
-import static model.database.SQLConstants.SQL_COLUMN_BOOKING_START_TIME;
-import static model.database.SQLConstants.SQL_COLUMN_BOOKING_END_TIME;
-import static model.database.SQLConstants.SQL_COLUMN_SUBJECT_NAME;
-import static model.database.SQLConstants.SQL_COLUMN_BOOKING_SUBJECT_ID; 
-import static model.database.SQLConstants.SQL_COLUMN_BOOKING_BOOKER;
-import static model.database.SQLConstants.SQL_COLUMN_BOOKING_DATE;
-import static model.database.SQLConstants.SQL_COLUMN_BOOKING_DESCRIPTION;
-import static model.database.SQLConstants.SQL_COLUMN_BOOKING_ID;
-import static model.database.SQLConstants.SQL_COLUMN_BOOKING_ROOM;
-import static model.database.SQLConstants.SQL_COLUMN_BOOKING_WEEK_DAY;
-import static model.database.SQLConstants.SQL_TABLE_SUBJECT;
-import static model.database.SQLConstants.SQL_TABLE_BOOKING;
+import model.bookings.Booking;
+import model.bookings.BookingManager;
+import model.bookings.BookingSearchQueryGenerator;
+import model.campus.CampusSearchQuery;
+import model.lectures.LectureManager;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,14 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.bookings.Booking;
-import model.bookings.BookingManager;
-import model.bookings.BookingSearchQueryGenerator;
-import model.campus.CampusSearchQuery;
-import model.lectures.CampusSubject;
-import model.lectures.Lecture;
-import model.lectures.LectureManager;
-import model.lectures.LectureSearchQueryGenerator;
+import static misc.Utils.successfulOperation;
+import static model.database.SQLConstants.*;
 
 public class DefaultBookingManager implements BookingManager {
     

@@ -3,6 +3,7 @@ package serve.rooms;
 import misc.ModelConstants;
 import model.rooms.Room;
 import model.rooms.RoomManager;
+import serve.managers.ManagerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,7 +37,8 @@ public class RoomAdder extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        RoomManager manager = (RoomManager) request.getServletContext().getAttribute(ROOM_MANAGER);
+        RoomManager manager = ((ManagerFactory) request.getServletContext().
+                getAttribute(MANAGER_FACTORY)).getRoomManager();
         try {
             String name = request.getParameter("room_name");
             int floor = Integer.parseInt(request.getParameter("room_floor"));
@@ -44,7 +46,7 @@ public class RoomAdder extends HttpServlet {
             Room.RoomType roomType = toRoomType(request.getParameter("room_type"));
             Room.SeatType seatType = toSeatType(request.getParameter("seat_type"));
             boolean canBeBooked = ("true".equals(request.getParameter("can_be_booked")));
-            Room newRoom = new Room(ModelConstants.SENTINEL_INT, capacity, name, roomType, 
+            Room newRoom = new Room(ModelConstants.SENTINEL_INT, capacity, name, roomType,
                     seatType, canBeBooked, floor);
             manager.add(newRoom);
             response.getWriter().println(SUCCESS);

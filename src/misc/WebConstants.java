@@ -8,10 +8,7 @@ import model.accounts.User;
  * Stores all necessary constants for Web side of the project.
  */
 public class WebConstants {
-    public static final String ROOM_MANAGER = "roomManager";
-    public static final String LECTURE_MANAGER = "lectureManager";
-    public static final String ACCOUNT_MANAGER = "accountManager";
-    public static final String BOOKING_MANAGER = "bookingManager";
+    public static final String MANAGER_FACTORY = "managerFactory";
 
     public static final String SUCCESS = "success";
     public static final String FAILED = "failure";
