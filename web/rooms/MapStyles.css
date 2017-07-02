@@ -1,48 +1,60 @@
 .st0 {
-  fill: #FFFFFF;
-  stroke: #010101;
-  stroke-miterlimit: 10;
+    fill: #FFFFFF;
+    stroke: #010101;
+    stroke-miterlimit: 10;
 }
 
 .st1 {
-  fill: #BFC0C2;
-  stroke: #010101;
-  stroke-miterlimit: 10;
+    fill: #BFC0C2;
+    stroke: #010101;
+    stroke-miterlimit: 10;
 }
 
 .st2 {
-  fill: none;
-  stroke: #010101;
-  stroke-miterlimit: 10;
+    fill: none;
+    stroke: #010101;
+    stroke-miterlimit: 10;
 }
 
 .room:hover {
-  fill: blue;
+    fill: blue;
 }
 
 .room {
-  fill: #f4cb42;
-  stroke: #000000;
-  stroke-width: 2;
-  stroke-miterlimit: 10;
+    fill: #f4cb42;
+    stroke: #000000;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
 }
 
 .st3 {
-  fill: #010101;
+    fill: #010101;
 }
 
 .st4 {
-  font-family: 'Consolas';
+    font-family: 'Consolas';
 }
 
 .st5 {
-  font-size: 18px;
+    font-size: 18px;
 }
 
 .st6 {
-  font-family: 'Sylfaen';
+    font-family: 'Sylfaen';
 }
 
 .st7 {
-  font-size: 18.5893px;
+    font-size: 18.5893px;
+}
+
+.passage {
+    fill: #58595B;
+    stroke: #000000;
+    stroke-miterlimit: 10;
+}
+
+.cafeteria {
+    fill: #4286F4;
+    stroke: #000000;
+    stroke-miterlimit: 10;
 }

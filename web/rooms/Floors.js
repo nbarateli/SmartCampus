@@ -12,6 +12,9 @@ function load() {
     workMaps(map2);
     workMaps(map3);
     workMaps(map4);
+    map2.style.display = "none";
+    map3.style.display = "none";
+    map4.style.display = "none";
     var span = document.getElementById("closeModal");
     var modal = document.getElementById('myModal');
     span.onclick = function () {
@@ -31,6 +34,10 @@ function load() {
 function workMaps(map) {
     var areas = map.childNodes;
     for (i = 0; i < areas.length; i++) {
+        // var className = areas[i].getAttribute("class");
+        var child = areas[i];
+        var name = $(child).attr("class");
+        if (name !== 'room') continue;
         areas[i].addEventListener("mouseover", myHover);
         areas[i].addEventListener("click", myClick);
     }
@@ -99,30 +106,30 @@ function floorChange() {
 }
 
 function showFirst() {
-    document.getElementById("imgmap2").style.display = "none";
-    document.getElementById("imgmap3").style.display = "none";
+    document.getElementById("map2").style.display = "none";
+    document.getElementById("map3").style.display = "none";
     document.getElementById("imgmap4").style.display = "none";
     document.getElementById("map1").style.display = "unset";
 }
 
 function showSecond() {
     document.getElementById("map1").style.display = "none";
-    document.getElementById("imgmap3").style.display = "none";
+    document.getElementById("map3").style.display = "none";
     document.getElementById("imgmap4").style.display = "none";
-    document.getElementById("imgmap2").style.display = "unset";
+    document.getElementById("map2").style.display = "unset";
 }
 
 function showThird() {
     document.getElementById("map1").style.display = "none";
-    document.getElementById("imgmap2").style.display = "none";
+    document.getElementById("map2").style.display = "none";
     document.getElementById("imgmap4").style.display = "none";
-    document.getElementById("imgmap3").style.display = "unset";
+    document.getElementById("map3").style.display = "unset";
 }
 
 function showFourth() {
     document.getElementById("map1").style.display = "none";
-    document.getElementById("imgmap2").style.display = "none";
-    document.getElementById("imgmap3").style.display = "none";
+    document.getElementById("map2").style.display = "none";
+    document.getElementById("map3").style.display = "none";
     document.getElementById("imgmap4").style.display = "unset";
 }
 
