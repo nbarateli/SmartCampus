@@ -21,6 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Time;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.LinkedList;
+import java.util.List;
 
 import static misc.ModelConstants.DAYS_IN_WEEK;
 import static misc.WebConstants.*;
@@ -45,6 +48,10 @@ public class LectureAdder extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+        List<String> ps = new LinkedList<>();
+        Enumeration<String> params = request.getParameterNames();
+        while (params.hasMoreElements()) ps.add(params.nextElement());
+        String s = ps.toString();
         ServletContext context = request.getServletContext();
         ManagerFactory factory = (ManagerFactory) context.getAttribute(MANAGER_FACTORY);
         BookingManager manager = factory.getBookingManager();

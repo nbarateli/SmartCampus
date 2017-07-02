@@ -17,9 +17,12 @@ function load() {
     span.onclick = function () {
 
         modal.style.display = "none";
+        document.getElementById('roomForm').innerHTML = "";
+        modal.getElementById()
     };
     window.onclick = function (event) {
         if (event.target == modal) {
+            document.getElementById('roomForm').innerHTML = "";
             modal.style.display = "none";
         }
     }
@@ -41,7 +44,7 @@ function myClick() {
     console.log(id);
     $.get('/rooms/room', {name: id.substring(1)},
         function (returnedData) {
-            displayRoom(returnedData, 'mod-cont');
+            displayRoom(returnedData, 'roomForm');
         }).fail(function () {
         console.log("error");
     });
@@ -99,25 +102,25 @@ function showFirst() {
     document.getElementById("imgmap2").style.display = "none";
     document.getElementById("imgmap3").style.display = "none";
     document.getElementById("imgmap4").style.display = "none";
-    document.getElementById("imgmap1").style.display = "unset";
+    document.getElementById("map1").style.display = "unset";
 }
 
 function showSecond() {
-    document.getElementById("imgmap1").style.display = "none";
+    document.getElementById("map1").style.display = "none";
     document.getElementById("imgmap3").style.display = "none";
     document.getElementById("imgmap4").style.display = "none";
     document.getElementById("imgmap2").style.display = "unset";
 }
 
 function showThird() {
-    document.getElementById("imgmap1").style.display = "none";
+    document.getElementById("map1").style.display = "none";
     document.getElementById("imgmap2").style.display = "none";
     document.getElementById("imgmap4").style.display = "none";
     document.getElementById("imgmap3").style.display = "unset";
 }
 
 function showFourth() {
-    document.getElementById("imgmap1").style.display = "none";
+    document.getElementById("map1").style.display = "none";
     document.getElementById("imgmap2").style.display = "none";
     document.getElementById("imgmap3").style.display = "none";
     document.getElementById("imgmap4").style.display = "unset";
@@ -125,6 +128,40 @@ function showFourth() {
 
 function displayRoom(data, id) {
     var tmp = document.getElementById("mustmpl").innerHTML;
+
+    function parseRoomType(roomtype) {
+        switch (roomtype.toString().toLowerCase()) {
+            case 'laboratory':
+                return "ლაბორატორია";
+            case 'auditorium':
+                return "აუდიტორია"
+        }
+        return "სხვა";
+    }
+
+    var parseSeatType = function (seattype) {
+        switch (seattype.toString().toLowerCase()) {
+            case 'desks':
+                return 'მერხები';
+            case 'chairs':
+                return 'სკამები';
+            case 'computers':
+                return 'კომპიუტერები';
+            case 'tables':
+                return 'მაგიდები';
+        }
+    };
+    data['roomtype'] = parseRoomType(data['roomtype']);
+
+    data['seattype'] = parseSeatType(data['seattype']);
+    var available = data['available'];
+    if (available) {
+        data['available'] = 'კი';
+        data['spanid'] = 'yes-span';
+    } else {
+        data['available'] = 'არა';
+        data['spanid'] = 'no-span';
+    }
     html = Mustache.to_html(tmp, data);
     var box = document.getElementById(id);
     box.innerHTML = html;

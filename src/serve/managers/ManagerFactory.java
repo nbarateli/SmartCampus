@@ -39,7 +39,7 @@ public class ManagerFactory {
     }
 
     public BookingManager getBookingManager() {
-        return roomManager == null ? bookingManager = new DefaultBookingManager(getConnector())
+        return bookingManager == null ? bookingManager = new DefaultBookingManager(getConnector())
                 : bookingManager;
     }
 }
