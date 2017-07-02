@@ -185,7 +185,7 @@
         <option value="third">მესამე სართული</option>
         <option value="fourth">მეოთხე სართული</option>
       </select>
-      <div>
+    <div class="mapdivision">
         <link rel="stylesheet" href="MapStyles.css">
         <svg version="1.1" id="map1" xmlns="http://www.w3.org/2000/svg"
              x="0px" y="0px"

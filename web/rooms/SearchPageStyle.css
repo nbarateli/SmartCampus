@@ -1,7 +1,10 @@
 @CHARSET "UTF-8";
+.mapdivision {
+  background-color: white;
+}
 
 body {
-  background-color: lightGreen ;
+  background-color: lightGreen;
 }
 
 #full-table {
@@ -51,11 +54,14 @@ td, tr {
 }
 
 #popup-div {
-	display: none;
-	z-index: 1;
-	height: 1px;
-	width: 1px;
-	position: absolute;
-	right:0; left:0; top:0; bottom:0;
-	background-color: yellow;
+  display: none;
+  z-index: 1;
+  height: 1px;
+  width: 1px;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: yellow;
 }
