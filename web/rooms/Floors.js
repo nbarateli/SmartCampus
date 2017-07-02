@@ -39,7 +39,7 @@ function myClick() {
     var id = this.id;
     var modal = document.getElementById('myModal');
     console.log(id);
-    $.get('/rooms/room', {name: id},
+    $.get('/rooms/room', {name: id.substring(1)},
         function (returnedData) {
             displayRoom(returnedData, 'mod-cont');
         }).fail(function () {
