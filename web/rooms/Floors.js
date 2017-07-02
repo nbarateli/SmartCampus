@@ -108,21 +108,21 @@ function floorChange() {
 function showFirst() {
     document.getElementById("map2").style.display = "none";
     document.getElementById("map3").style.display = "none";
-    document.getElementById("imgmap4").style.display = "none";
+    document.getElementById("map4").style.display = "none";
     document.getElementById("map1").style.display = "unset";
 }
 
 function showSecond() {
     document.getElementById("map1").style.display = "none";
     document.getElementById("map3").style.display = "none";
-    document.getElementById("imgmap4").style.display = "none";
+    document.getElementById("map4").style.display = "none";
     document.getElementById("map2").style.display = "unset";
 }
 
 function showThird() {
     document.getElementById("map1").style.display = "none";
     document.getElementById("map2").style.display = "none";
-    document.getElementById("imgmap4").style.display = "none";
+    document.getElementById("map4").style.display = "none";
     document.getElementById("map3").style.display = "unset";
 }
 
@@ -130,7 +130,7 @@ function showFourth() {
     document.getElementById("map1").style.display = "none";
     document.getElementById("map2").style.display = "none";
     document.getElementById("map3").style.display = "none";
-    document.getElementById("imgmap4").style.display = "unset";
+    document.getElementById("map4").style.display = "unset";
 }
 
 function displayRoom(data, id) {

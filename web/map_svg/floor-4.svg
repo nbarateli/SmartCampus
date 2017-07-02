@@ -1,79 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px"
-	 viewBox="-49 311 1700 880" style="enable-background:new -49 311 1700 880;" xml:space="preserve">
+	 viewBox="-399 111 1700 880" style="enable-background:new -399 111 1700 880;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;}
-	.st1{fill:none;stroke:#000000;stroke-miterlimit:10;}
-	.st2{font-family:'Sylfaen';}
-	.st3{font-size:24px;}
+	.st0 {
+      fill: #FFFFFF;
+      stroke: #000000;
+      stroke-miterlimit: 10;
+  }
+
+  .st1 {
+      fill: none;
+      stroke: #000000;
+      stroke-miterlimit: 10;
+  }
+
+  .st6 {
+      font-family: 'Sylfaen';
+  }
+
+  .st7 {
+      font-size: 24px;
+  }
+
+  .room:hover {
+      fill: blue;
+  }
+
+  .room {
+      fill: #f4cb42;
+      stroke: #000000;
+      stroke-width: 2;
+
 </style>
-<rect id="x400" x="22.6" y="923.8" class="st0" width="260" height="190"/>
-<rect id="x401" x="282.8" y="1048.8" class="st0" width="70" height="65"/>
-<rect id="x402-1" x="352.8" y="1048.8" class="st0" width="75" height="65"/>
-<rect id="x402-2" x="427.8" y="1048.8" class="st0" width="75" height="65"/>
-<rect id="x403-1" x="352.8" y="923.8" class="st0" width="110" height="65"/>
-<rect id="x403-2" x="462.8" y="923.8" class="st0" width="40" height="65"/>
-<rect id="x404" x="502.8" y="1048.8" class="st0" width="35" height="65"/>
-<rect id="x405" x="537.8" y="1048.8" class="st0" width="35" height="65"/>
-<rect id="x406" x="572.8" y="1048.8" class="st0" width="160" height="65"/>
-<rect id="x407-1" x="572.8" y="923.8" class="st0" width="80" height="65"/>
-<rect id="x407-2" x="652.8" y="923.8" class="st0" width="80" height="65"/>
-<rect id="x408" x="732.8" y="1048.8" class="st0" width="115" height="65"/>
-<rect id="xtoilet" x="847.8" y="1048.8" class="st0" width="80" height="65"/>
-<rect id="x409" x="927.8" y="1048.8" class="st0" width="155" height="65"/>
-<rect id="x410" x="927.8" y="923.8" class="st0" width="155" height="65"/>
-<rect id="x411" x="1082.8" y="1048.8" class="st0" width="75" height="65"/>
-<rect id="x412-1" x="1157.8" y="1048.8" class="st0" width="75" height="65"/>
-<rect id="x412-2" x="1232.8" y="1048.8" class="st0" width="75" height="65"/>
-<rect id="x413-2" x="1157.8" y="923.8" class="st0" width="45" height="65"/>
-<rect id="x413-1" x="1202.8" y="923.8" class="st0" width="105" height="65"/>
-<rect id="x414" x="1307.8" y="1048.8" class="st0" width="115" height="65"/>
-<rect id="x415" x="1422.8" y="993.8" class="st0" width="100" height="120"/>
-<polyline id="XMLID_2_" class="st0" points="1522.8,993.8 1522.8,923.8 1422.8,923.8 1422.8,868.7 1307.8,868.7 1307.8,923.8 "/>
-<line id="XMLID_3_" class="st1" x1="1157.8" y1="923.8" x2="1082.8" y2="923.8"/>
-<line id="XMLID_4_" class="st1" x1="502.8" y1="923.8" x2="572.8" y2="923.8"/>
-<line id="XMLID_5_" class="st1" x1="352.8" y1="923.8" x2="282.6" y2="923.8"/>
-<polyline id="XMLID_6_" class="st0" points="927.8,923.8 847.8,923.8 847.8,969 847.8,869 807.8,869 807.8,854 "/>
-<polyline id="XMLID_1_" class="st0" points="732.8,923.8 732.8,869 783,869 783,854 "/>
-<rect id="x416" x="807.8" y="739" class="st0" width="65" height="115"/>
-<rect id="x417" x="718" y="739" class="st0" width="65" height="115"/>
-<rect id="x418" x="807.8" y="704.5" class="st0" width="65" height="35"/>
-<rect id="x419" x="807.8" y="671" class="st0" width="65" height="35"/>
-<rect id="x420" x="807.8" y="561" class="st0" width="90" height="110"/>
-<rect id="x421" x="718" y="561" class="st0" width="65" height="110"/>
-<line id="XMLID_9_" class="st1" x1="718" y1="670" x2="718" y2="739"/>
-<rect id="x422" x="807.8" y="496.5" class="st0" width="65" height="65"/>
-<rect id="x423" x="807.8" y="431.5" class="st0" width="65" height="65"/>
-<polyline id="XMLID_7_" class="st0" points="807.8,431.5 718,431.5 718,561 "/>
-<polyline id="XMLID_8_" class="st0" points="718,496.3 783,496.3 783,446 "/>
-<text transform="matrix(1 0 0 1 125.6 1026.8)" class="st2 st3">400</text>
-<text transform="matrix(1 0 0 1 302 1086.3)" class="st2 st3">401</text>
-<text transform="matrix(1 0 0 1 367.3 1084)" class="st2 st3">402-1</text>
-<text transform="matrix(1 0 0 1 433.3 1082.3)" class="st2 st3">402-2</text>
-<text transform="matrix(1 0 0 1 378 952)" class="st2 st3">403-1</text>
-<text transform="matrix(4.489659e-011 -1 1 4.489659e-011 492.8449 986.0488)" class="st2 st3">403-2</text>
-<text transform="matrix(4.489659e-011 -1 1 4.489659e-011 527.498 1095.8027)" class="st2 st3">404</text>
-<text transform="matrix(4.489659e-011 -1 1 4.489659e-011 562.498 1094.8027)" class="st2 st3">405</text>
-<text transform="matrix(1 0 0 1 642.8 1091)" class="st2 st3">406</text>
-<text transform="matrix(1 0 0 1 584 959)" class="st2 st3">407-1</text>
-<text transform="matrix(1 0 0 1 666 959)" class="st2 st3">407-2</text>
-<text transform="matrix(1 0 0 1 760 1092.3)" class="st2 st3">408</text>
-<text transform="matrix(1 0 0 1 986.3 1079)" class="st2 st3">409</text>
-<text transform="matrix(1 0 0 1 989 959)" class="st2 st3">410</text>
-<text transform="matrix(1 0 0 1 1107 1082)" class="st2 st3">411</text>
-<text transform="matrix(1 0 0 1 1165 1083)" class="st2 st3">412-1</text>
-<text transform="matrix(1 0 0 1 1242 1084)" class="st2 st3">412-2</text>
-<text transform="matrix(4.489659e-011 -1 1 4.489659e-011 1186.645 985.3496)" class="st2 st3">413-2</text>
-<text transform="matrix(1 0 0 1 1228.3 964)" class="st2 st3">413-2</text>
-<text transform="matrix(1 0 0 1 1340 1079)" class="st2 st3">414</text>
-<text transform="matrix(1 0 0 1 1453 1060)" class="st2 st3">415</text>
-<text transform="matrix(1 0 0 1 831 811)" class="st2 st3">416</text>
-<text transform="matrix(1 0 0 1 737.5 807.5)" class="st2 st3">417</text>
-<text transform="matrix(1 0 0 1 823.8 729)" class="st2 st3">418</text>
-<text transform="matrix(1 0 0 1 825.3 691)" class="st2 st3">419</text>
-<text transform="matrix(1 0 0 1 833.8 621)" class="st2 st3">420</text>
-<text transform="matrix(1 0 0 1 730.5 620)" class="st2 st3">421</text>
-<text transform="matrix(1 0 0 1 831 530)" class="st2 st3">422</text>
-<text transform="matrix(1 0 0 1 833.8 473.15)" class="st2 st3">423</text>
+<rect id="x400" x="-265.4" y="711.8" class="room" width="260" height="190"/>
+<rect id="x401" x="-5.2" y="836.8" class="room" width="70" height="65"/>
+<rect id="x402-1" x="64.8" y="836.8" class="room" width="75" height="65"/>
+<rect id="x402-2" x="139.8" y="836.8" class="room" width="75" height="65"/>
+<rect id="x403-1" x="64.8" y="711.8" class="room" width="110" height="65"/>
+<rect id="x403-2" x="174.8" y="711.8" class="room" width="40" height="65"/>
+<rect id="x404" x="214.8" y="836.8" class="room" width="35" height="65"/>
+<rect id="x405" x="249.8" y="836.8" class="room" width="35" height="65"/>
+<rect id="x406" x="284.8" y="836.8" class="room" width="160" height="65"/>
+<rect id="x407-1" x="284.8" y="711.8" class="room" width="80" height="65"/>
+<rect id="x407-2" x="364.8" y="711.8" class="room" width="80" height="65"/>
+<rect id="x408" x="444.8" y="836.8" class="room" width="115" height="65"/>
+<rect id="xtoilet" x="559.8" y="836.8" class="st0" width="80" height="65"/>
+<rect id="x409" x="639.8" y="836.8" class="room" width="155" height="65"/>
+<rect id="x410" x="639.8" y="711.8" class="room" width="155" height="65"/>
+<rect id="x411" x="794.8" y="836.8" class="room" width="75" height="65"/>
+<rect id="x412-1" x="869.8" y="836.8" class="room" width="75" height="65"/>
+<rect id="x412-2" x="944.8" y="836.8" class="room" width="75" height="65"/>
+<rect id="x413-2" x="869.8" y="711.8" class="room" width="45" height="65"/>
+<rect id="x413-1" x="914.8" y="711.8" class="room" width="105" height="65"/>
+<rect id="x414" x="1019.8" y="836.8" class="room" width="115" height="65"/>
+<rect id="x415" x="1134.8" y="781.8" class="room" width="100" height="120"/>
+<polyline id="XMLID_2_" class="st0" points="1234.8,781.8 1234.8,711.8 1134.8,711.8 1134.8,656.7 1019.8,656.7 1019.8,711.8 "/>
+<line id="XMLID_3_" class="st1" x1="869.8" y1="711.8" x2="794.8" y2="711.8"/>
+<line id="XMLID_4_" class="st1" x1="214.8" y1="711.8" x2="284.8" y2="711.8"/>
+<line id="XMLID_5_" class="st1" x1="64.8" y1="711.8" x2="-5.4" y2="711.8"/>
+<polyline id="XMLID_6_" class="st0" points="639.8,711.8 559.8,711.8 559.8,757 559.8,657 519.8,657 519.8,642 "/>
+<polyline id="XMLID_1_" class="st0" points="444.8,711.8 444.8,657 495,657 495,642 "/>
+<rect id="x416" x="519.8" y="527" class="room" width="65" height="115"/>
+<rect id="x417" x="430" y="527" class="room" width="65" height="115"/>
+<rect id="x418" x="519.8" y="492.5" class="room" width="65" height="35"/>
+<rect id="x419" x="519.8" y="459" class="room" width="65" height="35"/>
+<rect id="x420" x="519.8" y="349" class="room" width="90" height="110"/>
+<rect id="x421" x="430" y="349" class="room" width="65" height="110"/>
+<line id="XMLID_9_" class="st1" x1="430" y1="458" x2="430" y2="527"/>
+<rect id="x422" x="519.8" y="284.5" class="room" width="65" height="65"/>
+<rect id="x423" x="519.8" y="219.5" class="room" width="65" height="65"/>
+<polyline id="XMLID_7_" class="st0" points="519.8,219.5 430,219.5 430,349 "/>
+<polyline id="XMLID_8_" class="st0" points="430,284.3 495,284.3 495,234 "/>
+<text transform="matrix(1 0 0 1 -162.4 814.8)" class="st6 st7">400</text>
+<text transform="matrix(1 0 0 1 14 874.3)" class="st6 st7">401</text>
+<text transform="matrix(1 0 0 1 79.3 872)" class="st6 st7">402-1</text>
+<text transform="matrix(1 0 0 1 145.3 870.3)" class="st6 st7">402-2</text>
+<text transform="matrix(1 0 0 1 90 740)" class="st6 st7">403-1</text>
+<text transform="matrix(4.489659e-011 -1 1 4.489659e-011 204.8448 774.0488)" class="st6 st7">403-2</text>
+<text transform="matrix(4.489659e-011 -1 1 4.489659e-011 239.4979 883.8027)" class="st6 st7">404</text>
+<text transform="matrix(4.489659e-011 -1 1 4.489659e-011 274.4979 882.8027)" class="st6 st7">405</text>
+<text transform="matrix(1 0 0 1 354.8 879)" class="st6 st7">406</text>
+<text transform="matrix(1 0 0 1 296 747)" class="st6 st7">407-1</text>
+<text transform="matrix(1 0 0 1 378 747)" class="st6 st7">407-2</text>
+<text transform="matrix(1 0 0 1 472 880.3)" class="st6 st7">408</text>
+<text transform="matrix(1 0 0 1 698.3 867)" class="st6 st7">409</text>
+<text transform="matrix(1 0 0 1 701 747)" class="st6 st7">410</text>
+<text transform="matrix(1 0 0 1 819 870)" class="st6 st7">411</text>
+<text transform="matrix(1 0 0 1 877 871)" class="st6 st7">412-1</text>
+<text transform="matrix(1 0 0 1 954 872)" class="st6 st7">412-2</text>
+<text transform="matrix(4.489659e-011 -1 1 4.489659e-011 898.645 773.3496)" class="st6 st7">413-2</text>
+<text transform="matrix(1 0 0 1 940.3 752)" class="st6 st7">413-2</text>
+<text transform="matrix(1 0 0 1 1052 867)" class="st6 st7">414</text>
+<text transform="matrix(1 0 0 1 1165 848)" class="st6 st7">415</text>
+<text transform="matrix(1 0 0 1 543 599)" class="st6 st7">416</text>
+<text transform="matrix(1 0 0 1 449.5 595.5)" class="st6 st7">417</text>
+<text transform="matrix(1 0 0 1 535.8 517)" class="st6 st7">418</text>
+<text transform="matrix(1 0 0 1 537.3 479)" class="st6 st7">419</text>
+<text transform="matrix(1 0 0 1 545.8 409)" class="st6 st7">420</text>
+<text transform="matrix(1 0 0 1 442.5 408)" class="st6 st7">421</text>
+<text transform="matrix(1 0 0 1 543 318)" class="st6 st7">422</text>
+<text transform="matrix(1 0 0 1 545.8 261.15)" class="st6 st7">423</text>
 </svg>
