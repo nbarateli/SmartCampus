@@ -28,10 +28,12 @@ public class DefaultLectureManager implements LectureManager {
     @Override
     public void addSubject(String subjectName) {
         String sql = "INSERT INTO " + SQL_TABLE_SUBJECT + " (" + SQL_COLUMN_SUBJECT_NAME + ") " +
-                "VALUES (\'" + subjectName + "\')";
+                "VALUES ('?')";
+        Object[] values = {subjectName};
+
         try {
             //TODO
-            connector.executeUpdate(sql);
+            connector.executeUpdate(sql, values);
         } catch (SQLException e) {
             //ignored
         }
