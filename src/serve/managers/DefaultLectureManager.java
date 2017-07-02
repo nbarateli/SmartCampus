@@ -118,7 +118,7 @@ public class DefaultLectureManager implements LectureManager {
             ResultSet set = connector.executeQuery(query.getQuery(), query.getValues());
 
             while (set.next()) {
-                list.add(getLectureFromResults(set));
+//                list.add(getLectureFromResults(set));
             }
         } catch (SQLException e) {
             //doing nothing
