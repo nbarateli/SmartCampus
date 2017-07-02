@@ -163,20 +163,4 @@ public class UtilsTest {
             e.printStackTrace();
         }
     }
-
-    @Test
-    public void getLectureFromResultsTest() {
-        try {
-            assertEquals(new Lecture(5,
-                            new User(5, "name", "name", "name", UserRole.STUDENT, ""),
-                            new Room(5, 5, "name", RoomType.valueOf("AUDITORIUM"),
-                                    SeatType.valueOf("DESKS"), false, 5),
-                            new CampusSubject(5, "name"), WeekDay.valueOf("MONDAY"),
-                            new Time(500), new Time(500)),
-                    Utils.getLectureFromResults(new MockResultSet()));
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
 }
