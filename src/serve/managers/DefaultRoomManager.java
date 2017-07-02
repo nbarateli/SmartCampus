@@ -113,7 +113,7 @@ public class DefaultRoomManager implements RoomManager {
                 " WHERE " + SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_ROOM + " = ? " +
                 (start == null ? "" : " AND " + SQL_COLUMN_BOOKING_START_TIME + " >= ? ") +
                 (end == null ? "" : " AND " + SQL_COLUMN_BOOKING_END_TIME + " <= ? ") +
-                (day == null ? "" : " AND " + SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_WEEK_DAY + " = ? " );
+                (day == null ? "" : " AND " + SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_WEEK_DAY + " = ? ");
         //TODO
         try (ResultSet rs = connector.executeQuery(sql, room.getId(),
                 (start == null ? null : toSqlTime(start)),
@@ -197,19 +197,16 @@ public class DefaultRoomManager implements RoomManager {
 
     @Override
     public List<RoomProblem> findAllProblemsOf(Room room) {
-        String sql = "SELECT * FROM ? " +
-                " JOIN ? ON ?.? = ?.? " +
-                " JOIN ? ON ?.? = ?.? " +
-                " WHERE ?.? = ?";
-        List<RoomProblem> problems = new ArrayList<>();
-        Object[] values = {
-                SQL_TABLE_ROOM_PROBLEM, SQL_TABLE_ROOM, SQL_TABLE_ROOM_PROBLEM,
+        String sql = String.format("SELECT * FROM %s " +
+                        " JOIN %s ON %s.%s = %s.%s " +
+                        " JOIN %s ON %s.%s = %s.%s " +
+                        " WHERE %s.%s = ?", SQL_TABLE_ROOM_PROBLEM, SQL_TABLE_ROOM, SQL_TABLE_ROOM_PROBLEM,
                 SQL_COLUMN_ROOM_PROBLEM_ROOM, SQL_TABLE_ROOM, SQL_COLUMN_ROOM_ID, SQL_TABLE_USER,
                 SQL_TABLE_ROOM_PROBLEM, SQL_COLUMN_ROOM_PROBLEM_REPORTED_BY, SQL_TABLE_USER,
-                SQL_COLUMN_USER_ID, SQL_TABLE_ROOM_PROBLEM, SQL_COLUMN_ROOM_PROBLEM_ROOM,
-                room.getId()
-        };
-        try (ResultSet results = connector.executeQuery(sql, values)) {
+                SQL_COLUMN_USER_ID, SQL_TABLE_ROOM_PROBLEM, SQL_COLUMN_ROOM_PROBLEM_ROOM);
+        List<RoomProblem> problems = new ArrayList<>();
+
+        try (ResultSet results = connector.executeQuery(sql, room.getId())) {
             while (results.next()) {
                 problems.add(getProblemFromResults(results));
             }
