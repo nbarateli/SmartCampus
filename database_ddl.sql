@@ -93,25 +93,6 @@ CREATE TABLE corridor_problem
     ON DELETE CASCADE
 );
 
-/**
-CREATE TABLE lecture
-(
-  lecture_id  INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  lecturer    INT             NOT NULL,
-  room_id     INT             NOT NULL,
-  subject_id  INT             NOT NULL,
-  day_of_week ENUM ('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'),
-  start_time  TIME            NOT NULL,
-  end_time    TIME            NOT NULL,
-  CONSTRAINT lecture_user_user_id_fk FOREIGN KEY (lecturer) REFERENCES campus_user (user_id)
-    ON DELETE CASCADE,
-  CONSTRAINT lecture_room_room_id_fk FOREIGN KEY (room_id) REFERENCES room (room_id)
-    ON DELETE CASCADE,
-  CONSTRAINT lecture_subject_subject_id_fk FOREIGN KEY (subject_id) REFERENCES campus_subject (subject_id)
-    ON DELETE CASCADE
-); */
-
-
 CREATE TABLE item_report
 (
   report_id        INT AUTO_INCREMENT

@@ -78,10 +78,10 @@
 
             <div class="select">
               <select name="repetition" class="form-control">
-                <option value="one_week">კვირაში ერთხელ</option>
-                <option value="two_weeks">ორ კვირაში ერთხელ</option>
-                <option value="three_weeks">სამ კვირაში ერთხელ</option>
-                <option value="four_weeks">ოთხ კვირაში ერთხელ</option>
+                <option value="1">კვირაში ერთხელ</option>
+                <option value="2">ორ კვირაში ერთხელ</option>
+                <option value="3">სამ კვირაში ერთხელ</option>
+                <option value="4">ოთხ კვირაში ერთხელ</option>
               </select>
             </div>
             <br>

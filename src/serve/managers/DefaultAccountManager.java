@@ -91,6 +91,7 @@ public class DefaultAccountManager implements AccountManager {
                 permissions.add(toUserPermission(resultSet.getString(SQL_COLUMN_USER_PERMISSION_NAME)));
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             //ignored
         }
         return permissions;

@@ -468,7 +468,7 @@ public final class Utils {
      * @return respective date
      */
     public static Date stringToDate(String toConvert){
-        DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         
         try {
             return format.parse(toConvert);
