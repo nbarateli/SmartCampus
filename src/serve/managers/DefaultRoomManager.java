@@ -4,7 +4,7 @@ import misc.Utils;
 import model.bookings.Booking;
 import model.campus.CampusSearchQuery;
 import model.lectures.Lecture;
-import model.lectures.Lecture.WeekDay;
+import model.bookings.Booking.WeekDay;
 import model.rooms.Room;
 import model.rooms.RoomManager;
 import model.rooms.RoomProblem;
@@ -96,12 +96,12 @@ public class DefaultRoomManager implements RoomManager {
     }
 
     @Override
-    public List<Booking> findAllBookingsAt(Room room, Lecture.WeekDay day) {
+    public List<Booking> findAllBookingsAt(Room room, WeekDay day) {
         return findAllBookingsAt(room, day, null, null);
     }
 
     @Override
-    public List<Booking> findAllBookingsAt(Room room, Lecture.WeekDay day, Time start, Time end) {
+    public List<Booking> findAllBookingsAt(Room room, WeekDay day, Time start, Time end) {
         List<Booking> bookings = new ArrayList<>();
         String sql = "SELECT * FROM " + SQL_TABLE_BOOKING + " INNER JOIN " + SQL_TABLE_USER + " ON " +
                 SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_BOOKER + " = " + SQL_TABLE_USER + "." +

@@ -3,7 +3,7 @@ package model.rooms;
 import model.bookings.Booking;
 import model.campus.CampusManager;
 import model.lectures.Lecture;
-import model.lectures.Lecture.WeekDay;
+import model.bookings.Booking.WeekDay;
 
 import static misc.Utils.toSqlTime;
 import static misc.Utils.toWeekDay;
@@ -52,7 +52,7 @@ public interface RoomManager extends CampusManager<Room, RoomSearchQueryGenerato
      * @param room a room where the bookings take place
      * @param day  the day on which the bookings take place
      */
-    List<Booking> findAllBookingsAt(Room room, Lecture.WeekDay day);
+    List<Booking> findAllBookingsAt(Room room, WeekDay day);
 
     /**
      * Returns a list of all the bookings that take place in the room
@@ -63,7 +63,7 @@ public interface RoomManager extends CampusManager<Room, RoomSearchQueryGenerato
      * @param start start of the time range when the bookings start
      * @param end   end of the time range when the bookings start
      */
-    List<Booking> findAllBookingsAt(Room room, Lecture.WeekDay day, Time start, Time end);
+    List<Booking> findAllBookingsAt(Room room, WeekDay day, Time start, Time end);
 
     /**
      * Returns a booking that takes place in the room

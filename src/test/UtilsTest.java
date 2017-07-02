@@ -5,7 +5,7 @@ import model.accounts.User;
 import model.accounts.User.UserRole;
 import model.lectures.CampusSubject;
 import model.lectures.Lecture;
-import model.lectures.Lecture.WeekDay;
+import model.bookings.Booking.WeekDay;
 import model.rooms.Room;
 import model.rooms.Room.RoomType;
 import model.rooms.Room.SeatType;
