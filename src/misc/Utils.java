@@ -1,6 +1,7 @@
 package misc;
 
 import model.accounts.User;
+import model.bookings.Booking;
 import model.lectures.CampusSubject;
 import model.lectures.Lecture;
 import model.rooms.Room;
@@ -216,7 +217,7 @@ public final class Utils {
             case "any":
                 return null;
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("caused by: " + s);
 
     }
 
@@ -249,17 +250,19 @@ public final class Utils {
     }
 
     /**
-     * Returns a <code>Lecture</code> object from current row of the given <code>ResultSet</code>
+     * Returns a <code>Booking</code> object from current row of the given <code>ResultSet</code>
      */
-    public static Lecture getLectureFromResults(ResultSet rs) throws SQLException {
-        int id = rs.getInt(SQL_COLUMN_LECTURE_ID);
-        User lecturer = getUserFromResults(rs);
+    public static Booking getBookingFromResults(ResultSet rs) throws SQLException {
+        int id = rs.getInt(SQL_COLUMN_BOOKING_ID);
+        User booker = getUserFromResults(rs);
         Room room = getRoomFromResults(rs);
         CampusSubject subject = getSubjectFromResults(rs);
-        Lecture.WeekDay day = toWeekDay(rs.getString(SQL_COLUMN_LECTURE_DAY));
-        Time starTime = rs.getTime(SQL_COLUMN_LECTURE_START_TIME);
-        Time endTime = rs.getTime(SQL_COLUMN_LECTURE_END_TIME);
-        return new Lecture(id, lecturer, room, subject, day, starTime, endTime);
+        Lecture.WeekDay day = toWeekDay(rs.getString(SQL_COLUMN_BOOKING_WEEK_DAY));
+        Time starTime = rs.getTime(SQL_COLUMN_BOOKING_START_TIME);
+        Time endTime = rs.getTime(SQL_COLUMN_BOOKING_END_TIME);
+        String description = rs.getString(SQL_COLUMN_BOOKING_DESCRIPTION);
+        Date date = rs.getDate(SQL_COLUMN_BOOKING_DATE);
+        return new Booking(id, booker, room, subject, day, starTime, endTime, description, date);
     }
 
     /**
@@ -333,9 +336,9 @@ public final class Utils {
      * @param connector   a database connector
      * @return status of the operation
      */
-    public static boolean successfulOperation(String insertQuery, DBConnector connector) {
+    public static boolean successfulOperation(String insertQuery, DBConnector connector, Object... values) {
         try {
-            connector.executeUpdate(insertQuery);
+            connector.executeUpdate(insertQuery, values);
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -468,7 +471,7 @@ public final class Utils {
      * @return respective date
      */
     public static Date stringToDate(String toConvert){
-        DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         
         try {
             return format.parse(toConvert);
@@ -513,30 +516,6 @@ public final class Utils {
         return c.getTime();
     }
 
-    /**
-     * checks if given string is valid for representing hour or minute
-     */
-    private static boolean numberStringIsValid(String s, boolean checkHour) {
-        if(!checkHour && validateNumber(s, 0, 59) == null)
-            return false;
-        if(checkHour && validateNumber(s, 0, 23) == null)
-            return false;
-        
-        return true;
-    }
-
-    /**
-     * Returns whether the first 5 characters of passed {@code String} form a valid time format.
-     *
-     * @param time a {@code String} value of a time to be checked.
-     * @return whether the first 5 characters of the argument form a valid time format.
-     */
-    private static boolean isValidFormat(String time) {
-        return time.length() >= 5 && time.charAt(2) == ':' &&
-                numberStringIsValid(time.substring(0, 2), true) &&
-                numberStringIsValid(time.substring(3, 5), false);
-    }
-
     public static String roleToString(UserRole role) {
         switch (role) {
             case STUDENT:
@@ -551,6 +530,30 @@ public final class Utils {
                 return "sys_admin";
         }
         return "";
+    }
+
+    /**
+     * checks if given string is valid for representing hour or minute
+     */
+    private static boolean numberStringIsValid(String s, boolean checkHour) {
+        if(!checkHour && validateNumber(s, 0, 59) == null)
+            return false;
+        if(checkHour && validateNumber(s, 0, 23) == null)
+            return false;
+
+        return true;
+    }
+
+    /**
+     * Returns whether the first 5 characters of passed {@code String} form a valid time format.
+     *
+     * @param time a {@code String} value of a time to be checked.
+     * @return whether the first 5 characters of the argument form a valid time format.
+     */
+    private static boolean isValidFormat(String time) {
+        return time.length() >= 5 && time.charAt(2) == ':' &&
+                numberStringIsValid(time.substring(0, 2), true) &&
+                numberStringIsValid(time.substring(3, 5), false);
     }
 
     private Utils() {

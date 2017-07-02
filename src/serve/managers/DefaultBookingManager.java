@@ -4,6 +4,7 @@ import model.bookings.Booking;
 import model.bookings.BookingManager;
 import model.bookings.BookingSearchQueryGenerator;
 import model.campus.CampusSearchQuery;
+import model.lectures.CampusSubject;
 import model.lectures.LectureManager;
 
 import java.sql.ResultSet;
@@ -13,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static misc.Utils.getBookingFromResults;
 import static misc.Utils.successfulOperation;
 import static model.database.SQLConstants.*;
 
@@ -57,8 +59,10 @@ public class DefaultBookingManager implements BookingManager {
             CampusSearchQuery query = queryGenerator.generateQuery();
             ResultSet set = connector.executeQuery(query.getQuery(), query.getValues());
 
-            
-            
+            while(set.next()) {
+                list.add(getBookingFromResults(set));
+            }
+
         } catch (SQLException e) {
             //doing nothing
         }
@@ -67,38 +71,43 @@ public class DefaultBookingManager implements BookingManager {
 
     @Override
     public boolean add(Booking booking) {
-        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String date = format.format(booking.getDate());
+        String description = booking.getDescription();
+        CampusSubject subject = booking.getSubject();
         
         String insertQuery = "insert into " + SQL_TABLE_BOOKING + " (" +
                 SQL_COLUMN_BOOKING_ROOM + ", " +
                 SQL_COLUMN_BOOKING_BOOKER + ", " + SQL_COLUMN_BOOKING_DATE +
                 ", " + SQL_COLUMN_BOOKING_SUBJECT_ID +
                 ", " + SQL_COLUMN_BOOKING_DESCRIPTION +
-                ", " + SQL_COLUMN_BOOKING_WEEK_DAY +
                 ", " + SQL_COLUMN_BOOKING_START_TIME + ", " +
-                SQL_COLUMN_BOOKING_END_TIME + ") values (" +
-                booking.getRoom().getId() + ", " +
-                booking.getBooker().getId() + ", '" +
-                date + "', " + booking.getSubject().getId() + 
-                ", '" + booking.getDescription() + "', " +
-                "', '" + booking.getStartTime() + "', '" +
-                booking.getEndTime() + 
-                "', '" + booking.getDay().name().toLowerCase() + "') ";
-        return successfulOperation(insertQuery, connector);
+                SQL_COLUMN_BOOKING_END_TIME + ", " + SQL_COLUMN_BOOKING_WEEK_DAY + ") values (?,?,?,?,?,?,?,?)";
+        return successfulOperation(insertQuery, connector, booking.getRoom().getId(), booking.getBooker().getId(),
+                "'" + date + "'", (subject == null ? "NULL" : subject.getId()),
+                (description == null ? "NULL" : "'" + description + "'"), "'" + booking.getStartTime() + "'",
+                "'" + booking.getEndTime() + "'", "'" + booking.getDay().name().toLowerCase() + "'");
     }
 
     @Override
     public boolean remove(int entityId) {
         String deleteQuery = "delete from " + SQL_TABLE_BOOKING + " where "
-                + SQL_COLUMN_BOOKING_ID + " = " + entityId;
-        return successfulOperation(deleteQuery, connector);
+                + SQL_COLUMN_BOOKING_ID + " = ?";
+        return successfulOperation(deleteQuery, connector, entityId);
     }
 
     @Override
-    public void deleteAllOccurrences(int bookingId) {
-        // TODO Auto-generated method stub
+    public boolean deleteAllOccurrences(int bookingId) {
+        String query = "select * from " + SQL_TABLE_BOOKING + " where " + SQL_COLUMN_BOOKING_ID + " = ?";
+        try {
+            ResultSet rs = connector.executeQuery(query, bookingId);
 
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return true;
     }
 
 }

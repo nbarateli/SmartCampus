@@ -126,11 +126,11 @@ public class DefaultRoomManager implements RoomManager {
         }
         return lectures;
     }
-    
+
     @Override
     public boolean isLectureAt(Room room, Date date, Time current) {
         WeekDay day = toWeekDay(date);
-        
+
         String sql = "SELECT * FROM " + SQL_TABLE_LECTURE + " INNER JOIN " + SQL_TABLE_USER + " ON " +
                 SQL_TABLE_LECTURE + "." + SQL_COLUMN_LECTURE_LECTURER + " = " + SQL_TABLE_USER + "." +
                 SQL_COLUMN_USER_ID +
@@ -143,11 +143,11 @@ public class DefaultRoomManager implements RoomManager {
                 " AND start_time <= " + toSqlTime(current) +
                 " AND end_time >= " + toSqlTime(current);
         //TODO
-        
+
         int count = 0;
-        
+
         try (ResultSet rs = connector.executeQuery(sql)) {
-            
+
             while (rs.next()) {
                 count++;
             }

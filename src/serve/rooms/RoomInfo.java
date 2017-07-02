@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import static misc.Utils.exactDateToString;
@@ -30,15 +32,23 @@ import static misc.WebConstants.*;
 public class RoomInfo extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Enumeration<String> params = request.getParameterNames();
+        List<String> p = new ArrayList<>();
+        while (params.hasMoreElements()) {
+            p.add(params.nextElement());
+
+        }
         response.setContentType("application/json");
+        String s = p.toString();
         response.setCharacterEncoding("UTF-8");
         JsonObjectBuilder builder = Json.createObjectBuilder();
         RoomManager manager = ((ManagerFactory) request.getServletContext()
                 .getAttribute(MANAGER_FACTORY)).getRoomManager();
         String id = request.getParameter("id");
+        String name = request.getParameter("name");
         Room room;
         try {
-            room = manager.getRoomById(Integer.valueOf(id));
+            room = id == null ? manager.getRoomByName(name) : manager.getRoomById(Integer.valueOf(id));
             buildJson(builder, room, manager);
         } catch (NumberFormatException | NullPointerException e) {
             builder.add(JSON_ERROR, JSON_ROOM_ERROR_BAD_PARAM);

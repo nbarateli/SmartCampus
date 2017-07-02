@@ -21,6 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Time;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.LinkedList;
+import java.util.List;
 
 import static misc.ModelConstants.DAYS_IN_WEEK;
 import static misc.WebConstants.*;
@@ -45,6 +48,10 @@ public class LectureAdder extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+        List<String> ps = new LinkedList<>();
+        Enumeration<String> params = request.getParameterNames();
+        while (params.hasMoreElements()) ps.add(params.nextElement());
+        String s = ps.toString();
         ServletContext context = request.getServletContext();
         ManagerFactory factory = (ManagerFactory) context.getAttribute(MANAGER_FACTORY);
         BookingManager manager = factory.getBookingManager();
@@ -69,10 +76,10 @@ public class LectureAdder extends HttpServlet {
         if (lecturer != null && room != null && subject != null
                 && startTime != null && endTime != null && date != null && numWeeks != null) {
 
-            for (int i = 0; i < numWeeks; i += DAYS_IN_WEEK * rep) {
+            for (int i = 0; i < numWeeks / rep; i++) {
                 Booking thisBooking = new Booking(
                         ModelConstants.SENTINEL_INT, lecturer, room, subject, weekDay, startTime,
-                        endTime, null, misc.Utils.addDaysToDate(date, i));
+                        endTime, null, misc.Utils.addDaysToDate(date, i * DAYS_IN_WEEK * rep));
                 manager.add(thisBooking);
             }
 

@@ -14,8 +14,9 @@ public interface BookingManager extends CampusManager<Booking, BookingSearchQuer
      * removes all the occurrence of the lecture (with same weekday and time) 
      * associated with this booking  
      * @param bookingId id of the booking (lecture) we should remove occurrences of
+     * @return true if operation was successful
      */
-    void deleteAllOccurrences(int bookingId);
+    boolean deleteAllOccurrences(int bookingId);
     
     /**
      * removes all bookings from database

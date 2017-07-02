@@ -62,26 +62,15 @@
                      placeholder="შეიყვანეთ საგნის სახელი">
             </div>
 
-            <div class="select">
-              <label class="control-label">ლექციის დრო</label>
-              <select name="week_day" class="form-control">
-                <option value="monday">ორშაბათი</option>
-                <option value="tuesday">სამშაბათი</option>
-                <option value="wednesday">ოთხშაბათი</option>
-                <option value="thursday">ხუთშაბათი</option>
-                <option value="friday">პარასკევი</option>
-                <option value="saturday">შაბათი</option>
-                <option value="sunday">კვირა</option>
-              </select>
-            </div>
             <br>
 
             <div class="select">
+              <label class="control-label">ლექციის დრო</label>
               <select name="repetition" class="form-control">
-                <option value="one_week">კვირაში ერთხელ</option>
-                <option value="two_weeks">ორ კვირაში ერთხელ</option>
-                <option value="three_weeks">სამ კვირაში ერთხელ</option>
-                <option value="four_weeks">ოთხ კვირაში ერთხელ</option>
+                <option value="1">კვირაში ერთხელ</option>
+                <option value="2">ორ კვირაში ერთხელ</option>
+                <option value="3">სამ კვირაში ერთხელ</option>
+                <option value="4">ოთხ კვირაში ერთხელ</option>
               </select>
             </div>
             <br>
