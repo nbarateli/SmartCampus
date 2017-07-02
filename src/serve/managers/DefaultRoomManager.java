@@ -60,9 +60,9 @@ public class DefaultRoomManager implements RoomManager {
                 SQL_COLUMN_ROOM_TYPE + ", " + SQL_COLUMN_ROOM_CAPACITY +
                 ", " + SQL_COLUMN_ROOM_AVAILABLE + ", " +
                 SQL_COLUMN_ROOM_SEAT_TYPE + ") values (?,?,?,?,?,?) ";
-        return successfulOperation(insertQuery, connector, "'" + room.getRoomName() + "'", room.getFloor(),
-                "'" + room.getRoomType().toString().toLowerCase() + "'", room.getCapacity(),
-                room.isAvailableForStudents(), "'" + room.getSeatType().toString().toLowerCase() + "'");
+        return successfulOperation(insertQuery, connector, room.getRoomName(), room.getFloor(),
+                room.getRoomType().toString().toLowerCase(), room.getCapacity(),
+                room.isAvailableForStudents(), room.getSeatType().toString().toLowerCase());
     }
 
     @Override
@@ -118,8 +118,7 @@ public class DefaultRoomManager implements RoomManager {
         try (ResultSet rs = connector.executeQuery(sql, room.getId(),
                 (start == null ? null : toSqlTime(start)),
                 (end == null ? null : toSqlTime(end)),
-                (day == null ? null : "'" + day.toString().toLowerCase() + "'"))) {
-
+                (day == null ? null : day.toString().toLowerCase()))) {
             while (rs.next()) {
                 bookings.add(getBookingFromResults(rs));
             }
@@ -147,7 +146,7 @@ public class DefaultRoomManager implements RoomManager {
                 " AND " + SQL_COLUMN_BOOKING_START_TIME + " <= ? AND " + SQL_COLUMN_BOOKING_END_TIME + " >= ?";
 
         try (ResultSet rs = connector.executeQuery(sql, room.getId(),
-                "'" + day.toString().toLowerCase() + "'", toSqlTime(current), toSqlTime(current))) {
+                day.toString().toLowerCase(), toSqlTime(current), toSqlTime(current))) {
             rs.next();
             booking = getBookingFromResults(rs);
 
@@ -222,7 +221,7 @@ public class DefaultRoomManager implements RoomManager {
         String sql = "INSERT INTO " + SQL_TABLE_ROOM_IMAGE + " (" + SQL_COLUMN_ROOM_IMAGE_URL + "," +
                 SQL_COLUMN_ROOM_IMAGE_ROOM_ID + ") VALUES (?,?)";
         try {
-            connector.executeUpdate(sql, "'" + imageURL + "'", room.getId());
+            connector.executeUpdate(sql,  imageURL, room.getId());
         } catch (SQLException e) {
             //doing nothing
         }
