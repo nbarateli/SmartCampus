@@ -79,14 +79,16 @@ public class DefaultBookingManager implements BookingManager {
         String insertQuery = "insert into " + SQL_TABLE_BOOKING + " (" +
                 SQL_COLUMN_BOOKING_ROOM + ", " +
                 SQL_COLUMN_BOOKING_BOOKER + ", " + SQL_COLUMN_BOOKING_DATE +
-                ", " + SQL_COLUMN_BOOKING_SUBJECT_ID +
-                ", " + SQL_COLUMN_BOOKING_DESCRIPTION +
+                (subject == null ? "" : ", " + SQL_COLUMN_BOOKING_SUBJECT_ID) +
+                (description == null ? "" : ", " + SQL_COLUMN_BOOKING_DESCRIPTION) +
                 ", " + SQL_COLUMN_BOOKING_START_TIME + ", " +
-                SQL_COLUMN_BOOKING_END_TIME + ", " + SQL_COLUMN_BOOKING_WEEK_DAY + ") values (?,?,?,?,?,?,?,?)";
+                SQL_COLUMN_BOOKING_END_TIME + ", " + SQL_COLUMN_BOOKING_WEEK_DAY +
+                ") values (?,?,?,?,?,?" + (description == null ? "" : ",?") +
+                (subject == null ? ")" : ",?)");
         return successfulOperation(insertQuery, connector, booking.getRoom().getId(), booking.getBooker().getId(),
-                "'" + date + "'", (subject == null ? "NULL" : subject.getId()),
-                (description == null ? "NULL" : "'" + description + "'"), "'" + booking.getStartTime() + "'",
-                "'" + booking.getEndTime() + "'", "'" + booking.getDay().name().toLowerCase() + "'");
+                date, (subject == null ? null : subject.getId()),
+                (description == null ? null : description), booking.getStartTime(),
+                booking.getEndTime(), booking.getDay().name().toLowerCase());
     }
 
     @Override

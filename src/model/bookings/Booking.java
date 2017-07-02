@@ -8,7 +8,6 @@ import java.util.Date;
 import model.accounts.User;
 import model.campus.CampusObject;
 import model.lectures.CampusSubject;
-import model.lectures.Lecture.WeekDay;
 import model.rooms.Room;
 
 /**
@@ -110,4 +109,7 @@ public class Booking implements CampusObject{
                 "}";
     }
 
+    public enum WeekDay {
+        MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    }
 }
