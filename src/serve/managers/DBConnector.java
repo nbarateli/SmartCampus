@@ -79,7 +79,6 @@ public class DBConnector {
                 }
             }
 
-            System.out.println(statement.toString());
             if (isUpdate)
                 return statement.executeUpdate();
             else
