@@ -68,9 +68,7 @@ public class Booking implements CampusObject{
         return day;
     }
     
-    public Date getDate() {
-        return bookingDate;
-    }
+    public Date getDate() { return new Date(bookingDate.getTime()); }
     
     public String getDescription() {
         return description;
