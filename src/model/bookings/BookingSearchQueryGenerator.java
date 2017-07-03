@@ -23,14 +23,14 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
     private User booker;
     private Room room;
     private CampusSubject subject;
-    private Lecture.WeekDay day;
+    private Booking.WeekDay day;
     private Time startTime;
     private Time endTime;
     private Date bookingDate;
     private String description;
 
-    public BookingSearchQueryGenerator(Integer bookingID, User booker, Room room, CampusSubject subject, Lecture.WeekDay day,
-                   Time startTime, Time endTime, String description, Date bookingDate) {
+    public BookingSearchQueryGenerator(Integer bookingID, User booker, Room room, CampusSubject subject, Booking.WeekDay day,
+                                       Time startTime, Time endTime, String description, Date bookingDate) {
         this.bookingID = bookingID;
         this.booker = booker;
         this.room = room;
@@ -94,11 +94,11 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
         this.startTime = startTime;
     }
 
-    public Lecture.WeekDay getDay() {
+    public Booking.WeekDay getDay() {
         return day;
     }
 
-    public void setDay(Lecture.WeekDay day) {
+    public void setDay(Booking.WeekDay day) {
         this.day = day;
     }
 
