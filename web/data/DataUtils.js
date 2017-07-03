@@ -50,6 +50,25 @@ var addRoomsFromFile = function (file) {
     ExcelToJSON(file, "room");
 };
 
+var toWeekDay = function (weeknumber) {
+    switch (weeknumber) {
+        case "1":
+            return "monday";
+        case "2":
+            return "tuesday";
+        case "3":
+            return "wednesday";
+        case "4":
+            return "thursday";
+        case "5":
+            return "friday";
+        case "6":
+            return "saturday";
+        case "7":
+            return "sunday";
+    }
+};
+
 var toRoomType = function (type) {
     switch (type) {
         case "1":

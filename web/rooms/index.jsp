@@ -1,10 +1,10 @@
 <%@ page import="misc.Utils" %>
-<%@ page import="model.rooms.RoomManager" %>
-<%@ page import="static misc.WebConstants.*" %>
-<%@ page import="model.rooms.RoomSearchQueryGenerator" %>
-<%@ page import="serve.managers.ManagerFactory" %>
-<%@ page import="static misc.Utils.*" %>
 <%@ page import="model.rooms.Room" %>
+<%@ page import="static misc.WebConstants.*" %>
+<%@ page import="model.rooms.RoomManager" %>
+<%@ page import="model.rooms.RoomSearchQueryGenerator" %>
+<%@ page import="static misc.Utils.*" %>
+<%@ page import="serve.managers.ManagerFactory" %>
 <%@ page import="java.util.List" %>
 <%--
   Created by IntelliJ IDEA.
@@ -200,6 +200,12 @@
               }
           %>
       </div>
+    <div id="myModal" class="modal">
+      <div class="modal-content" id="mod-cont">
+        <span id="closeModal" class="close">&times;</span>
+        <div id="roomForm" class="roomfrom"></div>
+      </div>
+    </div>
       <h1 id="par">FLOOR</h1>
       <select name="floors" onchange="floorChange()" id="floors">
         <option value="first">პირველი სართული</option>
@@ -208,7 +214,8 @@
         <option value="fourth">მეოთხე სართული</option>
       </select>
     <div class="mapdivision">
-        <link rel="stylesheet" href="MapStyles.css">
+
+      <link rel="stylesheet" href="MapStyles.css">
         <svg version="1.1" id="map1" xmlns="http://www.w3.org/2000/svg"
              x="0px" y="0px"
              viewBox="0 0 2500 1100" style="enable-background:new 0 0 2500 1100;" xml:space="preserve">
@@ -519,11 +526,6 @@
     </td>
   </tr>
 </table>
-<div id="myModal" class="modal">
-  <div class="modal-content" id="mod-cont">
-    <span id="closeModal" class="close">&times;</span>
-    <div id="roomForm"></div>
-  </div>
-</div>
+
 </body>
 </html>
