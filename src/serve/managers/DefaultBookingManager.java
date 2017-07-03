@@ -5,7 +5,6 @@ import model.bookings.BookingManager;
 import model.bookings.BookingSearchQueryGenerator;
 import model.campus.CampusSearchQuery;
 import model.lectures.CampusSubject;
-import model.lectures.LectureManager;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,7 +19,7 @@ import static model.database.SQLConstants.*;
 
 public class DefaultBookingManager implements BookingManager {
     
-    private static LectureManager instance;
+    private static BookingManager instance;
 
     private final DBConnector connector;
 

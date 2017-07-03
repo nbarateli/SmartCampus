@@ -1,7 +1,6 @@
 package serve.lecture;
 
 import model.bookings.BookingManager;
-import model.lectures.LectureManager;
 import serve.managers.ManagerFactory;
 
 import javax.servlet.ServletException;

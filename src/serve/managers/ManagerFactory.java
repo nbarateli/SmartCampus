@@ -2,7 +2,7 @@ package serve.managers;
 
 import model.accounts.AccountManager;
 import model.bookings.BookingManager;
-import model.lectures.LectureManager;
+import model.lectures.SubjectManager;
 import model.rooms.RoomManager;
 
 /**
@@ -15,7 +15,7 @@ public class ManagerFactory {
     private DBConnector connector;
     private RoomManager roomManager;
     private AccountManager accountManager;
-    private LectureManager lectureManager;
+    private SubjectManager subjectManager;
     private BookingManager bookingManager;
 
     public ManagerFactory() {
@@ -34,8 +34,8 @@ public class ManagerFactory {
         return accountManager == null ? accountManager = new DefaultAccountManager(getConnector()) : accountManager;
     }
 
-    public LectureManager getLectureManager() {
-        return lectureManager == null ? lectureManager = new DefaultLectureManager(getConnector()) : lectureManager;
+    public SubjectManager getSubjectManager() {
+        return subjectManager == null ? subjectManager = new DefaultSubjectManager(getConnector()) : subjectManager;
     }
 
     public BookingManager getBookingManager() {

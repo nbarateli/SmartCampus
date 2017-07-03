@@ -7,7 +7,8 @@ import model.bookings.Booking;
 import model.bookings.BookingManager;
 import model.lectures.CampusSubject;
 import model.bookings.Booking.WeekDay;
-import model.lectures.LectureManager;
+import model.lectures.SubjectManager;
+import model.lectures.SubjectSearchQueryGenerator;
 import model.rooms.Room;
 import model.rooms.RoomManager;
 import serve.managers.ManagerFactory;
@@ -55,7 +56,7 @@ public class LectureAdder extends HttpServlet {
         ServletContext context = request.getServletContext();
         ManagerFactory factory = (ManagerFactory) context.getAttribute(MANAGER_FACTORY);
         BookingManager manager = factory.getBookingManager();
-        LectureManager lectureManager = factory.getLectureManager();
+        SubjectManager subjectManager = factory.getSubjectManager();
         AccountManager accountManager = factory.getAccountManager();
         RoomManager roomManager = factory.getRoomManager();
 
@@ -73,7 +74,9 @@ public class LectureAdder extends HttpServlet {
             weekDay = misc.Utils.toWeekDay(date);
 
         User lecturer = accountManager.getUserViaEMail(lecturerEmail);
-        CampusSubject subject = lectureManager.findSubject(subjectName);
+        SubjectSearchQueryGenerator generator = new SubjectSearchQueryGenerator();
+        generator.setSubjectName(subjectName);
+        CampusSubject subject = subjectManager.find(generator).get(0);
         Room room = roomManager.getRoomByName(roomName);
 
         if (lecturer != null && room != null && subject != null

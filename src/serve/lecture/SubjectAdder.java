@@ -1,7 +1,8 @@
 package serve.lecture;
 
 import model.lectures.CampusSubject;
-import model.lectures.LectureManager;
+import model.lectures.SubjectManager;
+import model.lectures.SubjectSearchQueryGenerator;
 import serve.managers.ManagerFactory;
 
 import javax.servlet.ServletException;
@@ -34,13 +35,15 @@ public class SubjectAdder extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         ManagerFactory factory = (ManagerFactory) getServletContext().getAttribute(MANAGER_FACTORY);
-        LectureManager manager = factory.getLectureManager();
+        SubjectManager manager = factory.getSubjectManager();
 
         String subjectName = request.getParameter("subj_name");
-
-        CampusSubject subject = manager.findSubject(subjectName);
+        SubjectSearchQueryGenerator gn = new SubjectSearchQueryGenerator();
+        gn.setSubjectName(subjectName);
+        CampusSubject subject = manager.find(gn).get(0);
         if (subject == null) {
-            manager.addSubject(subjectName);
+            CampusSubject subj = new CampusSubject(-1, subjectName);
+            manager.add(subj);
             response.getWriter().println(SUCCESS);
         } else {
             response.getWriter().println(FAILED);
