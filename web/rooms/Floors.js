@@ -43,7 +43,6 @@ function workMaps(map) {
     }
 }
 
-
 function myClick() {
     //testing
     var id = this.id;
@@ -132,6 +131,10 @@ function showFourth() {
     document.getElementById("map3").style.display = "none";
     document.getElementById("map4").style.display = "unset";
 }
+function highlightRooms(room){
+    var roomName = JSON.stringify(room);
+    var area = document.getElementById(roomName);
+};
 
 function displayRoom(data, id) {
     var tmp = document.getElementById("mustmpl").innerHTML;

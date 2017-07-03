@@ -4,6 +4,8 @@
 <%@ page import="model.rooms.RoomSearchQueryGenerator" %>
 <%@ page import="serve.managers.ManagerFactory" %>
 <%@ page import="static misc.Utils.*" %>
+<%@ page import="model.rooms.Room" %>
+<%@ page import="java.util.List" %>
 <%--
   Created by IntelliJ IDEA.
   User: Niko
@@ -156,7 +158,6 @@
 
     <td id="right-td">
       <div align="center" id="right-div" style="display:none">
-
         <%
           //          RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();
 //          buildQuery(request, query);
@@ -186,6 +187,18 @@
 //
 //          }
         %>
+          <%
+              RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();
+              buildQuery(request,query);
+              List<Room> rooms = manager1.find(query);
+              for (Room room : rooms) {
+          %>
+              <script>
+                  highlightRooms(<%room.getId();%>);
+              </script>
+          <%
+              }
+          %>
       </div>
       <h1 id="par">FLOOR</h1>
       <select name="floors" onchange="floorChange()" id="floors">
@@ -502,8 +515,6 @@
           <text transform="matrix(1 0 0 1 543 318)" class="st6 st7">422</text>
           <text transform="matrix(1 0 0 1 545.8 261.15)" class="st6 st7">423</text>
 </svg>
-
-
       </div>
     </td>
   </tr>
