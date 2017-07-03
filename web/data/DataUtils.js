@@ -253,7 +253,7 @@ function createDialog() {
 var addLectureFromForm = function () {
     var params = ($('#sched-form').serialize());
 
-    clearFormInputs(document.getElementById("sched-form"));
+    //clearFormInputs(document.getElementById("sched-form"));
 
     sendData("/lectures/addlecture", params, true);
     return false;
