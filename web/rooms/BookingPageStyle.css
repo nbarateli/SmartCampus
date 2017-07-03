@@ -1,0 +1,16 @@
+body {
+    background-color: #178699;
+}
+
+#header {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#form-div {
+    width: 500px;
+}
+
+#main-div {
+    vertical-align: middle;
+}
