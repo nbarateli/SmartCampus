@@ -65,6 +65,7 @@ public final class Utils {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR, hour);
         calendar.set(Calendar.MINUTE, min);
+        calendar.set(Calendar.SECOND, 0);
         return new Time(calendar.getTimeInMillis());
     }
 

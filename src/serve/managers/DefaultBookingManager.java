@@ -101,13 +101,10 @@ public class DefaultBookingManager implements BookingManager {
         bookingQueryGenerator.setId(bookingId);
 
         Booking thisBooking = find(bookingQueryGenerator).get(0);
-        System.out.println("IMPORTANT: " + thisBooking.getRoom() +" "+ thisBooking.getBooker()+" "+ thisBooking.getSubject()+" "+ thisBooking.getDay() +" "+
-                        thisBooking.getStartTime()+" "+ thisBooking.getEndTime());
 
         String deleteQuery = "delete from " + SQL_TABLE_BOOKING + " where " + SQL_COLUMN_BOOKING_ROOM + "=? AND " +
                 SQL_COLUMN_BOOKING_BOOKER + "=? AND " + SQL_COLUMN_BOOKING_SUBJECT_ID +"=? AND \n"
                 + SQL_COLUMN_BOOKING_START_TIME + "=? AND " + SQL_COLUMN_BOOKING_END_TIME + "=? AND " + SQL_COLUMN_BOOKING_WEEK_DAY + "=?;";
-        System.out.println("query is: " + deleteQuery);
 
         try {
             connector.executeUpdate(deleteQuery, thisBooking.getRoom().getId(), thisBooking.getBooker().getId(),

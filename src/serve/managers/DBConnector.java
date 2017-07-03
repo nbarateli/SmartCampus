@@ -78,7 +78,6 @@ public class DBConnector {
                     j++;
                 }
             }
-            System.out.println("statement is: " + statement.toString());
 
             if (isUpdate)
                 return statement.executeUpdate();

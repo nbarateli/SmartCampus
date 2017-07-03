@@ -21,7 +21,7 @@ public class DefaultBookingManagerTest {
 
     @Test
     public void test1(){
-        a.deleteAllOccurrences(45);
+        a.deleteAllOccurrences(56);
         System.out.println("deleted");
     }
 
