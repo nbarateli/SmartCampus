@@ -2,7 +2,7 @@ package model.lectures;
 
 import model.campus.CampusSearchQuery;
 import model.campus.CampusSearchQueryGenerator;
-import model.lectures.Lecture.WeekDay;
+import model.bookings.Booking.WeekDay;
 
 import java.sql.Time;
 import java.util.ArrayList;

@@ -4,7 +4,7 @@
 }
 
 body {
-  background-color: lightGreen;
+  background-color: lightgreen;
 }
 
 #full-table {
@@ -64,4 +64,8 @@ td, tr {
   top: 0;
   bottom: 0;
   background-color: yellow;
+}
+
+.smaller-lab {
+  font-size: 13px;
 }

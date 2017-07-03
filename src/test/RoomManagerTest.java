@@ -1,7 +1,8 @@
 package test;
 
+import model.bookings.Booking;
 import model.lectures.Lecture;
-import model.lectures.Lecture.WeekDay;
+import model.bookings.Booking.WeekDay;
 import model.rooms.Room;
 import model.rooms.Room.RoomType;
 import model.rooms.Room.SeatType;
@@ -107,14 +108,14 @@ public class RoomManagerTest {
         RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();
         List<Room> list = manager.find(query);
         Room room1 = list.get(0);
-        List<Lecture> lecturesList = manager.findAllLecturesAt(room1);
-        List<Lecture> lecturesList2 = manager.findAllLecturesAt(room1, WeekDay.MONDAY);
-        lecturesList2.addAll(manager.findAllLecturesAt(room1, WeekDay.TUESDAY));
-        lecturesList2.addAll(manager.findAllLecturesAt(room1, WeekDay.WEDNESDAY));
-        lecturesList2.addAll(manager.findAllLecturesAt(room1, WeekDay.THURSDAY));
-        lecturesList2.addAll(manager.findAllLecturesAt(room1, WeekDay.FRIDAY));
-        lecturesList2.addAll(manager.findAllLecturesAt(room1, WeekDay.SATURDAY));
-        lecturesList2.addAll(manager.findAllLecturesAt(room1, WeekDay.SUNDAY));
+        List<Booking> lecturesList2 = manager.findAllBookingsAt(room1, WeekDay.MONDAY);
+        List<Booking> lecturesList = manager.findAllBookingsAt(room1);
+        lecturesList2.addAll(manager.findAllBookingsAt(room1, WeekDay.TUESDAY));
+        lecturesList2.addAll(manager.findAllBookingsAt(room1, WeekDay.WEDNESDAY));
+        lecturesList2.addAll(manager.findAllBookingsAt(room1, WeekDay.THURSDAY));
+        lecturesList2.addAll(manager.findAllBookingsAt(room1, WeekDay.FRIDAY));
+        lecturesList2.addAll(manager.findAllBookingsAt(room1, WeekDay.SATURDAY));
+        lecturesList2.addAll(manager.findAllBookingsAt(room1, WeekDay.SUNDAY));
         assertTrue(lecturesList.equals(lecturesList2));
     }
 
@@ -125,9 +126,9 @@ public class RoomManagerTest {
     @Test
     public void test5() {
         Room room1 = manager.getRoomById(4);
-        List<Lecture> lecturesList = manager.findAllLecturesAt(room1);
-        Lecture lec = lecturesList.get(0);
-        List<Lecture> lecturesList2 = manager.findAllLecturesAt(room1, lec.getDay(), lec.getStartTime(), lec.getEndTime());
+        List<Booking> lecturesList = manager.findAllBookingsAt(room1);
+        Booking lec = lecturesList.get(0);
+        List<Booking> lecturesList2 = manager.findAllBookingsAt(room1, lec.getDay(), lec.getStartTime(), lec.getEndTime());
         assertEquals(lecturesList2.size(), 1);
         assertTrue(lecturesList2.get(0).equals(lec));
     }
@@ -139,9 +140,9 @@ public class RoomManagerTest {
     @Test
     public void test6() {
         Room room1 = manager.getRoomByName("408");
-        List<Lecture> lecturesList = manager.findAllLecturesAt(room1);
-        Lecture lec = lecturesList.get(0);
-        List<Lecture> lecturesList2 = manager.findAllLecturesAt(room1, lec.getDay(), lec.getStartTime(), lec.getEndTime());
+        List<Booking> lecturesList = manager.findAllBookingsAt(room1);
+        Booking lec = lecturesList.get(0);
+        List<Booking> lecturesList2 = manager.findAllBookingsAt(room1, lec.getDay(), lec.getStartTime(), lec.getEndTime());
         assertEquals(lecturesList2.size(), 1);
         assertTrue(lecturesList2.get(0).equals(lec));
     }

@@ -1,9 +1,10 @@
 package serve.managers;
 
 import misc.Utils;
+import model.bookings.Booking;
 import model.campus.CampusSearchQuery;
 import model.lectures.Lecture;
-import model.lectures.Lecture.WeekDay;
+import model.bookings.Booking.WeekDay;
 import model.rooms.Room;
 import model.rooms.RoomManager;
 import model.rooms.RoomProblem;
@@ -58,12 +59,10 @@ public class DefaultRoomManager implements RoomManager {
                 SQL_COLUMN_ROOM_NAME + ", " + SQL_COLUMN_ROOM_FLOOR + ", " +
                 SQL_COLUMN_ROOM_TYPE + ", " + SQL_COLUMN_ROOM_CAPACITY +
                 ", " + SQL_COLUMN_ROOM_AVAILABLE + ", " +
-                SQL_COLUMN_ROOM_SEAT_TYPE + ") values (\"" +
-                room.getRoomName() + "\", " + room.getFloor() + ", '" +
-                room.getRoomType().toString().toLowerCase() + "', " +
-                room.getCapacity() + ", " + room.isAvailableForStudents() +
-                ", '" + room.getSeatType().toString().toLowerCase() + "') ";
-        return successfulOperation(insertQuery, connector);
+                SQL_COLUMN_ROOM_SEAT_TYPE + ") values (?,?,?,?,?,?) ";
+        return successfulOperation(insertQuery, connector, room.getRoomName(), room.getFloor(),
+                room.getRoomType().toString().toLowerCase(), room.getCapacity(),
+                room.isAvailableForStudents(), room.getSeatType().toString().toLowerCase());
     }
 
     @Override
@@ -77,9 +76,10 @@ public class DefaultRoomManager implements RoomManager {
     @Override
     public List<String> getAllImagesOf(Room room) {
         List<String> images = new LinkedList<>();
-        String sql = "SELECT image_url FROM  room_image WHERE room_image.room_id =" + room.getId();
+        String sql = "SELECT " + SQL_COLUMN_ROOM_IMAGE_URL + " FROM " + SQL_TABLE_ROOM_IMAGE +
+                " WHERE " + SQL_COLUMN_ROOM_IMAGE_ROOM_ID + " = ?";
         //TODO
-        try (ResultSet rs = connector.executeQuery(sql)) {
+        try (ResultSet rs = connector.executeQuery(sql, room.getId())) {
 
             while (rs.next()) {
                 images.add(rs.getString(SQL_COLUMN_ROOM_IMAGE_URL));
@@ -91,71 +91,76 @@ public class DefaultRoomManager implements RoomManager {
     }
 
     @Override
-    public List<Lecture> findAllLecturesAt(Room room) {
-        return findAllLecturesAt(room, null, null, null);
+    public List<Booking> findAllBookingsAt(Room room) {
+        return findAllBookingsAt(room, null, null, null);
     }
 
     @Override
-    public List<Lecture> findAllLecturesAt(Room room, Lecture.WeekDay day) {
-        return findAllLecturesAt(room, day, null, null);
+    public List<Booking> findAllBookingsAt(Room room, WeekDay day) {
+        return findAllBookingsAt(room, day, null, null);
     }
 
     @Override
-    public List<Lecture> findAllLecturesAt(Room room, Lecture.WeekDay day, Time start, Time end) {
-        List<Lecture> lectures = new ArrayList<>();
-        String sql = "SELECT * FROM " + SQL_TABLE_LECTURE + " INNER JOIN " + SQL_TABLE_USER + " ON " +
-                SQL_TABLE_LECTURE + "." + SQL_COLUMN_LECTURE_LECTURER + " = " + SQL_TABLE_USER + "." +
+    public List<Booking> findAllBookingsAt(Room room, WeekDay day, Time start, Time end) {
+        List<Booking> bookings = new ArrayList<>();
+        String sql = "SELECT * FROM " + SQL_TABLE_BOOKING + " INNER JOIN " + SQL_TABLE_USER + " ON " +
+                SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_BOOKER + " = " + SQL_TABLE_USER + "." +
                 SQL_COLUMN_USER_ID +
                 " INNER JOIN " + SQL_TABLE_SUBJECT + " ON " + SQL_TABLE_SUBJECT + "." + SQL_COLUMN_SUBJECT_ID +
-                "= " + SQL_TABLE_LECTURE + "." + SQL_COLUMN_SUBJECT_ID + " \n " +
-                " INNER JOIN " + SQL_TABLE_ROOM + " ON " + SQL_TABLE_LECTURE + "." + SQL_COLUMN_ROOM_ID + "" +
-                "= " + SQL_TABLE_ROOM + "." + SQL_COLUMN_ROOM_ID +
-                " WHERE lecture.room_id = " + room.getId() +
-                (day == null ? "" : " AND lecture.day_of_week = '" + day.toString().toLowerCase() + "'") +
-                (start == null ? "" : " AND start_time >= " + toSqlTime(start)) +
-                (end == null ? "" : " AND end_time <= " + toSqlTime(end));
+                " = " + SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_SUBJECT_ID + " \n " +
+                " INNER JOIN " + SQL_TABLE_ROOM + " ON " + SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_ROOM +
+                " = " + SQL_TABLE_ROOM + "." + SQL_COLUMN_ROOM_ID +
+                " WHERE " + SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_ROOM + " = ? " +
+                (start == null ? "" : " AND " + SQL_COLUMN_BOOKING_START_TIME + " >= ? ") +
+                (end == null ? "" : " AND " + SQL_COLUMN_BOOKING_END_TIME + " <= ? ") +
+                (day == null ? "" : " AND " + SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_WEEK_DAY + " = ? ");
         //TODO
-        try (ResultSet rs = connector.executeQuery(sql)) {
-
+        try (ResultSet rs = connector.executeQuery(sql, room.getId(),
+                (start == null ? null : toSqlTime(start)),
+                (end == null ? null : toSqlTime(end)),
+                (day == null ? null : day.toString().toLowerCase()))) {
             while (rs.next()) {
-                lectures.add(getLectureFromResults(rs));
+                bookings.add(getBookingFromResults(rs));
             }
         } catch (SQLException e) {
             e.printStackTrace();
             //ignored
         }
-        return lectures;
+        return bookings;
     }
 
     @Override
-    public boolean isLectureAt(Room room, Date date, Time current) {
+    public Booking findBookingAt(Room room, Date date, Time current) {
         WeekDay day = toWeekDay(date);
+        Booking booking = null;
 
-        String sql = "SELECT * FROM " + SQL_TABLE_LECTURE + " INNER JOIN " + SQL_TABLE_USER + " ON " +
-                SQL_TABLE_LECTURE + "." + SQL_COLUMN_LECTURE_LECTURER + " = " + SQL_TABLE_USER + "." +
+        String sql = "SELECT * FROM " + SQL_TABLE_BOOKING + " INNER JOIN " + SQL_TABLE_USER + " ON " +
+                SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_BOOKER + " = " + SQL_TABLE_USER + "." +
                 SQL_COLUMN_USER_ID +
                 " INNER JOIN " + SQL_TABLE_SUBJECT + " ON " + SQL_TABLE_SUBJECT + "." + SQL_COLUMN_SUBJECT_ID +
-                "= " + SQL_TABLE_LECTURE + "." + SQL_COLUMN_SUBJECT_ID + " \n " +
-                " INNER JOIN " + SQL_TABLE_ROOM + " ON " + SQL_TABLE_LECTURE + "." + SQL_COLUMN_ROOM_ID + "" +
-                "= " + SQL_TABLE_ROOM + "." + SQL_COLUMN_ROOM_ID +
-                " WHERE lecture.room_id = " + room.getId() +
-                " AND lecture.day_of_week = '" + day.toString().toLowerCase() + "'" +
-                " AND start_time <= " + toSqlTime(current) +
-                " AND end_time >= " + toSqlTime(current);
-        //TODO
+                " = " + SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_SUBJECT_ID + " \n " +
+                " INNER JOIN " + SQL_TABLE_ROOM + " ON " + SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_ROOM +
+                " = " + SQL_TABLE_ROOM + "." + SQL_COLUMN_ROOM_ID +
+                " WHERE " + SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_ROOM + " = ? " +
+                " AND " + SQL_COLUMN_BOOKING_WEEK_DAY + " = ? " +
+                " AND " + SQL_COLUMN_BOOKING_START_TIME + " <= ? AND " + SQL_COLUMN_BOOKING_END_TIME + " >= ?";
 
-        int count = 0;
+        try (ResultSet rs = connector.executeQuery(sql, room.getId(),
+                day.toString().toLowerCase(), toSqlTime(current), toSqlTime(current))) {
+            rs.next();
+            booking = getBookingFromResults(rs);
 
-        try (ResultSet rs = connector.executeQuery(sql)) {
-
-            while (rs.next()) {
-                count++;
-            }
         } catch (SQLException e) {
             e.printStackTrace();
             //ignored
         }
-        return (count != 0);
+        return booking;
+    }
+
+    @Override
+    public boolean isBooked(Room room, Date date, Time current) {
+
+        return (findBookingAt(room, date, current) == null);
     }
 
     @Override
@@ -191,19 +196,16 @@ public class DefaultRoomManager implements RoomManager {
 
     @Override
     public List<RoomProblem> findAllProblemsOf(Room room) {
-        String sql = "SELECT * FROM ? " +
-                " JOIN ? ON ?.? = ?.? " +
-                " JOIN ? ON ?.? = ?.? " +
-                " WHERE ?.? = ?";
-        List<RoomProblem> problems = new ArrayList<>();
-        Object[] values = {
-                SQL_TABLE_ROOM_PROBLEM, SQL_TABLE_ROOM, SQL_TABLE_ROOM_PROBLEM,
+        String sql = String.format("SELECT * FROM %s " +
+                        " JOIN %s ON %s.%s = %s.%s " +
+                        " JOIN %s ON %s.%s = %s.%s " +
+                        " WHERE %s.%s = ?", SQL_TABLE_ROOM_PROBLEM, SQL_TABLE_ROOM, SQL_TABLE_ROOM_PROBLEM,
                 SQL_COLUMN_ROOM_PROBLEM_ROOM, SQL_TABLE_ROOM, SQL_COLUMN_ROOM_ID, SQL_TABLE_USER,
                 SQL_TABLE_ROOM_PROBLEM, SQL_COLUMN_ROOM_PROBLEM_REPORTED_BY, SQL_TABLE_USER,
-                SQL_COLUMN_USER_ID, SQL_TABLE_ROOM_PROBLEM, SQL_COLUMN_ROOM_PROBLEM_ROOM,
-                room.getId()
-        };
-        try (ResultSet results = connector.executeQuery(sql, values)) {
+                SQL_COLUMN_USER_ID, SQL_TABLE_ROOM_PROBLEM, SQL_COLUMN_ROOM_PROBLEM_ROOM);
+        List<RoomProblem> problems = new ArrayList<>();
+
+        try (ResultSet results = connector.executeQuery(sql, room.getId())) {
             while (results.next()) {
                 problems.add(getProblemFromResults(results));
             }
@@ -216,9 +218,10 @@ public class DefaultRoomManager implements RoomManager {
 
     @Override
     public void addImage(Room room, String imageURL) {
-        String sql = "INSERT INTO room_image (image_url, room_id) VALUES ('" + imageURL + "', " + room.getId() + ")";
+        String sql = "INSERT INTO " + SQL_TABLE_ROOM_IMAGE + " (" + SQL_COLUMN_ROOM_IMAGE_URL + "," +
+                SQL_COLUMN_ROOM_IMAGE_ROOM_ID + ") VALUES (?,?)";
         try {
-            connector.executeUpdate(sql);
+            connector.executeUpdate(sql,  imageURL, room.getId());
         } catch (SQLException e) {
             //doing nothing
         }

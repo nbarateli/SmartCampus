@@ -1,8 +1,10 @@
 package model.lectures;
 
 import model.accounts.User;
+import model.bookings.Booking;
 import model.campus.CampusObject;
 import model.rooms.Room;
+import model.bookings.Booking.WeekDay;
 
 import java.sql.Time;
 import java.text.DateFormat;
@@ -114,9 +116,5 @@ public class Lecture implements CampusObject {
                 lecturer.getLastName() + " დღე: " + day + " დასაწყისი " + format.format(startTime) +
                 " აუდიტორია " + room.getRoomName() +
                 "}";
-    }
-
-    public enum WeekDay {
-        MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
     }
 }

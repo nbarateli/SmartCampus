@@ -6,7 +6,7 @@ import model.accounts.User;
 import model.bookings.Booking;
 import model.bookings.BookingManager;
 import model.lectures.CampusSubject;
-import model.lectures.Lecture.WeekDay;
+import model.bookings.Booking.WeekDay;
 import model.lectures.LectureManager;
 import model.rooms.Room;
 import model.rooms.RoomManager;

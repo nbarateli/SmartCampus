@@ -1,5 +1,6 @@
 package serve.rooms;
 
+import model.bookings.Booking;
 import model.lectures.Lecture;
 import model.rooms.Room;
 import model.rooms.RoomManager;
@@ -65,7 +66,7 @@ public class RoomInfo extends HttpServlet {
         }
         addBasicInfo(builder, room);
         addImages(builder, room, manager);
-        addLectures(builder, room, manager);
+        addBookings(builder, room, manager);
         addProblems(builder, room, manager);
     }
 
@@ -122,17 +123,17 @@ public class RoomInfo extends HttpServlet {
      * Appends the list of the all lectures of the room to the json builder in the format
      * of the json array.
      */
-    private void addLectures(JsonObjectBuilder builder, Room room, RoomManager manager) {
-        JsonArrayBuilder lectureArrayBuilder = Json.createArrayBuilder();
-        for (Lecture lecture : manager.findAllLecturesAt(room)) {
-            JsonObjectBuilder lectureBuilder = Json.createObjectBuilder();
-            lectureBuilder.add(JSON_LECTURE_SUBJECT, lecture.getSubject().getName());
-            lectureBuilder.add(JSON_LECTURE_LECTURER, lecture.getLecturer().getFirstName() + " " +
-                    lecture.getLecturer().getLastName());
-            lectureBuilder.add(JSON_LECTURE_START_TIME, toHHMM(lecture.getStartTime()));
-            lectureBuilder.add(JSON_LECTURE_END_TIME, toHHMM(lecture.getEndTime()));
-            lectureArrayBuilder.add(lectureBuilder.build());
+    private void addBookings(JsonObjectBuilder builder, Room room, RoomManager manager) {
+        JsonArrayBuilder bookingArrayBuilder = Json.createArrayBuilder();
+        for (Booking booking : manager.findAllBookingsAt(room)) {
+            JsonObjectBuilder bookingBuilder = Json.createObjectBuilder();
+            bookingBuilder.add(JSON_LECTURE_SUBJECT, booking.getSubject().getName());
+            bookingBuilder.add(JSON_LECTURE_LECTURER, booking.getBooker().getFirstName() + " " +
+                    booking.getBooker().getLastName());
+            bookingBuilder.add(JSON_LECTURE_START_TIME, toHHMM(booking.getStartTime()));
+            bookingBuilder.add(JSON_LECTURE_END_TIME, toHHMM(booking.getEndTime()));
+            bookingArrayBuilder.add(bookingBuilder.build());
         }
-        builder.add(JSON_ROOM_LECTURES, lectureArrayBuilder.build());
+        builder.add(JSON_ROOM_LECTURES, bookingArrayBuilder.build());
     }
 }

@@ -2,6 +2,7 @@ package misc;
 
 import model.accounts.User;
 import model.bookings.Booking;
+import model.bookings.Booking.WeekDay;
 import model.lectures.CampusSubject;
 import model.lectures.Lecture;
 import model.rooms.Room;
@@ -70,29 +71,29 @@ public final class Utils {
     /**
      * Converts given String to WeekDay format.
      */
-    public static Lecture.WeekDay toWeekDay(String day) {
+    public static WeekDay toWeekDay(String day) {
         switch (day.toLowerCase()) {
             case "ორშაბათი":
             case "monday":
-                return Lecture.WeekDay.MONDAY;
+                return WeekDay.MONDAY;
             case "სამშაბათი":
             case "tuesday":
-                return Lecture.WeekDay.TUESDAY;
+                return WeekDay.TUESDAY;
             case "ოთხშაბათი":
             case "wednesday":
-                return Lecture.WeekDay.WEDNESDAY;
+                return WeekDay.WEDNESDAY;
             case "ხუთშაბათი":
             case "thursday":
-                return Lecture.WeekDay.THURSDAY;
+                return WeekDay.THURSDAY;
             case "პარასკევი":
             case "friday":
-                return Lecture.WeekDay.FRIDAY;
+                return WeekDay.FRIDAY;
             case "შაბათი":
             case "saturday":
-                return Lecture.WeekDay.SATURDAY;
+                return WeekDay.SATURDAY;
             case "კვირა":
             case "sunday":
-                return Lecture.WeekDay.SUNDAY;
+                return WeekDay.SUNDAY;
 
         }
         return null;
@@ -101,26 +102,26 @@ public final class Utils {
     /**
      * Given a date returns respective weekday
      */
-    public static Lecture.WeekDay toWeekDay(Date date) {
+    public static WeekDay toWeekDay(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         int day = cal.get(Calendar.DAY_OF_WEEK);
 
         switch (day) {
             case 2:
-                return Lecture.WeekDay.MONDAY;
+                return WeekDay.MONDAY;
             case 3:
-                return Lecture.WeekDay.TUESDAY;
+                return WeekDay.TUESDAY;
             case 4:
-                return Lecture.WeekDay.WEDNESDAY;
+                return WeekDay.WEDNESDAY;
             case 5:
-                return Lecture.WeekDay.THURSDAY;
+                return WeekDay.THURSDAY;
             case 6:
-                return Lecture.WeekDay.FRIDAY;
+                return WeekDay.FRIDAY;
             case 7:
-                return Lecture.WeekDay.SATURDAY;
+                return WeekDay.SATURDAY;
             case 1:
-                return Lecture.WeekDay.SUNDAY;
+                return WeekDay.SUNDAY;
 
         }
         return null;
@@ -257,7 +258,7 @@ public final class Utils {
         User booker = getUserFromResults(rs);
         Room room = getRoomFromResults(rs);
         CampusSubject subject = getSubjectFromResults(rs);
-        Lecture.WeekDay day = toWeekDay(rs.getString(SQL_COLUMN_BOOKING_WEEK_DAY));
+        WeekDay day = toWeekDay(rs.getString(SQL_COLUMN_BOOKING_WEEK_DAY));
         Time starTime = rs.getTime(SQL_COLUMN_BOOKING_START_TIME);
         Time endTime = rs.getTime(SQL_COLUMN_BOOKING_END_TIME);
         String description = rs.getString(SQL_COLUMN_BOOKING_DESCRIPTION);
@@ -291,7 +292,7 @@ public final class Utils {
         return new CampusSubject(id, name);
     }
 
-    public static String toGeorgian(Lecture.WeekDay day) {
+    public static String toGeorgian(WeekDay day) {
         switch (day) {
             case MONDAY:
                 return "ორშაბათი";
