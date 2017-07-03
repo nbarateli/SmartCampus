@@ -77,16 +77,16 @@
 
         <div class="form-group">
           <input type="number" name="room_floor" class="form-control"
-                 placeholder="შეიყვანეთ სართული">
+                 placeholder="შეიყვანეთ სართული" min=1 max=4>
         </div>
 
         <div class="form-group">
           <input type="number"
                  name="capacity_from" class="form-control" title="-დან"
-                 placeholder="ადგილების რაოდენობა(-დან)"> <br>
+                 placeholder="ადგილების რაოდენობა(-დან)" min=0 max=500> <br>
 
           <input type="number" name="capacity_to" class="form-control"
-                 title="-მდე" placeholder="ადგილების რაოდენობა(-მდე)">
+                 title="-მდე" placeholder="ადგილების რაოდენობა(-მდე)" min=0 max=500>
         </div>
 
         <div class="select">
