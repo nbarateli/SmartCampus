@@ -1,4 +1,7 @@
-<%--
+<%@ page import="serve.managers.ManagerFactory" %>
+<%@ page import="static misc.WebConstants.MANAGER_FACTORY" %>
+<%@ page import="static misc.WebConstants.SIGNED_ACCOUNT" %>
+<%@ page import="model.accounts.User" %><%--
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 03.07.2017
@@ -7,6 +10,17 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
+<%
+  ManagerFactory factory = (ManagerFactory) request.getServletContext().getAttribute(MANAGER_FACTORY);
+  User currentUser = (User) request.getSession().getAttribute(SIGNED_ACCOUNT);
+
+  if (currentUser == null || !factory.getAccountManager().
+          getAllPermissionsOf(currentUser).contains(User.UserPermission.BOOK_A_ROOM)) {
+    response.sendRedirect("/unallowed_operation.html");
+  }
+%>
+
 <head>
   <title>ოთახის დაჯავშნა</title>
   <meta charset="utf-8">
@@ -71,7 +85,7 @@
 
   <div>
     <br><br><br>
-    <a href="/index.jsp">მთავარ გვერდზე დაბრუნება</a>
+    <a href="/index.jsp" id="home-link">მთავარ გვერდზე დაბრუნება</a>
   </div>
 
 </div>
