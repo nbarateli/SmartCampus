@@ -50,8 +50,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="SearchPageStyle.css">
   <link rel="stylesheet" href="Floors.css">
+  <link rel="stylesheet" href="SearchPageStyle.css">
+
   <script
           src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script
@@ -69,19 +70,17 @@
             class="form-vertical">
 
         <div class="form-group">
-          <label class="control-label">ოთახის სახელი</label>
+          <label class="control-label">ოთახის ინფორმაცია</label>
           <input type="text" name="room_name"
                  class="form-control" placeholder="შეიყვანეთ ოთახის სახელი">
         </div>
 
         <div class="form-group">
-          <label class="control-label">სართული</label>
           <input type="number" name="room_floor" class="form-control"
                  placeholder="შეიყვანეთ სართული">
         </div>
 
         <div class="form-group">
-          <label class="control-label">ადგილების რაოდენობა</label>
           <input type="number"
                  name="capacity_from" class="form-control" title="-დან"
                  placeholder="ადგილების რაოდენობა(-დან)"> <br>
@@ -91,7 +90,7 @@
         </div>
 
         <div class="select">
-          <label class="control-label">ოთახის ტიპი</label>
+          <label class="control-label smaller-lab">ოთახის ტიპი</label>
           <select name="room_type" class="form-control">
             <option value="any">ყველა</option>
             <option value="auditorium">აუდიტორია</option>
@@ -100,7 +99,7 @@
         </div>
 
         <div class="select">
-          <label class="control-label">ადგილების ტიპი</label>
+          <label class="control-label smaller-lab">ადგილების ტიპი</label>
           <select name="seat_type" class="form-control">
             <option value="any">ყველანაირი</option>
             <option value="desks">სკამები და მერხები</option>
@@ -120,6 +119,16 @@
           <label class="control-label">
             <input type="checkbox" name="no_problems"> პრობლემების გარეშე
           </label>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label">დროით ძებნა</label>
+          <input type="date" name="date_interested" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <input type="text" name="time_interested" class="form-control"
+                 placeholder="შეიყვანეთ დრო (HH:mm 24-საათიანი ფორმატით)">
         </div>
 
         <input type="submit" value="ძებნა" class="btn btn-primary">
