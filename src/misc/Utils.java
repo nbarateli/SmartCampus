@@ -477,10 +477,8 @@ public final class Utils {
         try {
             return format.parse(toConvert);
         } catch (ParseException e) {
-            e.printStackTrace();
+            return null;
         }
-        
-        return null;
     }
     
     /**

@@ -63,18 +63,21 @@ public class LectureAdder extends HttpServlet {
         String subjectName = request.getParameter("subject_name");
         String roomName = request.getParameter("room_name");
         Date date = misc.Utils.stringToDate(request.getParameter("start_date"));
-        WeekDay weekDay = misc.Utils.toWeekDay(date);
         Time startTime = misc.Utils.toHHMM(request.getParameter("start_time"));
         Time endTime = misc.Utils.toHHMM(request.getParameter("end_time"));
         Integer numWeeks = misc.Utils.validateNumber(request.getParameter("num_weeks"), 1, 16);
-        int rep = Integer.parseInt(request.getParameter("repetition"));
+        Integer rep = misc.Utils.validateNumber(request.getParameter("repetition"), 1, 16);
+
+        WeekDay weekDay = null;
+        if(date != null)
+            weekDay = misc.Utils.toWeekDay(date);
 
         User lecturer = accountManager.getUserViaEMail(lecturerEmail);
         CampusSubject subject = lectureManager.findSubject(subjectName);
         Room room = roomManager.getRoomByName(roomName);
 
         if (lecturer != null && room != null && subject != null
-                && startTime != null && endTime != null && date != null && numWeeks != null) {
+                && startTime != null && endTime != null && date != null && numWeeks != null && rep != null) {
 
             for (int i = 0; i < numWeeks / rep; i++) {
                 Booking thisBooking = new Booking(

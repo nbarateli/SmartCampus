@@ -4,7 +4,6 @@ import model.accounts.User;
 import model.campus.CampusSearchQuery;
 import model.campus.CampusSearchQueryGenerator;
 import model.lectures.CampusSubject;
-import model.lectures.Lecture;
 import model.rooms.Room;
 
 import java.sql.Time;
@@ -14,8 +13,6 @@ import java.util.List;
 
 import static misc.Utils.*;
 import static model.database.SQLConstants.*;
-import static model.database.SQLConstants.SQL_COLUMN_LECTURE_END_TIME;
-import static model.database.SQLConstants.SQL_TABLE_LECTURE;
 
 public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<Booking>{
 
@@ -128,9 +125,9 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
                 SQL_TABLE_BOOKING, SQL_COLUMN_BOOKING_SUBJECT_ID, SQL_TABLE_SUBJECT,
                 SQL_COLUMN_SUBJECT_ID,
                 generateEqualQuery(bookingID, SQL_COLUMN_BOOKING_ID, values) + " AND ",
-                generateEqualQuery(booker.getId(), SQL_COLUMN_BOOKING_BOOKER, values) + " AND ",
-                generateEqualQuery(room.getId(), SQL_COLUMN_BOOKING_ROOM, values) + " AND ",
-                generateLikeQuery(subject.getId(), SQL_COLUMN_BOOKING_SUBJECT_ID, values) + " AND ",
+                generateEqualQuery(booker, SQL_COLUMN_BOOKING_BOOKER, values) + " AND ",
+                generateEqualQuery(room, SQL_COLUMN_BOOKING_ROOM, values) + " AND ",
+                generateLikeQuery(subject, SQL_COLUMN_BOOKING_SUBJECT_ID, values) + " AND ",
                 generateLikeQuery(day, SQL_COLUMN_BOOKING_WEEK_DAY, values) + " AND ",
                 generateEqualsOrQuery(startTime, SQL_COLUMN_BOOKING_START_TIME, values, true) + " AND ",
                 generateEqualsOrQuery(endTime, SQL_COLUMN_BOOKING_END_TIME, values, false) + " AND ",
