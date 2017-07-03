@@ -1,5 +1,6 @@
 package serve.lecture;
 
+import model.bookings.BookingManager;
 import model.lectures.LectureManager;
 import serve.managers.ManagerFactory;
 
@@ -34,8 +35,8 @@ public class LectureRemover extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
 
-        LectureManager manager = ((ManagerFactory) request.getServletContext().getAttribute
-                (MANAGER_FACTORY)).getLectureManager();
+        BookingManager manager = ((ManagerFactory) request.getServletContext().getAttribute
+                (MANAGER_FACTORY)).getBookingManager();
         PrintWriter out = response.getWriter();
         if ("true".equals(request.getParameter("remove_all"))) {
             manager.removeAllLectures();
