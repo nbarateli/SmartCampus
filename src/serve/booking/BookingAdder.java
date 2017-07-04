@@ -1,10 +1,8 @@
 package serve.booking;
 
-import model.accounts.AccountManager;
 import model.accounts.User;
 import model.bookings.Booking;
 import model.bookings.BookingManager;
-import model.lectures.LectureManager;
 import model.rooms.Room;
 import model.rooms.RoomManager;
 import serve.managers.ManagerFactory;
@@ -34,8 +32,6 @@ public class BookingAdder extends HttpServlet {
         ServletContext context = request.getServletContext();
         ManagerFactory factory = (ManagerFactory) context.getAttribute(MANAGER_FACTORY);
         BookingManager bookingManager = factory.getBookingManager();
-        LectureManager lectureManager = factory.getLectureManager();
-        AccountManager accountManager = factory.getAccountManager();
         RoomManager roomManager = factory.getRoomManager();
 
         Room room = roomManager.getRoomByName(request.getParameter("room_name"));

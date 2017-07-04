@@ -81,6 +81,7 @@ public class DefaultSubjectManager implements SubjectManager {
         } catch (SQLException e) {
             //doing nothing
         }
+
         return CampusSubject;
     }
 

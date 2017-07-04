@@ -37,11 +37,12 @@ public class SubjectAdder extends HttpServlet {
         ManagerFactory factory = (ManagerFactory) getServletContext().getAttribute(MANAGER_FACTORY);
         SubjectManager manager = factory.getSubjectManager();
 
+
         String subjectName = request.getParameter("subj_name");
         SubjectSearchQueryGenerator gn = new SubjectSearchQueryGenerator();
+
         gn.setSubjectName(subjectName);
-        CampusSubject subject = manager.find(gn).get(0);
-        if (subject == null) {
+        if (manager.find(gn).size() == 0) {
             CampusSubject subj = new CampusSubject(-1, subjectName);
             manager.add(subj);
             response.getWriter().println(SUCCESS);

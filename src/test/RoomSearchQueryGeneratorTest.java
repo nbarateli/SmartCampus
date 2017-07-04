@@ -36,6 +36,8 @@ public class RoomSearchQueryGeneratorTest {
         //assertTrue(haveSameTokens(sql, query.generateQuery()));
     }
 
+
+
     private Room mockRoom(int id) {
         return new Room(id, 0, null,
                 null, null, true, 0);
@@ -53,6 +55,7 @@ public class RoomSearchQueryGeneratorTest {
         }
         return !tokenizerB.hasMoreTokens();
     }
+
 
 
 }
