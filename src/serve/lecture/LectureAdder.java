@@ -4,9 +4,9 @@ import misc.ModelConstants;
 import model.accounts.AccountManager;
 import model.accounts.User;
 import model.bookings.Booking;
+import model.bookings.Booking.WeekDay;
 import model.bookings.BookingManager;
 import model.lectures.CampusSubject;
-import model.bookings.Booking.WeekDay;
 import model.lectures.SubjectManager;
 import model.lectures.SubjectSearchQueryGenerator;
 import model.rooms.Room;
@@ -70,7 +70,7 @@ public class LectureAdder extends HttpServlet {
         Integer rep = misc.Utils.validateNumber(request.getParameter("repetition"), 1, 16);
 
         WeekDay weekDay = null;
-        if(date != null)
+        if (date != null)
             weekDay = misc.Utils.toWeekDay(date);
 
         User lecturer = accountManager.getUserViaEMail(lecturerEmail);
@@ -85,7 +85,8 @@ public class LectureAdder extends HttpServlet {
             for (int i = 0; i < numWeeks / rep; i++) {
                 Booking thisBooking = new Booking(
                         ModelConstants.SENTINEL_INT, lecturer, room, subject, weekDay, startTime,
-                        endTime, null, misc.Utils.addDaysToDate(date, i * DAYS_IN_WEEK * rep));
+                        endTime, null, date = misc.Utils.addDaysToDate(date, i * DAYS_IN_WEEK * rep),
+                        date);
                 manager.add(thisBooking);
             }
 

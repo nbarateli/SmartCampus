@@ -53,14 +53,15 @@ CREATE TABLE campus_subject
 
 CREATE TABLE booking
 (
-  booking_id   INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  room_id      INT             NOT NULL,
-  booker_id    INT             NOT NULL,
-  booking_date DATE            NOT NULL,
-  subject_id   INT             DEFAULT NULL,
-  description  VARCHAR(100)    DEFAULT NULL,
-  start_time   TIME            NOT NULL,
-  end_time     TIME            NOT NULL,
+  booking_id  INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  room_id     INT             NOT NULL,
+  booker_id   INT             NOT NULL,
+  start_date  DATE            NOT NULL,
+  end_date    DATE            NOT NULL,
+  subject_id  INT                      DEFAULT NULL,
+  description VARCHAR(100)             DEFAULT NULL,
+  start_time  TIME            NOT NULL,
+  end_time    TIME            NOT NULL,
   day_of_week ENUM ('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'),
   CONSTRAINT booking_subject_fk
   FOREIGN KEY (subject_id)

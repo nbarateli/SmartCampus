@@ -64,6 +64,7 @@ public class DBConnector {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.executeQuery("USE " + MYSQL_DATABASE_NAME + ";");
             if (values != null) {
+
                 addParameters(statement, values);
             }
 
@@ -79,18 +80,10 @@ public class DBConnector {
     }
 
     private void addParameters(PreparedStatement statement, Object[] values) throws SQLException {
-        ParameterMetaData pmd = statement.getParameterMetaData();
-        int count = pmd.getParameterCount();
-        int j = 0;
-        for (int i = 0; i < count; i++) {
-            if (j == values.length)
-                break;
+        for (int i = 0; i < values.length; i++) {
+            statement.setObject(i + 1, values[i]);
 
-            while (j < values.length - 1 && values[j] == null) {
-                j++;
-            }
-            statement.setObject(i + 1, values[j]);
-            j++;
         }
+
     }
 }

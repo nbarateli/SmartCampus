@@ -1,7 +1,7 @@
-<%@ page import="serve.managers.ManagerFactory" %>
+<%@ page import="model.accounts.User" %>
 <%@ page import="static misc.WebConstants.MANAGER_FACTORY" %>
 <%@ page import="static misc.WebConstants.SIGNED_ACCOUNT" %>
-<%@ page import="model.accounts.User" %><%--
+<%@ page import="serve.managers.ManagerFactory" %><%--
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 03.07.2017
@@ -28,9 +28,18 @@
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="BookingPageStyle.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-  <script
-          src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="${pageContext.request.contextPath}/scriptlibs/Datepair.js"></script>
+  <script src="${pageContext.request.contextPath}/scriptlibs/jquery.datepair.js"></script>
+  <script src="${pageContext.request.contextPath}/scriptlibs/wrapper.js"></script>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0/js/bootstrap-datepicker.min.js"></script>
+
+
   <script
           src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
@@ -59,23 +68,50 @@
 
       <br>
 
+      <label class="control-label" for="datepairExample"> დროით ძებნა</label>
       <div class="form-group">
-        <label class="control-label">ჯავშნის დრო</label>
-        <input type="text" name="start_time" class="form-control"
-               placeholder="შეიყვანეთ ჯავშნის დაწყების დრო(HH:mm 24-საათიანი ფორმატით)">
-      </div>
-      <div class="form-group">
+        <table id="datepairExample" class="form-group">
+          <tr id="fromRow">
+            <td><label class="control-label">თარიღი
+              <input type="text" name="start_date" class="date start"/>
+            </label></td>
+            <td><label class="control-label">დრო (დან)<br>
+              <input type="text" name="start_time" class="time start"/>
+            </label></td>
 
-        <input type="text" name="end_time" class="form-control"
-               placeholder="შეიყვანეთ ჯავშნის დასრულების დრო(HH:mm 24-საათიანი ფორმატით)">
+          </tr>
+          <tr id="toRow">
+            <td>
+              <label class="control-label">დრო<br>
+                <input type="text" name="end_time" class="time end"/>
+              </label>
+            </td>
+            <td>
+              <label> თარიღი (მდე)
+                <input type="text" name="end_date" class="date end"/>
+              </label>
+            </td>
+
+          </tr>
+        </table>
       </div>
 
-      <div class="form-group">
-        <label class="control-label">ჯავშნის თარიღი</label>
-        <input type="date" name="start_date" class="form-control">
-      </div>
 
-      <br>
+      <script>
+          // initialize input widgets first
+          $('#datepairExample .time').timepicker({
+              'showDuration': true,
+              'timeFormat': 'H:i'
+          });
+
+          $('#datepairExample .date').datepicker({
+              'format': 'dd.mm.yyyy',
+              'autoclose': true
+          });
+
+          // initialize datepair
+          $('#datepairExample').datepair();
+      </script>
 
       <input type="button" value="დამატება"
              class="btn btn-info btn-lg"

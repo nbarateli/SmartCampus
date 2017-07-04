@@ -39,19 +39,24 @@ public class BookingAdder extends HttpServlet {
             response.getWriter().println(FAILED);
             return;
         }
-        Date bookingDate = misc.Utils.stringToDate(request.getParameter("start_date"));
+        Date startDate = misc.Utils.stringToDate(request.getParameter("start_date"), "dd.mm.yyyy");
+        Date endDate = misc.Utils.stringToDate(request.getParameter("end_date"), "dd.mm.yyyy");
+
         String description = request.getParameter("description");
         Time startTime = misc.Utils.toHHMM(request.getParameter("start_time"));
         Time endTime = misc.Utils.toHHMM(request.getParameter("end_time"));
         Booking.WeekDay weekDay = null;
-        if (bookingDate != null) {
-            weekDay = misc.Utils.toWeekDay(bookingDate);
+        if (startDate != null) {
+            weekDay = misc.Utils.toWeekDay(startDate);
         }
         try {
             Booking booking = new Booking(SENTINEL_INT, currentUser, room,
-                    null, weekDay, startTime, endTime, description, bookingDate);
-            bookingManager.add(booking);
-            response.getWriter().println(SUCCESS);
+                    null, weekDay, startTime, endTime, description, startDate, endDate);
+            if (bookingManager.add(booking)) {
+                response.getWriter().println(SUCCESS);
+            } else {
+                throw new Exception();
+            }
         } catch (Exception ex) {
             response.getWriter().println(FAILED);
         }

@@ -21,22 +21,14 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
     private Room room;
     private CampusSubject subject;
     private Booking.WeekDay day;
-
-    public Date getBookingDate() {
-        return bookingDate == null ? null : new Date(bookingDate.getTime());
-    }
-
-    public void setBookingDate(Date bookingDate) {
-        this.bookingDate = bookingDate == null ? null : new Date(bookingDate.getTime());
-    }
-
     private Time startTime;
     private Time endTime;
-    private Date bookingDate;
+    private Date startDate;
+    private Date endDate;
     private String description;
 
     public BookingSearchQueryGenerator(Integer bookingID, User booker, Room room, CampusSubject subject, Booking.WeekDay day,
-                                       Time startTime, Time endTime, String description, Date bookingDate) {
+                                       Time startTime, Time endTime, String description, Date startDate, Date endDate) {
         this.bookingID = bookingID;
         this.booker = booker;
         this.room = room;
@@ -45,13 +37,31 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
         this.startTime = startTime;
         this.endTime = endTime;
         this.description = description;
-        this.bookingDate = bookingDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     //Default Constructor
     public BookingSearchQueryGenerator() {
         this(null, null, null, null, null,
-                null, null, null, null);
+                null, null, null, null, null);
+    }
+
+    public Date getEndDate() {
+        return endDate == null ? null : new Date(endDate.getTime());
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate == null ? null : new Date(endDate.getTime());
+
+    }
+
+    public Date getStartDate() {
+        return startDate == null ? null : new Date(startDate.getTime());
+    }
+
+    public void setStartDate(Date endDate) {
+        this.startDate = endDate == null ? null : new Date(endDate.getTime());
     }
 
     public int getId() {
@@ -111,7 +121,7 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
     }
 
     public Date getDate() {
-        return bookingDate;
+        return startDate;
     }
 
     public String getDescription() {
@@ -128,7 +138,7 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
         String sql = hasNonNullFields() ? String.format("SELECT * FROM %s JOIN %s ON %s.%s = %s.%s" +
                         " JOIN %s ON %s.%s = %s.%s " +
                         joinIfSubjectNotNull() +
-                        " \nWHERE %s%s%s%s%s%s%s%s%s",
+                        " \nWHERE \n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s",
                 SQL_TABLE_BOOKING, SQL_TABLE_ROOM, SQL_TABLE_BOOKING,
                 SQL_COLUMN_BOOKING_ROOM, SQL_TABLE_ROOM, SQL_COLUMN_ROOM_ID,
                 SQL_TABLE_USER, SQL_TABLE_BOOKING, SQL_COLUMN_BOOKING_BOOKER,
@@ -139,10 +149,11 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
                         SQL_TABLE_ROOM + "." + SQL_COLUMN_BOOKING_ROOM, values) + " AND ",
                 generateLikeQuery(subject, SQL_COLUMN_BOOKING_SUBJECT_ID, values) + " AND ",
                 generateLikeQuery(day, SQL_COLUMN_BOOKING_WEEK_DAY, values) + " AND ",
-                generateEqualsOrQuery(startTime, SQL_COLUMN_BOOKING_START_TIME, values, true) + " AND ",
-                generateEqualsOrQuery(endTime, SQL_COLUMN_BOOKING_END_TIME, values, false) + " AND ",
+                generateTimeQuery(startTime, SQL_COLUMN_BOOKING_START_TIME, values, true) + " AND ",
+                generateTimeQuery(endTime, SQL_COLUMN_BOOKING_END_TIME, values, false) + " AND ",
                 generateLikeQuery(description, SQL_COLUMN_BOOKING_DESCRIPTION, values) + " AND ",
-                generateDateQuery(bookingDate, SQL_COLUMN_BOOKING_DATE, values)
+                generateDateQuery(startDate, SQL_COLUMN_BOOKING_START_DATE, values, true) + "AND",
+                generateDateQuery(endDate, SQL_COLUMN_BOOKING_END_DATE, values, false)
         ) : "SELECT * FROM " + SQL_TABLE_BOOKING;
         return new CampusSearchQuery(sql, asArray(values));
     }
@@ -156,7 +167,7 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
         return bookingID != null || booker != null
                 || room != null || subject != null
                 || day != null || startTime != null
-                || endTime != null || bookingDate != null
+                || endTime != null || startDate != null
                 || description != null;
     }
 }

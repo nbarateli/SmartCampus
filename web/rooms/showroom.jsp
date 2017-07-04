@@ -38,7 +38,7 @@
         out.println("<td>" + booking.getBooker().getFirstName() + " "
                 + booking.getBooker().getLastName() + "</td>");
 //        out.println("<td>" + toGeorgian(booking.getDay()) + " " + booking.getStartTime() + "</td>");
-        out.println("<td>" + exactDateToString(booking.getDate()) + "</td>");
+        out.println("<td>" + exactDateToString(booking.getStartDate()) + "</td>");
         out.println("<td><input type=\"submit\" value=\"წაშლა\"></td>");
         out.println("</tr>");
       }

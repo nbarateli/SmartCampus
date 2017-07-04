@@ -28,27 +28,6 @@ public class DefaultBookingManager implements BookingManager {
     }
 
     @Override
-    public void removeAllBookings() {
-        String truncateQuery = "truncate table " + SQL_TABLE_BOOKING;
-        try {
-            connector.executeUpdate(truncateQuery);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void removeAllLectures() {
-        String deleteQuery = "delete from " + SQL_TABLE_BOOKING + " where " +
-                SQL_COLUMN_BOOKING_SUBJECT_ID + " > 0";
-        try {
-            connector.executeUpdate(deleteQuery);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
     public List<Booking> find(BookingSearchQueryGenerator queryGenerator) {
         List<Booking> list = new ArrayList<>();
         CampusSearchQuery query = queryGenerator.generateQuery();
@@ -60,6 +39,8 @@ public class DefaultBookingManager implements BookingManager {
             }
 
         } catch (SQLException e) {
+            e.printStackTrace();
+
             //doing nothing
         }
         return list;
@@ -68,21 +49,22 @@ public class DefaultBookingManager implements BookingManager {
     @Override
     public boolean add(Booking booking) {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        String date = format.format(booking.getDate());
+        String date = format.format(booking.getStartDate());
+
         String description = booking.getDescription();
         CampusSubject subject = booking.getSubject();
 
-        String insertQuery = "insert into " + SQL_TABLE_BOOKING + " (" +
-                SQL_COLUMN_BOOKING_ROOM + ", " +
-                SQL_COLUMN_BOOKING_BOOKER + ", " + SQL_COLUMN_BOOKING_DATE +
-                (subject == null ? "" : ", " + SQL_COLUMN_BOOKING_SUBJECT_ID) +
-                (description == null ? "" : ", " + SQL_COLUMN_BOOKING_DESCRIPTION) +
-                ", " + SQL_COLUMN_BOOKING_START_TIME + ", " +
-                SQL_COLUMN_BOOKING_END_TIME + ", " + SQL_COLUMN_BOOKING_WEEK_DAY +
-                ") values (?,?,?,?,?,?" + (description == null ? "" : ",?") +
-                (subject == null ? ")" : ",?)");
-        return successfulOperation(insertQuery, connector, booking.getRoom().getId(), booking.getBooker().getId(),
-                date, (subject == null ? null : subject.getId()),
+        String sql = String.format("INSERT  INTO  booking " +
+                        "(%s, %s, %s, %s, %s, %s, %s, %s, %s)" +
+                        "  VALUE "
+                        + "(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                SQL_COLUMN_BOOKING_ROOM, SQL_COLUMN_BOOKING_BOOKER, SQL_COLUMN_BOOKING_START_DATE,
+                SQL_COLUMN_BOOKING_END_DATE, SQL_COLUMN_BOOKING_SUBJECT_ID, SQL_COLUMN_BOOKING_DESCRIPTION,
+                SQL_COLUMN_BOOKING_START_TIME, SQL_COLUMN_BOOKING_END_TIME, SQL_COLUMN_BOOKING_WEEK_DAY
+        );
+
+        return successfulOperation(sql, connector, booking.getRoom().getId(), booking.getBooker().getId(),
+                booking.getStartDate(), booking.getEndDate(), (subject == null ? null : subject.getId()),
                 description, booking.getStartTime(),
                 booking.getEndTime(), booking.getDay().name().toLowerCase());
     }
@@ -113,6 +95,27 @@ public class DefaultBookingManager implements BookingManager {
             e.printStackTrace();
         }
         return true;
+    }
+
+    @Override
+    public void removeAllBookings() {
+        String truncateQuery = "truncate table " + SQL_TABLE_BOOKING;
+        try {
+            connector.executeUpdate(truncateQuery);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void removeAllLectures() {
+        String deleteQuery = "delete from " + SQL_TABLE_BOOKING + " where " +
+                SQL_COLUMN_BOOKING_SUBJECT_ID + " > 0";
+        try {
+            connector.executeUpdate(deleteQuery);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

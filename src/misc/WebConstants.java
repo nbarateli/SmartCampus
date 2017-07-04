@@ -26,7 +26,7 @@ public class WebConstants {
     public static final String JSON_ROOM_IMAGES = "images";
     public static final String JSON_ROOM_PROBLEMS = "problems";
     public static final String JSON_ROOM_LECTURES = "lectures";
-
+    public static final String JSON_ROOM_TAKEN = "booked";
     public static final String JSON_ROOM_BOOKINGS = "bookings";
     public static final String JSON_ROOM_BOOKING_ID = "bookingID";
 

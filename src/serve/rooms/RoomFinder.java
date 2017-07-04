@@ -1,5 +1,6 @@
 package serve.rooms;
 
+import model.bookings.Booking;
 import model.bookings.BookingManager;
 import model.bookings.BookingSearchQueryGenerator;
 import model.rooms.Room;
@@ -14,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Time;
 import java.util.List;
 
 import static misc.Utils.*;
@@ -35,9 +35,9 @@ public class RoomFinder extends HttpServlet {
         RoomManager roomManager = managerFactory.getRoomManager();
         BookingManager bookingManager = managerFactory.getBookingManager();
         List<Room> rooms = roomManager.find(getQuery(request));
-//        BookingSearchQueryGenerator bookingSearchQueryGenerator = getTimeQuery(request);
-//        String q = bookingSearchQueryGenerator.generateQuery().getQuery();
-//        bookingManager.find(bookingSearchQueryGenerator);
+
+        BookingSearchQueryGenerator bookingSearchQueryGenerator = getTimeQuery(request);
+        boolean searchByBooking = searchesByBooking(request);
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
         for (Room room : rooms) {
             JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
@@ -49,9 +49,16 @@ public class RoomFinder extends HttpServlet {
             objectBuilder.add(JSON_ROOM_SEAT_TYPE, room.getSeatType().name());
             objectBuilder.add(JSON_ROOM_AVAILABLE, room.isAvailableForStudents());
             List<String> images = roomManager.getAllImagesOf(room);
-            objectBuilder.add(JSON_ROOM_MAIN_IMAGE, images.size() > 0 ? images.get(0) : NO_IMAGE);
-            arrayBuilder.add(objectBuilder.build());
 
+
+            List<Booking> bookings = null;
+            if (searchByBooking) {
+                bookingSearchQueryGenerator.setRoom(room);
+                bookings = bookingManager.find(bookingSearchQueryGenerator);
+            }
+            objectBuilder.add(JSON_ROOM_MAIN_IMAGE, images.size() > 0 ? images.get(0) : NO_IMAGE);
+            objectBuilder.add(JSON_ROOM_TAKEN, searchByBooking && bookings.size() > 0);
+            arrayBuilder.add(objectBuilder.build());
         }
         JsonArray array = arrayBuilder.build();
         JsonWriter writer = Json.createWriter(response.getWriter());
@@ -59,14 +66,25 @@ public class RoomFinder extends HttpServlet {
 
     }
 
+    private boolean searchesByBooking(HttpServletRequest request) {
+        String startDate = request.getParameter("start_date");
+        String startTime = request.getParameter("start_time");
+        String endDate = request.getParameter("end_date");
+        String endTime = request.getParameter("end_time");
+        return !"".equals(startDate) || !"".equals(startTime) || !"".equals(endDate) || !"".equals(endTime);
+    }
+
     private BookingSearchQueryGenerator getTimeQuery(HttpServletRequest request) {
         BookingSearchQueryGenerator generator = new BookingSearchQueryGenerator();
-        String date = request.getParameter("date_interested");
-        String time = request.getParameter("time_interested");
-        generator.setBookingDate(date == null ? null : stringToDate(date));
-        Time timeIntersted = time == null ? null : stringToTime(time);
-        generator.setStartTime(timeIntersted);
-        generator.setEndTime(timeIntersted);
+        String startDate = request.getParameter("start_date");
+        String startTime = request.getParameter("start_time");
+        String endDate = request.getParameter("end_date");
+        String endTime = request.getParameter("end_time");
+
+        generator.setStartDate(startDate == null ? null : stringToDate(startDate, "dd.mm.yyyy"));
+        generator.setStartTime(startTime == null ? null : stringToTime(startTime));
+        generator.setEndTime(endTime == null ? null : stringToTime(endTime));
+        generator.setEndDate(endDate == null ? null : stringToDate(endDate, "dd.mm.yyyy"));
         return generator;
     }
 

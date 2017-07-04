@@ -48,20 +48,31 @@
 %>
 <head>
   <title>ოთახები</title>
+
   <meta charset="utf-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="MapStyles.css">
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="Floors.css">
   <link rel="stylesheet" href="SearchPageStyle.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
 
-  <script
-          src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0/js/bootstrap-datepicker.min.js"></script>
+
+
+  <script src="${pageContext.request.contextPath}/scriptlibs/Datepair.js"></script>
+  <script src="${pageContext.request.contextPath}/scriptlibs/jquery.datepair.js"></script>
+  <script src="${pageContext.request.contextPath}/scriptlibs/wrapper.js"></script>
   <script
           src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
   <script src="RoomsSearch.js"></script>
   <script src="Floors.js"></script>
+
 </head>
 <body>
 <table id="full-table">
@@ -123,19 +134,63 @@
           </label>
         </div>
 
-        <div class="form-group">
-          <label class="control-label">დროით ძებნა</label>
-          <input type="date" name="date_interested" class="form-control">
-        </div>
+        <%--<div class="form-group">--%>
+        <%--<label class="control-label">დროით ძებნა</label>--%>
+        <%--<input type="date" name="date_interested" class="form-control">--%>
+        <%--</div>--%>
+
+        <%--<div class="form-group">--%>
+        <%--<input name="start_time" class="form-control"--%>
+        <%--placeholder="დაკავებულობის სტატუსი (დან)">--%>
+        <%--</div>--%>
+        <%--<div class="form-group">--%>
+        <%--<input name="end_time" class="form-control"--%>
+        <%--placeholder="-მდე">--%>
+        <%--</div>--%>
 
         <div class="form-group">
-          <input name="start_time" class="form-control"
-                 placeholder="დაკავებულობის სტატუსი (დან)">
+          <table id="datepairExample" class="form-group">
+            <tr id="fromRow">
+              <td><label class="control-label">თარიღი
+                <input type="text" name="start_date" class="date start"/>
+              </label></td>
+              <td><label class="control-label">დრო (დან)<br>
+                <input type="text" name="start_time" class="time start"/>
+              </label></td>
+
+            </tr>
+            <tr id="toRow">
+              <td>
+                <label class="control-label">დრო<br>
+                  <input type="text" name="end_time" class="time end"/>
+                </label>
+              </td>
+              <td>
+                <label> თარიღი (მდე)
+                  <input type="text" name="end_date" class="date end"/>
+                </label>
+              </td>
+
+            </tr>
+          </table>
         </div>
-        <div class="form-group">
-          <input name="end_time" class="form-control"
-                 placeholder="-მდე">
-        </div>
+
+        <script>
+            // initialize input widgets first
+            $('#datepairExample .time').timepicker({
+                'showDuration': true,
+                'timeFormat': 'H:i'
+            });
+
+            $('#datepairExample .date').datepicker({
+                'format': 'dd.mm.yyyy',
+                'autoclose': true
+            });
+
+            // initialize datepair
+            $('#datepairExample').datepair();
+        </script>
+
         <input type="button" value="ძებნა" class="btn btn-primary" onclick="findRooms()">
         <input type="hidden" name="search" value="true" class="form-control">
       </form>
@@ -170,7 +225,7 @@
       </select>
       <div class="mapdivision">
 
-        <link rel="stylesheet" href="MapStyles.css">
+
         <svg version="1.1" id="map1" xmlns="http://www.w3.org/2000/svg"
              x="0px" y="0px"
              viewBox="0 0 2500 1100" style="enable-background:new 0 0 2500 1100;" xml:space="preserve">

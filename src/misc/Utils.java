@@ -267,8 +267,9 @@ public final class Utils {
         Time starTime = rs.getTime(SQL_COLUMN_BOOKING_START_TIME);
         Time endTime = rs.getTime(SQL_COLUMN_BOOKING_END_TIME);
         String description = rs.getString(SQL_COLUMN_BOOKING_DESCRIPTION);
-        Date date = rs.getDate(SQL_COLUMN_BOOKING_DATE);
-        return new Booking(id, booker, room, subject, day, starTime, endTime, description, date);
+        Date date = rs.getDate(SQL_COLUMN_BOOKING_START_DATE);
+        Date endDate = rs.getDate(SQL_COLUMN_BOOKING_END_DATE);
+        return new Booking(id, booker, room, subject, day, starTime, endTime, description, date, endDate);
     }
 
     /**
@@ -478,7 +479,19 @@ public final class Utils {
      * @return respective date
      */
     public static Date stringToDate(String toConvert) {
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return stringToDate(toConvert, "yyyy-MM-dd");
+    }
+
+    /**
+     * converts given string in MM/dd/yyyy format to Date
+     *
+     * @param toConvert string needed to be converted
+     * @param pattern   a pattern by which the given string is formatted
+     * @return respective date
+     */
+
+    public static Date stringToDate(String toConvert, String pattern) {
+        DateFormat format = new SimpleDateFormat(pattern);
 
         try {
             return format.parse(toConvert);
@@ -548,6 +561,29 @@ public final class Utils {
         return "";
     }
 
+    public static String toSqlDate(Date date, String inPattern) {
+        DateFormat format = new SimpleDateFormat(inPattern);
+        return format.format(date);
+    }
+
+    public static String generateDateQuery(Date field, String column, List<Object> values, boolean larger) {
+
+        return generateDateQuery(field, column, values, larger, "'%d/%m/%Y'", "dd/MM/yyyy");
+
+    }
+
+    public static String generateTimeQuery(Time time, String column, List<Object> values, boolean larger) {
+        return generateDateQuery(time, column, values, larger, "'%H:%i'", "HH:mm");
+    }
+
+    private static String generateDateQuery(Date field, String column, List<Object> values,
+                                            boolean larger, String outPattern, String inPattern) {
+        if (field == null) return " 1 = 1 ";
+        values.add(toSqlDate(field, inPattern));
+        return column + " = STR_TO_DATE(?, " + outPattern + ")";
+
+    }
+
     /**
      * checks if given string is valid for representing hour or minute
      */
@@ -572,17 +608,6 @@ public final class Utils {
                 numberStringIsValid(time.substring(3, 5), false);
     }
 
-    public static String toSqlDate(Date date) {
-        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        return format.format(date);
-    }
-
-    public static String generateDateQuery(Date field, String column, List<Object> values) {
-        if (field == null) return " 1 = 1 ";
-        values.add(toSqlDate(field));
-        return column + " = STR_TO_DATE(?, '%d/%m/%Y')";
-
-    }
 
     private Utils() {
 

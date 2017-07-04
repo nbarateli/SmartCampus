@@ -1,19 +1,19 @@
 package model.bookings;
 
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import model.accounts.User;
 import model.campus.CampusObject;
 import model.lectures.CampusSubject;
 import model.rooms.Room;
 
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Class for Booking ADT (immutable)
  */
-public class Booking implements CampusObject{
+public class Booking implements CampusObject {
 
     private final int bookingID;
     private final User booker;
@@ -22,11 +22,12 @@ public class Booking implements CampusObject{
     private final WeekDay day;
     private final Time startTime;
     private final Time endTime;
-    private final Date bookingDate;
+    private final Date startDate;
+    private final Date endDate;
     private final String description;
 
-    public Booking(int bookingID, User booker, Room room, CampusSubject subject, WeekDay day, 
-            Time startTime, Time endTime, String description, Date bookingDate) {
+    public Booking(int bookingID, User booker, Room room, CampusSubject subject, WeekDay day,
+                   Time startTime, Time endTime, String description, Date startDate, Date endDate) {
         this.bookingID = bookingID;
         this.booker = booker;
         this.room = room;
@@ -35,7 +36,16 @@ public class Booking implements CampusObject{
         this.startTime = startTime;
         this.endTime = endTime;
         this.description = description;
-        this.bookingDate = bookingDate;
+        this.startDate = new Date(startDate.getTime());
+        this.endDate = new Date(endDate.getTime());
+    }
+
+    public Date getStartDate() {
+        return new Date(startDate.getTime());
+    }
+
+    public Date getEndDate() {
+        return new Date(endDate.getTime());
     }
 
     @Override
@@ -67,9 +77,8 @@ public class Booking implements CampusObject{
     public WeekDay getDay() {
         return day;
     }
-    
-    public Date getDate() { return new Date(bookingDate.getTime()); }
-    
+
+
     public String getDescription() {
         return description;
     }
@@ -88,7 +97,7 @@ public class Booking implements CampusObject{
         Booking other = (Booking) obj;
         if (bookingID != other.bookingID)
             return false;
-        
+
         return true;
     }
 
@@ -96,11 +105,11 @@ public class Booking implements CampusObject{
     public String toString() {
         DateFormat format = new SimpleDateFormat("hh:mm");
         DateFormat dFormat = new SimpleDateFormat("dd/MM/yyyy");
-        
+
         return "Booking{" + "\n"
-                + (subject == null ? description : subject.getName()) 
+                + (subject == null ? description : subject.getName())
                 + ": დაჯავშნა: " + booker.getFirstName() + " " +
-                booker.getLastName() + " თარიღი: " + dFormat.format(bookingDate) + 
+                booker.getLastName() + " თარიღი: " + dFormat.format(startDate) +
                 " დღე: " + day + " დასაწყისი " + format.format(startTime) +
                 " დასასრული " + format.format(endTime) +
                 " აუდიტორია " + room.getRoomName() +
