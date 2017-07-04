@@ -4,7 +4,6 @@
 window.addEventListener('load', load, false);
 
 function load() {
-    console.log("lodaded");
     var map1 = document.getElementById("map1");
     var map2 = document.getElementById("map2");
     var map3 = document.getElementById("map3");
@@ -30,7 +29,7 @@ function load() {
             modal.style.display = "none";
         }
     }
-};
+}
 
 function workMaps(map) {
     var areas = map.childNodes;
@@ -49,7 +48,7 @@ function roomClicked() {
     //testing
     var id = this.id;
     var modal = document.getElementById('myModal');
-    console.log(id);
+
     $.get('/rooms/room', {name: id.substring(1)},
         function (returnedData) {
             displayRoom(returnedData, 'roomForm');
@@ -123,10 +122,59 @@ function showFourth() {
     document.getElementById("map4").style.display = "unset";
 }
 
-function highlightRooms(room) {
-    var roomName = JSON.stringify(room);
-    var area = document.getElementById(roomName);
-};
+function unHighLightRooms() {
+    var map1 = document.getElementById("map1");
+    var map2 = document.getElementById("map2");
+    var map3 = document.getElementById("map3");
+    var map4 = document.getElementById("map4");
+
+    function unHighlightMap(map) {
+        var children = map.childNodes;
+
+        function getColorFromStyle(style) {
+            console.log(style);
+            var elem = document.querySelector(style);
+            console.log(elem);
+            return getComputedStyle(elem).fill;
+        }
+
+        for (i  in children) {
+            var obj = children[i];
+            var cname = obj.className; //$(obj).attr("class");
+            if (cname === undefined || cname.baseVal !== 'room_selected') continue;
+            obj.className.baseVal = 'room';
+        }
+    }
+
+    unHighlightMap(map1);
+    unHighlightMap(map2);
+    unHighlightMap(map3);
+    unHighlightMap(map4);
+}
+
+function findRooms() {
+    var queryString = $('#search-form').serialize();
+
+    $.get('/rooms/findrooms', queryString,
+        function (returnedData) {
+            unHighLightRooms();
+            for (i in returnedData) {
+                var room = returnedData[i];
+                highlightRoom(room);
+            }
+        }).fail(function () {
+        console.log("error");
+    });
+    // return false;
+}
+
+function highlightRoom(room) {
+    var roomName = room['name'].toString();
+    var area = document.getElementById("x" + roomName);
+    if (area !== null) {
+        area.className.baseVal = 'room_selected';
+    }
+}
 
 function displayRoom(data, id) {
     var tmp = document.getElementById("mustmpl").innerHTML;
