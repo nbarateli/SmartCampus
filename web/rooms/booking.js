@@ -26,6 +26,24 @@ function sendData (url, params) {
     http.send(params);
 };
 
+function clearFormInputs(formToClear) {
+
+    var elems = formToClear.elements;
+    formToClear.reset();
+
+    for (i = 0; i < elems.length; i++) {
+
+        fieldType = elems[i].type.toLowerCase();
+
+        if (fieldType === "checkbox")
+            elems[i].checked = false;
+        else if (fieldType === "select")
+            elems[i].selectedIndex = 1;
+        else if (fieldType != "button" && fieldType != "submit")
+            elems[i].value = "";
+    }
+}
+
 function changeName(name) {
     $("#r_name").val(name);
 }
