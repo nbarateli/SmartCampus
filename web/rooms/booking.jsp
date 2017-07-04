@@ -34,7 +34,7 @@
   <script
           src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
-  <script src="/data/DataUtils.js"></script>
+  <script src="booking.js"></script>
 </head>
 <body>
 
@@ -49,7 +49,7 @@
 
       <div class="form-group">
         <input type="text" name="room_name" class="form-control"
-               placeholder="შეიყვანეთ ოთახის დასახელება" width="100px">
+               placeholder="შეიყვანეთ ოთახის დასახელება" width="100px" id="r_name">
       </div>
 
       <div class="form-group">
@@ -90,6 +90,15 @@
   </div>
 
 </div>
+
+<%
+  String roomName = request.getParameter("room_name");
+  if (roomName != null) {
+    out.println("<script>");
+    out.println("changeName(" + roomName + ")");
+    out.println("</script>");
+  }
+%>
 
 </body>
 </html>
