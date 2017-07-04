@@ -34,7 +34,6 @@
   <script
           src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
-  <script src="/data/DataUtils.js"></script>
   <script src="booking.js"></script>
 </head>
 <body>

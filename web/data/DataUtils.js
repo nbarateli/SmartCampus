@@ -289,15 +289,6 @@ var addSubjectFromForm = function () {
     return false;
 };
 
-function addBookingFromForm() {
-    var params = ($('#booking-form').serialize());
-
-    clearFormInputs(document.getElementById("booking-form"));
-
-    sendData("/bookings/addbooking", params, true);
-    return false;
-}
-
 function clearFormInputs(formToClear) {
 
     var elems = formToClear.elements;
