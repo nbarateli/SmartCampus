@@ -21,7 +21,6 @@ function load() {
 
         modal.style.display = "none";
         document.getElementById('roomForm').innerHTML = "";
-        modal.getElementById()
     };
     window.onclick = function (event) {
         if (event.target == modal) {
