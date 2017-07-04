@@ -1,11 +1,9 @@
 <%@ page import="misc.Utils" %>
-<%@ page import="model.rooms.Room" %>
-<%@ page import="static misc.WebConstants.*" %>
 <%@ page import="model.rooms.RoomManager" %>
+<%@ page import="static misc.WebConstants.*" %>
 <%@ page import="model.rooms.RoomSearchQueryGenerator" %>
-<%@ page import="static misc.Utils.*" %>
 <%@ page import="serve.managers.ManagerFactory" %>
-<%@ page import="java.util.List" %>
+<%@ page import="static misc.Utils.*" %>
 <%--
   Created by IntelliJ IDEA.
   User: Niko
@@ -133,28 +131,10 @@
                  placeholder="შეიყვანეთ დრო (HH:MM 24-საათიანი ფორმატით)">
         </div>
 
-        <input type="submit" value="ძებნა" class="btn btn-primary">
+          <input type="button" value="ძებნა" class="btn btn-primary" id="searchBtn">
         <input type="hidden" name="search" value="true" class="form-control">
       </form>
-      <script>
 
-          function get(name) {
-              if (name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search))
-                  return decodeURIComponent(name[1]);
-          }
-
-          var array;
-          $.getJSON("findrooms", function (result) {
-              for (i in array) {
-                  array.append(result);
-                  console.log(array[i]);
-              }
-              array = result;
-
-          });
-
-
-      </script>
 
     <td id="right-td">
       <div align="center" id="right-div" style="display:none">
@@ -187,18 +167,20 @@
 //
 //          }
         %>
-          <%
-              RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();
-              buildQuery(request,query);
-              List<Room> rooms = manager1.find(query);
-              for (Room room : rooms) {
-          %>
-              <script>
-                  highlightRooms(<%room.getId();%>);
-              </script>
-          <%
-              }
-          %>
+          <%--<%--%>
+          <%--RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();--%>
+          <%--if("true".equals(request.getParameter("search"))){--%>
+          <%--buildQuery(request,query);--%>
+          <%--List<Room> rooms = manager1.find(query);--%>
+          <%--for (Room room : rooms) {--%>
+          <%--%>--%>
+          <%--<script>--%>
+          <%--highlightRooms(<%room.getRoomName();%>);--%>
+          <%--</script>--%>
+          <%--<%--%>
+          <%--}--%>
+          <%--}--%>
+          <%--%>--%>
       </div>
     <div id="myModal" class="modal">
       <div class="modal-content" id="mod-cont">
