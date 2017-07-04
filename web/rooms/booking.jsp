@@ -34,6 +34,7 @@
   <script
           src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+  <script src="/data/DataUtils.js"></script>
 </head>
 <body>
 
@@ -44,7 +45,7 @@
 
 <div align="center" id="main-div">
   <div id="form-div">
-    <form id="sched-form" class="form-vertical">
+    <form id="booking-form" class="form-vertical">
 
       <div class="form-group">
         <input type="text" name="room_name" class="form-control"
@@ -78,7 +79,7 @@
 
       <input type="button" value="დამატება"
              class="btn btn-info btn-lg"
-             onclick="addBooking()">
+             onclick="addBookingFromForm()">
     </form>
 
   </div>
