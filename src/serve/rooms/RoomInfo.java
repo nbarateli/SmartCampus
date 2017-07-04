@@ -127,11 +127,11 @@ public class RoomInfo extends HttpServlet {
         JsonArrayBuilder bookingArrayBuilder = Json.createArrayBuilder();
         for (Booking booking : manager.findAllBookingsAt(room)) {
             JsonObjectBuilder bookingBuilder = Json.createObjectBuilder();
-            bookingBuilder.add(JSON_LECTURE_SUBJECT, booking.getSubject().getName());
-            bookingBuilder.add(JSON_LECTURE_LECTURER, booking.getBooker().getFirstName() + " " +
+            bookingBuilder.add(JSON_BOOKING_SUBJECT, booking.getSubject().getName());
+            bookingBuilder.add(JSON_BOOKING_BOOKER, booking.getBooker().getFirstName() + " " +
                     booking.getBooker().getLastName());
-            bookingBuilder.add(JSON_LECTURE_START_TIME, toHHMM(booking.getStartTime()));
-            bookingBuilder.add(JSON_LECTURE_END_TIME, toHHMM(booking.getEndTime()));
+            bookingBuilder.add(JSON_BOOKING_START_TIME, toHHMM(booking.getStartTime()));
+            bookingBuilder.add(JSON_BOOKING_END_TIME, toHHMM(booking.getEndTime()));
             bookingArrayBuilder.add(bookingBuilder.build());
         }
         builder.add(JSON_ROOM_LECTURES, bookingArrayBuilder.build());

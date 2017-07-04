@@ -129,64 +129,19 @@
         </div>
 
         <div class="form-group">
-          <input type="text" name="time_interested" class="form-control"
-                 placeholder="შეიყვანეთ დრო (HH:MM 24-საათიანი ფორმატით)">
+          <input name="start_time" class="form-control"
+                 placeholder="დაკავებულობის სტატუსი (დან)">
         </div>
-
+        <div class="form-group">
+          <input name="end_time" class="form-control"
+                 placeholder="-მდე">
+        </div>
         <input type="button" value="ძებნა" class="btn btn-primary" onclick="findRooms()">
         <input type="hidden" name="search" value="true" class="form-control">
       </form>
-      <script>
-
-          function get(name) {
-              if (name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search))
-                  return decodeURIComponent(name[1]);
-          }
-
-          var array;
-          $.getJSON("findrooms", function (result) {
-              for (i in array) {
-                  array.append(result);
-                  console.log(array[i]);
-              }
-              array = result;
-
-          });
-
-
-      </script>
 
     <td id="right-td">
       <div align="center" id="right-div" style="display:none">
-        <%
-          //          RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();
-//          buildQuery(request, query);
-//          List<Room> rooms = new LinkedList<>();//manager1.find(query);
-//
-//          for (Room room : rooms) {
-//            out.println("<div id=\"room-id-div\">" + "<a href=showroom.jsp?id=" + room.getId() + ">"
-//                    + room.getRoomName() + "</a></div>");
-//            out.println("<button>ვრცლად</button>");
-//
-//            List<String> images = manager1.getAllImagesOf(room);
-//            String src = images.size() > 0 ? images.get(0) : NO_IMAGE;
-//            out.println("<div class=\"to-hide\">");
-//            out.println("<div><img src=\"" + src + "\" height=\"60%\"></div>");
-//
-//            out.println("<div id=\"room-info-div\">");
-//            out.println("<div>სართული: " + room.getFloor() + ".</div>");
-//            out.println("<div>ოთახის ტიპი: " + roomTypeToString(room.getRoomType(), true) + ".</div>");
-//            out.println("<div>ადგილები: " + room.getCapacity() + ".</div>");
-//            out.println("<div>შეიძლება დაჯავშნა: ");
-//            out.println(room.isAvailableForStudents() ? "<span id=\"yes-span\">კი</span>"
-//                    : "<span id=\"no-span\">არა</span>");
-//            out.println("</div>");
-//            out.println("<div>ადგილის ტიპი: " + seatTypeToString(room.getSeatType(), true) + ".</div>");
-//            out.println("</div>");
-//            out.println("</div>");
-//
-//          }
-        %>
         <%
           RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();
           buildQuery(request, query);

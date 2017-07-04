@@ -21,6 +21,15 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
     private Room room;
     private CampusSubject subject;
     private Booking.WeekDay day;
+
+    public Date getBookingDate() {
+        return bookingDate == null ? null : new Date(bookingDate.getTime());
+    }
+
+    public void setBookingDate(Date bookingDate) {
+        this.bookingDate = bookingDate == null ? null : new Date(bookingDate.getTime());
+    }
+
     private Time startTime;
     private Time endTime;
     private Date bookingDate;
@@ -119,7 +128,7 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
         String sql = hasNonNullFields() ? String.format("SELECT * FROM %s JOIN %s ON %s.%s = %s.%s" +
                         " JOIN %s ON %s.%s = %s.%s " +
                         joinIfSubjectNotNull() +
-                        " \nWHERE %s%s%s%s%s%s%s%s",
+                        " \nWHERE %s%s%s%s%s%s%s%s%s",
                 SQL_TABLE_BOOKING, SQL_TABLE_ROOM, SQL_TABLE_BOOKING,
                 SQL_COLUMN_BOOKING_ROOM, SQL_TABLE_ROOM, SQL_COLUMN_ROOM_ID,
                 SQL_TABLE_USER, SQL_TABLE_BOOKING, SQL_COLUMN_BOOKING_BOOKER,
@@ -132,7 +141,8 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
                 generateLikeQuery(day, SQL_COLUMN_BOOKING_WEEK_DAY, values) + " AND ",
                 generateEqualsOrQuery(startTime, SQL_COLUMN_BOOKING_START_TIME, values, true) + " AND ",
                 generateEqualsOrQuery(endTime, SQL_COLUMN_BOOKING_END_TIME, values, false) + " AND ",
-                generateLikeQuery(description, SQL_COLUMN_BOOKING_DESCRIPTION, values)
+                generateLikeQuery(description, SQL_COLUMN_BOOKING_DESCRIPTION, values) + " AND ",
+                generateDateQuery(bookingDate, SQL_COLUMN_BOOKING_DATE, values)
         ) : "SELECT * FROM " + SQL_TABLE_BOOKING;
         return new CampusSearchQuery(sql, asArray(values));
     }

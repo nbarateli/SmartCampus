@@ -27,6 +27,10 @@ public class WebConstants {
     public static final String JSON_ROOM_PROBLEMS = "problems";
     public static final String JSON_ROOM_LECTURES = "lectures";
 
+    public static final String JSON_ROOM_BOOKINGS = "bookings";
+    public static final String JSON_ROOM_BOOKING_ID = "bookingID";
+
+
     public static final String JSON_ROOM_PROBLEM_ID = "id";
     public static final String JSON_ROOM_PROBLEM_AUTHOR = "author";
     public static final String JSON_ROOM_PROBLEM_ROOM_ = "room";
@@ -34,13 +38,14 @@ public class WebConstants {
     public static final String JSON_ROOM_PROBLEM_DESCR = "description";
     public static final String JSON_ROOM_PROBLEM_DATE = "datecreated";
 
-    public static final String JSON_LECTURE_ID = "id";
-    public static final String JSON_LECTURE_LECTURER = "lecturer";
-    public static final String JSON_LECTURE_ROOM = "room";
-    public static final String JSON_LECTURE_SUBJECT = "subject";
-    public static final String JSON_LECTURE_DAY = "day";
-    public static final String JSON_LECTURE_START_TIME = "starttime";
-    public static final String JSON_LECTURE_END_TIME = "endtime";
+    public static final String JSON_BOOKING_ID = "id";
+    public static final String JSON_BOOKING_BOOKER = "lecturer";
+    public static final String JSON_BOOKING_ROOM = "room";
+    public static final String JSON_BOOKING_SUBJECT = "subject";
+    public static final String JSON_BOOKING_DAY = "day";
+    public static final String JSON_BOOKING_START_TIME = "starttime";
+    public static final String JSON_BOOKING_END_TIME = "endtime";
+
     public static final String JSON_ROOM_ERROR_BAD_PARAM = "bad parameter";
     public static final String JSON_ROOM_ERROR_NOT_FOUND = "room not found";
 

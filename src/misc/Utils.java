@@ -487,6 +487,15 @@ public final class Utils {
         }
     }
 
+    public static Time stringToTime(String toConvert) {
+        DateFormat format = new SimpleDateFormat("HH:mm");
+        try {
+            return new Time(format.parse(toConvert).getTime());
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
     /**
      * checks if given string is a valid number and falls in given range
      *
@@ -561,6 +570,18 @@ public final class Utils {
         return time.length() >= 5 && time.charAt(2) == ':' &&
                 numberStringIsValid(time.substring(0, 2), true) &&
                 numberStringIsValid(time.substring(3, 5), false);
+    }
+
+    public static String toSqlDate(Date date) {
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        return format.format(date);
+    }
+
+    public static String generateDateQuery(Date field, String column, List<Object> values) {
+        if (field == null) return " 1 = 1 ";
+        values.add(toSqlDate(field));
+        return column + " = STR_TO_DATE(?, '%d/%m/%Y')";
+
     }
 
     private Utils() {

@@ -1,5 +1,7 @@
 package serve.rooms;
 
+import model.bookings.BookingManager;
+import model.bookings.BookingSearchQueryGenerator;
 import model.rooms.Room;
 import model.rooms.RoomManager;
 import model.rooms.RoomSearchQueryGenerator;
@@ -12,10 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Time;
 import java.util.List;
 
-import static misc.Utils.toRoomType;
-import static misc.Utils.toSeatType;
+import static misc.Utils.*;
 import static misc.WebConstants.*;
 
 /**
@@ -28,9 +30,14 @@ public class RoomFinder extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        RoomManager manager = ((ManagerFactory) request.getServletContext().getAttribute(MANAGER_FACTORY)).getRoomManager();
-
-        List<Room> rooms = manager.find(getQuery(request));
+        ManagerFactory managerFactory = (ManagerFactory)
+                request.getServletContext().getAttribute(MANAGER_FACTORY);
+        RoomManager roomManager = managerFactory.getRoomManager();
+        BookingManager bookingManager = managerFactory.getBookingManager();
+        List<Room> rooms = roomManager.find(getQuery(request));
+//        BookingSearchQueryGenerator bookingSearchQueryGenerator = getTimeQuery(request);
+//        String q = bookingSearchQueryGenerator.generateQuery().getQuery();
+//        bookingManager.find(bookingSearchQueryGenerator);
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
         for (Room room : rooms) {
             JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
@@ -41,14 +48,26 @@ public class RoomFinder extends HttpServlet {
             objectBuilder.add(JSON_ROOM_TYPE, room.getRoomType().name());
             objectBuilder.add(JSON_ROOM_SEAT_TYPE, room.getSeatType().name());
             objectBuilder.add(JSON_ROOM_AVAILABLE, room.isAvailableForStudents());
-            List<String> images = manager.getAllImagesOf(room);
+            List<String> images = roomManager.getAllImagesOf(room);
             objectBuilder.add(JSON_ROOM_MAIN_IMAGE, images.size() > 0 ? images.get(0) : NO_IMAGE);
             arrayBuilder.add(objectBuilder.build());
+
         }
         JsonArray array = arrayBuilder.build();
         JsonWriter writer = Json.createWriter(response.getWriter());
         writer.writeArray(array);
 
+    }
+
+    private BookingSearchQueryGenerator getTimeQuery(HttpServletRequest request) {
+        BookingSearchQueryGenerator generator = new BookingSearchQueryGenerator();
+        String date = request.getParameter("date_interested");
+        String time = request.getParameter("time_interested");
+        generator.setBookingDate(date == null ? null : stringToDate(date));
+        Time timeIntersted = time == null ? null : stringToTime(time);
+        generator.setStartTime(timeIntersted);
+        generator.setEndTime(timeIntersted);
+        return generator;
     }
 
 
@@ -71,6 +90,7 @@ public class RoomFinder extends HttpServlet {
         query.setRoomType(roomType.length() > 0 ? toRoomType(roomType) : null);
         query.setSeatType(seatType.length() > 0 ? toSeatType(seatType) : null);
         query.setAvailableForBooking(canBeBooked);
+
         return query;
     }
 

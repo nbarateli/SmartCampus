@@ -5,7 +5,7 @@
 function addBookingFromForm() {
     var params = ($('#booking-form').serialize());
 
-    clearFormInputs(document.getElementById("booking-form"));
+    // clearFormInputs(document.getElementById("booking-form"));
 
     sendData("/bookings/addbooking", params);
     return false;

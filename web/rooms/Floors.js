@@ -154,7 +154,7 @@ function unHighLightRooms() {
 
 function findRooms() {
     var queryString = $('#search-form').serialize();
-
+    console.log(queryString);
     $.get('/rooms/findrooms', queryString,
         function (returnedData) {
             unHighLightRooms();

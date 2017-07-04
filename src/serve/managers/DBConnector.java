@@ -64,19 +64,7 @@ public class DBConnector {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.executeQuery("USE " + MYSQL_DATABASE_NAME + ";");
             if (values != null) {
-                ParameterMetaData pmd = statement.getParameterMetaData();
-                int count = pmd.getParameterCount();
-                int j = 0;
-                for (int i = 0; i < count; i++) {
-                    if (j == values.length)
-                        break;
-
-                    while (j < values.length - 1 && values[j] == null) {
-                        j++;
-                    }
-                    statement.setObject(i + 1, values[j]);
-                    j++;
-                }
+                addParameters(statement, values);
             }
 
             if (isUpdate)
@@ -87,6 +75,22 @@ public class DBConnector {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    private void addParameters(PreparedStatement statement, Object[] values) throws SQLException {
+        ParameterMetaData pmd = statement.getParameterMetaData();
+        int count = pmd.getParameterCount();
+        int j = 0;
+        for (int i = 0; i < count; i++) {
+            if (j == values.length)
+                break;
+
+            while (j < values.length - 1 && values[j] == null) {
+                j++;
+            }
+            statement.setObject(i + 1, values[j]);
+            j++;
         }
     }
 }

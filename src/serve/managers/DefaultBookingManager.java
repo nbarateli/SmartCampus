@@ -18,7 +18,7 @@ import static misc.Utils.successfulOperation;
 import static model.database.SQLConstants.*;
 
 public class DefaultBookingManager implements BookingManager {
-    
+
     private static BookingManager instance;
 
     private final DBConnector connector;
@@ -36,7 +36,7 @@ public class DefaultBookingManager implements BookingManager {
             e.printStackTrace();
         }
     }
-    
+
     @Override
     public void removeAllLectures() {
         String deleteQuery = "delete from " + SQL_TABLE_BOOKING + " where " +
@@ -51,11 +51,11 @@ public class DefaultBookingManager implements BookingManager {
     @Override
     public List<Booking> find(BookingSearchQueryGenerator queryGenerator) {
         List<Booking> list = new ArrayList<>();
-        try {
-            CampusSearchQuery query = queryGenerator.generateQuery();
-            ResultSet set = connector.executeQuery(query.getQuery(), query.getValues());
+        CampusSearchQuery query = queryGenerator.generateQuery();
+        try (ResultSet set = connector.executeQuery(query.getQuery(), query.getValues())) {
 
-            while(set.next()) {
+
+            while (set.next()) {
                 list.add(getBookingFromResults(set));
             }
 
@@ -71,7 +71,7 @@ public class DefaultBookingManager implements BookingManager {
         String date = format.format(booking.getDate());
         String description = booking.getDescription();
         CampusSubject subject = booking.getSubject();
-        
+
         String insertQuery = "insert into " + SQL_TABLE_BOOKING + " (" +
                 SQL_COLUMN_BOOKING_ROOM + ", " +
                 SQL_COLUMN_BOOKING_BOOKER + ", " + SQL_COLUMN_BOOKING_DATE +
@@ -102,7 +102,7 @@ public class DefaultBookingManager implements BookingManager {
         Booking thisBooking = find(bookingQueryGenerator).get(0);
 
         String deleteQuery = "delete from " + SQL_TABLE_BOOKING + " where " + SQL_COLUMN_BOOKING_ROOM + "=? AND " +
-                SQL_COLUMN_BOOKING_BOOKER + "=? AND " + SQL_COLUMN_BOOKING_SUBJECT_ID +"=? AND \n"
+                SQL_COLUMN_BOOKING_BOOKER + "=? AND " + SQL_COLUMN_BOOKING_SUBJECT_ID + "=? AND \n"
                 + SQL_COLUMN_BOOKING_START_TIME + "=? AND " + SQL_COLUMN_BOOKING_END_TIME + "=? AND " + SQL_COLUMN_BOOKING_WEEK_DAY + "=?;";
 
         try {
@@ -114,8 +114,6 @@ public class DefaultBookingManager implements BookingManager {
         }
         return true;
     }
-
-
 
 
 }
