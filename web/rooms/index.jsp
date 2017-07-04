@@ -1,9 +1,11 @@
 <%@ page import="misc.Utils" %>
-<%@ page import="model.rooms.RoomManager" %>
+<%@ page import="model.rooms.Room" %>
 <%@ page import="static misc.WebConstants.*" %>
+<%@ page import="model.rooms.RoomManager" %>
 <%@ page import="model.rooms.RoomSearchQueryGenerator" %>
-<%@ page import="serve.managers.ManagerFactory" %>
 <%@ page import="static misc.Utils.*" %>
+<%@ page import="serve.managers.ManagerFactory" %>
+<%@ page import="java.util.List" %>
 <%--
   Created by IntelliJ IDEA.
   User: Niko
@@ -131,15 +133,33 @@
                  placeholder="შეიყვანეთ დრო (HH:MM 24-საათიანი ფორმატით)">
         </div>
 
-          <input type="button" value="ძებნა" class="btn btn-primary" id="searchBtn">
+        <input type="button" value="ძებნა" class="btn btn-primary" onclick="findRooms()">
         <input type="hidden" name="search" value="true" class="form-control">
       </form>
+      <script>
 
+          function get(name) {
+              if (name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search))
+                  return decodeURIComponent(name[1]);
+          }
+
+          var array;
+          $.getJSON("findrooms", function (result) {
+              for (i in array) {
+                  array.append(result);
+                  console.log(array[i]);
+              }
+              array = result;
+
+          });
+
+
+      </script>
 
     <td id="right-td">
       <div align="center" id="right-div" style="display:none">
         <%
-//          RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();
+          //          RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();
 //          buildQuery(request, query);
 //          List<Room> rooms = new LinkedList<>();//manager1.find(query);
 //
@@ -167,27 +187,25 @@
 //
 //          }
         %>
-          <%--<%--%>
-          <%--RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();--%>
-          <%--if("true".equals(request.getParameter("search"))){--%>
-          <%--buildQuery(request,query);--%>
-          <%--List<Room> rooms = manager1.find(query);--%>
-          <%--for (Room room : rooms) {--%>
-          <%--%>--%>
-          <%--<script>--%>
-          <%--highlightRooms(<%room.getRoomName();%>);--%>
-          <%--</script>--%>
-          <%--<%--%>
-          <%--}--%>
-          <%--}--%>
-          <%--%>--%>
+        <%
+          RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();
+          buildQuery(request, query);
+          List<Room> rooms = manager1.find(query);
+          for (Room room : rooms) {
+        %>
+        <script>
+            <%--highlightRoom(<%room.getId();%>);--%>
+        </script>
+        <%
+          }
+        %>
       </div>
-    <div id="myModal" class="modal">
-      <div class="modal-content" id="mod-cont">
-        <span id="closeModal" class="close">&times;</span>
-        <div id="roomForm" class="roomfrom"></div>
+      <div id="myModal" class="modal">
+        <div class="modal-content" id="mod-cont">
+          <span id="closeModal" class="close">&times;</span>
+          <div id="roomForm" class="roomfrom"></div>
+        </div>
       </div>
-    </div>
       <h1 id="par">FLOOR</h1>
       <select name="floors" onchange="floorChange()" id="floors">
         <option value="first">პირველი სართული</option>
@@ -195,9 +213,9 @@
         <option value="third">მესამე სართული</option>
         <option value="fourth">მეოთხე სართული</option>
       </select>
-    <div class="mapdivision">
+      <div class="mapdivision">
 
-      <link rel="stylesheet" href="MapStyles.css">
+        <link rel="stylesheet" href="MapStyles.css">
         <svg version="1.1" id="map1" xmlns="http://www.w3.org/2000/svg"
              x="0px" y="0px"
              viewBox="0 0 2500 1100" style="enable-background:new 0 0 2500 1100;" xml:space="preserve">
@@ -224,7 +242,7 @@
           <rect id="x105" x="1409.7" y="682.1" class="room" width="177" height="60"/>
           <rect id="x114" x="1658" y="498" class="room" width="65" height="115"/>
           <rect id="x115" x="1562" y="497" class="room" width="65" height="115"/>
-          <polygon id="x116" class="st0" points="1658,428 1723,427 1723,497 1658,498 "/>
+          <polygon id="x116" class="room" points="1658,428 1723,427 1723,497 1658,498 "/>
           <rect id="x117" x="1658" y="312.5" class="room" width="65" height="115"/>
           <rect id="x119" x="1658" y="245.6" class="room" width="65" height="66.9"/>
           <rect id="x120" x="1658" y="148" class="room" width="65" height="97.5"/>

@@ -27,6 +27,17 @@
     stroke-miterlimit: 10;
 }
 
+.room_selected:hover {
+    fill: grey;
+}
+
+.room_selected {
+    fill: #47ff09;
+    stroke: #000000;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+}
+
 .st3 {
     fill: #010101;
 }
