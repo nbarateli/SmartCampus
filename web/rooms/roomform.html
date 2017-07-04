@@ -10,6 +10,11 @@
         <span id="{{spanid}}">{{available}}</span>
       </div>
       <div>ადგილის ტიპი: {{seattype}}.</div>
+      <br>
+      <form action="booking.jsp" method="post">
+        <input type="hidden" value="{{name}}" name="room_name">
+        <input type="submit" class="btn btn-primary" value="დაჯავშნა">
+      </form>
     </div>
   </div>
 
