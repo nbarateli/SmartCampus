@@ -44,7 +44,7 @@ function workMaps(map) {
 
 
 function roomClicked() {
-    //testing
+
     var id = this.id;
     var modal = document.getElementById('myModal');
 
@@ -153,10 +153,8 @@ function unHighLightRooms() {
 
 function findRooms() {
     var queryString = $('#search-form').serialize();
-    console.log(queryString);
     $.get('/rooms/findrooms', queryString,
         function (returnedData) {
-            console.log(returnedData);
             unHighLightRooms();
             for (i in returnedData) {
                 var room = returnedData[i];
@@ -174,7 +172,6 @@ function highlightRoom(room) {
     var area = document.getElementById("x" + roomName);
     if (area !== null) {
         if (room['booked'] !== undefined) {
-            console.log(room['booked']);
             area.className.baseVal = room['booked'] ? 'room_booked' : 'room_selected';
         } else {
             area.className.baseVal = 'room_selected';
