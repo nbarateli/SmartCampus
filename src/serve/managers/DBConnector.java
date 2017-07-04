@@ -68,12 +68,12 @@ public class DBConnector {
                 int count = pmd.getParameterCount();
                 int j = 0;
                 for (int i = 0; i < count; i++) {
-                    if(j == values.length)
+                    if (j == values.length)
                         break;
 
-                    while(j < values.length - 1 && values[j] == null)
+                    while (j < values.length - 1 && values[j] == null) {
                         j++;
-
+                    }
                     statement.setObject(i + 1, values[j]);
                     j++;
                 }

@@ -2,9 +2,9 @@ package serve.managers;
 
 import misc.Utils;
 import model.bookings.Booking;
-import model.campus.CampusSearchQuery;
-import model.lectures.Lecture;
 import model.bookings.Booking.WeekDay;
+import model.bookings.BookingSearchQueryGenerator;
+import model.campus.CampusSearchQuery;
 import model.rooms.Room;
 import model.rooms.RoomManager;
 import model.rooms.RoomProblem;
@@ -103,7 +103,7 @@ public class DefaultRoomManager implements RoomManager {
     @Override
     public List<Booking> findAllBookingsAt(Room room, WeekDay day, Time start, Time end) {
         List<Booking> bookings = new ArrayList<>();
-        String sql = "SELECT * FROM " + SQL_TABLE_BOOKING + " INNER JOIN " + SQL_TABLE_USER + " ON " +
+        /*String sql = "SELECT * FROM " + SQL_TABLE_BOOKING + " INNER JOIN " + SQL_TABLE_USER + " ON " +
                 SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_BOOKER + " = " + SQL_TABLE_USER + "." +
                 SQL_COLUMN_USER_ID +
                 " INNER JOIN " + SQL_TABLE_SUBJECT + " ON " + SQL_TABLE_SUBJECT + "." + SQL_COLUMN_SUBJECT_ID +
@@ -113,12 +113,16 @@ public class DefaultRoomManager implements RoomManager {
                 " WHERE " + SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_ROOM + " = ? " +
                 (start == null ? "" : " AND " + SQL_COLUMN_BOOKING_START_TIME + " >= ? ") +
                 (end == null ? "" : " AND " + SQL_COLUMN_BOOKING_END_TIME + " <= ? ") +
-                (day == null ? "" : " AND " + SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_WEEK_DAY + " = ? ");
-        //TODO
-        try (ResultSet rs = connector.executeQuery(sql, room.getId(),
-                (start == null ? null : toSqlTime(start)),
-                (end == null ? null : toSqlTime(end)),
-                (day == null ? null : day.toString().toLowerCase()))) {
+                (day == null ? "" : " AND " + SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_WEEK_DAY + " = ? ");*/
+        BookingSearchQueryGenerator generator = new BookingSearchQueryGenerator();
+        generator.setRoom(room);
+        generator.setDay(day);
+        generator.setStartTime(start);
+        generator.setEndTime(end);
+        CampusSearchQuery query = generator.generateQuery();
+        String sql = query.getQuery();
+
+        try (ResultSet rs = connector.executeQuery(sql, query.getValues())) {
             while (rs.next()) {
                 bookings.add(getBookingFromResults(rs));
             }
@@ -221,7 +225,7 @@ public class DefaultRoomManager implements RoomManager {
         String sql = "INSERT INTO " + SQL_TABLE_ROOM_IMAGE + " (" + SQL_COLUMN_ROOM_IMAGE_URL + "," +
                 SQL_COLUMN_ROOM_IMAGE_ROOM_ID + ") VALUES (?,?)";
         try {
-            connector.executeUpdate(sql,  imageURL, room.getId());
+            connector.executeUpdate(sql, imageURL, room.getId());
         } catch (SQLException e) {
             //doing nothing
         }

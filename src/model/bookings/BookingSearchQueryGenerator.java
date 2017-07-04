@@ -14,7 +14,7 @@ import java.util.List;
 import static misc.Utils.*;
 import static model.database.SQLConstants.*;
 
-public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<Booking>{
+public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<Booking> {
 
     private Integer bookingID;
     private User booker;
@@ -27,7 +27,7 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
     private String description;
 
     public BookingSearchQueryGenerator(Integer bookingID, User booker, Room room, CampusSubject subject, Booking.WeekDay day,
-                   Time startTime, Time endTime, String description, Date bookingDate) {
+                                       Time startTime, Time endTime, String description, Date bookingDate) {
         this.bookingID = bookingID;
         this.booker = booker;
         this.room = room;
@@ -40,7 +40,7 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
     }
 
     //Default Constructor
-    public BookingSearchQueryGenerator(){
+    public BookingSearchQueryGenerator() {
         this(null, null, null, null, null,
                 null, null, null, null);
     }
@@ -81,7 +81,9 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
         return new Time(endTime.getTime());
     }
 
-    public void setEndTime(Time endTime) { this.endTime = endTime; }
+    public void setEndTime(Time endTime) {
+        this.endTime = endTime;
+    }
 
     public Time getStartTime() {
         return new Time(startTime.getTime());
@@ -116,17 +118,16 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
         List<Object> values = new ArrayList<>();
         String sql = hasNonNullFields() ? String.format("SELECT * FROM %s JOIN %s ON %s.%s = %s.%s" +
                         " JOIN %s ON %s.%s = %s.%s " +
-                        " JOIN %s ON %s.%s= %s.%s" +
+                        joinIfSubjectNotNull() +
                         " \nWHERE %s%s%s%s%s%s%s%s",
                 SQL_TABLE_BOOKING, SQL_TABLE_ROOM, SQL_TABLE_BOOKING,
                 SQL_COLUMN_BOOKING_ROOM, SQL_TABLE_ROOM, SQL_COLUMN_ROOM_ID,
                 SQL_TABLE_USER, SQL_TABLE_BOOKING, SQL_COLUMN_BOOKING_BOOKER,
-                SQL_TABLE_USER, SQL_COLUMN_USER_ID, SQL_TABLE_SUBJECT,
-                SQL_TABLE_BOOKING, SQL_COLUMN_BOOKING_SUBJECT_ID, SQL_TABLE_SUBJECT,
-                SQL_COLUMN_SUBJECT_ID,
+                SQL_TABLE_USER, SQL_COLUMN_USER_ID,
                 generateEqualQuery(bookingID, SQL_COLUMN_BOOKING_ID, values) + " AND ",
                 generateEqualQuery(booker, SQL_COLUMN_BOOKING_BOOKER, values) + " AND ",
-                generateEqualQuery(room, SQL_COLUMN_BOOKING_ROOM, values) + " AND ",
+                generateEqualQuery(room == null ? null : room.getId(),
+                        SQL_TABLE_ROOM + "." + SQL_COLUMN_BOOKING_ROOM, values) + " AND ",
                 generateLikeQuery(subject, SQL_COLUMN_BOOKING_SUBJECT_ID, values) + " AND ",
                 generateLikeQuery(day, SQL_COLUMN_BOOKING_WEEK_DAY, values) + " AND ",
                 generateEqualsOrQuery(startTime, SQL_COLUMN_BOOKING_START_TIME, values, true) + " AND ",
@@ -134,6 +135,11 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
                 generateLikeQuery(description, SQL_COLUMN_BOOKING_DESCRIPTION, values)
         ) : "SELECT * FROM " + SQL_TABLE_BOOKING;
         return new CampusSearchQuery(sql, asArray(values));
+    }
+
+    private String joinIfSubjectNotNull() {
+        return subject == null ? "" : String.format(" JOIN %s ON %s.%s= %s.%s", SQL_TABLE_SUBJECT, SQL_TABLE_BOOKING,
+                SQL_COLUMN_BOOKING_SUBJECT_ID, SQL_TABLE_SUBJECT, SQL_COLUMN_SUBJECT_ID);
     }
 
     private boolean hasNonNullFields() {

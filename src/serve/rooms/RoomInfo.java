@@ -1,7 +1,6 @@
 package serve.rooms;
 
 import model.bookings.Booking;
-import model.lectures.Lecture;
 import model.rooms.Room;
 import model.rooms.RoomManager;
 import model.rooms.RoomProblem;
@@ -55,6 +54,7 @@ public class RoomInfo extends HttpServlet {
             builder.add(JSON_ERROR, JSON_ROOM_ERROR_BAD_PARAM);
         }
         JsonWriter writer = Json.createWriter(response.getWriter());
+//        System.out.println(builder.build().toString());
         writer.writeObject(builder.build());
     }
 

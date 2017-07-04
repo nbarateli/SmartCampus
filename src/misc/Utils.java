@@ -4,7 +4,6 @@ import model.accounts.User;
 import model.bookings.Booking;
 import model.bookings.Booking.WeekDay;
 import model.lectures.CampusSubject;
-import model.lectures.Lecture;
 import model.rooms.Room;
 import model.rooms.RoomProblem;
 import serve.managers.DBConnector;
@@ -258,7 +257,12 @@ public final class Utils {
         int id = rs.getInt(SQL_COLUMN_BOOKING_ID);
         User booker = getUserFromResults(rs);
         Room room = getRoomFromResults(rs);
-        CampusSubject subject = getSubjectFromResults(rs);
+        CampusSubject subject = null;
+        try {
+            getSubjectFromResults(rs);
+        } catch (SQLException e) {
+            //ignored
+        }
         WeekDay day = toWeekDay(rs.getString(SQL_COLUMN_BOOKING_WEEK_DAY));
         Time starTime = rs.getTime(SQL_COLUMN_BOOKING_START_TIME);
         Time endTime = rs.getTime(SQL_COLUMN_BOOKING_END_TIME);
@@ -466,45 +470,48 @@ public final class Utils {
         }
         return null;
     }
-    
+
     /**
      * converts given string in MM/dd/yyyy format to Date
+     *
      * @param toConvert string needed to be converted
      * @return respective date
      */
-    public static Date stringToDate(String toConvert){
+    public static Date stringToDate(String toConvert) {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        
+
         try {
             return format.parse(toConvert);
         } catch (ParseException e) {
             return null;
         }
     }
-    
+
     /**
      * checks if given string is a valid number and falls in given range
+     *
      * @param number string needed to be parsed
-     * @param min minimum value this integer should be
-     * @param max maximum value this integer should be
-     * @return integer representation of this string if it does, else null 
+     * @param min    minimum value this integer should be
+     * @param max    maximum value this integer should be
+     * @return integer representation of this string if it does, else null
      */
     public static Integer validateNumber(String number, int min, int max) {
         int numValue;
         try {
             numValue = Integer.parseInt(number);
-            if(numValue < min && numValue > max)
+            if (numValue < min && numValue > max)
                 return null;
         } catch (NumberFormatException e) {
             return null; //the text wasn't a number
         }
-        
+
         return numValue;
     }
-    
+
     /**
      * adds given number of days to given date
-     * @param date date to add days to
+     *
+     * @param date    date to add days to
      * @param numDays number of days to add
      * @return date gotten by adding days
      */
@@ -512,7 +519,7 @@ public final class Utils {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         c.add(Calendar.DATE, numDays);
-        
+
         return c.getTime();
     }
 
@@ -536,9 +543,9 @@ public final class Utils {
      * checks if given string is valid for representing hour or minute
      */
     private static boolean numberStringIsValid(String s, boolean checkHour) {
-        if(!checkHour && validateNumber(s, 0, 59) == null)
+        if (!checkHour && validateNumber(s, 0, 59) == null)
             return false;
-        if(checkHour && validateNumber(s, 0, 23) == null)
+        if (checkHour && validateNumber(s, 0, 23) == null)
             return false;
 
         return true;
