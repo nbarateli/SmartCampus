@@ -27,7 +27,7 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
     private String description;
 
     public BookingSearchQueryGenerator(Integer bookingID, User booker, Room room, CampusSubject subject, Booking.WeekDay day,
-                                       Time startTime, Time endTime, String description, Date bookingDate) {
+                   Time startTime, Time endTime, String description, Date bookingDate) {
         this.bookingID = bookingID;
         this.booker = booker;
         this.room = room;

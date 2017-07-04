@@ -31,7 +31,6 @@ public class DefaultBookingManager implements BookingManager {
     public void removeAllBookings() {
         String truncateQuery = "truncate table " + SQL_TABLE_BOOKING;
         try {
-            //TODO
             connector.executeUpdate(truncateQuery);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -40,10 +39,9 @@ public class DefaultBookingManager implements BookingManager {
     
     @Override
     public void removeAllLectures() {
-        String deleteQuery = "delete from " + SQL_TABLE_BOOKING + " where " + 
+        String deleteQuery = "delete from " + SQL_TABLE_BOOKING + " where " +
                 SQL_COLUMN_BOOKING_SUBJECT_ID + " > 0";
         try {
-            //TODO
             connector.executeUpdate(deleteQuery);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -54,7 +52,6 @@ public class DefaultBookingManager implements BookingManager {
     public List<Booking> find(BookingSearchQueryGenerator queryGenerator) {
         List<Booking> list = new ArrayList<>();
         try {
-            //TODO
             CampusSearchQuery query = queryGenerator.generateQuery();
             ResultSet set = connector.executeQuery(query.getQuery(), query.getValues());
 
@@ -86,7 +83,7 @@ public class DefaultBookingManager implements BookingManager {
                 (subject == null ? ")" : ",?)");
         return successfulOperation(insertQuery, connector, booking.getRoom().getId(), booking.getBooker().getId(),
                 date, (subject == null ? null : subject.getId()),
-                (description == null ? null : description), booking.getStartTime(),
+                description, booking.getStartTime(),
                 booking.getEndTime(), booking.getDay().name().toLowerCase());
     }
 
@@ -99,16 +96,26 @@ public class DefaultBookingManager implements BookingManager {
 
     @Override
     public boolean deleteAllOccurrences(int bookingId) {
-        String query = "select * from " + SQL_TABLE_BOOKING + " where " + SQL_COLUMN_BOOKING_ID + " = ?";
+        BookingSearchQueryGenerator bookingQueryGenerator = new BookingSearchQueryGenerator();
+        bookingQueryGenerator.setId(bookingId);
+
+        Booking thisBooking = find(bookingQueryGenerator).get(0);
+
+        String deleteQuery = "delete from " + SQL_TABLE_BOOKING + " where " + SQL_COLUMN_BOOKING_ROOM + "=? AND " +
+                SQL_COLUMN_BOOKING_BOOKER + "=? AND " + SQL_COLUMN_BOOKING_SUBJECT_ID +"=? AND \n"
+                + SQL_COLUMN_BOOKING_START_TIME + "=? AND " + SQL_COLUMN_BOOKING_END_TIME + "=? AND " + SQL_COLUMN_BOOKING_WEEK_DAY + "=?;";
+
         try {
-            ResultSet rs = connector.executeQuery(query, bookingId);
-
-
+            connector.executeUpdate(deleteQuery, thisBooking.getRoom().getId(), thisBooking.getBooker().getId(),
+                    thisBooking.getSubject().getId(), thisBooking.getStartTime(), thisBooking.getEndTime(),
+                    thisBooking.getDay().name().toLowerCase());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return true;
     }
+
+
+
 
 }

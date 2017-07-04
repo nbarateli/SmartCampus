@@ -62,8 +62,18 @@
       <td><a href="#" onclick="signOut();">Sign out</a></td>
     </tr>
   </table>
+
   <br><br>
-  <div><a href="data/addingData.jsp">მონაცემების შეყვანა</a></div>
+  <div>
+    <a href="data/addingData.jsp">მონაცემების შეყვანა</a>
+  </div>
+
+  <br>
+  <div>
+    <a href="rooms/booking.jsp">ოთახის დაჯავშნა</a>
+  </div>
+
 </div>
 </body>
 </html>
+

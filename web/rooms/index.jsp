@@ -1,10 +1,10 @@
 <%@ page import="misc.Utils" %>
-<%@ page import="model.rooms.RoomManager" %>
-<%@ page import="static misc.WebConstants.*" %>
-<%@ page import="model.rooms.RoomSearchQueryGenerator" %>
-<%@ page import="serve.managers.ManagerFactory" %>
-<%@ page import="static misc.Utils.*" %>
 <%@ page import="model.rooms.Room" %>
+<%@ page import="static misc.WebConstants.*" %>
+<%@ page import="model.rooms.RoomManager" %>
+<%@ page import="model.rooms.RoomSearchQueryGenerator" %>
+<%@ page import="static misc.Utils.*" %>
+<%@ page import="serve.managers.ManagerFactory" %>
 <%@ page import="java.util.List" %>
 <%--
   Created by IntelliJ IDEA.
@@ -79,16 +79,16 @@
 
         <div class="form-group">
           <input type="number" name="room_floor" class="form-control"
-                 placeholder="შეიყვანეთ სართული" min=1 max=4>
+                 placeholder="შეიყვანეთ სართული">
         </div>
 
         <div class="form-group">
           <input type="number"
                  name="capacity_from" class="form-control" title="-დან"
-                 placeholder="ადგილების რაოდენობა(-დან)" min=0 max=500> <br>
+                 placeholder="ადგილების რაოდენობა(-დან)"> <br>
 
           <input type="number" name="capacity_to" class="form-control"
-                 title="-მდე" placeholder="ადგილების რაოდენობა(-მდე)" min=0 max=500>
+                 title="-მდე" placeholder="ადგილების რაოდენობა(-მდე)">
         </div>
 
         <div class="select">
@@ -130,7 +130,7 @@
 
         <div class="form-group">
           <input type="text" name="time_interested" class="form-control"
-                 placeholder="შეიყვანეთ დრო (HH:mm 24-საათიანი ფორმატით)">
+                 placeholder="შეიყვანეთ დრო (HH:MM 24-საათიანი ფორმატით)">
         </div>
 
         <input type="submit" value="ძებნა" class="btn btn-primary">
@@ -159,7 +159,7 @@
     <td id="right-td">
       <div align="center" id="right-div" style="display:none">
         <%
-          //          RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();
+//          RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();
 //          buildQuery(request, query);
 //          List<Room> rooms = new LinkedList<>();//manager1.find(query);
 //
@@ -200,6 +200,12 @@
               }
           %>
       </div>
+    <div id="myModal" class="modal">
+      <div class="modal-content" id="mod-cont">
+        <span id="closeModal" class="close">&times;</span>
+        <div id="roomForm" class="roomfrom"></div>
+      </div>
+    </div>
       <h1 id="par">FLOOR</h1>
       <select name="floors" onchange="floorChange()" id="floors">
         <option value="first">პირველი სართული</option>
@@ -208,7 +214,8 @@
         <option value="fourth">მეოთხე სართული</option>
       </select>
     <div class="mapdivision">
-        <link rel="stylesheet" href="MapStyles.css">
+
+      <link rel="stylesheet" href="MapStyles.css">
         <svg version="1.1" id="map1" xmlns="http://www.w3.org/2000/svg"
              x="0px" y="0px"
              viewBox="0 0 2500 1100" style="enable-background:new 0 0 2500 1100;" xml:space="preserve">
@@ -253,8 +260,8 @@
           <rect id="x112" x="2127.7" y="788.1" class="room" width="116.1" height="60"/>
           <rect id="x113" x="2243.8" y="737.8" class="room" width="90" height="110"/>
           <text transform="matrix(1 0 0 1 181.6 827.65)" class="st3 st4 st5">ST1</text>
-          <text transform="matrix(1 0 0 1 445 500.95)" class="st3 st6 st5">ბიბლიოთეკა</text>
-          <text transform="matrix(1 0 0 1 1001.3335 558.1667)" class="st3 st6 st5">101ა</text>
+          <text transform="matrix(1 0 0 1 445 500.95)" class="room st3 st6 st5">ბიბლიოთეკა</text>
+          <text transform="matrix(1 0 0 1 1001.3335 558.1667)" class="room st3 st6 st5">101ა</text>
           <text transform="matrix(1 0 0 1 1109.3003 561.3335)" class="st3 st6 st5">102ა</text>
           <text transform="matrix(0.9683 0 0 1 1110.834 469.3867)" class="st3 st6 st7">103ა</text>
           <text transform="matrix(1 0 0 1 1112.3337 388.333)" class="st3 st6 st5">105ა</text>
@@ -519,11 +526,6 @@
     </td>
   </tr>
 </table>
-<div id="myModal" class="modal">
-  <div class="modal-content" id="mod-cont">
-    <span id="closeModal" class="close">&times;</span>
-    <div id="roomForm"></div>
-  </div>
-</div>
+
 </body>
 </html>

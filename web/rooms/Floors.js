@@ -4,6 +4,7 @@
 window.addEventListener('load', load, false);
 
 function load() {
+    console.log("lodaded");
     var map1 = document.getElementById("map1");
     var map2 = document.getElementById("map2");
     var map3 = document.getElementById("map3");
@@ -39,11 +40,12 @@ function workMaps(map) {
         var name = $(child).attr("class");
         if (name !== 'room') continue;
         areas[i].addEventListener("mouseover", myHover);
-        areas[i].addEventListener("click", myClick);
+        areas[i].addEventListener("click", roomClicked);
     }
 }
 
-function myClick() {
+
+function roomClicked() {
     //testing
     var id = this.id;
     var modal = document.getElementById('myModal');
@@ -54,17 +56,6 @@ function myClick() {
         }).fail(function () {
         console.log("error");
     });
-    // $.ajax({
-    //     type: 'POST',
-    //     url: '/rooms/room',
-    //     data: id,
-    //     parameterNames: 'id',
-    //     success: function (data) {
-    //         var parsedData = JSON.parse(data);
-    //         console.log(parsedData);
-    //     }
-    // })
-
 
     modal.style.display = "block";
 }
@@ -131,7 +122,8 @@ function showFourth() {
     document.getElementById("map3").style.display = "none";
     document.getElementById("map4").style.display = "unset";
 }
-function highlightRooms(room){
+
+function highlightRooms(room) {
     var roomName = JSON.stringify(room);
     var area = document.getElementById(roomName);
 };
