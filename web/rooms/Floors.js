@@ -158,7 +158,6 @@ function findRooms() {
             unHighLightRooms();
             for (i in returnedData) {
                 var room = returnedData[i];
-
                 highlightRoom(room);
             }
         }).fail(function () {

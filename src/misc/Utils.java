@@ -580,7 +580,7 @@ public final class Utils {
                                             boolean larger, String outPattern, String inPattern) {
         if (field == null) return " 1 = 1 ";
         values.add(toSqlDate(field, inPattern));
-        return column + " = STR_TO_DATE(?, " + outPattern + ")";
+        return column + (larger ? " >" : " <") + "= STR_TO_DATE(?, " + outPattern + ")";
 
     }
 
@@ -590,10 +590,7 @@ public final class Utils {
     private static boolean numberStringIsValid(String s, boolean checkHour) {
         if (!checkHour && validateNumber(s, 0, 59) == null)
             return false;
-        if (checkHour && validateNumber(s, 0, 23) == null)
-            return false;
-
-        return true;
+        return !checkHour || validateNumber(s, 0, 23) != null;
     }
 
     /**
