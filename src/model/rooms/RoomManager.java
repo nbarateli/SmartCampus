@@ -1,23 +1,9 @@
 package model.rooms;
 
 import model.bookings.Booking;
-import model.campus.CampusManager;
-import model.lectures.Lecture;
 import model.bookings.Booking.WeekDay;
+import model.campus.CampusManager;
 
-import static misc.Utils.toSqlTime;
-import static misc.Utils.toWeekDay;
-import static model.database.SQLConstants.SQL_COLUMN_LECTURE_LECTURER;
-import static model.database.SQLConstants.SQL_COLUMN_ROOM_ID;
-import static model.database.SQLConstants.SQL_COLUMN_SUBJECT_ID;
-import static model.database.SQLConstants.SQL_COLUMN_USER_ID;
-import static model.database.SQLConstants.SQL_TABLE_LECTURE;
-import static model.database.SQLConstants.SQL_TABLE_ROOM;
-import static model.database.SQLConstants.SQL_TABLE_SUBJECT;
-import static model.database.SQLConstants.SQL_TABLE_USER;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Time;
 import java.util.Date;
 import java.util.List;
@@ -69,18 +55,18 @@ public interface RoomManager extends CampusManager<Room, RoomSearchQueryGenerato
      * Returns a booking that takes place in the room
      * at given day and on given time
      *
-     * @param room  a room where the booking takes place
-     * @param date  the date on which the booking takes place
+     * @param room    a room where the booking takes place
+     * @param date    the date on which the booking takes place
      * @param current time we should check for the booking
      */
     Booking findBookingAt(Room room, Date date, Time current);
-    
+
     /**
      * Tells if there is a booking that takes place in the room
      * at given date and on given current time.
      *
-     * @param room  a room we are interested in
-     * @param date  the date we are interested in
+     * @param room    a room we are interested in
+     * @param date    the date we are interested in
      * @param current time we are interested in
      */
     boolean isBooked(Room room, Date date, Time current);
@@ -113,5 +99,9 @@ public interface RoomManager extends CampusManager<Room, RoomSearchQueryGenerato
      * @param imageURL an URL to the image
      */
     void addImage(Room room, String imageURL);
-    
+
+    /**
+     * Returns a list of names of all the rooms.
+     */
+    List<String> getAllRoomNames();
 }

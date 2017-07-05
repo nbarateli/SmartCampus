@@ -13,10 +13,7 @@ import model.rooms.RoomSearchQueryGenerator;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import static misc.Utils.*;
 import static model.database.SQLConstants.*;
@@ -229,6 +226,21 @@ public class DefaultRoomManager implements RoomManager {
         } catch (SQLException e) {
             //doing nothing
         }
+    }
+
+    @Override
+    public List<String> getAllRoomNames() {
+        List<String> roomNames = new ArrayList<>();
+        String sql = "SELECT " + SQL_COLUMN_ROOM_NAME + " FROM " + SQL_TABLE_ROOM;
+        try (ResultSet results = connector.executeQuery(sql)) {
+            while (results.next()) {
+                roomNames.add(results.getString(SQL_COLUMN_ROOM_NAME));
+            }
+        } catch (SQLException e) {
+            //ignored
+        }
+        Collections.sort(roomNames);
+        return roomNames;
     }
 
 }

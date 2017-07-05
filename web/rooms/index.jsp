@@ -62,7 +62,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0/js/bootstrap-datepicker.min.js"></script>
-
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
   <script src="${pageContext.request.contextPath}/scriptlibs/Datepair.js"></script>
   <script src="${pageContext.request.contextPath}/scriptlibs/jquery.datepair.js"></script>
@@ -82,10 +83,11 @@
       <form id="search-form" action="index.jsp"
             class="form-vertical">
 
-        <div class="form-group">
+        <div class="form-group ui-widget">
+
           <label class="control-label">ოთახის ინფორმაცია</label>
-          <input type="text" name="room_name"
-                 class="form-control" placeholder="შეიყვანეთ ოთახის სახელი">
+          <input name="room_name"
+                 class="form-control" placeholder="შეიყვანეთ ოთახის სახელი" id="room_name_in">
         </div>
 
         <div class="form-group">
