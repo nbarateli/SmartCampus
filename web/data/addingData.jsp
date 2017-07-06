@@ -22,12 +22,15 @@
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="addingDataStyle.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
   <script
           src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script
           src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="DataUtils.js"></script>
 </head>
 <body>
@@ -53,49 +56,58 @@
             </div>
 
             <div class="form-group">
-              <input type="text" name="room_name" class="form-control"
-                     placeholder="შეიყვანეთ ოთახის დასახელება">
-            </div>
-
-            <div class="form-group">
               <input type="text" name="subject_name" class="form-control"
                      placeholder="შეიყვანეთ საგნის სახელი">
             </div>
 
+            <div class="form-group">
+              <input type="number" name="num_students" class="form-control" id="num_stud"
+                     placeholder="შეიყვანეთ სტუდენტების რაოდენობა" min=1 max=200>
+            </div>
+
+            <br>
+
+            <input type="number" name="num_weeks" class="form-control" id="num_w"
+                   placeholder="კვირების რაოდენობა" min=1 max=16>
+
             <br>
 
             <div class="select">
-              <label class="control-label">ლექციის დრო</label>
-              <select name="repetition" class="form-control">
+              <select name="repetition" class="form-control" id="rep">
                 <option value="1">კვირაში ერთხელ</option>
                 <option value="2">ორ კვირაში ერთხელ</option>
                 <option value="3">სამ კვირაში ერთხელ</option>
                 <option value="4">ოთხ კვირაში ერთხელ</option>
               </select>
             </div>
+
             <br>
-
-            <input type="number" name="num_weeks" class="form-control"
-                   placeholder="კვირების რაოდენობა" min=1 max=16>
-
             <br>
 
             <div class="form-group">
-
-              <input type="text" name="start_time" class="form-control"
+              <label class="control-label">ლექციის დრო</label>
+              <input type="text" name="start_time" class="form-control" id="start_t"
                      placeholder="შეიყვანეთ ლექციის დაწყების დრო(HH:mm 24-საათიანი ფორმატით)">
             </div>
+
             <div class="form-group">
 
-              <input type="text" name="end_time" class="form-control"
+              <input type="text" name="end_time" class="form-control" id="end_t"
                      placeholder="შეიყვანეთ ლექციის დასრულების დრო(HH:mm 24-საათიანი ფორმატით)">
             </div>
 
             <div class="form-group">
               <label class="control-label">ლექციის დაწყების თარიღი</label>
-              <input type="date" name="start_date" class="form-control">
+              <input type="date" name="start_date" class="form-control" id="start_d">
             </div>
 
+            <div class="form-group ui-widget">
+              <input type="text" name="room_name" class="form-control" id="room_n"
+                     placeholder="შეიყვანეთ ოთახის დასახელება">
+            </div>
+
+            <br>
+            <br>
             <br>
 
             <input type="button" value="დამატება"
