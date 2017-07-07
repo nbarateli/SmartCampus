@@ -43,7 +43,7 @@
 
       <div class="modal-content">
 
-        <div class="modal-body">
+        <div class="modal-body" id="lecture_modal">
           <label class="info-label"><b>შეგიძლიათ მონაცემები შეიყვანოთ ხელით (სათითაოდ):</b></label> <br>
           <br>
 

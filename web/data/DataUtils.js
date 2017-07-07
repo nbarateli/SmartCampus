@@ -377,6 +377,8 @@ $(document).ready(function () {
         source: roomNames
     });
 
+    $("#room_n").autocomplete("option", "appendTo", "#lecture_modal");
+
     function makeRoomSuggestions() {
         $.get("/rooms/availablerooms",
             $("#sched-form").serialize(),
