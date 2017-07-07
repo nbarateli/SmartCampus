@@ -52,14 +52,16 @@
   <meta charset="utf-8">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="MapStyles.css">
+  <link rel="stylesheet" href="css/MapStyles.css">
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="Floors.css">
-  <link rel="stylesheet" href="SearchPageStyle.css">
+  <link rel="stylesheet" href="css/Floors.css">
+  <link rel="stylesheet" href="css/SearchPageStyle.css">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+  <link rel="stylesheet" href="/css/auto-complete.css">
+  <script src="/js/auto-complete.js"></script>
+  <script src="/js/utils.js"></script>
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
@@ -72,8 +74,8 @@
   <script
           src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
-  <script src="RoomsSearch.js"></script>
-  <script src="Floors.js"></script>
+  <script src="js/RoomsSearch.js"></script>
+  <script src="js/Floors.js"></script>
 
 </head>
 <body>
@@ -89,6 +91,7 @@
           <label class="control-label">ოთახის ინფორმაცია</label>
           <input name="room_name"
                  class="form-control" placeholder="შეიყვანეთ ოთახის სახელი" id="room_name_in">
+          <script>roomNameAutocomplete("room_name_in")</script>
         </div>
 
         <div class="form-group">

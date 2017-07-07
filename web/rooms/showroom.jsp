@@ -27,7 +27,7 @@
     if no parameters is passed
 --%>
 <head>
-  <link rel="stylesheet" href="ShowRoomStyle.css">
+  <link rel="stylesheet" href="css/ShowRoomStyle.css">
   <%!
     private void printAll(List<Booking> bookings, JspWriter out) throws Exception {
       for (Booking booking : bookings) {

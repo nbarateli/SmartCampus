@@ -24,8 +24,7 @@ function sendData (url, params) {
         }
     };
     http.send(params);
-};
-
+}
 function clearFormInputs(formToClear) {
 
     var elems = formToClear.elements;
