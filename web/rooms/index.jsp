@@ -95,16 +95,16 @@
         </div>
 
         <div class="form-group">
-          <input type="number" name="room_floor" class="form-control"
+          <input type="number" name="room_floor" class="form-control" min="1" max="4"
                  placeholder="შეიყვანეთ სართული">
         </div>
 
         <div class="form-group">
           <input type="number"
-                 name="capacity_from" class="form-control" title="-დან"
+                 name="capacity_from" class="form-control" title="-დან" min="0" max="200"
                  placeholder="ადგილების რაოდენობა(-დან)"> <br>
 
-          <input type="number" name="capacity_to" class="form-control"
+          <input type="number" name="capacity_to" class="form-control" min="0" max="200"
                  title="-მდე" placeholder="ადგილების რაოდენობა(-მდე)">
         </div>
 
@@ -276,8 +276,8 @@
           <rect id="x112" x="2127.7" y="788.1" class="room" width="116.1" height="60"/>
           <rect id="x113" x="2243.8" y="737.8" class="room" width="90" height="110"/>
           <text transform="matrix(1 0 0 1 181.6 827.65)" class="st3 st4 st5">ST1</text>
-          <text transform="matrix(1 0 0 1 445 500.95)" class="room st3 st6 st5">ბიბლიოთეკა</text>
-          <text transform="matrix(1 0 0 1 1001.3335 558.1667)" class="room st3 st6 st5">101ა</text>
+          <text transform="matrix(1 0 0 1 445 500.95)" class="st3 st6 st5">ბიბლიოთეკა</text>
+          <text transform="matrix(1 0 0 1 1001.3335 558.1667)" class="st3 st6 st5">101ა</text>
           <text transform="matrix(1 0 0 1 1109.3003 561.3335)" class="st3 st6 st5">102ა</text>
           <text transform="matrix(0.9683 0 0 1 1110.834 469.3867)" class="st3 st6 st7">103ა</text>
           <text transform="matrix(1 0 0 1 1112.3337 388.333)" class="st3 st6 st5">105ა</text>
