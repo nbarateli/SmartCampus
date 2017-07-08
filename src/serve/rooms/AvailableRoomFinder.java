@@ -52,13 +52,13 @@ public class AvailableRoomFinder extends HttpServlet {
         query.setCapacityFrom(capacity == null ? 0 : capacity);
         rooms = roomManager.find(query);
 
-
         Integer numWeeks = validateNumber(request.getParameter("num_weeks"), 1, 16);
-        if(numWeeks != null) {
+        Date date = stringToDate(request.getParameter("start_date"));
+        Time startTime = stringToTime(request.getParameter("start_time"));
+        Time endTime = stringToTime(request.getParameter("end_time"));
+
+        if(numWeeks != null && date != null && startTime != null && endTime != null) {
             Integer rep = validateNumber(request.getParameter("repetition"), 1, 4);
-            Date date = stringToDate(request.getParameter("start_date"));
-            Time startTime = stringToTime(request.getParameter("start_time"));
-            Time endTime = stringToTime(request.getParameter("end_time"));
 
             BookingSearchQueryGenerator generator = new BookingSearchQueryGenerator();
             generator.setStartTime(startTime);
@@ -71,8 +71,10 @@ public class AvailableRoomFinder extends HttpServlet {
                     generator.setRoom(room);
                     generator.setStartDate(addDaysToDate(date, i * DAYS_IN_WEEK * rep));
                     List<Booking> bookings = bookingManager.find(generator);
-                    if(bookings.size() > 0)
-                        it.remove();
+                    for(int j = 0; j < bookings.size(); j++) {
+                        if(bookings.get(j).getSubject() != null)
+                            it.remove();
+                    }
                 }
             }
 

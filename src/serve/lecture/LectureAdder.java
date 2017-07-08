@@ -85,8 +85,8 @@ public class LectureAdder extends HttpServlet {
             for (int i = 0; i < numWeeks / rep; i++) {
                 Booking thisBooking = new Booking(
                         ModelConstants.SENTINEL_INT, lecturer, room, subject, weekDay, startTime,
-                        endTime, null, date = misc.Utils.addDaysToDate(date, i * DAYS_IN_WEEK * rep),
-                        date);
+                        endTime, null, misc.Utils.addDaysToDate(date, i * DAYS_IN_WEEK * rep),
+                        misc.Utils.addDaysToDate(date, i * DAYS_IN_WEEK * rep));
                 manager.add(thisBooking);
             }
 
