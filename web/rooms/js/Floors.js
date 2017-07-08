@@ -35,12 +35,14 @@ function workMaps(map) {
     for (i = 0; i < areas.length; i++) {
         // var className = areas[i].getAttribute("class");
         var child = areas[i];
-        var name = $(child).attr("class");
-        if (name !== 'room') continue;
-        areas[i].addEventListener("mouseover", myHover);
+        var name = $(child).attr('class') == null? null : $(child).attr('class').split(' ')[0];
+        if (name !== 'room' && name !== 'room_name') continue;
+        //areas[i].addEventListener("mouseover", myHover);
         areas[i].addEventListener("click", roomClicked);
+        //areas[i].addEventListener("mouseout", myOut);
     }
 }
+
 
 
 function roomClicked() {
@@ -58,21 +60,32 @@ function roomClicked() {
     modal.style.display = "block";
 }
 
+function myOut(){
+    var id = "h" + this.id;
+    var hoverElement = document.getElementById(id);
+    hoverElement.style.display = "none";
+}
 function myHover() {
-    return;
+    //return;
     var id = this.id;
-    var rect = document.getElementById(id).getBoundingClientRect();
-    var coords = this.getAttribute("coords").split(",");
-    var leftPos = +rect.left + 130 + +coords[2];
-    var topPos = +rect.top + +coords[3];
 
-    console.log("sum is: " + leftPos + " " + topPos);
-    console.log(leftPos + " " + topPos);
-    var div = document.getElementById("popup-div");
-    div.removeChild(div.childNodes[0]);
+    var already = document.getElementById("h" + id);
+    if(already !== null){
+        already.style.display = "unset";
+        return;
+    }
+
+    var div = document.createElement("div");
+    var rect = document.getElementById(id).getBoundingClientRect();
+    var leftPos = +rect.left + rect.width;
+    var topPos = +rect.top ;
+    console.log(leftPos +" "+ topPos);
+
     var text = document.createTextNode("this room is: " + id);
     div.appendChild(text);
 
+    div.id = "h"+id;
+    div.className = "shit";
     div.style.backgroundColor = "yellow";
     div.style.border = "1px";
     div.style.position = "absolute";
@@ -82,7 +95,6 @@ function myHover() {
     div.style.width = "100px";
     document.body.appendChild(div);
 
-    document.getElementById("par").innerHTML = id;
 }
 
 function floorChange() {

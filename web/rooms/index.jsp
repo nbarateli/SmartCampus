@@ -114,6 +114,7 @@
           <select name="room_type" class="form-control">
             <option value="any">ყველა</option>
             <option value="auditorium">აუდიტორია</option>
+            <option value="laboratory">ლაბორატორია</option>
             <option value="utility">სხვა</option>
           </select>
         </div>
@@ -123,7 +124,7 @@
           <select name="seat_type" class="form-control">
             <option value="any">ყველანაირი</option>
             <option value="desks">სკამები და მერხები</option>
-            <option value="chairs">სკამ-მერხები (ხის)</option>
+            <option value="chairs">სკამ-მერხები</option>
             <option value="computers">კომპიუტერები</option>
             <option value="tables">მაგიდები</option>
           </select>
@@ -245,6 +246,7 @@
 	611.8,626.8 566.8,626.8 566.8,681.8 "/>
           <path id="XMLID_10_" class="st0" d="M781.6,702.1c202.7,96.6,276.5,101.2,297,75c15.3-19.5,9-66.5-13.5-76.5
 	c-17.1-7.6-44.1,5.9-66,33"/>
+
           <rect id="x101ა" x="990.5" y="497" class="room" width="60" height="115"/>
           <rect id="x102ა" x="1099.5" y="497" class="room" width="60" height="115"/>
           <rect id="x103ა" x="1099.5" y="432.3" class="room" width="60" height="65"/>
@@ -276,35 +278,35 @@
           <rect id="x110" x="1978.3" y="788.1" class="room" width="150" height="60"/>
           <rect id="x112" x="2127.7" y="788.1" class="room" width="116.1" height="60"/>
           <rect id="x113" x="2243.8" y="737.8" class="room" width="90" height="110"/>
-          <text transform="matrix(1 0 0 1 181.6 827.65)" class="st3 st4 st5">ST1</text>
-          <text transform="matrix(1 0 0 1 445 500.95)" class="st3 st6 st5">ბიბლიოთეკა</text>
-          <text transform="matrix(1 0 0 1 1001.3335 558.1667)" class="st3 st6 st5">101ა</text>
-          <text transform="matrix(1 0 0 1 1109.3003 561.3335)" class="st3 st6 st5">102ა</text>
-          <text transform="matrix(0.9683 0 0 1 1110.834 469.3867)" class="st3 st6 st7">103ა</text>
-          <text transform="matrix(1 0 0 1 1112.3337 388.333)" class="st3 st6 st5">105ა</text>
-          <text transform="matrix(1 0 0 1 1001.8337 384.0002)" class="st3 st6 st5">104ა</text>
-          <text transform="matrix(1 0 0 1 1110.333 287.6665)" class="st3 st6 st5">106ა</text>
-          <text transform="matrix(1 0 0 1 1109.667 207)" class="st3 st6 st5">107ა</text>
-          <text transform="matrix(1 0 0 1 1253.9998 814.334)" class="st3 st6 st5">101</text>
-          <text transform="matrix(1 0 0 1 1255.6003 716.334)" class="st3 st6 st5">102</text>
-          <text transform="matrix(1 0 0 1 1363.6504 818.7671)" class="st3 st6 st5">103</text>
-          <text transform="matrix(1 0 0 1 1481.8828 818.7676)" class="st3 st6 st5">104</text>
-          <text transform="matrix(1 0 0 1 1478.7 716.2999)" class="st3 st6 st5">105</text>
-          <text transform="matrix(1 0 0 1 1628.333 820.7673)" class="st3 st6 st5">106</text>
-          <text transform="matrix(1 0 0 1 1819.1667 822.1003)" class="st3 st6 st5">107</text>
-          <text transform="matrix(1 0 0 1 1817 713)" class="st3 st6 st5">108</text>
-          <text transform="matrix(1 0 0 1 1931.6663 820.7671)" class="st3 st6 st5">109</text>
-          <text transform="matrix(1 0 0 1 2035.3337 818.1006)" class="st3 st6 st5">110</text>
-          <text transform="matrix(1 0 0 1 2036.6663 709.866)" class="st3 st6 st5">111</text>
-          <text transform="matrix(1 0 0 1 2169.717 822.1011)" class="st3 st6 st5">112</text>
-          <text transform="matrix(1 0 0 1 2273.4331 781.6663)" class="st3 st6 st5">113</text>
-          <text transform="matrix(1 0 0 1 1577.1667 564.0002)" class="st3 st6 st5">115</text>
-          <text transform="matrix(1 0 0 1 1676 564.3335)" class="st3 st6 st5">114</text>
-          <text transform="matrix(1 0 0 1 1676.5002 472.7197)" class="st3 st6 st5">116</text>
-          <text transform="matrix(1 0 0 1 1674.9998 379.9998)" class="st3 st6 st5">117</text>
-          <text transform="matrix(1 0 0 1 1577.1663 380)" class="st3 st6 st5">118</text>
-          <text transform="matrix(1 0 0 1 1675.833 282.333)" class="st3 st6 st5">119</text>
-          <text transform="matrix(1 0 0 1 1676.5 205.6665)" class="st3 st6 st5">120</text>
+          <text id="zST1" transform="matrix(1 0 0 1 181.6 827.65)" class="room_name st3 st4 st5">ST1</text>
+          <text id="zბიბლიოთეკა" transform="matrix(1 0 0 1 445 500.95)" class="room_name st3 st6 st5">ბიბლიოთეკა</text>
+          <text id="z101ა" transform="matrix(1 0 0 1 1001.3335 558.1667)" class="room_name st3 st6 st5">101ა</text>
+          <text id="z102ა" transform="matrix(1 0 0 1 1109.3003 561.3335)" class="room_name st3 st6 st5">102ა</text>
+          <text id="z103ა" transform="matrix(0.9683 0 0 1 1110.834 469.3867)" class="room_name st3 st6 st7">103ა</text>
+          <text id="z105ა" transform="matrix(1 0 0 1 1112.3337 388.333)" class="room_name st3 st6 st5">105ა</text>
+          <text id="z104ა" transform="matrix(1 0 0 1 1001.8337 384.0002)" class="room_name st3 st6 st5">104ა</text>
+          <text id="z106ა" transform="matrix(1 0 0 1 1110.333 287.6665)" class="room_name st3 st6 st5">106ა</text>
+          <text id="z107ა" transform="matrix(1 0 0 1 1109.667 207)" class="room_name st3 st6 st5">107ა</text>
+          <text id="z101" transform="matrix(1 0 0 1 1253.9998 814.334)" class="room_name st3 st6 st5">101</text>
+          <text id="z102" transform="matrix(1 0 0 1 1255.6003 716.334)" class="room_name st3 st6 st5">102</text>
+          <text id="z103" transform="matrix(1 0 0 1 1363.6504 818.7671)" class="room_name st3 st6 st5">103</text>
+          <text id="z104" transform="matrix(1 0 0 1 1481.8828 818.7676)" class="room_name st3 st6 st5">104</text>
+          <text id="z105" transform="matrix(1 0 0 1 1478.7 716.2999)" class="room_name st3 st6 st5">105</text>
+          <text id="z106" transform="matrix(1 0 0 1 1628.333 820.7673)" class="room_name st3 st6 st5">106</text>
+          <text id="z107" transform="matrix(1 0 0 1 1819.1667 822.1003)" class="room_name st3 st6 st5">107</text>
+          <text id="z108" transform="matrix(1 0 0 1 1817 713)" class="room_name st3 st6 st5">108</text>
+          <text id="z109" transform="matrix(1 0 0 1 1931.6663 820.7671)" class="room_name st3 st6 st5">109</text>
+          <text id="z110" transform="matrix(1 0 0 1 2035.3337 818.1006)" class="room_name st3 st6 st5">110</text>
+          <text id="z111" transform="matrix(1 0 0 1 2036.6663 709.866)" class="room_name st3 st6 st5">111</text>
+          <text id="z112" transform="matrix(1 0 0 1 2169.717 822.1011)" class="room_name st3 st6 st5">112</text>
+          <text id="z113" transform="matrix(1 0 0 1 2273.4331 781.6663)" class="room_name st3 st6 st5">113</text>
+          <text id="z115" transform="matrix(1 0 0 1 1577.1667 564.0002)" class="room_name st3 st6 st5">115</text>
+          <text id="z114" transform="matrix(1 0 0 1 1676 564.3335)" class="room_name st3 st6 st5">114</text>
+          <text id="z116" transform="matrix(1 0 0 1 1676.5002 472.7197)" class="room_name st3 st6 st5">116</text>
+          <text id="z117" transform="matrix(1 0 0 1 1674.9998 379.9998)" class="room_name st3 st6 st5">117</text>
+          <text id="z118" transform="matrix(1 0 0 1 1577.1663 380)" class="room_name st3 st6 st5">118</text>
+          <text id="z119" transform="matrix(1 0 0 1 1675.833 282.333)" class="room_name st3 st6 st5">119</text>
+          <text id="z120" transform="matrix(1 0 0 1 1676.5 205.6665)" class="room_name st3 st6 st5">120</text>
           <path class="st0" d="M166.8,681.8"/>
 </svg>
         <svg version="1.1" id="map2" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
@@ -350,35 +352,35 @@
           <polygon id="xკულინარიის_x5F_აკადემია" class="st2" points="1274,79.7 1363.7,79.7 1363.7,114
 	1629,114 1629,159.7 1699,159.7 1699,89.7 1629,89.7 1699,89.7 1699,-140.3 1714,-140.3 1714,-250.3 1274,-250.3 "/>
           <path class="st2" d="M904.1,449.3"/>
-          <text transform="matrix(1 0 0 1 104 1077)" class="st6 st7">200</text>
-          <text transform="matrix(1 0 0 1 259.2 1119.1)" class="st6 st7">201</text>
-          <text transform="matrix(1 0 0 1 324.2001 1116.6)" class="st6 st7">202</text>
-          <text transform="matrix(1 0 0 1 437.9 1117.1)" class="st6 st7">203</text>
-          <text transform="matrix(1 0 0 1 440.9 998)" class="st6 st7">204</text>
-          <text transform="matrix(1 0 0 1 552 1114)" class="st6 st7">205</text>
-          <text transform="matrix(1 0 0 1 661.9 1116.1)" class="st6 st7">206</text>
-          <text transform="matrix(1 0 0 1 658.9 998.2)" class="st6 st7">207</text>
-          <text transform="matrix(1 0 0 1 800.9 1113.5)" class="st6 st7">208</text>
-          <text transform="matrix(2.244830e-010 -1 1 2.244830e-010 975.8965 1126.6016)" class="st6 st7">209</text>
-          <text transform="matrix(2.244830e-010 -1 1 2.244830e-010 976.8965 1012.3027)" class="st6 st7">210</text>
-          <text transform="matrix(1 0 0 1 1022.9 1001.8)" class="st6 st7">212</text>
-          <text transform="matrix(1 0 0 1 1024.9 1116.1)" class="st6 st7">211</text>
-          <text transform="matrix(1 0 0 1 1119.2334 1113.5833)" class="st6 st7">213</text>
-          <text transform="matrix(1 0 0 1 1245.9166 1111.5333)" class="st6 st7">214</text>
-          <text transform="matrix(4.489659e-011 -1 1 4.489659e-011 1205.498 1008.8691)" class="st6 st7">215</text>
-          <text transform="matrix(1 0 0 1 1401.1996 1118.0005)" class="st6 st7">217</text>
-          <text transform="matrix(1 0 0 1 1261 1000.6664)" class="st6 st7">216</text>
-          <text transform="matrix(1 0 0 1 1499.667 1088.667)" class="st6 st7">218</text>
-          <text transform="matrix(1 0 0 1 757.6665 832)" class="st6 st7">220</text>
-          <text transform="matrix(1 0 0 1 853 830)" class="st6 st7">219</text>
-          <text transform="matrix(1 0 0 1 853.6665 740.667)" class="st6 st7">221</text>
-          <text transform="matrix(1 0 0 1 855.7332 649.333)" class="st6 st7">222</text>
-          <text transform="matrix(1 0 0 1 754.5668 648)" class="st6 st7">223</text>
-          <text transform="matrix(1 0 0 1 854.2001 564.6667)" class="st6 st7">224</text>
-          <text transform="matrix(1 0 0 1 852.9333 489.6333)" class="st6 st7">225</text>
-          <text transform="matrix(1 0 0 1 962.7664 29.3333)" class="st6 st7">B1</text>
-          <text transform="matrix(1 0 0 1 1091 25.3335)" class="st6 st7">ტ1,4</text>
-          <text transform="matrix(1 0 0 1 1369.6666 -60.6667)" class="st6 st7">კულინარიის აკადემია</text>
+          <text id="z200" transform="matrix(1 0 0 1 104 1077)" class="room_name st6 st7">200</text>
+          <text id="z201" transform="matrix(1 0 0 1 259.2 1119.1)" class="room_name st6 st7">201</text>
+          <text id="z202" transform="matrix(1 0 0 1 324.2001 1116.6)" class="room_name st6 st7">202</text>
+          <text id="z203" transform="matrix(1 0 0 1 437.9 1117.1)" class="room_name st6 st7">203</text>
+          <text id="z204" transform="matrix(1 0 0 1 440.9 998)" class="room_name st6 st7">204</text>
+          <text id="z205" transform="matrix(1 0 0 1 552 1114)" class="room_name st6 st7">205</text>
+          <text id="z206" transform="matrix(1 0 0 1 661.9 1116.1)" class="room_name st6 st7">206</text>
+          <text id="z207" transform="matrix(1 0 0 1 658.9 998.2)" class="room_name st6 st7">207</text>
+          <text id="z208" transform="matrix(1 0 0 1 800.9 1113.5)" class="room_name st6 st7">208</text>
+          <text id="z209" transform="matrix(2.244830e-010 -1 1 2.244830e-010 975.8965 1126.6016)" class="room_name st6 st7">209</text>
+          <text id="z210" transform="matrix(2.244830e-010 -1 1 2.244830e-010 976.8965 1012.3027)" class="room_name st6 st7">210</text>
+          <text id="z212" transform="matrix(1 0 0 1 1022.9 1001.8)" class="room_name st6 st7">212</text>
+          <text id="z211" transform="matrix(1 0 0 1 1024.9 1116.1)" class="room_name st6 st7">211</text>
+          <text id="z213" transform="matrix(1 0 0 1 1119.2334 1113.5833)" class="room_name st6 st7">213</text>
+          <text id="z214" transform="matrix(1 0 0 1 1245.9166 1111.5333)" class="room_name st6 st7">214</text>
+          <text id="z215" transform="matrix(4.489659e-011 -1 1 4.489659e-011 1205.498 1008.8691)" class="room_name st6 st7">215</text>
+          <text id="z217" transform="matrix(1 0 0 1 1401.1996 1118.0005)" class="room_name st6 st7">217</text>
+          <text id="z216" transform="matrix(1 0 0 1 1261 1000.6664)" class="room_name st6 st7">216</text>
+          <text id="z218" transform="matrix(1 0 0 1 1499.667 1088.667)" class="room_name st6 st7">218</text>
+          <text id="z220" transform="matrix(1 0 0 1 757.6665 832)" class="room_name st6 st7">220</text>
+          <text id="z219" transform="matrix(1 0 0 1 853 830)" class="room_name st6 st7">219</text>
+          <text id="z221" transform="matrix(1 0 0 1 853.6665 740.667)" class="room_name st6 st7">221</text>
+          <text id="z222" transform="matrix(1 0 0 1 855.7332 649.333)" class="room_name st6 st7">222</text>
+          <text id="z223" transform="matrix(1 0 0 1 754.5668 648)" class="room_name st6 st7">223</text>
+          <text id="z224" transform="matrix(1 0 0 1 854.2001 564.6667)" class="room_name st6 st7">224</text>
+          <text id="z225" transform="matrix(1 0 0 1 852.9333 489.6333)" class="room_name st6 st7">225</text>
+          <text id="zB1" transform="matrix(1 0 0 1 962.7664 29.3333)" class="room_name st6 st7">B1</text>
+          <text id="zტ1_x2C_4" transform="matrix(1 0 0 1 1091 25.3335)" class="room_name st6 st7">ტ1,4</text>
+          <text id="zკულინარიის_x5F_აკადემია" transform="matrix(1 0 0 1 1369.6666 -60.6667)" class="room_name st6 st7">კულინარიის აკადემია</text>
 </svg>
         <svg version="1.1" id="map3" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
              viewBox="0 -360 1700 1600" style="enable-background:new 0 -360 1700 1600;" xml:space="preserve">
@@ -430,38 +432,38 @@
           <polyline id="XMLID_18_" class="st2" points="1132.8,-19.4 1153,-19.4 1153,45.6 1132.8,45.6 "/>
           <path id="xკაფეტერია" class="cafeteria"
                 d="M1153,60.7h420V-4h10c0-230,0-230,0-230h20v-70h-85h85v-30h-450V60.7z"/>
-          <text transform="matrix(1 0 0 1 141.5 970)" class="st6 st7">301</text>
-          <text transform="matrix(1 0 0 1 203.5 969.5)" class="st6 st7">302</text>
-          <text transform="matrix(1 0 0 1 313.5 969.5)" class="st6 st7">303</text>
-          <text transform="matrix(4.489659e-011 -1 1 4.489659e-011 287.498 876.502)" class="st6 st7">304</text>
-          <text transform="matrix(1 0 0 1 316 862)" class="st6 st7">305</text>
-          <text transform="matrix(1 0 0 1 433 967.5)" class="st6 st7">306</text>
-          <text transform="matrix(4.489659e-011 -1 1 4.489659e-011 508.498 875.002)" class="st6 st7">308</text>
-          <text transform="matrix(1 0 0 1 492.5 966)" class="st6 st7">307-1</text>
-          <text transform="matrix(1 0 0 1 563 965.5)" class="st6 st7">307-2</text>
-          <text transform="matrix(1 0 0 1 547 864)" class="st6 st7">309</text>
-          <text transform="matrix(1 0 0 1 650 964)" class="st6 st7">310</text>
-          <text transform="matrix(4.489659e-011 -1 1 4.489659e-011 854.998 871.002)" class="st6 st7">312</text>
-          <text transform="matrix(4.489659e-011 -1 1 4.489659e-011 852.498 979.002)" class="st6 st7">311</text>
-          <text transform="matrix(1 0 0 1 899 865)" class="st6 st7">314</text>
-          <text transform="matrix(1 0 0 1 896 962)" class="st6 st7">313</text>
-          <text transform="matrix(1 0 0 1 994 964)" class="st6 st7">315</text>
-          <text transform="matrix(4.489659e-011 -1 1 4.489659e-011 1074.498 878.502)" class="st6 st7">317</text>
-          <text transform="matrix(4.489659e-011 -1 1 4.489659e-011 1078.9961 984.002)" class="st6 st7">316</text>
-          <text transform="matrix(1 0 0 1 1125 963)" class="st6 st7">318</text>
-          <text transform="matrix(1 0 0 1 1120.5 861)" class="st6 st7">319</text>
-          <text transform="matrix(1 0 0 1 1236.5 971.5)" class="st6 st7">320</text>
-          <text transform="matrix(1 0 0 1 1353 932)" class="st6 st7">321</text>
-          <text transform="matrix(1 0 0 1 630 701)" class="st6 st7">323</text>
-          <text transform="matrix(1 0 0 1 731 703.2)" class="st6 st7">322</text>
-          <text transform="matrix(1 0 0 1 730.8 519)" class="st6 st7">325</text>
-          <text transform="matrix(1 0 0 1 728 616.35)" class="st6 st7">324</text>
-          <text transform="matrix(1 0 0 1 632.5 528)" class="st6 st7">326</text>
-          <text transform="matrix(1 0 0 1 731 426)" class="st6 st7">327</text>
-          <text transform="matrix(1 0 0 1 725.8 368)" class="st6 st7">328</text>
-          <text transform="matrix(1 0 0 1 889 -85)" class="st6 st7">139</text>
-          <text transform="matrix(1 0 0 1 884 25)" class="st6 st7">88</text>
-          <text transform="matrix(1 0 0 1 1280 -121)" class="st6 st7">კაფეტერია</text>
+          <text id="z301" transform="matrix(1 0 0 1 141.5 970)" class="room_name st6 st7">301</text>
+          <text id="z302" transform="matrix(1 0 0 1 203.5 969.5)" class="room_name st6 st7">302</text>
+          <text id="z303" transform="matrix(1 0 0 1 313.5 969.5)" class="room_name st6 st7">303</text>
+          <text id="z304" transform="matrix(4.489659e-011 -1 1 4.489659e-011 287.498 876.502)" class="room_name st6 st7">304</text>
+          <text id="z305" transform="matrix(1 0 0 1 316 862)" class="room_name st6 st7">305</text>
+          <text id="z306" transform="matrix(1 0 0 1 433 967.5)" class="room_name st6 st7">306</text>
+          <text id="z308" transform="matrix(4.489659e-011 -1 1 4.489659e-011 508.498 875.002)" class="room_name st6 st7">308</text>
+          <text id="z307-1" transform="matrix(1 0 0 1 492.5 966)" class="room_name st6 st7">307-1</text>
+          <text id="z307-2" transform="matrix(1 0 0 1 563 965.5)" class="room_name st6 st7">307-2</text>
+          <text id="z309" transform="matrix(1 0 0 1 547 864)" class="room_name st6 st7">309</text>
+          <text id="z310" transform="matrix(1 0 0 1 650 964)" class="room_name st6 st7">310</text>
+          <text id="z312" transform="matrix(4.489659e-011 -1 1 4.489659e-011 854.998 871.002)" class="room_name st6 st7">312</text>
+          <text id="z311" transform="matrix(4.489659e-011 -1 1 4.489659e-011 852.498 979.002)" class="room_name st6 st7">311</text>
+          <text id="z314" transform="matrix(1 0 0 1 899 865)" class="room_name st6 st7">314</text>
+          <text id="z313" transform="matrix(1 0 0 1 896 962)" class="room_name st6 st7">313</text>
+          <text id="z315" transform="matrix(1 0 0 1 994 964)" class="room_name st6 st7">315</text>
+          <text id="z317" transform="matrix(4.489659e-011 -1 1 4.489659e-011 1074.498 878.502)" class="room_name st6 st7">317</text>
+          <text id="z316" transform="matrix(4.489659e-011 -1 1 4.489659e-011 1078.9961 984.002)" class="room_name st6 st7">316</text>
+          <text id="z318" transform="matrix(1 0 0 1 1125 963)" class="room_name st6 st7">318</text>
+          <text id="z319" transform="matrix(1 0 0 1 1120.5 861)" class="room_name st6 st7">319</text>
+          <text id="z320" transform="matrix(1 0 0 1 1236.5 971.5)" class="room_name st6 st7">320</text>
+          <text id="z321" transform="matrix(1 0 0 1 1353 932)" class="room_name st6 st7">321</text>
+          <text id="z323" transform="matrix(1 0 0 1 630 701)" class="room_name st6 st7">323</text>
+          <text id="z322" transform="matrix(1 0 0 1 731 703.2)" class="room_name st6 st7">322</text>
+          <text id="z325" transform="matrix(1 0 0 1 730.8 519)" class="room_name st6 st7">325</text>
+          <text id="z324" transform="matrix(1 0 0 1 728 616.35)" class="room_name st6 st7">324</text>
+          <text id="z326" transform="matrix(1 0 0 1 632.5 528)" class="room_name st6 st7">326</text>
+          <text id="z327" transform="matrix(1 0 0 1 731 426)" class="room_name st6 st7">327</text>
+          <text id="z328" transform="matrix(1 0 0 1 725.8 368)" class="room_name st6 st7">328</text>
+          <text id="z139" transform="matrix(1 0 0 1 889 -85)" class="room_name st6 st7">139</text>
+          <text id="z88" transform="matrix(1 0 0 1 884 25)" class="room_name st6 st7">88</text>
+          <text id="zკაფეტერია" transform="matrix(1 0 0 1 1280 -121)" class="room_name st6 st7">კაფეტერია</text>
           <polyline class="st2" points="1203,770 1203,825 1048,825 748,825 "/>
 </svg>
         <svg version="1.1" id="map4" xmlns="http://www.w3.org/2000/svg"
@@ -509,35 +511,35 @@
           <rect id="x423" x="519.8" y="219.5" class="room" width="65" height="65"/>
           <polyline id="XMLID_7_" class="st0" points="519.8,219.5 430,219.5 430,349 "/>
           <polyline id="XMLID_8_" class="st0" points="430,284.3 495,284.3 495,234 "/>
-          <text transform="matrix(1 0 0 1 -162.4 814.8)" class="st6 st7">400</text>
-          <text transform="matrix(1 0 0 1 14 874.3)" class="st6 st7">401</text>
-          <text transform="matrix(1 0 0 1 79.3 872)" class="st6 st7">402-1</text>
-          <text transform="matrix(1 0 0 1 145.3 870.3)" class="st6 st7">402-2</text>
-          <text transform="matrix(1 0 0 1 90 740)" class="st6 st7">403-1</text>
-          <text transform="matrix(4.489659e-011 -1 1 4.489659e-011 204.8448 774.0488)" class="st6 st7">403-2</text>
-          <text transform="matrix(4.489659e-011 -1 1 4.489659e-011 239.4979 883.8027)" class="st6 st7">404</text>
-          <text transform="matrix(4.489659e-011 -1 1 4.489659e-011 274.4979 882.8027)" class="st6 st7">405</text>
-          <text transform="matrix(1 0 0 1 354.8 879)" class="st6 st7">406</text>
-          <text transform="matrix(1 0 0 1 296 747)" class="st6 st7">407-1</text>
-          <text transform="matrix(1 0 0 1 378 747)" class="st6 st7">407-2</text>
-          <text transform="matrix(1 0 0 1 472 880.3)" class="st6 st7">408</text>
-          <text transform="matrix(1 0 0 1 698.3 867)" class="st6 st7">409</text>
-          <text transform="matrix(1 0 0 1 701 747)" class="st6 st7">410</text>
-          <text transform="matrix(1 0 0 1 819 870)" class="st6 st7">411</text>
-          <text transform="matrix(1 0 0 1 877 871)" class="st6 st7">412-1</text>
-          <text transform="matrix(1 0 0 1 954 872)" class="st6 st7">412-2</text>
-          <text transform="matrix(4.489659e-011 -1 1 4.489659e-011 898.645 773.3496)" class="st6 st7">413-2</text>
-          <text transform="matrix(1 0 0 1 940.3 752)" class="st6 st7">413-2</text>
-          <text transform="matrix(1 0 0 1 1052 867)" class="st6 st7">414</text>
-          <text transform="matrix(1 0 0 1 1165 848)" class="st6 st7">415</text>
-          <text transform="matrix(1 0 0 1 543 599)" class="st6 st7">416</text>
-          <text transform="matrix(1 0 0 1 449.5 595.5)" class="st6 st7">417</text>
-          <text transform="matrix(1 0 0 1 535.8 517)" class="st6 st7">418</text>
-          <text transform="matrix(1 0 0 1 537.3 479)" class="st6 st7">419</text>
-          <text transform="matrix(1 0 0 1 545.8 409)" class="st6 st7">420</text>
-          <text transform="matrix(1 0 0 1 442.5 408)" class="st6 st7">421</text>
-          <text transform="matrix(1 0 0 1 543 318)" class="st6 st7">422</text>
-          <text transform="matrix(1 0 0 1 545.8 261.15)" class="st6 st7">423</text>
+          <text id="z400" transform="matrix(1 0 0 1 -162.4 814.8)" class="room_name st6 st7">400</text>
+          <text id="z401" transform="matrix(1 0 0 1 14 874.3)" class="room_name st6 st7">401</text>
+          <text id="z402-1" transform="matrix(1 0 0 1 79.3 872)" class="room_name st6 st7">402-1</text>
+          <text id="z402-2" transform="matrix(1 0 0 1 145.3 870.3)" class="room_name st6 st7">402-2</text>
+          <text id="z403-1" transform="matrix(1 0 0 1 90 740)" class="room_name st6 st7">403-1</text>
+          <text id="z403-2" transform="matrix(4.489659e-011 -1 1 4.489659e-011 204.8448 774.0488)" class="room_name st6 st7">403-2</text>
+          <text id="z404" transform="matrix(4.489659e-011 -1 1 4.489659e-011 239.4979 883.8027)" class="room_name st6 st7">404</text>
+          <text id="z405" transform="matrix(4.489659e-011 -1 1 4.489659e-011 274.4979 882.8027)" class="room_name st6 st7">405</text>
+          <text id="z406" transform="matrix(1 0 0 1 354.8 879)" class="room_name st6 st7">406</text>
+          <text id="z407-1" transform="matrix(1 0 0 1 296 747)" class="room_name st6 st7">407-1</text>
+          <text id="z407-2" transform="matrix(1 0 0 1 378 747)" class="room_name st6 st7">407-2</text>
+          <text id="z408" transform="matrix(1 0 0 1 472 880.3)" class="room_name st6 st7">408</text>
+          <text id="z409" transform="matrix(1 0 0 1 698.3 867)" class="room_name st6 st7">409</text>
+          <text id="z410" transform="matrix(1 0 0 1 701 747)" class="room_name st6 st7">410</text>
+          <text id="z411" transform="matrix(1 0 0 1 819 870)" class="room_name st6 st7">411</text>
+          <text id="z412-1" transform="matrix(1 0 0 1 877 871)" class="room_name st6 st7">412-1</text>
+          <text id="z412-2" transform="matrix(1 0 0 1 954 872)" class="room_name st6 st7">412-2</text>
+          <text id="z413-1" transform="matrix(4.489659e-011 -1 1 4.489659e-011 898.645 773.3496)" class="room_name st6 st7">413-1</text>
+          <text id="z413-2" transform="matrix(1 0 0 1 940.3 752)" class="room_name st6 st7">413-2</text>
+          <text id="z414" transform="matrix(1 0 0 1 1052 867)" class="room_name st6 st7">414</text>
+          <text id="z415" transform="matrix(1 0 0 1 1165 848)" class="room_name st6 st7">415</text>
+          <text id="z416" transform="matrix(1 0 0 1 543 599)" class="room_name st6 st7">416</text>
+          <text id="z417" transform="matrix(1 0 0 1 449.5 595.5)" class="room_name st6 st7">417</text>
+          <text id="z418" transform="matrix(1 0 0 1 535.8 517)" class="room_name st6 st7">418</text>
+          <text id="z419" transform="matrix(1 0 0 1 537.3 479)" class="room_name st6 st7">419</text>
+          <text id="z420" transform="matrix(1 0 0 1 545.8 409)" class="room_name st6 st7">420</text>
+          <text id="z421" transform="matrix(1 0 0 1 442.5 408)" class="room_name st6 st7">421</text>
+          <text id="z422" transform="matrix(1 0 0 1 543 318)" class="room_name st6 st7">422</text>
+          <text id="z423" transform="matrix(1 0 0 1 545.8 261.15)" class="room_name st6 st7">423</text>
 </svg>
       </div>
     </td>
