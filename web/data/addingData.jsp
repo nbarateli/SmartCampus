@@ -52,13 +52,6 @@
           <br>
 
           <form id="sched-form" class="form-vertical">
-            <div class="form-group ui-widget">
-              <input name="room_name" autofocus class="form-control" id="room_n"
-                     placeholder="შეიყვანეთ ოთახის დასახელება">
-              <script>
-                  roomNameAutocomplete('room_n');
-              </script>
-            </div>
 
             <div class="form-group">
               <input type="email" name="lecturer_email"
@@ -112,6 +105,13 @@
               <input type="date" name="start_date" class="form-control" id="start_d">
             </div>
 
+            <div class="form-group ui-widget">
+              <input name="room_name" class="form-control" id="room_n"
+                     placeholder="შეიყვანეთ ოთახის დასახელება">
+              <script>
+ //                 roomNameAutocomplete('room_n');
+              </script>
+            </div>
 
             <br>
             <br>

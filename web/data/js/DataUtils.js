@@ -342,4 +342,70 @@ function handleFileSelectRoom(evt) {
     document.getElementById('room-list').innerHTML = '<ul>' + output.join('') + '</ul>';
 }
 
+$(document).ready(function () {
+    document.getElementById('lect-file').addEventListener('change', handleFileSelectLect, false);
+    document.getElementById('subj-file').addEventListener('change', handleFileSelectSubj, false);
+    document.getElementById('rooms-file').addEventListener('change', handleFileSelectRoom, false);
+
+    $("#num_stud").blur(function() {
+        makeRoomSuggestions();
+    });
+    $("#start_t").blur(function() {
+        makeRoomSuggestions();
+    });
+
+    $("#end_t").blur(function() {
+        makeRoomSuggestions();
+    });
+
+    $("#start_d").blur(function() {
+        makeRoomSuggestions();
+    });
+
+    $("#num_w").blur(function() {
+        makeRoomSuggestions();
+    });
+
+    $("#rep").blur(function() {
+        makeRoomSuggestions();
+    });
+
+    var roomNames = [];
+    var roomAutocomplete = roomNameAutocomplete(roomNames);
+
+    function makeRoomSuggestions() {
+        $.get("/rooms/availablerooms",
+            $("#sched-form").serialize(),
+            function(data) {
+                roomNames = [];
+                roomAutocomplete.destroy();
+                for (i in data) {
+                    var roomName = data[i].toString();
+
+                    roomNames.push(roomName);
+                }
+                roomAutocomplete = roomNameAutocomplete(roomNames);
+            }
+        );
+    }
+
+    function roomNameAutocomplete(roomNames) {
+        console.log(roomNames.toString());
+        return new autoComplete({
+            selector: '#room_n',
+            minChars: 1,
+            source: function (term, suggest) {
+                term = term.toLowerCase();
+                var choices = roomNames;
+                console.log(roomNames.toString());
+                var suggestions = [];
+                for (i = 0; i < choices.length; i++)
+                    if (~choices[i].toLowerCase().indexOf(term)) suggestions.push(choices[i]);
+                suggest(suggestions);
+            }
+        });
+    }
+
+});
+
 
