@@ -53,11 +53,11 @@ td, tr {
     padding-right: 5px;
 }
 
-#popup-div {
-    display: none;
+.popup-div {
+    display: unset;
     z-index: 1;
-    height: 1px;
-    width: 1px;
+    height: 100px;
+    width: 100px;
     position: absolute;
     right: 0;
     left: 0;

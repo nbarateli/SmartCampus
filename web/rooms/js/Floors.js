@@ -37,9 +37,9 @@ function workMaps(map) {
         var child = areas[i];
         var name = $(child).attr('class') == null? null : $(child).attr('class').split(' ')[0];
         if (name !== 'room' && name !== 'room_name') continue;
-        //areas[i].addEventListener("mouseover", myHover);
+        areas[i].addEventListener("mouseover", myHover);
         areas[i].addEventListener("click", roomClicked);
-        //areas[i].addEventListener("mouseout", myOut);
+        areas[i].addEventListener("mouseout", myOut);
     }
 }
 
@@ -61,40 +61,35 @@ function roomClicked() {
 }
 
 function myOut(){
-    var id = "h" + this.id;
+    var roomId = document.getElementById("x" + this.id.substr(1)).id;
+    var id = "h" + roomId;
     var hoverElement = document.getElementById(id);
     hoverElement.style.display = "none";
 }
 function myHover() {
     //return;
-    var id = this.id;
-
-    var already = document.getElementById("h" + id);
+    var roomId = document.getElementById("x" + this.id.substr(1)).id;
+    var already = document.getElementById("h" + roomId);
     if(already !== null){
         already.style.display = "unset";
         return;
     }
 
     var div = document.createElement("div");
-    var rect = document.getElementById(id).getBoundingClientRect();
+    var rect = document.getElementById(roomId).getBoundingClientRect();
     var leftPos = +rect.left + rect.width;
     var topPos = +rect.top ;
     console.log(leftPos +" "+ topPos);
 
-    var text = document.createTextNode("this room is: " + id);
+    var text = document.createTextNode("this room is: " + roomId.substr(1));
     div.appendChild(text);
 
-    div.id = "h"+id;
-    div.className = "shit";
-    div.style.backgroundColor = "yellow";
-    div.style.border = "1px";
-    div.style.position = "absolute";
+    div.className = "popup-div";
+    div.id = "h"+roomId;
     div.style.left = leftPos + "px";
-    div.style.top = topPos + "px"; //div.style.right = "2px"; div.style.bottom = "2px";
-    div.style.height = "100px";
-    div.style.width = "100px";
-    document.body.appendChild(div);
+    div.style.top = topPos + "px";
 
+    document.body.appendChild(div);
 }
 
 function floorChange() {
