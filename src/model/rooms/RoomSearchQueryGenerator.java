@@ -136,7 +136,7 @@ public class RoomSearchQueryGenerator implements CampusSearchQueryGenerator<Room
                 generateEqualsOrQuery(capacityTo, SQL_COLUMN_ROOM_CAPACITY, values, false),
                 generateLikeQuery((roomTypeToString(roomType, false).equals("") ? null : roomTypeToString(roomType, false)),
                         SQL_COLUMN_ROOM_TYPE, values),
-                generateLikeQuery((seatTypeToString(seatType, true).equals("") ? null : seatTypeToString(seatType, true)),
+                generateLikeQuery((seatTypeToString(seatType, true).equals("") ? null : seatTypeToString(seatType, false)),
                         SQL_COLUMN_ROOM_SEAT_TYPE, values),
                 generateBooleanQuery(availableForBooking ? true : null,
                         SQL_COLUMN_ROOM_AVAILABLE, values),
