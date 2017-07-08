@@ -347,26 +347,7 @@ $(document).ready(function () {
     document.getElementById('subj-file').addEventListener('change', handleFileSelectSubj, false);
     document.getElementById('rooms-file').addEventListener('change', handleFileSelectRoom, false);
 
-    $("#num_stud").blur(function() {
-        makeRoomSuggestions();
-    });
-    $("#start_t").blur(function() {
-        makeRoomSuggestions();
-    });
-
-    $("#end_t").blur(function() {
-        makeRoomSuggestions();
-    });
-
-    $("#start_d").blur(function() {
-        makeRoomSuggestions();
-    });
-
-    $("#num_w").blur(function() {
-        makeRoomSuggestions();
-    });
-
-    $("#rep").blur(function() {
+    $("#room_n").focus(function() {
         makeRoomSuggestions();
     });
 
