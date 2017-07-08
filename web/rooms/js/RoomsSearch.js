@@ -7,4 +7,27 @@ $(document).ready(function () {
     $("button").click(function () {
         $(this).next().slideToggle(400);
     });
+
+    $("#floor_index").blur(function() {
+        quantity_fixer(this, 1, 4);
+    });
+
+    $("#seat_quantity_from").blur(function(){
+        quantity_fixer(this, 0, 200);
+    });
+
+    $("#seat_quantity_to").blur(function(){
+        quantity_fixer(this, 0, 200);
+    });
+
+
 });
+
+function quantity_fixer(obj, low, high) {
+    var quan = $(obj).val();
+
+    if(quan < 0) $(obj).val(low);
+    if(quan > 200) $(obj).val(high);
+}
+
+

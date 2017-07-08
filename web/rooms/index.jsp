@@ -95,16 +95,17 @@
         </div>
 
         <div class="form-group">
-          <input type="number" name="room_floor" class="form-control" min="1" max="4"
+          <input id="floor_index" type="number" name="room_floor" class="form-control" min="1" max="4"
                  placeholder="შეიყვანეთ სართული">
         </div>
 
         <div class="form-group">
-          <input type="number"
+          <input type="number" id="seat_quantity_from"
                  name="capacity_from" class="form-control" title="-დან" min="0" max="200"
                  placeholder="ადგილების რაოდენობა(-დან)"> <br>
 
-          <input type="number" name="capacity_to" class="form-control" min="0" max="200"
+          <input type="number" id="seat_quantity_to"
+                 name="capacity_to" class="form-control" min="0" max="200"
                  title="-მდე" placeholder="ადგილების რაოდენობა(-მდე)">
         </div>
 
