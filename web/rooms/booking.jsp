@@ -77,12 +77,7 @@
       <div class="form-group">
         <input type="email" name="lecturer_email" id="lect_mail"
                class="form-control"
-               placeholder="შეიყვანეთ ლექტორის ფოსტის მისამართი">
-      </div>
-
-      <div class="form-group">
-        <input type="text" name="subject_name" class="form-control" id="subj_name"
-               placeholder="შეიყვანეთ საგნის სახელი">
+               placeholder="შეიყვანეთ ლექტორის/დამჯავშნავის ფოსტის მისამართი">
       </div>
 
       <div class="form-group">
@@ -91,8 +86,13 @@
       </div>
 
       <div class="form-group">
+        <input type="text" name="subject_name" class="form-control" id="subj_name"
+               placeholder="შეიყვანეთ საგნის სახელი (თუ ლექციაა)">
+      </div>
+
+      <div class="form-group">
         <input type="text" name="description" class="form-control" id="desc"
-               placeholder="შეიყვანეთ დაჯავშნის მიზეზი">
+               placeholder="შეიყვანეთ დაჯავშნის მიზეზი (თუ ლექცია არ არის)">
       </div>
 
       <input type="hidden" name="repetition" value="1">
@@ -175,7 +175,7 @@
 %>
 
     <script>
-      hideNeededInputs(false)
+      hideNeededInputs()
     </script>
 
 <%
@@ -183,7 +183,7 @@
 %>
 
     <script>
-      hideNeededInputs(true)
+      changeMail(<%="'" + currentUser.geteMail() + "'"%>)
     </script>
 
 <%

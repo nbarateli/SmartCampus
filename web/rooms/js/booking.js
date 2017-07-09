@@ -56,11 +56,11 @@ function changeName(name) {
     $("#r_name").val(name);
 }
 
-function hideNeededInputs(isLecture) {
-    if(isLecture) {
-        $("#desc").hide();
-    } else {
-        $("#lect_mail").hide();
-        $("#subj_name").hide();
-    }
+function changeMail(mail) {
+    $("#lect_mail").val(mail);
+}
+
+function hideNeededInputs() {
+    $("#lect_mail").hide();
+    $("#subj_name").hide();
 }

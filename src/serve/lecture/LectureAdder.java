@@ -63,6 +63,7 @@ public class LectureAdder extends HttpServlet {
         String lecturerEmail = request.getParameter("lecturer_email");
         String subjectName = request.getParameter("subject_name");
         String roomName = request.getParameter("room_name");
+        String description = request.getParameter("description");
         Date date = misc.Utils.stringToDate(request.getParameter("start_date"));
         Time startTime = misc.Utils.toHHMM(request.getParameter("start_time"));
         Time endTime = misc.Utils.toHHMM(request.getParameter("end_time"));
@@ -85,7 +86,7 @@ public class LectureAdder extends HttpServlet {
             for (int i = 0; i < numWeeks / rep; i++) {
                 Booking thisBooking = new Booking(
                         ModelConstants.SENTINEL_INT, lecturer, room, subject, weekDay, startTime,
-                        endTime, null, misc.Utils.addDaysToDate(date, i * DAYS_IN_WEEK * rep),
+                        endTime, description, misc.Utils.addDaysToDate(date, i * DAYS_IN_WEEK * rep),
                         misc.Utils.addDaysToDate(date, i * DAYS_IN_WEEK * rep));
                 manager.add(thisBooking);
             }
