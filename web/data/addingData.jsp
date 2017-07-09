@@ -188,6 +188,7 @@
               <label class="control-label">ოთახის ტიპი</label> <select
                     name="room_type" class="form-control">
               <option value="auditorium">აუდიტორია</option>
+              <option value="laboratory">ლაბორატორია</option>
               <option value="utility">სხვა</option>
             </select>
             </div>
@@ -196,12 +197,7 @@
               <label class="control-label">ადგილების ტიპი</label> <select
                     name="seat_type" class="form-control">
               <option value="desks">სკამები და მერხები</option>
-              <option value="wooden_chair">სკამ-მერხები
-                (ხის)
-              </option>
-              <option value="plastic_chair">სკამ-მერხები
-                (პლასტმასის)
-              </option>
+              <option value="chairs">სკამ-მერხები</option>
               <option value="computers">კომპიუტერები</option>
               <option value="tables">მაგიდები</option>
             </select>

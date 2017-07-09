@@ -11,13 +11,29 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
+<%!
+  private ManagerFactory factory;
+  private User currentUser;
+%>
+
 <%
-  ManagerFactory factory = (ManagerFactory) request.getServletContext().getAttribute(MANAGER_FACTORY);
-  User currentUser = (User) request.getSession().getAttribute(SIGNED_ACCOUNT);
+  factory = (ManagerFactory) request.getServletContext().getAttribute(MANAGER_FACTORY);
+  currentUser = (User) request.getSession().getAttribute(SIGNED_ACCOUNT);
 
   if (currentUser == null || !factory.getAccountManager().
           getAllPermissionsOf(currentUser).contains(User.UserPermission.BOOK_A_ROOM)) {
     response.sendRedirect("/unallowed_operation.html");
+  }
+%>
+
+<%!
+  private String getClickFunction() {
+    if (!factory.getAccountManager().
+            getAllPermissionsOf(currentUser).contains(User.UserPermission.INSERT_DATA)) {
+      return "addBookingFromForm()";
+    } else {
+      return "addLectureFromForm()";
+    }
   }
 %>
 
@@ -59,14 +75,28 @@
     <form id="booking-form" class="form-vertical">
 
       <div class="form-group">
+        <input type="email" name="lecturer_email" id="lect_mail"
+               class="form-control"
+               placeholder="შეიყვანეთ ლექტორის ფოსტის მისამართი">
+      </div>
+
+      <div class="form-group">
+        <input type="text" name="subject_name" class="form-control" id="subj_name"
+               placeholder="შეიყვანეთ საგნის სახელი">
+      </div>
+
+      <div class="form-group">
         <input type="text" name="room_name" class="form-control"
                placeholder="შეიყვანეთ ოთახის დასახელება" width="100px" id="r_name">
       </div>
 
       <div class="form-group">
-        <input type="text" name="description" class="form-control"
+        <input type="text" name="description" class="form-control" id="desc"
                placeholder="შეიყვანეთ დაჯავშნის მიზეზი">
       </div>
+
+      <input type="hidden" name="repetition" value="1">
+      <input type="hidden" name="num_weeks" value="1">
 
       <br>
 
@@ -117,7 +147,7 @@
 
       <input type="button" value="დამატება"
              class="btn btn-info btn-lg"
-             onclick="addBookingFromForm()">
+             onclick=<%= getClickFunction()%>>
     </form>
 
   </div>
@@ -132,9 +162,31 @@
 <%
   String roomName = request.getParameter("room_name");
   if (roomName != null) {
-    out.println("<script>");
-    out.println("changeName(" + roomName + ")");
-    out.println("</script>");
+%>
+
+    <script>
+      changeName(<%=roomName%>)
+    </script>
+
+<%
+  }
+  if(!factory.getAccountManager().
+          getAllPermissionsOf(currentUser).contains(User.UserPermission.INSERT_DATA)) {
+%>
+
+    <script>
+      hideNeededInputs(false)
+    </script>
+
+<%
+  } else {
+%>
+
+    <script>
+      hideNeededInputs(true)
+    </script>
+
+<%
   }
 %>
 

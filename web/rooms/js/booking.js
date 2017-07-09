@@ -11,6 +11,15 @@ function addBookingFromForm() {
     return false;
 }
 
+function addLectureFromForm() {
+    var params = ($('#sched-form').serialize());
+
+    //clearFormInputs(document.getElementById("sched-form"));
+
+    sendData("/lectures/addlecture", params, true);
+    return false;
+};
+
 function sendData (url, params) {
     var http = new XMLHttpRequest();
     http.open("POST", url, true);
@@ -45,4 +54,13 @@ function clearFormInputs(formToClear) {
 
 function changeName(name) {
     $("#r_name").val(name);
+}
+
+function hideNeededInputs(isLecture) {
+    if(isLecture) {
+        $("#desc").hide();
+    } else {
+        $("#lect_mail").hide();
+        $("#subj_name").hide();
+    }
 }

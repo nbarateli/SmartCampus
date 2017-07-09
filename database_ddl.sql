@@ -177,6 +177,8 @@ FOR EACH ROW
     INSERT INTO user_role (user_id, role) VALUES (NEW.user_id, NEW.initial_role);
   END;
 
+$$
+
 DELIMITER ;
 
 DELIMITER //
@@ -244,4 +246,7 @@ FOR EACH ROW
     END IF;
     END IF;
   END;
+  
+//
+
 DELIMITER ;
