@@ -35,12 +35,14 @@ function workMaps(map) {
     for (i = 0; i < areas.length; i++) {
         // var className = areas[i].getAttribute("class");
         var child = areas[i];
-        var name = $(child).attr("class");
-        if (name !== 'room') continue;
-        areas[i].addEventListener("mouseover", myHover);
+        var name = $(child).attr('class') == undefined? null : $(child).attr('class').split(' ')[0];
+        if (name !== 'room' && name !== 'room_name') continue;
         areas[i].addEventListener("click", roomClicked);
+        // areas[i].addEventListener("mouseover", myHover);
+        // areas[i].addEventListener("mouseout", myOut);
     }
 }
+
 
 
 function roomClicked() {
@@ -58,31 +60,36 @@ function roomClicked() {
     modal.style.display = "block";
 }
 
+function myOut(){
+    var roomId = document.getElementById("x" + this.id.substr(1)).id;
+    var id = "h" + roomId;
+    var hoverElement = document.getElementById(id);
+    hoverElement.style.display = "none";
+}
 function myHover() {
-    return;
-    var id = this.id;
-    var rect = document.getElementById(id).getBoundingClientRect();
-    var coords = this.getAttribute("coords").split(",");
-    var leftPos = +rect.left + 130 + +coords[2];
-    var topPos = +rect.top + +coords[3];
+    //return;
+    var roomId = document.getElementById("x" + this.id.substr(1)).id;
+    var already = document.getElementById("h" + roomId);
+    if(already !== null){
+        already.style.display = "unset";
+        return;
+    }
 
-    console.log("sum is: " + leftPos + " " + topPos);
-    console.log(leftPos + " " + topPos);
-    var div = document.getElementById("popup-div");
-    div.removeChild(div.childNodes[0]);
-    var text = document.createTextNode("this room is: " + id);
+    var div = document.createElement("div");
+    var rect = document.getElementById(roomId).getBoundingClientRect();
+    var leftPos = +rect.left + rect.width;
+    var topPos = +rect.top ;
+    console.log(leftPos +" "+ topPos);
+
+    var text = document.createTextNode("this room is: " + roomId.substr(1));
     div.appendChild(text);
 
-    div.style.backgroundColor = "yellow";
-    div.style.border = "1px";
-    div.style.position = "absolute";
+    div.className = "popup-div";
+    div.id = "h"+roomId;
     div.style.left = leftPos + "px";
-    div.style.top = topPos + "px"; //div.style.right = "2px"; div.style.bottom = "2px";
-    div.style.height = "100px";
-    div.style.width = "100px";
-    document.body.appendChild(div);
+    div.style.top = topPos + "px";
 
-    document.getElementById("par").innerHTML = id;
+    document.body.appendChild(div);
 }
 
 function floorChange() {
