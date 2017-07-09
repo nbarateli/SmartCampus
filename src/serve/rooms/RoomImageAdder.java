@@ -17,6 +17,10 @@ import static misc.WebConstants.*;
 
 /**
  * Created by Niko on 09.07.2017.
+ * <p>
+ * A servlet that is responsible for handling image uploads on rooms.
+ * Takes two parameters: room_id - which is the int id of the room in the database,
+ * and image_url that is the url of the image that's going to be added.
  */
 @WebServlet(name = "RoomImageAdder", urlPatterns = {"/rooms/add_image"})
 public class RoomImageAdder extends HttpServlet {
