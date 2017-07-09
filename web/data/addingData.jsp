@@ -134,7 +134,7 @@
             <div id="drop_zone" style="padding: 5px; border: dashed #cccccc">Drop files here</div>
           </div>
           <output id="list_drag"></output>
-          <script src="FileDragDrop.js"></script>
+          <script src="js/FileDragDrop.js"></script>
           <br>
           <br>
           <div class="form-vertical" id="lect-file">

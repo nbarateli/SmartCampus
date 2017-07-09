@@ -1,4 +1,4 @@
-var ExcelToJSON = function (file, type) {
+function ExcelToJSON(file, type) {
 
     this.parseExcel = function (file) {
 
@@ -36,21 +36,21 @@ var ExcelToJSON = function (file, type) {
         reader.readAsBinaryString(file);
     };
     this.parseExcel(file);
-};
+}
 
-var addLecturesFromFile = function (file) {
+function addLecturesFromFile(file) {
     ExcelToJSON(file, "lecture");
-};
+}
 
-var addSubjectsFromFile = function (file) {
+function addSubjectsFromFile(file) {
     ExcelToJSON(file, "subject");
-};
+}
 
-var addRoomsFromFile = function (file) {
+function addRoomsFromFile(file) {
     ExcelToJSON(file, "room");
-};
+}
 
-var toWeekDay = function (weeknumber) {
+function toWeekDay(weeknumber) {
     switch (weeknumber) {
         case "1":
             return "monday";
@@ -67,18 +67,18 @@ var toWeekDay = function (weeknumber) {
         case "7":
             return "sunday";
     }
-};
+}
 
-var toRoomType = function (type) {
+function toRoomType(type) {
     switch (type) {
         case "1":
             return "auditorium";
         case "2":
             return "utility";
     }
-};
+}
 
-var toSeatType = function (type) {
+function toSeatType(type) {
     switch (type) {
         case "1":
             return "desks";
@@ -91,9 +91,9 @@ var toSeatType = function (type) {
         case "5":
             return "tables";
     }
-};
+}
 
-var addLectureFromJson = function (jsonObject, doAlert) {
+function addLectureFromJson(jsonObject, doAlert) {
     var params = "";
     params += "lecturer_email=" + jsonObject.lecturer_email;
     params += "&subject_name=" + jsonObject.subject_name;
@@ -106,7 +106,7 @@ var addLectureFromJson = function (jsonObject, doAlert) {
 
     console.log(params);
     sendData("/lectures/addlecture", params, doAlert);
-};
+}
 
 var addSubjectFromJson = function (jsonObject, doAlert) {
     var params = "subj_name=" + jsonObject.subj_name;
@@ -114,7 +114,7 @@ var addSubjectFromJson = function (jsonObject, doAlert) {
     sendData("/lectures/addsubject", params, doAlert);
 };
 
-var addRoomFromJson = function (jsonObject, doAlert) {
+function addRoomFromJson(jsonObject, doAlert) {
     var name = jsonObject['ოთახის N'].toString();
     var typePure = jsonObject['ტიპი'];
 
@@ -228,9 +228,9 @@ var addRoomFromJson = function (jsonObject, doAlert) {
     params += "&can_be_booked=" + canBeBooked(typePure);
 
     sendData("/rooms/addroom", params, doAlert);
-};
+}
 
-var sendData = function (url, params, doAlert) {
+function sendData(url, params, doAlert) {
     var http = new XMLHttpRequest();
     http.open("POST", url, true);
 
@@ -243,7 +243,7 @@ var sendData = function (url, params, doAlert) {
         }
     };
     http.send(params);
-};
+}
 
 function createDialog() {
     var conf = confirm("დარწმუნებული ხართ რომ გსურთ ყველა ლექციის შესახებ მონაცემების წაშლა?");
@@ -253,41 +253,41 @@ function createDialog() {
     }
 }
 
-var addLectureFromForm = function () {
+function addLectureFromForm() {
     var params = ($('#sched-form').serialize());
 
     //clearFormInputs(document.getElementById("sched-form"));
 
     sendData("/lectures/addlecture", params, true);
     return false;
-};
+}
 
-var removeRoomFromForm = function () {
+function removeRoomFromForm() {
     var params = ($('#remove-room-form').serialize());
 
     clearFormInputs(document.getElementById("remove-room-form"));
 
     sendData("/rooms/removeroom", params, true);
     return false;
-};
+}
 
-var addRoomFromForm = function () {
+function addRoomFromForm() {
     var params = ($('#add-room-form').serialize());
 
     clearFormInputs(document.getElementById("add-room-form"));
 
     sendData("/rooms/addroom", params, true);
     return false;
-};
+}
 
-var addSubjectFromForm = function () {
+function addSubjectFromForm() {
     var params = ($('#add-subj-form').serialize());
 
     clearFormInputs(document.getElementById("add-subj-form"));
 
     sendData("/lectures/addsubject", params, true);
     return false;
-};
+}
 
 function clearFormInputs(formToClear) {
 
