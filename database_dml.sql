@@ -50,3 +50,6 @@ INSERT INTO item_report (item_name, item_description, author_id, report_type, da
   ('ლეპტოპი', 'alienware Intel® Core™ i7-7820HK', 3, 'found', '18-04-17'),
   ('საფულე', 'შავი, ტყავის', 6, 'lost', '17-05-17'),
   ('ყურსასმენი', 'მწვანე, Panasonic-ის', 3, 'found', '16-05-17');
+  
+
+  

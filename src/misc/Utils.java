@@ -538,6 +538,9 @@ public final class Utils {
      * @return date gotten by adding days
      */
     public static Date addDaysToDate(Date date, int numDays) {
+        if(date == null)
+            return null;
+
         Calendar c = Calendar.getInstance();
         c.setTime(date);
         c.add(Calendar.DATE, numDays);

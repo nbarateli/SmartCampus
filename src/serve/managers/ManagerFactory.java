@@ -19,7 +19,7 @@ public class ManagerFactory {
     private BookingManager bookingManager;
 
     public ManagerFactory() {
-
+        connector = new DBConnector();
     }
 
     public DBConnector getConnector() {

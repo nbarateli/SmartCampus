@@ -1,6 +1,13 @@
 package serve.managers;
 
-import java.sql.*;
+import com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource;
+import misc.DBInfo;
+
+import javax.sql.PooledConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import static misc.DBInfo.*;
 
@@ -10,8 +17,20 @@ import static misc.DBInfo.*;
  * Responsible for creating a connecting and executing queries in database.
  */
 public class DBConnector {
-    DBConnector() {
+    private PooledConnection pool;
 
+    DBConnector() {
+        MysqlConnectionPoolDataSource dataSource = new MysqlConnectionPoolDataSource();
+        try {
+            DBInfo.class.newInstance();
+            dataSource.setURL(MYSQL_DATABASE_SERVER);
+            dataSource.setUser(MYSQL_USERNAME);
+            dataSource.setPassword(MYSQL_PASSWORD);
+            pool = dataSource.getPooledConnection(MYSQL_USERNAME, MYSQL_PASSWORD);
+        } catch (Exception e) {
+            e.printStackTrace();
+            //ignored
+        }
     }
 
 
@@ -59,8 +78,7 @@ public class DBConnector {
     private Object execute(String sql, Object[] values, boolean isUpdate) throws SQLException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection
-                    (MYSQL_DATABASE_SERVER, MYSQL_USERNAME, MYSQL_PASSWORD);
+            Connection connection = pool.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.executeQuery("USE " + MYSQL_DATABASE_NAME + ";");
             if (values != null) {

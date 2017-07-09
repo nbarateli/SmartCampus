@@ -1,16 +1,19 @@
 <%@ page import="misc.WebConstants" %>
+<%@ page import="model.accounts.AccountManager" %>
+<%@ page import="model.accounts.User" %>
 <%@ page import="model.bookings.Booking" %>
 <%@ page import="model.lectures.CampusSubject" %>
-<%@ page import="model.rooms.Room" %>
-<%@ page import="model.rooms.RoomManager" %>
 <%@ page import="static misc.Utils.roomTypeToString" %>
 <%@ page import="static misc.Utils.toSeatType" %>
 <%@ page import="static misc.Utils.toGeorgian" %>
 <%@ page import="static misc.Utils.seatTypeToString" %>
 <%@ page import="static misc.WebConstants.MANAGER_FACTORY" %>
-<%@ page import="serve.managers.ManagerFactory" %>
-<%@ page import="java.util.List" %>
+<%@ page import="model.rooms.Room" %>
+<%@ page import="model.rooms.RoomManager" %>
 <%@ page import="static misc.Utils.*" %>
+<%@ page import="serve.managers.ManagerFactory" %>
+<%@ page import="static misc.WebConstants.SIGNED_ACCOUNT" %>
+<%@ page import="java.util.List" %>
 <%--
   Created by IntelliJ IDEA.
   User: Niko
@@ -28,7 +31,30 @@
 --%>
 <head>
   <link rel="stylesheet" href="css/ShowRoomStyle.css">
+  <%--<link rel="stylesheet" href="/css/bootstrap.css">--%>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/data/css/addingDataStyle.css">
+  <%--<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">--%>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
   <%!
+    private boolean canDisplay(HttpServletRequest request) {
+      User user = (User) request.getSession().getAttribute(SIGNED_ACCOUNT);
+      AccountManager manager = ((ManagerFactory) request.getServletContext().getAttribute(MANAGER_FACTORY)).
+              getAccountManager();
+      try {
+        return user != null && manager.getAllPermissionsOf(user).contains(User.UserPermission.INSERT_DATA);
+      } catch (Exception e) {
+        return false;
+      }
+    }
+
     private void printAll(List<Booking> bookings, JspWriter out) throws Exception {
       for (Booking booking : bookings) {
         CampusSubject subject = booking.getSubject();
@@ -65,6 +91,48 @@
   </title>
 </head>
 <body style="background-color: #bbbbbb">
+<div class="modal fade" id="add-room-modal" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <br>
+        <br>
+        <br>
+        <label class="info-label"><b>აირჩიეთ სურათ(ებ)ი:</b></label>
+        <br>
+        <br>
+
+        <br>
+        <br>
+        <br>
+
+        <br>
+        <br>
+        <div class="form-vertical" id="rooms-file">
+          <input type="file" id='imageup' name="pic" multiple accept="image/*" style=";display:none">
+          <div style="padding: 10px;border: solid 1px #cccccc">
+            <div id="drop_zone" style="padding: 5px; border: dashed #cccccc">Drop files
+              here
+            </div>
+          </div>
+          <br>
+          <output id="image-list"></output>
+        </div>
+        <br>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+<%
+  if (canDisplay(request)) {
+    out.print("<button class=\"main-button\" data-toggle=\"modal\" data-target=\"#add-room-modal\">სურათის ატვირთვა\n" +
+            "</button>");
+  }
+%>
+<script src="js/addImages.js"></script>
 <div align="center">
   <div class="to-hide">
     <div style="font-size: 25px"><%out.println(room.getRoomName());%></div>

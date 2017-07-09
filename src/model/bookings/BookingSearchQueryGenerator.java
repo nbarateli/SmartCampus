@@ -149,8 +149,8 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
                         SQL_TABLE_ROOM + "." + SQL_COLUMN_BOOKING_ROOM, values) + " AND ",
                 generateLikeQuery(subject, SQL_COLUMN_BOOKING_SUBJECT_ID, values) + " AND ",
                 generateLikeQuery(day, SQL_COLUMN_BOOKING_WEEK_DAY, values) + " AND ",
-                generateTimeQuery(startTime, SQL_COLUMN_BOOKING_START_TIME, values, true) + " AND ",
-                generateTimeQuery(endTime, SQL_COLUMN_BOOKING_END_TIME, values, false) + " AND ",
+                generateTimeQuery(endTime, SQL_COLUMN_BOOKING_START_TIME, values, false) + " AND ",
+                generateTimeQuery(startTime, SQL_COLUMN_BOOKING_END_TIME, values, true) + " AND ",
                 generateLikeQuery(description, SQL_COLUMN_BOOKING_DESCRIPTION, values) + " AND ",
                 generateDateQuery(startDate, SQL_COLUMN_BOOKING_START_DATE, values, true) + "AND",
                 generateDateQuery(endDate, SQL_COLUMN_BOOKING_END_DATE, values, false)
