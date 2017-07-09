@@ -84,7 +84,11 @@ public class DefaultAccountManager implements AccountManager {
 
     @Override
     public List<User.UserPermission> getAllPermissionsOf(User user) {
+
         List<User.UserPermission> permissions = new ArrayList<>();
+        if (user == null) {
+            return permissions;
+        }
         String sql = String.format("SELECT * FROM %s WHERE %s = ?", SQL_TABLE_USER_PERMISSION, SQL_COLUMN_USER_PERMISSION_USER);
         try (ResultSet resultSet = connector.executeQuery(sql, user.getId())) {
             while (resultSet.next()) {

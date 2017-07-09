@@ -20,22 +20,19 @@
   <title>მონაცემების შეყვანა</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/addingDataStyle.css">
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/rooms/css/SearchPageStyle.css">
-  <script src="/js/auto-complete.js"></script>
   <link rel="stylesheet" href="/css/auto-complete.css">
   <script src="/js/utils.js"></script>
-
+  <script src="/js/auto-complete.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="js/DataUtils.js"></script>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 <body>
 
@@ -109,7 +106,7 @@
               <input name="room_name" class="form-control" id="room_n"
                      placeholder="შეიყვანეთ ოთახის დასახელება">
               <script>
- //                 roomNameAutocomplete('room_n');
+                  //                 roomNameAutocomplete('room_n');
               </script>
             </div>
 
