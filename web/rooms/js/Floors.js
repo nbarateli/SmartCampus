@@ -35,11 +35,11 @@ function workMaps(map) {
     for (i = 0; i < areas.length; i++) {
         // var className = areas[i].getAttribute("class");
         var child = areas[i];
-        var name = $(child).attr('class') == null? null : $(child).attr('class').split(' ')[0];
+        var name = $(child).attr('class') == undefined? null : $(child).attr('class').split(' ')[0];
         if (name !== 'room' && name !== 'room_name') continue;
-        areas[i].addEventListener("mouseover", myHover);
         areas[i].addEventListener("click", roomClicked);
-        areas[i].addEventListener("mouseout", myOut);
+        // areas[i].addEventListener("mouseover", myHover);
+        // areas[i].addEventListener("mouseout", myOut);
     }
 }
 
