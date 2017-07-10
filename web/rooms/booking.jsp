@@ -62,6 +62,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
   <link rel="stylesheet" href="/css/bootstrap-datepicker.min.css">
   <script src="js/booking.js"></script>
+    <script src="js/form-validation.js"></script>
 </head>
 <body>
 
@@ -77,12 +78,12 @@
       <div class="form-group">
         <input type="email" name="lecturer_email" id="lect_mail"
                class="form-control"
-               placeholder="შეიყვანეთ ლექტორის/დამჯავშნავის ფოსტის მისამართი">
+               placeholder="შეიყვანეთ ლექტორის/დამჯავშნავის ფოსტის მისამართი" required>
       </div>
 
       <div class="form-group">
         <input type="text" name="room_name" class="form-control"
-               placeholder="შეიყვანეთ ოთახის დასახელება" width="100px" id="r_name">
+               placeholder="შეიყვანეთ ოთახის დასახელება" width="100px" id="r_name" required>
       </div>
 
       <div class="form-group">
@@ -105,22 +106,22 @@
         <table id="datepairExample" class="form-group">
           <tr id="fromRow">
             <td><label class="control-label">თარიღი
-              <input type="text" name="start_date" class="date start"/>
+                <input type="text" name="start_date" class="date start" required/>
             </label></td>
             <td><label class="control-label">დრო (დან)<br>
-              <input type="text" name="start_time" class="time start"/>
+                <input type="text" name="start_time" class="time start" required/>
             </label></td>
 
           </tr>
           <tr id="toRow">
             <td>
               <label class="control-label">დრო<br>
-                <input type="text" name="end_time" class="time end"/>
+                  <input type="text" name="end_time" class="time end" required/>
               </label>
             </td>
             <td>
               <label> თარიღი (მდე)
-                <input type="text" name="end_date" class="date end"/>
+                  <input type="text" name="end_date" class="date end" required/>
               </label>
             </td>
 
@@ -145,11 +146,13 @@
           $('#datepairExample').datepair();
       </script>
 
-      <input type="button" value="დამატება"
-             class="btn btn-info btn-lg"
-             onclick=<%= getClickFunction()%>>
+        <input type="button" value="დამატება" type="submit"
+               class="btn btn-info btn-lg"
+               onclick=<%= getClickFunction()%>>
     </form>
-
+      <script>
+          $('#booking-form').validate();
+      </script>
   </div>
 
   <div>
