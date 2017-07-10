@@ -12,7 +12,7 @@ function addBookingFromForm() {
 }
 
 function addLectureFromForm() {
-    var params = ($('#sched-form').serialize());
+    var params = ($('#booking-form').serialize());
 
     //clearFormInputs(document.getElementById("sched-form"));
 
@@ -32,6 +32,7 @@ function sendData (url, params) {
             window.alert(http.responseText);
         }
     };
+    console.log("params are: " + params);
     http.send(params);
 }
 function clearFormInputs(formToClear) {

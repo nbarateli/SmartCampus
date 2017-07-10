@@ -111,7 +111,7 @@
       <div class="form-group">
         <table id="datepairExample" class="form-group">
           <tr id="fromRow">
-            <td><label class="control-label">თარიღი
+            <td><label class="control-label">თარიღი <br>
               <input type="text" name="start_date" class="date start"/>
             </label></td>
             <td><label class="control-label">დრო (დან)<br>
@@ -121,16 +121,15 @@
           </tr>
           <tr id="toRow">
             <td>
-              <label class="control-label">დრო<br>
-                <input type="text" name="end_time" class="time end"/>
-              </label>
-            </td>
-            <td>
               <label> თარიღი (მდე)
                 <input type="text" name="end_date" class="date end"/>
               </label>
             </td>
-
+            <td>
+              <label class="control-label">დრო<br>
+                <input type="text" name="end_time" class="time end"/>
+              </label>
+            </td>
           </tr>
         </table>
       </div>

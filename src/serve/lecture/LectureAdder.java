@@ -64,11 +64,13 @@ public class LectureAdder extends HttpServlet {
         String subjectName = request.getParameter("subject_name");
         String roomName = request.getParameter("room_name");
         String description = request.getParameter("description");
-        Date date = misc.Utils.stringToDate(request.getParameter("start_date"));
+        Date date = misc.Utils.stringToDate(request.getParameter("start_date"), "dd.MM.yyyy");
         Time startTime = misc.Utils.toHHMM(request.getParameter("start_time"));
         Time endTime = misc.Utils.toHHMM(request.getParameter("end_time"));
         Integer numWeeks = misc.Utils.validateNumber(request.getParameter("num_weeks"), 1, 16);
         Integer rep = misc.Utils.validateNumber(request.getParameter("repetition"), 1, 16);
+
+        System.out.println(request.getParameter("start_date"));
 
         WeekDay weekDay = null;
         if (date != null)
@@ -80,6 +82,8 @@ public class LectureAdder extends HttpServlet {
         CampusSubject subject = subjectManager.find(generator).get(0);
         Room room = roomManager.getRoomByName(roomName);
 
+        System.out.println(lecturer.getLastName() +" "+ room.getRoomName() +" "+ subject.getName() +" "+ startTime +" "+ endTime +" "+ date +" "+
+        numWeeks +" "+ rep);
         if (lecturer != null && room != null && subject != null
                 && startTime != null && endTime != null && date != null && numWeeks != null && rep != null) {
 
