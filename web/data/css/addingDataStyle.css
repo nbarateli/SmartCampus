@@ -12,6 +12,12 @@
 
 body {
     background-color: #AED6F1;
+    background-image: url(../../img/addData-background2.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
 }
 
 #main-div {
