@@ -10,7 +10,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/auto-complete.js"></script>
+<script src="/js/utils.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/css/auto-complete.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0/js/bootstrap-datepicker.min.js"></script>
 <%!
   private ManagerFactory factory;
   private User currentUser;
@@ -80,9 +86,10 @@
                placeholder="შეიყვანეთ ლექტორის/დამჯავშნავის ფოსტის მისამართი">
       </div>
 
-      <div class="form-group">
+      <div class="form-group ui-widget">
         <input type="text" name="room_name" class="form-control"
                placeholder="შეიყვანეთ ოთახის დასახელება" width="100px" id="r_name">
+        <script>roomNameAutocomplete('r_name');</script>
       </div>
 
       <div class="form-group">
@@ -164,27 +171,27 @@
   if (roomName != null) {
 %>
 
-    <script>
-      changeName(<%=roomName%>)
-    </script>
+<script>
+    changeName(<%=roomName%>)
+</script>
 
 <%
   }
-  if(!factory.getAccountManager().
+  if (!factory.getAccountManager().
           getAllPermissionsOf(currentUser).contains(User.UserPermission.INSERT_DATA)) {
 %>
 
-    <script>
-      hideNeededInputs()
-    </script>
+<script>
+    hideNeededInputs()
+</script>
 
 <%
-  } else {
+} else {
 %>
 
-    <script>
-      changeMail(<%="'" + currentUser.geteMail() + "'"%>)
-    </script>
+<script>
+    changeMail(<%="'" + currentUser.geteMail() + "'"%>)
+</script>
 
 <%
   }
