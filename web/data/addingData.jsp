@@ -146,9 +146,6 @@
             <div class="form-group ui-widget">
               <input name="room_name" class="form-control" id="room_n"
                      placeholder="შეიყვანეთ ოთახის დასახელება">
-              <script>
-                  roomNameAutocomplete('room_n');
-              </script>
             </div>
 
             <br>
