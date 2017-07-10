@@ -10,7 +10,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/auto-complete.js"></script>
+<script src="/js/utils.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/css/auto-complete.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0/js/bootstrap-datepicker.min.js"></script>
 <%!
   private ManagerFactory factory;
   private User currentUser;
@@ -62,7 +68,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
   <link rel="stylesheet" href="/css/bootstrap-datepicker.min.css">
   <script src="js/booking.js"></script>
-    <script src="js/form-validation.js"></script>
 </head>
 <body>
 
@@ -78,12 +83,13 @@
       <div class="form-group">
         <input type="email" name="lecturer_email" id="lect_mail"
                class="form-control"
-               placeholder="შეიყვანეთ ლექტორის/დამჯავშნავის ფოსტის მისამართი" required>
+               placeholder="შეიყვანეთ ლექტორის/დამჯავშნავის ფოსტის მისამართი">
       </div>
 
-      <div class="form-group">
+      <div class="form-group ui-widget">
         <input type="text" name="room_name" class="form-control"
-               placeholder="შეიყვანეთ ოთახის დასახელება" width="100px" id="r_name" required>
+               placeholder="შეიყვანეთ ოთახის დასახელება" width="100px" id="r_name">
+        <script>roomNameAutocomplete('r_name');</script>
       </div>
 
       <div class="form-group">
@@ -106,22 +112,22 @@
         <table id="datepairExample" class="form-group">
           <tr id="fromRow">
             <td><label class="control-label">თარიღი
-                <input type="text" name="start_date" class="date start" required/>
+              <input type="text" name="start_date" class="date start"/>
             </label></td>
             <td><label class="control-label">დრო (დან)<br>
-                <input type="text" name="start_time" class="time start" required/>
+              <input type="text" name="start_time" class="time start"/>
             </label></td>
 
           </tr>
           <tr id="toRow">
             <td>
               <label class="control-label">დრო<br>
-                  <input type="text" name="end_time" class="time end" required/>
+                <input type="text" name="end_time" class="time end"/>
               </label>
             </td>
             <td>
               <label> თარიღი (მდე)
-                  <input type="text" name="end_date" class="date end" required/>
+                <input type="text" name="end_date" class="date end"/>
               </label>
             </td>
 
@@ -146,13 +152,11 @@
           $('#datepairExample').datepair();
       </script>
 
-        <input type="button" value="დამატება" type="submit"
-               class="btn btn-info btn-lg"
-               onclick=<%= getClickFunction()%>>
+      <input type="button" value="დამატება"
+             class="btn btn-info btn-lg"
+             onclick=<%= getClickFunction()%>>
     </form>
-      <script>
-          $('#booking-form').validate();
-      </script>
+
   </div>
 
   <div>
@@ -167,27 +171,27 @@
   if (roomName != null) {
 %>
 
-    <script>
-      changeName(<%=roomName%>)
-    </script>
+<script>
+    changeName(<%=roomName%>)
+</script>
 
 <%
   }
-  if(!factory.getAccountManager().
+  if (!factory.getAccountManager().
           getAllPermissionsOf(currentUser).contains(User.UserPermission.INSERT_DATA)) {
 %>
 
-    <script>
-      hideNeededInputs()
-    </script>
+<script>
+    hideNeededInputs()
+</script>
 
 <%
-  } else {
+} else {
 %>
 
-    <script>
-      changeMail(<%="'" + currentUser.geteMail() + "'"%>)
-    </script>
+<script>
+    changeMail(<%="'" + currentUser.geteMail() + "'"%>)
+</script>
 
 <%
   }

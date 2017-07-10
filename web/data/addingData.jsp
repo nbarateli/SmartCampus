@@ -19,13 +19,18 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <title>მონაცემების შეყვანა</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/addingDataStyle.css">
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
   <link rel="stylesheet" href="/rooms/css/SearchPageStyle.css">
   <link rel="stylesheet" href="/css/auto-complete.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
+
   <script src="/js/utils.js"></script>
   <script src="/js/auto-complete.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -33,6 +38,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="js/DataUtils.js"></script>
+
+
+  <link rel="stylesheet" href="/css/bootstrap-datepicker.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0/js/bootstrap-datepicker.min.js"></script>
+
+  <script src="${pageContext.request.contextPath}/scriptlibs/Datepair.js"></script>
+  <script src="${pageContext.request.contextPath}/scriptlibs/jquery.datepair.js"></script>
+  <script src="${pageContext.request.contextPath}/scriptlibs/wrapper.js"></script>
+
 </head>
 <body>
 
@@ -85,28 +99,55 @@
             <br>
             <br>
 
-            <div class="form-group">
-              <label class="control-label">ლექციის დრო</label>
-              <input type="text" name="start_time" class="form-control" id="start_t"
-                     placeholder="შეიყვანეთ ლექციის დაწყების დრო(HH:mm 24-საათიანი ფორმატით)">
-            </div>
 
             <div class="form-group">
+              <table id="datepairExample" class="form-group">
+                <tr id="fromRow">
+                  <td><label class="control-label">თარიღი<br>
+                    <input type="text" name="start_date" class="date start" id=start_d/>
+                  </label></td>
+                  <td><label class="control-label">დრო (დან)<br>
+                    <input type="text" name="start_time" class="time start" id="start_t"/>
+                  </label></td>
+                </tr>
+                <tr id="toRow">
+                  <td>
+                    <label class="control-label"> თარიღი (მდე)<br>
+                      <input type="text" name="end_date" class="date end" id="end_d"/>
+                    </label>
+                  </td>
+                  <td>
+                    <label class="control-label">დრო <br>
+                      <input type="text" name="end_time" class="time end" id="end_t"/>
+                    </label>
+                  </td>
 
-              <input type="text" name="end_time" class="form-control" id="end_t"
-                     placeholder="შეიყვანეთ ლექციის დასრულების დრო(HH:mm 24-საათიანი ფორმატით)">
+
+                </tr>
+              </table>
             </div>
 
-            <div class="form-group">
-              <label class="control-label">ლექციის დაწყების თარიღი</label>
-              <input type="date" name="start_date" class="form-control" id="start_d">
-            </div>
+            <script>
+                // initialize input widgets first
+                $('#datepairExample .time').timepicker({
+                    'showDuration': true,
+                    'timeFormat': 'H:i'
+                });
+
+                $('#datepairExample .date').datepicker({
+                    'format': 'dd.mm.yyyy',
+                    'autoclose': true
+                });
+
+                // initialize datepair
+                $('#datepairExample').datepair();
+            </script>
 
             <div class="form-group ui-widget">
               <input name="room_name" class="form-control" id="room_n"
                      placeholder="შეიყვანეთ ოთახის დასახელება">
               <script>
-                  //                 roomNameAutocomplete('room_n');
+                  roomNameAutocomplete('room_n');
               </script>
             </div>
 
