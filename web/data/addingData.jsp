@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/addingDataStyle.css">
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+  <link rel="icon" href="../img/smallLogo.png">
   <%--<link rel="stylesheet" href="/rooms/css/SearchPageStyle.css">--%>
   <link rel="stylesheet" href="/css/auto-complete.css">
   <link rel="stylesheet"

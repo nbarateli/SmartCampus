@@ -150,7 +150,7 @@
     out.println(room == null ? "Error" : room.getRoomName());
   %>
   </title>
-  <link rel="icon" href="img/bigLogo.png">
+  <link rel="icon" href="../img/smallLogo.png">
 
 </head>
 <body style="background-color: #bbbbbb">
