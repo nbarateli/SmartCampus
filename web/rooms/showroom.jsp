@@ -154,6 +154,9 @@
 
 </head>
 <body style="background-color: #bbbbbb">
+
+<a id="back-to-main" class="image" href="/"></a>
+
 <div class="modal fade" id="add-room-modal" role="dialog">
   <div class="modal-dialog">
 

@@ -71,7 +71,7 @@
   <script src="js/booking.js"></script>
 </head>
 <body>
-
+<a id="back-to-main" class="image" href="/"></a>
 <h1 id="header">ოთახის დაჯავშნა</h1>
 
 <br>

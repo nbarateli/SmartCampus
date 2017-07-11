@@ -27,3 +27,13 @@ tr, th, td {
   color: #cc0000;
   padding-right: 5px;
 }
+
+#back-to-main {
+  content: url(../../img/bigLogo.png);
+  position: relative;
+  float: right;
+  height: 80px;
+  width: 90px;
+  padding: 10px;
+  /*display: none;*/
+}

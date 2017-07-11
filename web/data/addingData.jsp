@@ -49,9 +49,10 @@
 
 </head>
 <body>
+<a id="back-to-main" class="image" href="/"></a>
 
 <div align="center" id="main-div">
-  <button class="main-button" data-toggle="modal" data-target="#schedule-modal">ლექციების ცხრილის შეყვანა</button>
+    <button class="main-button" data-toggle="modal" data-target="#schedule-modal">ლექციების ცხრილის შეყვანა</button>
 
   <div class="modal fade" id="schedule-modal" role="dialog">
     <div class="modal-dialog">

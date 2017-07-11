@@ -93,7 +93,15 @@ button:hover {
     border-radius: 6px !important;
 }
 
-
+#back-to-main {
+    content: url(../../img/bigLogo.png);
+    position: relative;
+    float: right;
+    height: 80px;
+    width: 90px;
+    padding: 10px;
+    /*display: none;*/
+}
 
 
 

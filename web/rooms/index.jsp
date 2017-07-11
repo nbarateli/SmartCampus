@@ -79,6 +79,9 @@
 
 </head>
 <body>
+
+<a id="back-to-main" class="image" href="/"></a>
+
 <table id="full-table">
   <tr>
     <td id="left-td">
