@@ -40,8 +40,6 @@ body {
     position: relative;
     float: left;
     margin-bot: 5px;
-
-    border-radius: 6px !important;
 }
 
 .form-right {
@@ -49,6 +47,17 @@ body {
     float: right;
     margin-bot: 5px;
     padding-bot: 5px;
+}
 
-    border-radius: 6px !important;
+#start_t {
+    border-radius: 6px;
+}
+#end_t {
+    border-radius: 6px;
+}
+#start_d {
+    border-radius: 6px;
+}
+#end_d {
+    border-radius: 6px;
 }
