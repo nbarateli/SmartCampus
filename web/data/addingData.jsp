@@ -99,17 +99,14 @@
             <br>
 
             <div id="datepairExample" class="form-group">
-              <div class="form-left">თარიღი (დან)
-                <input type="text" name="start_date" class="date start" id=start_d/ data-provide="datepicker">
+              <div class="form-mid">დაწყების თარიღი<br>
+                <input type="text" name="start_date" class="date start" id="start_d"/>
               </div>
-              <div class="form-right">დრო (დან)
+              <div class="form-left">დრო (დან) <br>
                 <input type="text" name="start_time" class="time start" id="start_t"/>
               </div>
-              <div class="form-left">თარიღი (მდე)
-                <input type="text" name="start_date" class="date start" id=end_d/ data-provide="datepicker">
-              </div>
-              <div class="form-right">დრო (მდე)
-                <input type="text" name="end_time" class="time start" id="end_t"/>
+              <div class="form-right">დრო (მდე) <br>
+                <input type="text" name="start_time" class="time start" id="end_t"/>
               </div>
             </div>
 

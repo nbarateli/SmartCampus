@@ -39,7 +39,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="/data/css/addingDataStyle.css">
-  <%--<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">--%>
+  <link rel="stylesheet" href="css/ShowRoomStyle.css">
+<%--<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">--%>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
@@ -144,10 +145,13 @@
 
     }
   %>
-  <title><%
+  <title>
+    <%
     out.println(room == null ? "Error" : room.getRoomName());
   %>
   </title>
+  <link rel="icon" href="img/bigLogo.png">
+
 </head>
 <body style="background-color: #bbbbbb">
 <div class="modal fade" id="add-room-modal" role="dialog">

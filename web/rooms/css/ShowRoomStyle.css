@@ -1,5 +1,15 @@
 @CHARSET "UTF-8";
 
+body {
+  height: 100%;
+  width: 100%;
+  background-image: url(../../img/showroom5.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 table {
   border-collapse: collapse;
 }
