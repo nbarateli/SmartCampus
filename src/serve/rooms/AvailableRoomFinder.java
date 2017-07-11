@@ -1,6 +1,7 @@
 package serve.rooms;
 
 import misc.ModelConstants;
+import misc.Utils;
 import model.bookings.Booking;
 import model.bookings.BookingManager;
 import model.bookings.BookingSearchQueryGenerator;
@@ -48,12 +49,12 @@ public class AvailableRoomFinder extends HttpServlet {
         List<Room> rooms = new ArrayList<>();
 
         Integer capacity = validateNumber(request.getParameter("num_students"), 1, 200);
-        RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();
-        query.setCapacityFrom(capacity == null ? 0 : capacity);
-        rooms = roomManager.find(query);
+        RoomSearchQueryGenerator roomQuery = new RoomSearchQueryGenerator();
+        roomQuery.setCapacityFrom(capacity == null ? 0 : capacity);
+        rooms = roomManager.find(roomQuery);
 
         Integer numWeeks = validateNumber(request.getParameter("num_weeks"), 1, 16);
-        Date date = stringToDate(request.getParameter("start_date"));
+        Date date = stringToDate(request.getParameter("start_date"), "dd.MM.yyyy");
         Time startTime = stringToTime(request.getParameter("start_time"));
         Time endTime = stringToTime(request.getParameter("end_time"));
 
@@ -70,7 +71,9 @@ public class AvailableRoomFinder extends HttpServlet {
                     Room room = it.next();
                     generator.setRoom(room);
                     generator.setStartDate(addDaysToDate(date, i * DAYS_IN_WEEK * rep));
+                    generator.setEndDate(addDaysToDate(date, i * DAYS_IN_WEEK * rep));
                     List<Booking> bookings = bookingManager.find(generator);
+                    if(bookings.size() == 0) continue;
                     for(int j = 0; j < bookings.size(); j++) {
                         if(bookings.get(j).getSubject() != null)
                             it.remove();
