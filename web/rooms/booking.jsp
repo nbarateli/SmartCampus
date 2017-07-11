@@ -1,7 +1,11 @@
 <%@ page import="model.accounts.User" %>
 <%@ page import="static misc.WebConstants.MANAGER_FACTORY" %>
 <%@ page import="static misc.WebConstants.SIGNED_ACCOUNT" %>
-<%@ page import="serve.managers.ManagerFactory" %><%--
+<%@ page import="serve.managers.ManagerFactory" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.StringTokenizer" %>
+<%@ page import="java.util.HashMap" %>
+<%--
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 03.07.2017
@@ -25,7 +29,6 @@
 <%
   factory = (ManagerFactory) request.getServletContext().getAttribute(MANAGER_FACTORY);
   currentUser = (User) request.getSession().getAttribute(SIGNED_ACCOUNT);
-
   if (currentUser == null || !factory.getAccountManager().
           getAllPermissionsOf(currentUser).contains(User.UserPermission.BOOK_A_ROOM)) {
     response.sendRedirect("/unallowed_operation.html");
@@ -112,22 +115,22 @@
         <table id="datepairExample" class="form-group">
           <tr id="fromRow">
             <td><label class="control-label">თარიღი <br>
-              <input type="text" name="start_date" class="date start"/>
+              <input type="text" name="start_date" class="date start" id = "start_dt"/>
             </label></td>
             <td><label class="control-label">დრო (დან)<br>
-              <input type="text" name="start_time" class="time start"/>
+              <input type="text" name="start_time" class="time start" id = "start_tm"/>
             </label></td>
 
           </tr>
           <tr id="toRow">
             <td>
               <label> თარიღი (მდე)
-                <input type="text" name="end_date" class="date end"/>
+                <input type="text" name="end_date" class="date end" id = "end_dt"/>
               </label>
             </td>
             <td>
               <label class="control-label">დრო<br>
-                <input type="text" name="end_time" class="time end"/>
+                <input type="text" name="end_time" class="time end" id = "end_tm"/>
               </label>
             </td>
           </tr>
@@ -141,12 +144,10 @@
               'showDuration': true,
               'timeFormat': 'H:i'
           });
-
           $('#datepairExample .date').datepicker({
               'format': 'dd.mm.yyyy',
               'autoclose': true
           });
-
           // initialize datepair
           $('#datepairExample').datepair();
       </script>
@@ -176,10 +177,125 @@
 
 <%
   }
+  Map<String, String> map = new HashMap<String, String>();
+  map.put("Jan", "01");
+  map.put("Feb", "02");
+  map.put("Mar", "03");
+  map.put("Apr", "04");
+  map.put("May", "05");
+  map.put("Jun", "06");
+  map.put("Jul", "07");
+  map.put("Aug", "08");
+  map.put("Sep", "09");
+  map.put("Oct", "10");
+  map.put("Nov", "11");
+  map.put("Dec", "12");
+  int i = 0;
+  String date1 = request.getParameter("start_date");
+  if (date1 != null) {
+  StringTokenizer st = new StringTokenizer(date1);
+  String date = "";
+
+  while (st.hasMoreTokens()) {
+    i++;
+    String temp = st.nextToken();
+    if(i == 2){
+        date = '.' + map.get(temp) + '.';
+    }
+    if(i == 3){
+        date = Integer.parseInt(temp) + date;
+    }
+    if(i == 6){
+      date = date + Integer.parseInt(temp);
+    }
+  }
+
+%>
+
+<script>
+    changeDate(<%="'" + date + "'"%>)
+</script>
+
+<%
+  }
+%>
+
+
+<%
+  String date2 = request.getParameter("end_date");
+  if (date2 != null) {
+  StringTokenizer st1 = new StringTokenizer(date2);
+  String dates = "";
+  i = 0;
+  while (st1.hasMoreTokens()) {
+  i++;
+  String temp = st1.nextToken();
+  if(i == 2){
+  dates = '.' + map.get(temp) + '.';
+  }
+  if(i == 3){
+  dates = Integer.parseInt(temp) + dates;
+  }
+  if(i == 6){
+  dates = dates + Integer.parseInt(temp);
+  }
+  }
+
+%>
+
+<script>
+    changeDateSecond(<%="'" + dates + "'"%>)
+</script>
+
+<%
+  }
+%>
+
+
+<%
+  String startTime = request.getParameter("start_time");
+  System.out.println(startTime);
+  if (startTime != null) {
+%>
+
+<script>
+    changeTimeStart(<%="'" + startTime + "'"%>)
+</script>
+
+<%
+  }
+%>
+
+<%
+  String endTime = request.getParameter("end_time");
+  System.out.println(endTime);
+  if (endTime != null) {
+%>
+
+<script>
+    changeTimeEnd(<%="'" + endTime + "'"%>)
+</script>
+
+<%
+  }
+%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%
   if (!factory.getAccountManager().
           getAllPermissionsOf(currentUser).contains(User.UserPermission.INSERT_DATA)) {
 %>
-
 <script>
     hideNeededInputs()
 </script>

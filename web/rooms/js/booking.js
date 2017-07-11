@@ -55,6 +55,26 @@ function clearFormInputs(formToClear) {
     }
 }
 
+function changeDate(date) {
+    console.log("bliad");
+    $("#start_dt").val(date);
+}
+
+function changeTimeStart(startTime) {
+    console.log("bliad");
+    $("#start_tm").val(startTime);
+}
+
+function changeTimeEnd(endTime) {
+    console.log("bliad");
+    $("#end_tm").val(endTime);
+}
+
+function changeDateSecond(date) {
+    console.log("bliad");
+    $("#end_dt").val(date);
+}
+
 function changeName(name) {
     $("#r_name").val(name);
 }
