@@ -49,7 +49,7 @@
 
 </head>
 <body>
-<a id="back-to-main" class="image" href="/"></a>
+<a id="back-to-main" class="image" href="/" style=" display:inline-block;"></a>
 
 <div align="center" id="main-div">
     <button class="main-button" data-toggle="modal" data-target="#schedule-modal">ლექციების ცხრილის შეყვანა</button>
