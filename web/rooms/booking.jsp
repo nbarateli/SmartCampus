@@ -167,7 +167,7 @@
           $('#datepairExample').datepair();
       </script>
 
-      <input type="button" value="დამატება" style="position: relative; margin-top: 100px;"
+      <input type="button" value="დამატება"
              class="btn btn-info btn-lg"
              onclick=<%= getClickFunction()%>>
     </form>
