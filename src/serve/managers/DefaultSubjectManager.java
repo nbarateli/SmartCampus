@@ -91,6 +91,4 @@ public class DefaultSubjectManager implements SubjectManager {
                 + SQL_COLUMN_LECTURE_ID + " = " + entityId;
         return successfulOperation(deleteQuery, connector);
     }
-
-
 }

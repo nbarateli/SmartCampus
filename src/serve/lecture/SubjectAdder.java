@@ -36,8 +36,6 @@ public class SubjectAdder extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         ManagerFactory factory = (ManagerFactory) getServletContext().getAttribute(MANAGER_FACTORY);
         SubjectManager manager = factory.getSubjectManager();
-
-
         String subjectName = request.getParameter("subj_name");
         SubjectSearchQueryGenerator gn = new SubjectSearchQueryGenerator();
 
@@ -50,6 +48,5 @@ public class SubjectAdder extends HttpServlet {
             response.getWriter().println(FAILED);
         }
     }
-
 }
 

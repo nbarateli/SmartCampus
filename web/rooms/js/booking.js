@@ -14,6 +14,8 @@ function addBookingFromForm() {
 function addLectureFromForm() {
     var params = ($('#booking-form').serialize());
 
+    console.log(params);
+
     //clearFormInputs(document.getElementById("sched-form"));
 
     sendData("/lectures/addlecture", params, true);
