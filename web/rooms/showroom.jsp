@@ -14,6 +14,7 @@
 <%@ page import="serve.managers.ManagerFactory" %>
 <%@ page import="static misc.WebConstants.SIGNED_ACCOUNT" %>
 <%@ page import="java.sql.Time" %>
+<%@ page import="java.text.DateFormat" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.util.List" %>
@@ -59,7 +60,7 @@
     }
 
 
-    private void printAll(List<Booking> bookings, JspWriter out) throws Exception {
+    private void printAll(Date startDate, List<Booking> bookings, JspWriter out) throws Exception {
       Time start = new Time(0, 0, 0);
       Time end = new Time(23, 59, 59);
       int x = 0;
@@ -221,12 +222,17 @@
         <%
           if (room != null && room.getRoomType() != Room.RoomType.UTILITY) {
             try {
-              printAll(manager.findAllBookingsAt(room), out);
+              Date date = new Date();
+
+              printAll(date, manager.findAllBookingsAt(room), out);
+              //out.println("<div>" + " Current Date is: " + date.toString() + "</div>");
+              //out.println("<div><button type=\"button\" onclick=\" \">შემდეგი დღე</button></div>");
             } catch (Exception e) {
 
             }
           }
         %>
+
       </table>
     </div>
   </div>
