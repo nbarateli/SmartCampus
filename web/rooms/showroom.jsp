@@ -13,6 +13,9 @@
 <%@ page import="static misc.Utils.*" %>
 <%@ page import="serve.managers.ManagerFactory" %>
 <%@ page import="static misc.WebConstants.SIGNED_ACCOUNT" %>
+<%@ page import="java.sql.Time" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <%@ page import="java.util.List" %>
 <%--
   Created by IntelliJ IDEA.
@@ -55,18 +58,64 @@
       }
     }
 
+
     private void printAll(List<Booking> bookings, JspWriter out) throws Exception {
-      for (Booking booking : bookings) {
+      Time start = new Time(0, 0, 0);
+      Time end = new Time(23, 59, 59);
+      int x = 0;
+      Booking last = null;
+      if(bookings.size() == 0){
+        out.println("<td>" + " Free " + "</td>");
+        out.println("<td>" + " empty " + "</td>");
+        out.println("<td>"+  start + "</td>");
+        out.println("<td>"+  end + "</td>");
+        out.println("<td><input type=\"submit\" value=\"დაჯავშნა\"></td>");
+      }
+      for (int i = 0; i < bookings.size(); i++){
+        Booking booking = bookings.get(i);
+
+        if(i != 0){
+          SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+          Date date1 = format.parse(last.getEndTime().toString());
+          Date date2 = format.parse(booking.getStartTime().toString());
+          long difference = date2.getTime() - date1.getTime();
+          if(difference/1000 > 1800){
+            out.println("<td>" + " Free " + "</td>");
+            out.println("<td>" + " empty " + "</td>");
+            out.println("<td>"+  last.getEndTime() + "</td>");
+            out.println("<td>"+  booking.getStartTime() + "</td>");
+            out.println("<td><input type=\"submit\" value=\"დაჯავშნა\"></td>");
+          }
+        }
+
+        if(i == 0 && !start.equals(booking.getStartTime())){
+          out.println("<td>" + " Free " + "</td>");
+          out.println("<td>" + " empty " + "</td>");
+          out.println("<td>"+  start + "</td>");
+          out.println("<td>"+  booking.getStartTime() + "</td>");
+          out.println("<td><input type=\"submit\" value=\"დაჯავშნა\"></td>");
+        }
         CampusSubject subject = booking.getSubject();
         out.println("<tr><form action=\"/lectures/removelecture\" method=\"post\">");
         out.println("<input type=\"hidden\" value=\"" + booking.getId() + "\" name=\"lecture_id\">");
-        out.println("<td>" + (subject == null ? "NO SUBJECT " : subject.getName()) + "</td>");
+        out.println("<td>" + (subject == null ? "Student Booking" : "Lecture: " + subject.getName()) + "</td>");
         out.println("<td>" + booking.getBooker().getFirstName() + " "
                 + booking.getBooker().getLastName() + "</td>");
-//        out.println("<td>" + toGeorgian(booking.getDay()) + " " + booking.getStartTime() + "</td>");
-        out.println("<td>" + exactDateToString(booking.getStartDate()) + "</td>");
+        out.println("<td>"+  booking.getStartTime() + "</td>");
+        out.println("<td>"+  booking.getEndTime() + "</td>");
+        //out.println("<td>" + exactDateToString(booking.getStartDate()) + "</td>");
         out.println("<td><input type=\"submit\" value=\"წაშლა\"></td>");
         out.println("</tr>");
+        if(i == bookings.size() - 1 && !start.equals(booking.getEndTime())){
+          out.println("<td>" + " Free " + "</td>");
+          out.println("<td>" + " empty " + "</td>");
+          out.println("<td>"+  booking.getEndTime() + "</td>");
+          out.println("<td>"+  end + "</td>");
+          out.println("<td><input type=\"submit\" value=\"დაჯავშნა\"></td>");
+        }
+
+
+        last = booking;
       }
     }
 
@@ -155,9 +204,10 @@
     <div>
       <table>
         <tr>
-          <th>სახელი</th>
-          <th>ლექტორი</th>
-          <th>დაწყების დრო</th>
+          <th>  Lecture/Student booking  </th>
+          <th>  Booker  </th>
+          <th>  Start time  </th>
+          <th>  end time  </th>
         </tr>
         <%
           if (room != null && room.getRoomType() != Room.RoomType.UTILITY) {
