@@ -51,19 +51,58 @@ button:hover {
     font-size: 20px;
 }
 
+.form-mid {
+    position: relative;
+}
+
 .form-left {
     position: relative;
     float: left;
+    margin-bot: 5px;
+
+    border-radius: 6px;
 }
 
 .form-right {
     position: relative;
     float: right;
+    margin-bot: 5px;
+    padding-bot: 5px;
+
+    border-radius: 6px;
 }
 
 #datepairExample {
     position: relative;
+    padding-bottom: 7px;
 }
+
+#start_t {
+    border-radius: 6px;
+}
+
+#end_t {
+    border-radius: 6px;
+}
+
+#start_d {
+    border-radius: 6px !important;
+}
+
+#end_d {
+    border-radius: 6px !important;
+}
+
+#back-to-main {
+    content: url(../../img/bigLogo.png);
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    height: 80px;
+    width: 90px;
+}
+
+
 
 
 

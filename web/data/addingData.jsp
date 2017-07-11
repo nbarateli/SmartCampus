@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/addingDataStyle.css">
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+  <link rel="icon" href="../img/smallLogo.png">
   <%--<link rel="stylesheet" href="/rooms/css/SearchPageStyle.css">--%>
   <link rel="stylesheet" href="/css/auto-complete.css">
   <link rel="stylesheet"
@@ -49,9 +49,10 @@
 
 </head>
 <body>
+<a id="back-to-main" class="image" href="/" style=" display:inline-block;"></a>
 
 <div align="center" id="main-div">
-  <button class="main-button" data-toggle="modal" data-target="#schedule-modal">ლექციების ცხრილის შეყვანა</button>
+    <button class="main-button" data-toggle="modal" data-target="#schedule-modal">ლექციების ცხრილის შეყვანა</button>
 
   <div class="modal fade" id="schedule-modal" role="dialog">
     <div class="modal-dialog">
@@ -99,16 +100,13 @@
             <br>
 
             <div id="datepairExample" class="form-group">
-              <div class="form-left">თარიღი (დან)
-                <input type="text" name="start_date" class="date start" id=start_d/ data-provide="datepicker">
+              <div class="form-mid">დაწყების თარიღი<br>
+                <input type="text" name="start_date" class="date start" id="start_d"/>
               </div>
-              <div class="form-right">დრო (დან)
+              <div class="form-left">დრო (დან) <br>
                 <input type="text" name="start_time" class="time start" id="start_t"/>
               </div>
-              <div class="form-left">თარიღი (მდე)
-                <input type="text" name="start_date" class="date start" id=end_d/ data-provide="datepicker">
-              </div>
-              <div class="form-right">დრო (მდე)
+              <div class="form-right">დრო (მდე) <br>
                 <input type="text" name="start_time" class="time start" id="end_t"/>
               </div>
             </div>

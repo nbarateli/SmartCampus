@@ -52,6 +52,7 @@
   <meta charset="utf-8">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="../img/smallLogo.png">
   <link rel="stylesheet" href="css/MapStyles.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/Floors.css">
@@ -78,6 +79,9 @@
 
 </head>
 <body>
+
+<a id="back-to-main" class="image" href="/"></a>
+
 <table id="full-table">
   <tr>
     <td id="left-td">
@@ -158,23 +162,23 @@
         <div class="form-group">
           <table id="datepairExample" class="form-group">
             <tr id="fromRow">
-              <td><label class="control-label">თარიღი
-                <input type="text" name="start_date" class="date start"/>
+              <td><label class="control-label">თარიღი (დან)
+                <input id="date-input-from" type="text" name="start_date" class="date start"/>
               </label></td>
               <td><label class="control-label">დრო (დან)<br>
-                <input type="text" name="start_time" class="time start"/>
+                <input id="time-input-from" type="text" name="start_time" class="time start"/>
               </label></td>
 
             </tr>
             <tr id="toRow">
               <td>
-                <label class="control-label">დრო<br>
-                  <input type="text" name="end_time" class="time end"/>
+                <label class="control-label">დრო (მდე)<br>
+                  <input id="time-input-to" type="text" name="end_time" class="time end"/>
                 </label>
               </td>
               <td>
                 <label> თარიღი (მდე)
-                  <input type="text" name="end_date" class="date end"/>
+                  <input id="date-input-to" type="text" name="end_date" class="date end"/>
                 </label>
               </td>
 

@@ -62,7 +62,7 @@ public final class Utils {
         int hour = Integer.valueOf(time.substring(0, 2));
         int min = Integer.valueOf(time.substring(3, 5));
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR, hour);
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MINUTE, min);
         calendar.set(Calendar.SECOND, 0);
         return new Time(calendar.getTimeInMillis());

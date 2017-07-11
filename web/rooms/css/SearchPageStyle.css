@@ -106,4 +106,30 @@ td, tr {
     padding-right: 0px;
 }
 
+#time-input-from {
+    border-radius: 6px;
+}
+
+#time-input-to {
+    border-radius: 6px;
+}
+
+#date-input-from {
+    border-radius: 6px;
+}
+
+#date-input-to {
+    border-radius: 6px;
+}
+
+#back-to-main {
+    content: url(../../img/bigLogo.png);
+    position: relative;
+    float: right;
+    height: 80px;
+    width: 90px;
+    padding: 10px;
+    /*display: none;*/
+}
+
 

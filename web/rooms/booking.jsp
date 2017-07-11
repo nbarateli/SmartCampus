@@ -18,6 +18,7 @@
 <script src="/js/auto-complete.js"></script>
 <script src="/js/utils.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="icon" href="../img/smallLogo.png">
 <link rel="stylesheet" href="/css/auto-complete.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0/js/bootstrap-datepicker.min.js"></script>
@@ -73,7 +74,7 @@
   <script src="js/booking.js"></script>
 </head>
 <body>
-
+<a id="back-to-main" class="image" href="/"></a>
 <h1 id="header">ოთახის დაჯავშნა</h1>
 
 <br>
