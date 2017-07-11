@@ -109,31 +109,46 @@
       <br>
 
       <label class="control-label" for="datepairExample"> დროით ძებნა</label>
-      <div class="form-group">
-        <table id="datepairExample" class="form-group">
-          <tr id="fromRow">
-            <td><label class="control-label">თარიღი <br>
-              <input type="text" name="start_date" class="date start"/>
-            </label></td>
-            <td><label class="control-label">დრო (დან)<br>
-              <input type="text" name="start_time" class="time start"/>
-            </label></td>
-
-          </tr>
-          <tr id="toRow">
-            <td>
-              <label> თარიღი (მდე)
-                <input type="text" name="end_date" class="date end"/>
-              </label>
-            </td>
-            <td>
-              <label class="control-label">დრო<br>
-                <input type="text" name="end_time" class="time end"/>
-              </label>
-            </td>
-          </tr>
-        </table>
+      <div id="datepairExample" class="form-group">
+        <div class="form-left">თარიღი (დან)<br>
+          <input type="text" name="start_date" class="date start" id="start_d"/>
+        </div>
+        <div class="form-right">დრო (დან) <br>
+          <input type="text" name="start_time" class="time start" id="start_t"/>
+        </div>
+        <div class="form-left">თარიღი (მდე)<br>
+          <input type="text" name="start_date" class="date start" id="end_d"/>
+        </div>
+        <div class="form-right">დრო (მდე) <br>
+          <input type="text" name="start_time" class="time start" id="end_t"/>
+        </div>
       </div>
+
+    <%--<div class="form-group">--%>
+        <%--<table id="datepairExample" class="form-group">--%>
+          <%--<tr id="fromRow">--%>
+            <%--<td><label class="control-label">თარიღი <br>--%>
+              <%--<input type="text" name="start_date" class="date start"/>--%>
+            <%--</label></td>--%>
+            <%--<td><label class="control-label">დრო (დან)<br>--%>
+              <%--<input type="text" name="start_time" class="time start"/>--%>
+            <%--</label></td>--%>
+
+          <%--</tr>--%>
+          <%--<tr id="toRow">--%>
+            <%--<td>--%>
+              <%--<label> თარიღი (მდე)--%>
+                <%--<input type="text" name="end_date" class="date end"/>--%>
+              <%--</label>--%>
+            <%--</td>--%>
+            <%--<td>--%>
+              <%--<label class="control-label">დრო<br>--%>
+                <%--<input type="text" name="end_time" class="time end"/>--%>
+              <%--</label>--%>
+            <%--</td>--%>
+          <%--</tr>--%>
+        <%--</table>--%>
+      <%--</div>--%>
 
 
       <script>
@@ -152,7 +167,7 @@
           $('#datepairExample').datepair();
       </script>
 
-      <input type="button" value="დამატება"
+      <input type="button" value="დამატება" style="position: relative; margin-top: 100px;"
              class="btn btn-info btn-lg"
              onclick=<%= getClickFunction()%>>
     </form>
