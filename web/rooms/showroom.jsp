@@ -65,6 +65,8 @@
       int x = 0;
       Booking last = null;
       if(bookings.size() == 0){
+        out.println("<tr><form action=\"booking.jsp\">");
+
         out.println("<td>" + " Free " + "</td>");
         out.println("<td>" + " empty " + "</td>");
         out.println("<td>"+  start + "</td>");
@@ -80,15 +82,20 @@
           Date date2 = format.parse(booking.getStartTime().toString());
           long difference = date2.getTime() - date1.getTime();
           if(difference/1000 > 1800){
+            out.println("<tr><form action=\"booking.jsp\">");
+
             out.println("<td>" + " Free " + "</td>");
             out.println("<td>" + " empty " + "</td>");
             out.println("<td>"+  last.getEndTime() + "</td>");
             out.println("<td>"+  booking.getStartTime() + "</td>");
             out.println("<td><input type=\"submit\" value=\"დაჯავშნა\"></td>");
+
           }
         }
 
         if(i == 0 && !start.equals(booking.getStartTime())){
+          out.println("<tr><form action=\"booking.jsp\">");
+
           out.println("<td>" + " Free " + "</td>");
           out.println("<td>" + " empty " + "</td>");
           out.println("<td>"+  start + "</td>");
@@ -107,6 +114,8 @@
         out.println("<td><input type=\"submit\" value=\"წაშლა\"></td>");
         out.println("</tr>");
         if(i == bookings.size() - 1 && !start.equals(booking.getEndTime())){
+          out.println("<tr><form action=\"booking.jsp\">");
+
           out.println("<td>" + " Free " + "</td>");
           out.println("<td>" + " empty " + "</td>");
           out.println("<td>"+  booking.getEndTime() + "</td>");
