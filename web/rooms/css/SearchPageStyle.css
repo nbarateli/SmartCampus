@@ -1,10 +1,18 @@
 @CHARSET "UTF-8";
 .mapdivision {
-  background-color: white;
+    background-color: grey;
+    border-color: black;
+    border-radius: 20px;
+}
+
+@font-face {
+    font-family: bpg_arial;
+    src: url(../../fonts/bpg_arial_2009.ttf);
 }
 
 body {
-    background-color: lightGreen;
+    background-color: lightgreen;
+    font-family: bpg_arial;
 }
 
 #full-table {
@@ -69,3 +77,33 @@ td, tr {
 .smaller-lab {
   font-size: 13px;
 }
+
+#floors {
+    margin-bottom: 10px;
+    paddin-bottom: 5px;
+    height: 25px;
+}
+
+#par {
+    font-family: serif;
+    margin-bottom: -2px;
+}
+
+.control-label {
+    font-family: bpg_arial;
+    font-size: initial;
+}
+
+.form-control {
+    font-family: bpg_arial;
+}
+
+#full-table td{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#full-table td:first-child{
+    padding-right: 0px;
+}
+
+

@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="css/addingDataStyle.css">
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-  <link rel="stylesheet" href="/rooms/css/SearchPageStyle.css">
+  <%--<link rel="stylesheet" href="/rooms/css/SearchPageStyle.css">--%>
   <link rel="stylesheet" href="/css/auto-complete.css">
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css">
@@ -97,35 +97,49 @@
             </div>
 
             <br>
-            <br>
 
-
-            <div class="form-group">
-              <table id="datepairExample" class="form-group">
-                <tr id="fromRow">
-                  <td><label class="control-label">თარიღი<br>
-                    <input type="text" name="start_date" class="date start" id=start_d/>
-                  </label></td>
-                  <td><label class="control-label">დრო (დან)<br>
-                    <input type="text" name="start_time" class="time start" id="start_t"/>
-                  </label></td>
-                </tr>
-                <tr id="toRow">
-                  <td>
-                    <label class="control-label"> თარიღი (მდე)<br>
-                      <input type="text" name="end_date" class="date end" id="end_d"/>
-                    </label>
-                  </td>
-                  <td>
-                    <label class="control-label">დრო <br>
-                      <input type="text" name="end_time" class="time end" id="end_t"/>
-                    </label>
-                  </td>
-
-
-                </tr>
-              </table>
+            <div id="datepairExample" class="form-group">
+              <div class="form-left">თარიღი (დან)
+                <input type="text" name="start_date" class="date start" id=start_d/ data-provide="datepicker">
+              </div>
+              <div class="form-right">დრო (დან)
+                <input type="text" name="start_time" class="time start" id="start_t"/>
+              </div>
+              <div class="form-left">თარიღი (მდე)
+                <input type="text" name="start_date" class="date start" id=end_d/ data-provide="datepicker">
+              </div>
+              <div class="form-right">დრო (მდე)
+                <input type="text" name="start_time" class="time start" id="end_t"/>
+              </div>
             </div>
+
+              <%--<div class="form-group">--%>
+                  <%--<table id="datepairExample" class="form-group">--%>
+                      <%--<tr id="fromRow">--%>
+                          <%--<td><label class="control-label">თარიღი <br>--%>
+                              <%--<input type="text" name="start_date" class="date start"/>--%>
+                          <%--</label></td>--%>
+                          <%--<td></td>--%>
+                          <%--<td><label class="control-label">დრო (დან)<br>--%>
+                              <%--<input type="text" name="start_time" class="time start"/>--%>
+                          <%--</label></td>--%>
+
+                      <%--</tr>--%>
+                      <%--<tr id="toRow">--%>
+                          <%--<td>--%>
+                              <%--<label> თარიღი (მდე) <br>--%>
+                                  <%--<input type="text" name="end_date" class="date end"/>--%>
+                              <%--</label>--%>
+                          <%--</td>--%>
+                          <%--<td></td>--%>
+                          <%--<td>--%>
+                              <%--<label class="control-label">დრო<br>--%>
+                                  <%--<input type="text" name="end_time" class="time end"/>--%>
+                              <%--</label>--%>
+                          <%--</td>--%>
+                      <%--</tr>--%>
+                  <%--</table>--%>
+              <%--</div>--%>
 
             <script>
                 // initialize input widgets first
@@ -143,7 +157,9 @@
                 $('#datepairExample').datepair();
             </script>
 
+              <br>
             <div class="form-group ui-widget">
+                <br>
               <input name="room_name" class="form-control" id="room_n"
                      placeholder="შეიყვანეთ ოთახის დასახელება">
             </div>

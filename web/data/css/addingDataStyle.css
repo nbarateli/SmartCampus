@@ -10,14 +10,19 @@
     border: 1px dashed;
 }
 
-body {
-    background-color: #AED6F1;
-    background-image: url(../../img/addData-background2.jpg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+@font-face {
+    font-family: bpg_arial;
+    src: url(../../fonts/bpg_arial_2009.ttf);
+}
 
+body {
+    /*background-color: #AED6F1;*/
+    background-color: ghostwhite;
+    background-image: linear-gradient(90deg, transparent 79px, #abced4 81px, #abced4 81px, transparent 81px),
+    linear-gradient(#eee .1em, transparent .1em);
+    background-size: 100% 1.2em;
+
+    font-family: bpg_arial;
 }
 
 #main-div {
@@ -27,7 +32,7 @@ body {
 }
 
 .main-button {
-    background-color: #58D68D;
+    background-color: silver;
     text-align: center;
     padding: 20px 35px;
     border-radius: 8px;
@@ -39,10 +44,27 @@ body {
 }
 
 button:hover {
-    background-color: #229954;
+    background-color: grey;
 }
 
 .info-label {
     font-size: 20px;
 }
+
+.form-left {
+    position: relative;
+    float: left;
+}
+
+.form-right {
+    position: relative;
+    float: right;
+}
+
+#datepairExample {
+    position: relative;
+}
+
+
+
 

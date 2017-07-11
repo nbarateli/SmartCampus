@@ -348,7 +348,6 @@ $(document).ready(function () {
     document.getElementById('rooms-file').addEventListener('change', handleFileSelectRoom, false);
 
     $("#room_n").focus(function() {
-        alert("daachira");
         makeRoomSuggestions();
     });
 
