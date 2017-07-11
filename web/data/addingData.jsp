@@ -109,7 +109,7 @@
                 <input type="text" name="start_date" class="date start" id=end_d/ data-provide="datepicker">
               </div>
               <div class="form-right">დრო (მდე)
-                <input type="text" name="start_time" class="time start" id="end_t"/>
+                <input type="text" name="end_time" class="time start" id="end_t"/>
               </div>
             </div>
 
