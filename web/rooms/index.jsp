@@ -172,14 +172,14 @@
             </tr>
             <tr id="toRow">
               <td>
-                <label class="control-label">დრო (მდე)<br>
-                  <input id="time-input-to" type="text" name="end_time" class="time end"/>
-                </label>
-              </td>
-              <td>
                 <label> თარიღი (მდე)
                   <input id="date-input-to" type="text" name="end_date" class="date end"/>
                 </label>
+              </td>
+              <td>
+                  <label class="control-label">დრო (მდე)<br>
+                      <input id="time-input-to" type="text" name="end_time" class="time end"/>
+                  </label>
               </td>
 
             </tr>

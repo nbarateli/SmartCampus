@@ -137,7 +137,7 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
         List<Object> values = new ArrayList<>();
         String sql = hasNonNullFields() ? String.format("SELECT * FROM %s JOIN %s ON %s.%s = %s.%s" +
                         " JOIN %s ON %s.%s = %s.%s " +
-                        joinIfSubjectNotNull() +
+                        joinSubject() +
                         " \nWHERE \n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s",
                 SQL_TABLE_BOOKING, SQL_TABLE_ROOM, SQL_TABLE_BOOKING,
                 SQL_COLUMN_BOOKING_ROOM, SQL_TABLE_ROOM, SQL_COLUMN_ROOM_ID,
@@ -158,8 +158,8 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
         return new CampusSearchQuery(sql, asArray(values));
     }
 
-    private String joinIfSubjectNotNull() {
-        return subject == null ? "" : String.format(" JOIN %s ON %s.%s= %s.%s", SQL_TABLE_SUBJECT, SQL_TABLE_BOOKING,
+    private String joinSubject() {
+        return String.format(" JOIN %s ON %s.%s = %s.%s", SQL_TABLE_SUBJECT, SQL_TABLE_BOOKING,
                 SQL_COLUMN_BOOKING_SUBJECT_ID, SQL_TABLE_SUBJECT, SQL_COLUMN_SUBJECT_ID);
     }
 
