@@ -259,7 +259,7 @@ public final class Utils {
         Room room = getRoomFromResults(rs);
         CampusSubject subject = null;
         try {
-            getSubjectFromResults(rs);
+            subject = getSubjectFromResults(rs);
         } catch (SQLException e) {
             //ignored
         }
