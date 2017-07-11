@@ -374,7 +374,7 @@ $(document).ready(function () {
         console.log(roomNames.toString());
         return new autoComplete({
             selector: '#room_n',
-            minChars: 1,
+            minChars: 0,
             source: function (term, suggest) {
                 term = term.toLowerCase();
                 var choices = roomNames;

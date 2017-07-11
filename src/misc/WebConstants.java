@@ -53,6 +53,10 @@ public class WebConstants {
     public static final String SIGNED_ACCOUNT = "signed_account";
     public static final User.UserRole DEFAULT_USER_ROLE = User.UserRole.STUDENT;
     public static final String JSON_ERROR_REASON = "reason";
+
+
+    public static final String JSON_SUBJECT_ID = "subject_id";
+    public static final String JSON_SUBJECT_NAME = "subject_name";
 }
 
 

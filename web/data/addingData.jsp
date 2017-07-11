@@ -31,8 +31,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
 
-  <script src="/js/utils.js"></script>
-  <script src="/js/auto-complete.js"></script>
+
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
@@ -46,13 +45,15 @@
   <script src="${pageContext.request.contextPath}/scriptlibs/Datepair.js"></script>
   <script src="${pageContext.request.contextPath}/scriptlibs/jquery.datepair.js"></script>
   <script src="${pageContext.request.contextPath}/scriptlibs/wrapper.js"></script>
+  <script src="/js/auto-complete.js"></script>
+  <script src="/js/utils.js"></script>
 
 </head>
 <body>
 <a id="back-to-main" class="image" href="/" style=" display:inline-block;"></a>
 
 <div align="center" id="main-div">
-    <button class="main-button" data-toggle="modal" data-target="#schedule-modal">ლექციების ცხრილის შეყვანა</button>
+  <button class="main-button" data-toggle="modal" data-target="#schedule-modal">ლექციების ცხრილის შეყვანა</button>
 
   <div class="modal fade" id="schedule-modal" role="dialog">
     <div class="modal-dialog">
@@ -72,10 +73,10 @@
             </div>
 
             <div class="form-group">
-              <input type="text" name="subject_name" class="form-control"
+              <input type="text" name="subject_name" class="form-control" id="subj_name_l"
                      placeholder="შეიყვანეთ საგნის სახელი">
             </div>
-
+            <script> subjectNameAutocomplete('subj_name_l')</script>
             <div class="form-group">
               <input type="number" name="num_students" class="form-control" id="num_stud"
                      placeholder="შეიყვანეთ სტუდენტების რაოდენობა" min=1 max=200>
@@ -107,37 +108,37 @@
                 <input type="text" name="start_time" class="time start" id="start_t"/>
               </div>
               <div class="form-right">დრო (მდე) <br>
-                <input type="text" name="start_time" class="time start" id="end_t"/>
+                <input type="text" name="end_time" class="time start" id="end_t"/>
               </div>
             </div>
 
-              <%--<div class="form-group">--%>
-                  <%--<table id="datepairExample" class="form-group">--%>
-                      <%--<tr id="fromRow">--%>
-                          <%--<td><label class="control-label">თარიღი <br>--%>
-                              <%--<input type="text" name="start_date" class="date start"/>--%>
-                          <%--</label></td>--%>
-                          <%--<td></td>--%>
-                          <%--<td><label class="control-label">დრო (დან)<br>--%>
-                              <%--<input type="text" name="start_time" class="time start"/>--%>
-                          <%--</label></td>--%>
+            <%--<div class="form-group">--%>
+            <%--<table id="datepairExample" class="form-group">--%>
+            <%--<tr id="fromRow">--%>
+            <%--<td><label class="control-label">თარიღი <br>--%>
+            <%--<input type="text" name="start_date" class="date start"/>--%>
+            <%--</label></td>--%>
+            <%--<td></td>--%>
+            <%--<td><label class="control-label">დრო (დან)<br>--%>
+            <%--<input type="text" name="start_time" class="time start"/>--%>
+            <%--</label></td>--%>
 
-                      <%--</tr>--%>
-                      <%--<tr id="toRow">--%>
-                          <%--<td>--%>
-                              <%--<label> თარიღი (მდე) <br>--%>
-                                  <%--<input type="text" name="end_date" class="date end"/>--%>
-                              <%--</label>--%>
-                          <%--</td>--%>
-                          <%--<td></td>--%>
-                          <%--<td>--%>
-                              <%--<label class="control-label">დრო<br>--%>
-                                  <%--<input type="text" name="end_time" class="time end"/>--%>
-                              <%--</label>--%>
-                          <%--</td>--%>
-                      <%--</tr>--%>
-                  <%--</table>--%>
-              <%--</div>--%>
+            <%--</tr>--%>
+            <%--<tr id="toRow">--%>
+            <%--<td>--%>
+            <%--<label> თარიღი (მდე) <br>--%>
+            <%--<input type="text" name="end_date" class="date end"/>--%>
+            <%--</label>--%>
+            <%--</td>--%>
+            <%--<td></td>--%>
+            <%--<td>--%>
+            <%--<label class="control-label">დრო<br>--%>
+            <%--<input type="text" name="end_time" class="time end"/>--%>
+            <%--</label>--%>
+            <%--</td>--%>
+            <%--</tr>--%>
+            <%--</table>--%>
+            <%--</div>--%>
 
             <script>
                 // initialize input widgets first
@@ -155,9 +156,9 @@
                 $('#datepairExample').datepair();
             </script>
 
-              <br>
+            <br>
             <div class="form-group ui-widget">
-                <br>
+              <br>
               <input name="room_name" class="form-control" id="room_n"
                      placeholder="შეიყვანეთ ოთახის დასახელება">
             </div>
@@ -300,10 +301,11 @@
           <br>
           <form id="remove-room-form" class="form-vertical">
 
-            <div class="form-group">
-              <input type="text" name="room_name" class="form-control" placeholder="შეიყვანეთ ოთახის სახელი">
+            <div class="form-group ui-widget">
+              <input type="text" name="room_name" class="form-control" id='room_n_delete'
+                     placeholder="შეიყვანეთ ოთახის სახელი">
             </div>
-
+            <script>roomNameAutocomplete('room_n_delete')</script>
             <input type="button" value="წაშლა" class="btn btn-primary btn-lg"
                    onclick="removeRoomFromForm()">
           </form>
@@ -326,15 +328,15 @@
           <br>
           <form id="add-subj-form" class="form-vertical">
 
-            <div class="form-group">
-              <input type="text" name="subj_name" class="form-control"
+            <div class="form-group ui-widget">
+              <input type="text" name="subj_name" class="form-control ui-widget"
                      placeholder="შეიყვანეთ საგნის სახელი">
             </div>
-
             <input type="button" value="დამატება"
                    class="btn btn-primary btn-lg"
                    onclick="addSubjectFromForm()">
           </form>
+
 
           <br>
           <br>

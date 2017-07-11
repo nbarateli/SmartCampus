@@ -57,6 +57,24 @@ public class DefaultSubjectManager implements SubjectManager {
     }
 
     @Override
+    public List<CampusSubject> getAllSubjects() {
+        List<CampusSubject> subjects = new ArrayList<>();
+        String sql = "SELECT * FROM " + SQL_TABLE_SUBJECT;
+        try (ResultSet results = connector.executeQuery(sql)) {
+            while (results.next()) {
+                subjects.add(new CampusSubject(
+                        results.getInt(SQL_COLUMN_SUBJECT_ID),
+                        results.getString(SQL_COLUMN_SUBJECT_NAME))
+                );
+            }
+        } catch (Exception e) {
+            //ignored
+        }
+
+        return subjects;
+    }
+
+    @Override
     public void removeSubject(String subjectName) {
         String sql = "DELETE FROM " + SQL_TABLE_SUBJECT + " WHERE " +
                 SQL_COLUMN_SUBJECT_NAME + " = '?'";
