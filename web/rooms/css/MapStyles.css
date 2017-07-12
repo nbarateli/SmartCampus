@@ -53,20 +53,17 @@
   fill: #010101;
 }
 
-.st4 {
-  font-family: 'Consolas';
+.map-font {
+  font-family: 'BPG Glaho';
+  src: url(../../fonts/bpg_glaho.ttf);
 }
 
 .st5 {
-  font-size: 18px;
-}
-
-.st6 {
-  font-family: 'Sylfaen';
+  font-size: 21pt;
 }
 
 .st7 {
-  font-size: 18.5893px;
+  font-size: 21pt;
 }
 
 .passage {

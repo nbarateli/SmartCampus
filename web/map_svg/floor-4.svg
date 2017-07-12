@@ -7,30 +7,31 @@
       fill: #FFFFFF;
       stroke: #000000;
       stroke-miterlimit: 10;
-  }
+    }
 
-  .st1 {
+    .st1 {
       fill: none;
       stroke: #000000;
       stroke-miterlimit: 10;
-  }
+    }
 
-  .st6 {
+    .st6 {
       font-family: 'Sylfaen';
-  }
+    }
 
-  .st7 {
+    .st7 {
       font-size: 24px;
-  }
+    }
 
-  .room:hover {
+    .room:hover {
       fill: blue;
-  }
+    }
 
-  .room {
+    .room {
       fill: #f4cb42;
       stroke: #000000;
       stroke-width: 2;
+    }
 
 </style>
 <rect id="x400" x="-265.4" y="711.8" class="room" width="260" height="190"/>

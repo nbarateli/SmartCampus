@@ -3,13 +3,44 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px"
 	 viewBox="0 -360 1700 1600" style="enable-background:new 0 -360 1700 1600;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;}
-	.st1{fill:#F4CB42;stroke:#000000;stroke-width:2;stroke-miterlimit:10;}
-	.st2{fill:none;stroke:#000000;stroke-miterlimit:10;}
-	.st3{fill:#58595B;stroke:#000000;stroke-miterlimit:10;}
-	.st4{fill:#4286F4;stroke:#000000;stroke-miterlimit:10;}
-	.st5{font-family:'Sylfaen';}
-	.st6{font-size:24px;}
+	.st0 {
+      fill: #FFFFFF;
+      stroke: #000000;
+      stroke-miterlimit: 10;
+    }
+
+    .st1 {
+      fill: #F4CB42;
+      stroke: #000000;
+      stroke-width: 2;
+      stroke-miterlimit: 10;
+    }
+
+    .st2 {
+      fill: none;
+      stroke: #000000;
+      stroke-miterlimit: 10;
+    }
+
+    .st3 {
+      fill: #58595B;
+      stroke: #000000;
+      stroke-miterlimit: 10;
+    }
+
+    .map-font {
+      fill: #4286F4;
+      stroke: #000000;
+      stroke-miterlimit: 10;
+    }
+
+    .st5 {
+      font-family: 'Sylfaen';
+    }
+
+    .st6 {
+      font-size: 24px;
+    }
 </style>
 <polyline class="st0" points="1364,940 1364,890 1264,890 1264,835 1234,835 1234,820 1204,820 1204,835 1149,835 1149,835 
 	1204,835 1204,820 1234,820 1234,835 1264,835 1264,890 1364,890 1364,1060 74,1060 74,995 34,995 34,830 144,830 144,935 144,890 
