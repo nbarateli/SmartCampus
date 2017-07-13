@@ -240,39 +240,24 @@
       </div>
       <div>ადგილის ტიპი: <%out.print(seatTypeToString(room.getSeatType(), true));%>.</div>
     </div>
-    <div>ლექციები:</div>
 
-    <%--<div>--%>
-    <%--<table>--%>
-    <%--<tr>--%>
-    <%--<th> Lecture/Student booking</th>--%>
-    <%--<th> Booker</th>--%>
-    <%--<th> Start time</th>--%>
-    <%--<th> end time</th>--%>
-    <%--</tr>--%>
-    <%--<%--%>
-    <%--if (room != null && room.getRoomType() != Room.RoomType.UTILITY) {--%>
-    <%--try {--%>
-    <%--Date date = new Date();--%>
-
-    <%--printAll(room, date, manager.findAllBookingsAt(room), out);--%>
-    <%--out.println("<div>" + " Current Date is: " + date.toString() + "</div>");--%>
-    <%--//              out.println("<div><button type=\"button\" onclick=\"");--%>
-    <%--//              out.println(printAll(date, manager.findAllBookingsAt(room), out));--%>
-    <%--//              out.println(">შემდეგი დღე</button></div>");--%>
-    <%--} catch (Exception e) {--%>
-
-    <%--}--%>
-    <%--}--%>
-    <%--%>--%>
-
-    <%--</table>--%>
-    <%--</div>--%>
-    <%----%>
+    <script type="mustache/x-tmpl">
+      <tr>
+        <td><img class="user-picture"
+                 src={{user_image}}
+                 alt=""></td>
+        <td>{{subject}}</td>
+        <td>{{lecturer}}</td>
+        <td>{{time}}</td>
+      </tr>
+    </script>
+    <script src="/js/weekpicker.js"></script>
 
     <div class="table-users">
       <div class="header">ლექციები/ჯავშნები</div>
-
+      <div>
+        <div class="week-picker"></div>
+      </div>
       <div class=schedule>
         <td style="overflow-x: scroll">
           <table>
@@ -287,90 +272,42 @@
             </tr>
             <tr>
               <td>
-                <table>
-                  <tr>
-                    <td><img class="user-picture"
-                             src="https://lh3.googleusercontent.com/-79PHA8fhC94/VlWOJHJ5EyI/AAAAAAAAAF8/Q022eoHnfsIYfh7_ByeZo2wChqfVd_boACEwYBhgL/w139-h140-p/TH6FdGJ.jpg"
-                             alt=""></td>
-                    <td>subj</td>
-                    <td>name</td>
-                    <td>hour</td>
-                  </tr>
-                </table>
-              </td>
-              <td>
-                <table>
-                  <tr>
-                    <td><img class="user-picture"
-                             src="https://lh3.googleusercontent.com/-79PHA8fhC94/VlWOJHJ5EyI/AAAAAAAAAF8/Q022eoHnfsIYfh7_ByeZo2wChqfVd_boACEwYBhgL/w139-h140-p/TH6FdGJ.jpg"
-                             alt=""></td>
-                    <td>subj</td>
-                    <td>name</td>
-                    <td>hour</td>
-                  </tr>
-                </table>
-              </td>
-              <td>
-                <table>
-                  <tr>
-                    <td><img class="user-picture"
-                             src="https://lh3.googleusercontent.com/-79PHA8fhC94/VlWOJHJ5EyI/AAAAAAAAAF8/Q022eoHnfsIYfh7_ByeZo2wChqfVd_boACEwYBhgL/w139-h140-p/TH6FdGJ.jpg"
-                             alt=""></td>
-                    <td>subj</td>
-                    <td>name</td>
-                    <td>hour</td>
-                  </tr>
-                </table>
-              </td>
-              <td>
-                <table>
-                  <tr>
-                    <td><img class="user-picture"
-                             src="https://lh3.googleusercontent.com/-79PHA8fhC94/VlWOJHJ5EyI/AAAAAAAAAF8/Q022eoHnfsIYfh7_ByeZo2wChqfVd_boACEwYBhgL/w139-h140-p/TH6FdGJ.jpg"
-                             alt=""></td>
-                    <td>subj</td>
-                    <td>name</td>
-                    <td>hour</td>
-                  </tr>
-                </table>
-              </td>
-              <td>
-                <table>
-                  <tr>
-                    <td><img class="user-picture"
-                             src="https://lh3.googleusercontent.com/-79PHA8fhC94/VlWOJHJ5EyI/AAAAAAAAAF8/Q022eoHnfsIYfh7_ByeZo2wChqfVd_boACEwYBhgL/w139-h140-p/TH6FdGJ.jpg"
-                             alt=""></td>
-                    <td>subj</td>
-                    <td>name</td>
-                    <td>hour</td>
-                  </tr>
-                </table>
-              </td>
-              <td>
-                <table>
-                  <tr>
-                    <td><img class="user-picture"
-                             src="https://lh3.googleusercontent.com/-79PHA8fhC94/VlWOJHJ5EyI/AAAAAAAAAF8/Q022eoHnfsIYfh7_ByeZo2wChqfVd_boACEwYBhgL/w139-h140-p/TH6FdGJ.jpg"
-                             alt=""></td>
-                    <td>subj</td>
-                    <td>name</td>
-                    <td>hour</td>
-                  </tr>
-                </table>
-              </td>
-              <td>
-                <table>
-                  <tr>
-                    <td><img class="user-picture"
-                             src="https://lh3.googleusercontent.com/-79PHA8fhC94/VlWOJHJ5EyI/AAAAAAAAAF8/Q022eoHnfsIYfh7_ByeZo2wChqfVd_boACEwYBhgL/w139-h140-p/TH6FdGJ.jpg"
-                             alt=""></td>
-                    <td>subj</td>
-                    <td>name</td>
-                    <td>hour</td>
-                  </tr>
-                </table>
-              </td>
+                <table id="monday">
 
+                </table>
+              </td>
+              <td>
+                <table id="tuesday">
+                  <tr>
+
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table id="wednesday">
+
+                </table>
+              </td>
+              <td>
+                <table id="thursday">
+
+                </table>
+              </td>
+              <td>
+                <table id="friday">
+
+                </table>
+              </td>
+              <td>
+                <table id="saturday">
+
+                </table>
+              </td>
+              <td>
+                <table id="sunday">
+
+                </table>
+              </td>
             </tr>
           </table>
         </td>
