@@ -14,7 +14,6 @@
 <%@ page import="serve.managers.ManagerFactory" %>
 <%@ page import="static misc.WebConstants.SIGNED_ACCOUNT" %>
 <%@ page import="java.sql.Time" %>
-<%@ page import="java.text.DateFormat" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.util.List" %>
@@ -34,14 +33,19 @@
     if no parameters is passed
 --%>
 <head>
+
   <link rel="stylesheet" href="css/ShowRoomStyle.css">
   <%--<link rel="stylesheet" href="/css/bootstrap.css">--%>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="/data/css/addingDataStyle.css">
   <link rel="stylesheet" href="css/ShowRoomStyle.css">
-<%--<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">--%>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <%--<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">--%>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="css/style.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
@@ -67,7 +71,7 @@
       Time end = new Time(23, 59, 59);
       int x = 0;
       Booking last = null;
-      if(bookings.size() == 0){
+      if (bookings.size() == 0) {
         out.println("<tr><form action=\"booking.jsp\">");
         out.println("<input type=\"hidden\" value=\"" + room.getRoomName() + "\" name=\"room_name\">");
         out.println("<input type=\"hidden\" value=\"" + startDate + "\" name=\"start_date\">");
@@ -76,20 +80,20 @@
         out.println("<input type=\"hidden\" value=\"" + end + "\" name=\"end_time\">");
         out.println("<td>" + " Free " + "</td>");
         out.println("<td>" + " empty " + "</td>");
-        out.println("<td>"+  start + "</td>");
-        out.println("<td>"+  end + "</td>");
+        out.println("<td>" + start + "</td>");
+        out.println("<td>" + end + "</td>");
         out.println("<td><input type=\"submit\" value=\"დაჯავშნა\"></td></tr></form>");
 
       }
-      for (int i = 0; i < bookings.size(); i++){
+      for (int i = 0; i < bookings.size(); i++) {
         Booking booking = bookings.get(i);
-        if(booking.getStartDate().getDate() != startDate.getDate()) continue;
-        if(x != 0){
+        if (booking.getStartDate().getDate() != startDate.getDate()) continue;
+        if (x != 0) {
           SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
           Date date1 = format.parse(last.getEndTime().toString());
           Date date2 = format.parse(booking.getStartTime().toString());
           long difference = date2.getTime() - date1.getTime();
-          if(difference/1000 > 1800){
+          if (difference / 1000 > 1800) {
             out.println("<tr><form action=\"booking.jsp\">");
             out.println("<input type=\"hidden\" value=\"" + room.getRoomName() + "\" name=\"room_name\">");
             out.println("<input type=\"hidden\" value=\"" + startDate + "\" name=\"start_date\">");
@@ -98,13 +102,13 @@
             out.println("<input type=\"hidden\" value=\"" + booking.getStartTime() + "\" name=\"end_time\">");
             out.println("<td>" + " Free " + "</td>");
             out.println("<td>" + " empty " + "</td>");
-            out.println("<td>"+  last.getEndTime() + "</td>");
-            out.println("<td>"+  booking.getStartTime() + "</td>");
+            out.println("<td>" + last.getEndTime() + "</td>");
+            out.println("<td>" + booking.getStartTime() + "</td>");
             out.println("<td><input type=\"submit\" value=\"დაჯავშნა\"></td></tr></form>");
 
           }
         }
-        if(x == 0 && !start.equals(booking.getStartTime())){
+        if (x == 0 && !start.equals(booking.getStartTime())) {
           out.println("<tr><form action=\"booking.jsp\">");
           out.println("<input type=\"hidden\" value=\"" + room.getRoomName() + "\" name=\"room_name\">");
           out.println("<input type=\"hidden\" value=\"" + startDate + "\" name=\"start_date\">");
@@ -113,8 +117,8 @@
           out.println("<input type=\"hidden\" value=\"" + booking.getStartTime() + "\" name=\"end_time\">");
           out.println("<td>" + " Free " + "</td>");
           out.println("<td>" + " empty " + "</td>");
-          out.println("<td>"+  start + "</td>");
-          out.println("<td>"+  booking.getStartTime() + "</td>");
+          out.println("<td>" + start + "</td>");
+          out.println("<td>" + booking.getStartTime() + "</td>");
           out.println("<td><input type=\"submit\" value=\"დაჯავშნა\"></td></tr></form>");
 
           x++;
@@ -126,15 +130,15 @@
 
         out.println("<td>" + booking.getBooker().getFirstName() + " "
                 + booking.getBooker().getLastName() + "</td>");
-        out.println("<td>"+  booking.getStartTime() + "</td>");
-        out.println("<td>"+  booking.getEndTime() + "</td>");
+        out.println("<td>" + booking.getStartTime() + "</td>");
+        out.println("<td>" + booking.getEndTime() + "</td>");
         //out.println("<td>" + exactDateToString(booking.getStartDate()) + "</td>");
         out.println("<td><input type=\"submit\" value=\"წაშლა\"></td></tr></form>");
         out.println("</tr>");
 
         last = booking;
       }
-      if(last != null){
+      if (last != null) {
         out.println("<tr><form action=\"booking.jsp\">");
         out.println("<input type=\"hidden\" value=\"" + room.getRoomName() + "\" name=\"room_name\">");
         out.println("<input type=\"hidden\" value=\"" + last.getEndDate() + "\" name=\"start_date\">");
@@ -143,8 +147,8 @@
         out.println("<input type=\"hidden\" value=\"" + end + "\" name=\"end_time\">");
         out.println("<td>" + " Free " + "</td>");
         out.println("<td>" + " empty " + "</td>");
-        out.println("<td>"+  last.getEndTime() + "</td>");
-        out.println("<td>"+  end + "</td>");
+        out.println("<td>" + last.getEndTime() + "</td>");
+        out.println("<td>" + end + "</td>");
         out.println("<td><input type=\"submit\" value=\"დაჯავშნა\"></td></tr></form>");
       }
     }
@@ -166,8 +170,8 @@
   %>
   <title>
     <%
-    out.println(room == null ? "Error" : room.getRoomName());
-  %>
+      out.println(room == null ? "Error" : room.getRoomName());
+    %>
   </title>
   <link rel="icon" href="../img/smallLogo.png">
 
@@ -221,7 +225,8 @@
 <div align="center">
   <div class="to-hide">
     <div style="font-size: 25px"><%out.println(room.getRoomName());%></div>
-    <div><img src="<%out.print(images.size()>0?images.get(0):WebConstants.NO_IMAGE);%>" style="width: 25%">
+    <div><img src="<%out.print(images.size()>0?images.get(0):WebConstants.NO_IMAGE);%>" class="room-image"
+              style="border-radius: 0%">
     </div>
     <div id="room-info-div">
       <div>სართული: <%out.print(room.getFloor());%>.</div>
@@ -237,31 +242,139 @@
     </div>
     <div>ლექციები:</div>
 
-    <div>
-      <table>
-        <tr>
-          <th>  Lecture/Student booking  </th>
-          <th>  Booker  </th>
-          <th>  Start time  </th>
-          <th>  end time  </th>
-        </tr>
-        <%
-          if (room != null && room.getRoomType() != Room.RoomType.UTILITY) {
-            try {
-              Date date = new Date();
+    <%--<div>--%>
+    <%--<table>--%>
+    <%--<tr>--%>
+    <%--<th> Lecture/Student booking</th>--%>
+    <%--<th> Booker</th>--%>
+    <%--<th> Start time</th>--%>
+    <%--<th> end time</th>--%>
+    <%--</tr>--%>
+    <%--<%--%>
+    <%--if (room != null && room.getRoomType() != Room.RoomType.UTILITY) {--%>
+    <%--try {--%>
+    <%--Date date = new Date();--%>
 
-              printAll(room, date, manager.findAllBookingsAt(room), out);
-              out.println("<div>" + " Current Date is: " + date.toString() + "</div>");
-//              out.println("<div><button type=\"button\" onclick=\"");
-//              out.println(printAll(date, manager.findAllBookingsAt(room), out));
-//              out.println(">შემდეგი დღე</button></div>");
-            } catch (Exception e) {
+    <%--printAll(room, date, manager.findAllBookingsAt(room), out);--%>
+    <%--out.println("<div>" + " Current Date is: " + date.toString() + "</div>");--%>
+    <%--//              out.println("<div><button type=\"button\" onclick=\"");--%>
+    <%--//              out.println(printAll(date, manager.findAllBookingsAt(room), out));--%>
+    <%--//              out.println(">შემდეგი დღე</button></div>");--%>
+    <%--} catch (Exception e) {--%>
 
-            }
-          }
-        %>
+    <%--}--%>
+    <%--}--%>
+    <%--%>--%>
 
-      </table>
+    <%--</table>--%>
+    <%--</div>--%>
+    <%----%>
+
+    <div class="table-users">
+      <div class="header">ლექციები/ჯავშნები</div>
+
+      <div class=schedule>
+        <td style="overflow-x: scroll">
+          <table>
+            <tr>
+              <th>ორშაბათი</th>
+              <th>სამშაბათი</th>
+              <th>ოთხშაბათი</th>
+              <th>ხუთშაბათი</th>
+              <th>პარასკევი</th>
+              <th>შაბათი</th>
+              <th>კვირა</th>
+            </tr>
+            <tr>
+              <td>
+                <table>
+                  <tr>
+                    <td><img class="user-picture"
+                             src="https://lh3.googleusercontent.com/-79PHA8fhC94/VlWOJHJ5EyI/AAAAAAAAAF8/Q022eoHnfsIYfh7_ByeZo2wChqfVd_boACEwYBhgL/w139-h140-p/TH6FdGJ.jpg"
+                             alt=""></td>
+                    <td>subj</td>
+                    <td>name</td>
+                    <td>hour</td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td><img class="user-picture"
+                             src="https://lh3.googleusercontent.com/-79PHA8fhC94/VlWOJHJ5EyI/AAAAAAAAAF8/Q022eoHnfsIYfh7_ByeZo2wChqfVd_boACEwYBhgL/w139-h140-p/TH6FdGJ.jpg"
+                             alt=""></td>
+                    <td>subj</td>
+                    <td>name</td>
+                    <td>hour</td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td><img class="user-picture"
+                             src="https://lh3.googleusercontent.com/-79PHA8fhC94/VlWOJHJ5EyI/AAAAAAAAAF8/Q022eoHnfsIYfh7_ByeZo2wChqfVd_boACEwYBhgL/w139-h140-p/TH6FdGJ.jpg"
+                             alt=""></td>
+                    <td>subj</td>
+                    <td>name</td>
+                    <td>hour</td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td><img class="user-picture"
+                             src="https://lh3.googleusercontent.com/-79PHA8fhC94/VlWOJHJ5EyI/AAAAAAAAAF8/Q022eoHnfsIYfh7_ByeZo2wChqfVd_boACEwYBhgL/w139-h140-p/TH6FdGJ.jpg"
+                             alt=""></td>
+                    <td>subj</td>
+                    <td>name</td>
+                    <td>hour</td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td><img class="user-picture"
+                             src="https://lh3.googleusercontent.com/-79PHA8fhC94/VlWOJHJ5EyI/AAAAAAAAAF8/Q022eoHnfsIYfh7_ByeZo2wChqfVd_boACEwYBhgL/w139-h140-p/TH6FdGJ.jpg"
+                             alt=""></td>
+                    <td>subj</td>
+                    <td>name</td>
+                    <td>hour</td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td><img class="user-picture"
+                             src="https://lh3.googleusercontent.com/-79PHA8fhC94/VlWOJHJ5EyI/AAAAAAAAAF8/Q022eoHnfsIYfh7_ByeZo2wChqfVd_boACEwYBhgL/w139-h140-p/TH6FdGJ.jpg"
+                             alt=""></td>
+                    <td>subj</td>
+                    <td>name</td>
+                    <td>hour</td>
+                  </tr>
+                </table>
+              </td>
+              <td>
+                <table>
+                  <tr>
+                    <td><img class="user-picture"
+                             src="https://lh3.googleusercontent.com/-79PHA8fhC94/VlWOJHJ5EyI/AAAAAAAAAF8/Q022eoHnfsIYfh7_ByeZo2wChqfVd_boACEwYBhgL/w139-h140-p/TH6FdGJ.jpg"
+                             alt=""></td>
+                    <td>subj</td>
+                    <td>name</td>
+                    <td>hour</td>
+                  </tr>
+                </table>
+              </td>
+
+            </tr>
+          </table>
+        </td>
+      </div>
     </div>
   </div>
 
