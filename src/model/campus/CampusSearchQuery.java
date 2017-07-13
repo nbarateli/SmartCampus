@@ -22,4 +22,24 @@ public class CampusSearchQuery {
     public String getQuery() {
         return query;
     }
+
+    @Override
+    public String toString() {
+
+        return replaceQuestionMarks(query, values);
+    }
+
+    private String replaceQuestionMarks(String query, Object[] values) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0, j = 0; i < query.length(); i++) {
+            char c = query.charAt(i);
+            if (c == '?') {
+                result.append(values[j++]);
+            } else {
+                result.append(c);
+            }
+        }
+
+        return result.toString();
+    }
 }
