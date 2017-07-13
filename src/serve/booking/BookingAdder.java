@@ -27,6 +27,7 @@ import static misc.WebConstants.*;
 public class BookingAdder extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         User currentUser = (User) request.getSession().getAttribute(SIGNED_ACCOUNT);
         if (currentUser == null) return;
         ServletContext context = request.getServletContext();

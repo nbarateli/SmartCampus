@@ -5,16 +5,17 @@ import model.bookings.BookingManager;
 import model.bookings.BookingSearchQueryGenerator;
 import model.campus.CampusSearchQuery;
 import model.lectures.CampusSubject;
+import model.rooms.Room;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import static misc.Utils.getBookingFromResults;
-import static misc.Utils.successfulOperation;
+import static misc.Utils.*;
 import static model.database.SQLConstants.*;
 
 public class DefaultBookingManager implements BookingManager {
@@ -116,6 +117,36 @@ public class DefaultBookingManager implements BookingManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<Booking> getAllBookingsOn(Date day, Room room) {
+        List<Booking> bookings = new ArrayList<>();
+        String sql = String.format("SELECT * FROM " +
+                        "%s \n" +
+                        " JOIN %s ON %s.%s = %s.%s \n" +
+                        "LEFT JOIN %s ON %s.%s = %s.%s\n" +
+                        "JOIN %s ON %s.%s = %s.%s\n" +
+                        "WHERE \n" +
+                        "%s.%s = ?\n" +
+                        "AND %s <= STR_TO_DATE(?, %s) AND %s >= STR_TO_DATE(?, %s)",
+                SQL_TABLE_BOOKING, SQL_TABLE_ROOM, SQL_TABLE_BOOKING,
+                SQL_COLUMN_BOOKING_ROOM, SQL_TABLE_ROOM, SQL_COLUMN_ROOM_ID,
+                SQL_TABLE_SUBJECT, SQL_TABLE_BOOKING, SQL_COLUMN_SUBJECT_ID,
+                SQL_TABLE_SUBJECT, SQL_COLUMN_SUBJECT_ID,
+                SQL_TABLE_USER, SQL_TABLE_BOOKING, SQL_COLUMN_BOOKING_BOOKER,
+                SQL_TABLE_USER, SQL_COLUMN_USER_ID, SQL_TABLE_BOOKING, SQL_COLUMN_BOOKING_ROOM,
+                SQL_COLUMN_BOOKING_START_DATE, "'%d.%m.%Y'", SQL_COLUMN_BOOKING_END_DATE, "'%d.%m.%Y'");
+        String d = dateToString(day, "dd.MM.yy") + "";
+        try (ResultSet results = connector.executeQuery(sql, room.getId(), d, d)) {
+            while (results.next()) {
+                bookings.add(getBookingFromResults(results));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            //ignored. returning empty list.
+        }
+        return bookings;
     }
 
 

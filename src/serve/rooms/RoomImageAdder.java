@@ -38,7 +38,7 @@ public class RoomImageAdder extends HttpServlet {
             objectBuilder.add(JSON_ERROR, false);
         } catch (NumberFormatException e) {
             objectBuilder.add(JSON_ERROR, true);
-            objectBuilder.add(JSON_ERROR_REASON, JSON_ROOM_ERROR_BAD_PARAM);
+            objectBuilder.add(JSON_ERROR_REASON, JSON_ERROR_BAD_PARAM);
         } catch (Exception e) {
             objectBuilder.add(JSON_ERROR, true);
             objectBuilder.add(JSON_ERROR_REASON, JSON_ROOM_ERROR_NOT_FOUND);

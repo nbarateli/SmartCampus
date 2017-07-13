@@ -117,10 +117,10 @@
           <input type="text" name="start_time" class="time start" id="start_t"/>
         </div>
         <div class="form-left">თარიღი (მდე)<br>
-          <input type="text" name="start_date" class="date start" id="end_d"/>
+          <input type="text" name="end_date" class="date start" id="end_d"/>
         </div>
         <div class="form-right">დრო (მდე) <br>
-          <input type="text" name="start_time" class="time start" id="end_t"/>
+          <input type="text" name="end_time" class="time start" id="end_t"/>
         </div>
       </div>
 

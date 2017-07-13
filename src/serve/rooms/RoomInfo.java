@@ -51,7 +51,7 @@ public class RoomInfo extends HttpServlet {
             room = id == null ? manager.getRoomByName(name) : manager.getRoomById(Integer.valueOf(id));
             buildJson(builder, room, manager);
         } catch (NumberFormatException | NullPointerException e) {
-            builder.add(JSON_ERROR, JSON_ROOM_ERROR_BAD_PARAM);
+            builder.add(JSON_ERROR, JSON_ERROR_BAD_PARAM);
         }
         JsonWriter writer = Json.createWriter(response.getWriter());
 //        System.out.println(builder.build().toString());

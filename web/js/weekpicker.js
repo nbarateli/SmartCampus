@@ -11,22 +11,26 @@ $(function () {
         window.setTimeout(function () {
             $('.week-picker').find('.ui-datepicker-current-day a').addClass('ui-state-active')
         }, 1);
-        console.log('weeeeeak')
+
     }
 
     $('.week-picker').datepicker({
+        firstDay: 1,
         showOtherMonths: true,
         selectOtherMonths: true,
+        dateFormat: 'dd.mm.yy',
         onSelect: function (dateText, inst) {
             var date = $(this).datepicker('getDate');
-            startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay());
-            endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 6);
+            startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 1);
+            endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 7);
 
             var dateFormat = inst.settings.dateFormat || $.datepicker._defaults.dateFormat;
             // $('#startDate').text($.datepicker.formatDate(dateFormat, startDate, inst.settings));
             // $('#endDate').text($.datepicker.formatDate(dateFormat, endDate, inst.settings));
             console.log($.datepicker.formatDate(dateFormat, startDate, inst.settings) + " "
                 + $.datepicker.formatDate(dateFormat, endDate, inst.settings));
+            console.log(startDate - endDate);
+            displayWeek(endDate, inst.settings);
             selectCurrentWeek();
         },
         beforeShowDay: function (date) {

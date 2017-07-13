@@ -19,6 +19,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static misc.WebConstants.USER_NO_PIC;
 import static model.accounts.User.UserPermission.*;
 import static model.accounts.User.UserRole;
 import static model.accounts.User.UserRole.*;
@@ -231,8 +232,8 @@ public final class Utils {
         String firstName = rs.getString(SQL_COLUMN_USER_FIRST_NAME);
         String lastName = rs.getString(SQL_COLUMN_USER_LAST_NAME);
         UserRole role = toUserRole(rs.getString(SQL_COLUMN_USER_ROLE));
-
-        return new User(id, eMail, firstName, lastName, role, "");
+        String imageURL = rs.getString(SQL_COLUMN_USER_IMAGE);
+        return new User(id, eMail, firstName, lastName, role, imageURL == null ? USER_NO_PIC : imageURL);
     }
 
     /**
@@ -295,6 +296,9 @@ public final class Utils {
     public static CampusSubject getSubjectFromResults(ResultSet rs) throws SQLException {
         int id = rs.getInt(SQL_COLUMN_SUBJECT_ID);
         String name = rs.getString(SQL_COLUMN_SUBJECT_NAME);
+        if (id == 0) {
+            return null;
+        }
         return new CampusSubject(id, name);
     }
 
@@ -538,7 +542,7 @@ public final class Utils {
      * @return date gotten by adding days
      */
     public static Date addDaysToDate(Date date, int numDays) {
-        if(date == null)
+        if (date == null)
             return null;
 
         Calendar c = Calendar.getInstance();
@@ -564,7 +568,7 @@ public final class Utils {
         return "";
     }
 
-    public static String toSqlDate(Date date, String inPattern) {
+    public static String dateToString(Date date, String inPattern) {
         DateFormat format = new SimpleDateFormat(inPattern);
         return format.format(date);
     }
@@ -582,7 +586,7 @@ public final class Utils {
     private static String generateDateQuery(Date field, String column, List<Object> values,
                                             boolean larger, String outPattern, String inPattern) {
         if (field == null) return " 1 = 1 ";
-        values.add(toSqlDate(field, inPattern));
+        values.add(dateToString(field, inPattern));
         return column + (larger ? " >" : " <") + "= STR_TO_DATE(?, " + outPattern + ")";
 
     }

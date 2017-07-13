@@ -51,6 +51,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
 
   <%!
     private boolean canDisplay(HttpServletRequest request) {
@@ -241,18 +242,17 @@
       <div>ადგილის ტიპი: <%out.print(seatTypeToString(room.getSeatType(), true));%>.</div>
     </div>
 
-    <script type="mustache/x-tmpl">
+    <script type="mustache/x-tmpl" id="bookingtemplate">
       <tr>
-        <td><img class="user-picture"
-                 src={{user_image}}
-                 alt=""></td>
-        <td>{{subject}}</td>
-        <td>{{lecturer}}</td>
-        <td>{{time}}</td>
+        <td><img class="user-picture" src={{booker_pic}} alt=""></td>
+        <td>{{subject_name}}</td>
+        <td>{{booker}}</td>
+        <td>{{start_time}}</td>
       </tr>
     </script>
+    <script src="/js/utils.js"></script>
     <script src="/js/weekpicker.js"></script>
-
+    <script src="js/scheduletemplate.js"></script>
     <div class="table-users">
       <div class="header">ლექციები/ჯავშნები</div>
       <div>

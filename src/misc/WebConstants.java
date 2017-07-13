@@ -9,7 +9,7 @@ import model.accounts.User;
  */
 public class WebConstants {
     public static final String MANAGER_FACTORY = "managerFactory";
-
+    public static final String USER_NO_PIC = "http://i.imgur.com/evhkHoi.png";
     public static final String SUCCESS = "success";
     public static final String FAILED = "failure";
 
@@ -38,15 +38,15 @@ public class WebConstants {
     public static final String JSON_ROOM_PROBLEM_DESCR = "description";
     public static final String JSON_ROOM_PROBLEM_DATE = "datecreated";
 
-    public static final String JSON_BOOKING_ID = "id";
+    //    public static final String JSON_BOOKING_ID = "id";
     public static final String JSON_BOOKING_BOOKER = "lecturer";
     public static final String JSON_BOOKING_ROOM = "room";
     public static final String JSON_BOOKING_SUBJECT = "subject";
     public static final String JSON_BOOKING_DAY = "day";
-    public static final String JSON_BOOKING_START_TIME = "starttime";
-    public static final String JSON_BOOKING_END_TIME = "endtime";
+//    public static final String JSON_BOOKING_START_TIME = "starttime";
+//    public static final String JSON_BOOKING_END_TIME = "endtime";
 
-    public static final String JSON_ROOM_ERROR_BAD_PARAM = "bad parameter";
+    public static final String JSON_ERROR_BAD_PARAM = "bad parameter";
     public static final String JSON_ROOM_ERROR_NOT_FOUND = "room not found";
 
     public static final String JSON_ERROR = "error";
@@ -57,6 +57,20 @@ public class WebConstants {
 
     public static final String JSON_SUBJECT_ID = "subject_id";
     public static final String JSON_SUBJECT_NAME = "subject_name";
+
+    public static final String JSON_BOOKING_ID = "id";
+    public static final String JSON_BOOKING_ROOM_ID = "room_id";
+    public static final String JSON_BOOKING_ROOM_NAME = "room";
+    public static final String JSON_BOOKING_BOOKER_ID = "booker_id";
+    public static final String JSON_BOOKING_BOOKER_NAME = "booker";
+    public static final String JSON_BOOKING_BOOKER_PICTURE = "booker_pic";
+    public static final String JSON_BOOKING_SUBJECT_ID = "subject_id";
+    public static final String JSON_BOOKING_SUBJECT_NAME = "subject_name";
+    public static final String JSON_BOOKING_DESCRIPTION = "description";
+    public static final String JSON_BOOKING_START_DATE = "start_date";
+    public static final String JSON_BOOKING_END_DATE = "end_date";
+    public static final String JSON_BOOKING_START_TIME = "start_time";
+    public static final String JSON_BOOKING_END_TIME = "end_time";
 }
 
 
