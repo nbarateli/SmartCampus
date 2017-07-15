@@ -22,6 +22,11 @@ body * {
   width: 60px;
 }
 
+.roomimages {
+  width: 60%;
+  height: 400px;
+}
+
 .table-users {
   border: 1px solid #327a81;
   border-radius: 10px;
@@ -205,6 +210,7 @@ table tr:nth-child(2n+1) {
 
 .room-image {
   border-radius: 0;
-  width: 25%
+  height: 80%;
+  width: 80%;
 }
 

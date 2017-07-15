@@ -81,7 +81,7 @@
       out.println(room == null ? "Error" : room.getRoomName());
     %>
   </title>
-  <link rel="icon" href="../img/smallLogo.png">
+  <link rel="icon" href="/img/smallLogo.png">
 
 </head>
 <body style="background-color: #bbbbbb">
@@ -131,10 +131,41 @@
 %>
 <script src="js/addImages.js"></script>
 <div align="center">
+
   <div class="to-hide">
     <div style="font-size: 25px"><%out.println(room.getRoomName());%></div>
-    <div><img src="<%out.print(images.size()>0?images.get(0):WebConstants.NO_IMAGE);%>" class="room-image"
-              style="border-radius: 0%">
+    <div>
+      <br>
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <%
+            for (int i = 1; i < images.size(); i++) {
+              out.println("<li data-target=\"#myCarousel\" data-slide-to=\"" + i + "\"></li>");
+            }
+          %>
+
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner roomimages">
+          <div class="item active">
+            <img src="<%out.print(images.size()>0?images.get(0):WebConstants.NO_IMAGE);%>" class="room-image">
+          </div>
+
+          <%
+            for (int i = 1; i < images.size(); i++) {
+              out.println(
+                      "          <div class=\"item\">\n" +
+                              "            <img class=\"room-image\" src=\"" + images.get(i) + "\" >\n" +
+                              "          </div>\n"
+              );
+            }
+          %>
+
+        </div>
+      </div>
     </div>
     <div id="room-info-div">
       <div>სართული: <%out.print(room.getFloor());%>.</div>
