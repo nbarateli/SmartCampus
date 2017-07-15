@@ -29,7 +29,7 @@ $(function () {
             // $('#endDate').text($.datepicker.formatDate(dateFormat, endDate, inst.settings));
             console.log($.datepicker.formatDate(dateFormat, startDate, inst.settings) + " "
                 + $.datepicker.formatDate(dateFormat, endDate, inst.settings));
-            console.log(startDate - endDate);
+
             displayWeek(endDate, inst.settings);
             selectCurrentWeek();
         },

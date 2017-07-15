@@ -100,17 +100,6 @@ public class DefaultRoomManager implements RoomManager {
     @Override
     public List<Booking> findAllBookingsAt(Room room, WeekDay day, Time start, Time end) {
         List<Booking> bookings = new ArrayList<>();
-        /*String sql = "SELECT * FROM " + SQL_TABLE_BOOKING + " INNER JOIN " + SQL_TABLE_USER + " ON " +
-                SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_BOOKER + " = " + SQL_TABLE_USER + "." +
-                SQL_COLUMN_USER_ID +
-                " INNER JOIN " + SQL_TABLE_SUBJECT + " ON " + SQL_TABLE_SUBJECT + "." + SQL_COLUMN_SUBJECT_ID +
-                " = " + SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_SUBJECT_ID + " \n " +
-                " INNER JOIN " + SQL_TABLE_ROOM + " ON " + SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_ROOM +
-                " = " + SQL_TABLE_ROOM + "." + SQL_COLUMN_ROOM_ID +
-                " WHERE " + SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_ROOM + " = ? " +
-                (start == null ? "" : " AND " + SQL_COLUMN_BOOKING_START_TIME + " >= ? ") +
-                (end == null ? "" : " AND " + SQL_COLUMN_BOOKING_END_TIME + " <= ? ") +
-                (day == null ? "" : " AND " + SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_WEEK_DAY + " = ? ");*/
         BookingSearchQueryGenerator generator = new BookingSearchQueryGenerator();
         generator.setRoom(room);
         generator.setDay(day);
@@ -135,7 +124,11 @@ public class DefaultRoomManager implements RoomManager {
         WeekDay day = toWeekDay(date);
         Booking booking = null;
 
-        String sql = "SELECT * FROM " + SQL_TABLE_BOOKING + " INNER JOIN " + SQL_TABLE_USER + " ON " +
+        String sql = String.format("SELECT * FROM booking \n" +
+                "WHERE room_id = ? \n" +
+                "AND booking_date = ? \n" +
+                "AND start_time <= ? AND  ? <= booking.end_time");
+        /*"SELECT * FROM " + SQL_TABLE_BOOKING + " INNER JOIN " + SQL_TABLE_USER + " ON " +
                 SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_BOOKER + " = " + SQL_TABLE_USER + "." +
                 SQL_COLUMN_USER_ID +
                 " INNER JOIN " + SQL_TABLE_SUBJECT + " ON " + SQL_TABLE_SUBJECT + "." + SQL_COLUMN_SUBJECT_ID +
@@ -144,10 +137,10 @@ public class DefaultRoomManager implements RoomManager {
                 " = " + SQL_TABLE_ROOM + "." + SQL_COLUMN_ROOM_ID +
                 " WHERE " + SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_ROOM + " = ? " +
                 " AND " + SQL_COLUMN_BOOKING_WEEK_DAY + " = ? " +
-                " AND " + SQL_COLUMN_BOOKING_START_TIME + " <= ? AND " + SQL_COLUMN_BOOKING_END_TIME + " >= ?";
+                " AND " + SQL_COLUMN_BOOKING_START_TIME + " <= ? AND " + SQL_COLUMN_BOOKING_END_TIME + " >= ?";*/
 
         try (ResultSet rs = connector.executeQuery(sql, room.getId(),
-                day.toString().toLowerCase(), toSqlTime(current), toSqlTime(current))) {
+                date, current, current)) {
             rs.next();
             booking = getBookingFromResults(rs);
 

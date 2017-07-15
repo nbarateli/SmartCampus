@@ -27,6 +27,19 @@ public class DefaultAccountManager implements AccountManager {
     }
 
     @Override
+    public void setPicture(User user, String imageURL) {
+        try {
+            String sql = String.format("UPDATE %s \n" +
+                            "SET %s.%s = ? WHERE %s = ?",
+                    SQL_TABLE_USER, SQL_TABLE_USER, SQL_COLUMN_USER_IMAGE,
+                    SQL_COLUMN_USER_ID);
+            connector.executeUpdate(sql, imageURL, user.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public User getUserViaID(int id) {
         return null;
     }

@@ -1,7 +1,5 @@
 package serve.rooms;
 
-import misc.ModelConstants;
-import misc.Utils;
 import model.bookings.Booking;
 import model.bookings.BookingManager;
 import model.bookings.BookingSearchQueryGenerator;
@@ -28,17 +26,12 @@ import java.util.List;
 import static misc.ModelConstants.DAYS_IN_WEEK;
 import static misc.Utils.*;
 import static misc.WebConstants.MANAGER_FACTORY;
-import static misc.WebConstants.SUCCESS;
 
 /**
  * Created by Administrator on 06.07.2017.
  */
 @WebServlet(name = "AvailableRoomFinder", urlPatterns = {"/rooms/availablerooms"})
 public class AvailableRoomFinder extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -58,7 +51,7 @@ public class AvailableRoomFinder extends HttpServlet {
         Time startTime = stringToTime(request.getParameter("start_time"));
         Time endTime = stringToTime(request.getParameter("end_time"));
 
-        if(numWeeks != null && date != null && startTime != null && endTime != null) {
+        if (numWeeks != null && date != null && startTime != null && endTime != null) {
             Integer rep = validateNumber(request.getParameter("repetition"), 1, 4);
 
             BookingSearchQueryGenerator generator = new BookingSearchQueryGenerator();
@@ -67,15 +60,14 @@ public class AvailableRoomFinder extends HttpServlet {
 
             for (int i = 0; i < numWeeks / rep; i++) {
                 Iterator<Room> it = rooms.iterator();
-                while(it.hasNext()) {
+                while (it.hasNext()) {
                     Room room = it.next();
                     generator.setRoom(room);
-                    generator.setStartDate(addDaysToDate(date, i * DAYS_IN_WEEK * rep));
-                    generator.setEndDate(addDaysToDate(date, i * DAYS_IN_WEEK * rep));
+                    generator.setBookingDate(addDaysToDate(date, i * DAYS_IN_WEEK * rep));
                     List<Booking> bookings = bookingManager.find(generator);
-                    if(bookings.size() == 0) continue;
-                    for(int j = 0; j < bookings.size(); j++) {
-                        if(bookings.get(j).getSubject() != null)
+                    if (bookings.size() == 0) continue;
+                    for (Booking booking : bookings) {
+                        if (booking.getSubject() != null)
                             it.remove();
                     }
                 }
@@ -89,5 +81,9 @@ public class AvailableRoomFinder extends HttpServlet {
         }
         JsonWriter writer = Json.createWriter(response.getWriter());
         writer.writeArray(arrayBuilder.build());
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }

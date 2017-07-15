@@ -24,20 +24,6 @@ public class DefaultSubjectManager implements SubjectManager {
         this.connector = connector;
     }
 
-    @Override
-    public boolean add(CampusSubject subject) {
-        String sql = "INSERT INTO " + SQL_TABLE_SUBJECT + " (" + SQL_COLUMN_SUBJECT_NAME + ") " +
-                "VALUES (\'" + subject.getName() + "\')";
-        try {
-            //TODO
-            connector.executeUpdate(sql);
-            return true;
-        } catch (SQLException e) {
-            //ignored
-            return false;
-        }
-    }
-
     /**
      * returns number of subjects in the database
      */
@@ -86,6 +72,22 @@ public class DefaultSubjectManager implements SubjectManager {
         }
     }
 
+    @Override
+    public CampusSubject getSubjectByName(String subjectName) {
+        if (subjectName == null) {
+            return null;
+        }
+        String sql = String.format("SELECT * FROM %s \n" +
+                "WHERE %s LIKE ?", SQL_TABLE_SUBJECT, SQL_COLUMN_SUBJECT_NAME);
+        try (ResultSet results = connector.executeQuery(sql, subjectName)) {
+            if (results.next()) {
+                return getSubjectFromResults(results);
+            }
+        } catch (Exception e) {
+            //ignored
+        }
+        return null;
+    }
 
     @Override
     public List<CampusSubject> find(SubjectSearchQueryGenerator queryGenerator) {
@@ -101,6 +103,20 @@ public class DefaultSubjectManager implements SubjectManager {
         }
 
         return CampusSubject;
+    }
+
+    @Override
+    public boolean add(CampusSubject subject) {
+        String sql = "INSERT INTO " + SQL_TABLE_SUBJECT + " (" + SQL_COLUMN_SUBJECT_NAME + ") " +
+                "VALUES (\'" + subject.getName() + "\')";
+        try {
+            //TODO
+            connector.executeUpdate(sql);
+            return true;
+        } catch (SQLException e) {
+            //ignored
+            return false;
+        }
     }
 
     @Override

@@ -67,8 +67,7 @@ public class WebConstants {
     public static final String JSON_BOOKING_SUBJECT_ID = "subject_id";
     public static final String JSON_BOOKING_SUBJECT_NAME = "subject_name";
     public static final String JSON_BOOKING_DESCRIPTION = "description";
-    public static final String JSON_BOOKING_START_DATE = "start_date";
-    public static final String JSON_BOOKING_END_DATE = "end_date";
+    public static final String JSON_BOOKING_DATE = "booking_date";
     public static final String JSON_BOOKING_START_TIME = "start_time";
     public static final String JSON_BOOKING_END_TIME = "end_time";
 }

@@ -15,6 +15,10 @@ import java.util.List;
  */
 public interface AccountManager extends CampusManager<User, UserSearchQueryGenerator> {
 
+    /**
+     * Updates the picture of the user
+     */
+    void setPicture(User user, String imageURL);
 
     /**
      * Returns a {@code User} object associated with given id in the database.

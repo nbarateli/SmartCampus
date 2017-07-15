@@ -20,9 +20,9 @@ function addLectureFromForm() {
 
     sendData("/lectures/addlecture", params, true);
     return false;
-};
+}
 
-function sendData (url, params) {
+function sendData(url, params) {
     var http = new XMLHttpRequest();
     http.open("POST", url, true);
 

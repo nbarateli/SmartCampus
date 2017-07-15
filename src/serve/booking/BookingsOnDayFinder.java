@@ -87,8 +87,7 @@ public class BookingsOnDayFinder extends HttpServlet {
         } else {
             builder.add(JSON_BOOKING_DESCRIPTION, JsonValue.NULL);
         }
-        builder.add(JSON_BOOKING_START_DATE, dateToString(booking.getStartDate(), "dd.mm.yy"));
-        builder.add(JSON_BOOKING_END_DATE, dateToString(booking.getEndDate(), "dd.mm.yy"));
+        builder.add(JSON_BOOKING_DATE, dateToString(booking.getBookingDate(), "dd.mm.yy"));
         builder.add(JSON_BOOKING_START_TIME, toHHMM(booking.getStartTime()));
         builder.add(JSON_BOOKING_END_TIME, toHHMM(booking.getEndTime()));
         return builder.build();

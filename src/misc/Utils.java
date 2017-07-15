@@ -70,6 +70,15 @@ public final class Utils {
     }
 
     /**
+     * Returns the day of week of the date
+     */
+    public static int getWeekDay(Date date) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        return c.get(Calendar.DAY_OF_WEEK);
+    }
+
+    /**
      * Converts given String to WeekDay format.
      */
     public static WeekDay toWeekDay(String day) {
@@ -264,13 +273,11 @@ public final class Utils {
         } catch (SQLException e) {
             //ignored
         }
-        WeekDay day = toWeekDay(rs.getString(SQL_COLUMN_BOOKING_WEEK_DAY));
         Time starTime = rs.getTime(SQL_COLUMN_BOOKING_START_TIME);
         Time endTime = rs.getTime(SQL_COLUMN_BOOKING_END_TIME);
         String description = rs.getString(SQL_COLUMN_BOOKING_DESCRIPTION);
-        Date date = rs.getDate(SQL_COLUMN_BOOKING_START_DATE);
-        Date endDate = rs.getDate(SQL_COLUMN_BOOKING_END_DATE);
-        return new Booking(id, booker, room, subject, day, starTime, endTime, description, date, endDate);
+        Date date = rs.getDate(SQL_COLUMN_BOOKING_BOOKING_DATE);
+        return new Booking(id, booker, room, subject, starTime, endTime, description, date);
     }
 
     /**
@@ -579,8 +586,20 @@ public final class Utils {
 
     }
 
+    public static String generateDateEqualsQuery(Date field, String column, List<Object> values) {
+        return generateDateEqualsQuery(field, column, values, "'%d/%m/%Y'", "dd/MM/yyyy");
+
+    }
+
     public static String generateTimeQuery(Time time, String column, List<Object> values, boolean larger) {
         return generateDateQuery(time, column, values, larger, "'%H:%i'", "HH:mm");
+    }
+
+    private static String generateDateEqualsQuery(Date field, String column, List<Object> values,
+                                                  String outPattern, String inPattern) {
+        if (field == null) return " 1 = 1 ";
+        values.add(dateToString(field, inPattern));
+        return column + "= STR_TO_DATE(?, " + outPattern + ")";
     }
 
     private static String generateDateQuery(Date field, String column, List<Object> values,

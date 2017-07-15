@@ -25,4 +25,8 @@ public interface SubjectManager extends CampusManager<CampusSubject, SubjectSear
      */
     void removeSubject(String subject);
 
+    /**
+     * Returns a subject that has exact same name
+     */
+    CampusSubject getSubjectByName(String subjectName);
 }

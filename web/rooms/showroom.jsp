@@ -1,22 +1,17 @@
 <%@ page import="misc.WebConstants" %>
 <%@ page import="model.accounts.AccountManager" %>
 <%@ page import="model.accounts.User" %>
-<%@ page import="model.bookings.Booking" %>
-<%@ page import="model.lectures.CampusSubject" %>
+<%@ page import="model.rooms.Room" %>
+<%@ page import="model.rooms.RoomManager" %>
 <%@ page import="static misc.Utils.roomTypeToString" %>
 <%@ page import="static misc.Utils.toSeatType" %>
 <%@ page import="static misc.Utils.toGeorgian" %>
 <%@ page import="static misc.Utils.seatTypeToString" %>
 <%@ page import="static misc.WebConstants.MANAGER_FACTORY" %>
-<%@ page import="model.rooms.Room" %>
-<%@ page import="model.rooms.RoomManager" %>
-<%@ page import="static misc.Utils.*" %>
 <%@ page import="serve.managers.ManagerFactory" %>
-<%@ page import="static misc.WebConstants.SIGNED_ACCOUNT" %>
-<%@ page import="java.sql.Time" %>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.util.Date" %>
 <%@ page import="java.util.List" %>
+<%@ page import="static misc.Utils.*" %>
+<%@ page import="static misc.WebConstants.SIGNED_ACCOUNT" %>
 <%--
   Created by IntelliJ IDEA.
   User: Niko
@@ -65,94 +60,6 @@
       }
     }
 
-
-    private void printAll(Room room, Date startDate, List<Booking> bookings, JspWriter out) throws Exception {
-      //bookings.sort(com);
-      Time start = new Time(0, 0, 0);
-      Time end = new Time(23, 59, 59);
-      int x = 0;
-      Booking last = null;
-      if (bookings.size() == 0) {
-        out.println("<tr><form action=\"booking.jsp\">");
-        out.println("<input type=\"hidden\" value=\"" + room.getRoomName() + "\" name=\"room_name\">");
-        out.println("<input type=\"hidden\" value=\"" + startDate + "\" name=\"start_date\">");
-        out.println("<input type=\"hidden\" value=\"" + startDate + "\" name=\"end_date\">");
-        out.println("<input type=\"hidden\" value=\"" + start + "\" name=\"start_time\">");
-        out.println("<input type=\"hidden\" value=\"" + end + "\" name=\"end_time\">");
-        out.println("<td>" + " Free " + "</td>");
-        out.println("<td>" + " empty " + "</td>");
-        out.println("<td>" + start + "</td>");
-        out.println("<td>" + end + "</td>");
-        out.println("<td><input type=\"submit\" value=\"დაჯავშნა\"></td></tr></form>");
-
-      }
-      for (int i = 0; i < bookings.size(); i++) {
-        Booking booking = bookings.get(i);
-        if (booking.getStartDate().getDate() != startDate.getDate()) continue;
-        if (x != 0) {
-          SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-          Date date1 = format.parse(last.getEndTime().toString());
-          Date date2 = format.parse(booking.getStartTime().toString());
-          long difference = date2.getTime() - date1.getTime();
-          if (difference / 1000 > 1800) {
-            out.println("<tr><form action=\"booking.jsp\">");
-            out.println("<input type=\"hidden\" value=\"" + room.getRoomName() + "\" name=\"room_name\">");
-            out.println("<input type=\"hidden\" value=\"" + startDate + "\" name=\"start_date\">");
-            out.println("<input type=\"hidden\" value=\"" + startDate + "\" name=\"end_date\">");
-            out.println("<input type=\"hidden\" value=\"" + last.getEndTime() + "\" name=\"start_time\">");
-            out.println("<input type=\"hidden\" value=\"" + booking.getStartTime() + "\" name=\"end_time\">");
-            out.println("<td>" + " Free " + "</td>");
-            out.println("<td>" + " empty " + "</td>");
-            out.println("<td>" + last.getEndTime() + "</td>");
-            out.println("<td>" + booking.getStartTime() + "</td>");
-            out.println("<td><input type=\"submit\" value=\"დაჯავშნა\"></td></tr></form>");
-
-          }
-        }
-        if (x == 0 && !start.equals(booking.getStartTime())) {
-          out.println("<tr><form action=\"booking.jsp\">");
-          out.println("<input type=\"hidden\" value=\"" + room.getRoomName() + "\" name=\"room_name\">");
-          out.println("<input type=\"hidden\" value=\"" + startDate + "\" name=\"start_date\">");
-          out.println("<input type=\"hidden\" value=\"" + startDate + "\" name=\"end_date\">");
-          out.println("<input type=\"hidden\" value=\"" + start + "\" name=\"start_time\">");
-          out.println("<input type=\"hidden\" value=\"" + booking.getStartTime() + "\" name=\"end_time\">");
-          out.println("<td>" + " Free " + "</td>");
-          out.println("<td>" + " empty " + "</td>");
-          out.println("<td>" + start + "</td>");
-          out.println("<td>" + booking.getStartTime() + "</td>");
-          out.println("<td><input type=\"submit\" value=\"დაჯავშნა\"></td></tr></form>");
-
-          x++;
-        }
-        CampusSubject subject = booking.getSubject();
-        out.println("<tr><form action=\"/lectures/removelecture\" method=\"post\">");
-        out.println("<input type=\"hidden\" value=\"" + booking.getId() + "\" name=\"lecture_id\">");
-        out.println("<td>" + (subject == null ? "Student Booking" : "Lecture: " + subject.getName()) + "</td>");
-
-        out.println("<td>" + booking.getBooker().getFirstName() + " "
-                + booking.getBooker().getLastName() + "</td>");
-        out.println("<td>" + booking.getStartTime() + "</td>");
-        out.println("<td>" + booking.getEndTime() + "</td>");
-        //out.println("<td>" + exactDateToString(booking.getStartDate()) + "</td>");
-        out.println("<td><input type=\"submit\" value=\"წაშლა\"></td></tr></form>");
-        out.println("</tr>");
-
-        last = booking;
-      }
-      if (last != null) {
-        out.println("<tr><form action=\"booking.jsp\">");
-        out.println("<input type=\"hidden\" value=\"" + room.getRoomName() + "\" name=\"room_name\">");
-        out.println("<input type=\"hidden\" value=\"" + last.getEndDate() + "\" name=\"start_date\">");
-        out.println("<input type=\"hidden\" value=\"" + startDate + "\" name=\"end_date\">");
-        out.println("<input type=\"hidden\" value=\"" + last.getEndTime() + "\" name=\"start_time\">");
-        out.println("<input type=\"hidden\" value=\"" + end + "\" name=\"end_time\">");
-        out.println("<td>" + " Free " + "</td>");
-        out.println("<td>" + " empty " + "</td>");
-        out.println("<td>" + last.getEndTime() + "</td>");
-        out.println("<td>" + end + "</td>");
-        out.println("<td><input type=\"submit\" value=\"დაჯავშნა\"></td></tr></form>");
-      }
-    }
 
     Room room;
     List<String> images;

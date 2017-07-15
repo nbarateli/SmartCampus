@@ -20,8 +20,7 @@ import java.io.PrintWriter;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
 
-import static misc.WebConstants.MANAGER_FACTORY;
-import static misc.WebConstants.SIGNED_ACCOUNT;
+import static misc.WebConstants.*;
 
 @WebServlet(name = "LoginHandler", urlPatterns = {"/tokensignin"})
 public class LoginHandler extends HttpServlet {
@@ -94,10 +93,14 @@ public class LoginHandler extends HttpServlet {
                 user = new User(-1, email, givenName, familyName, WebConstants.DEFAULT_USER_ROLE, pictureUrl);
                 if (accountManager.add(user)) {
                     user = accountManager.getUserViaEMail(email);
+
                 } else {
                     return null;
                 }
             } else {
+                if (user.getImageURL().equals(USER_NO_PIC)) {
+                    accountManager.setPicture(user, pictureUrl);
+                }
                 out.println("found user");
             }
             return user;

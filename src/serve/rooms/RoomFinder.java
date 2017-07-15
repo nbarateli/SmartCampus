@@ -76,15 +76,13 @@ public class RoomFinder extends HttpServlet {
 
     private BookingSearchQueryGenerator getTimeQuery(HttpServletRequest request) {
         BookingSearchQueryGenerator generator = new BookingSearchQueryGenerator();
-        String startDate = request.getParameter("start_date");
+        String bookingDate = request.getParameter("booking_date");
         String startTime = request.getParameter("start_time");
-        String endDate = request.getParameter("end_date");
         String endTime = request.getParameter("end_time");
 
-        generator.setStartDate(startDate == null ? null : stringToDate(startDate, "dd.mm.yyyy"));
+        generator.setBookingDate(bookingDate == null ? null : stringToDate(bookingDate, "dd.mm.yyyy"));
         generator.setStartTime(startTime == null ? null : stringToTime(startTime));
         generator.setEndTime(endTime == null ? null : stringToTime(endTime));
-        generator.setEndDate(endDate == null ? null : stringToDate(endDate, "dd.mm.yyyy"));
         return generator;
     }
 

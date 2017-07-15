@@ -43,7 +43,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0/js/bootstrap-datepicker.min.js"></script>
 
   <script src="${pageContext.request.contextPath}/scriptlibs/Datepair.js"></script>
-  <script src="${pageContext.request.contextPath}/scriptlibs/jquery.datepair.js"></script>
+  <%--<script src="${pageContext.request.contextPath}/scriptlibs/jquery.datepair.js"></script>--%>
   <script src="${pageContext.request.contextPath}/scriptlibs/wrapper.js"></script>
   <script src="/js/auto-complete.js"></script>
   <script src="/js/utils.js"></script>
@@ -101,7 +101,7 @@
             <br>
 
             <div id="datepairExample" class="form-group">
-              <div class="form-mid">დაწყების თარიღი<br>
+              <div class="form-mid">ლექციის<br>
                 <input type="text" name="start_date" class="date start" id="start_d"/>
               </div>
               <div class="form-left">დრო (დან) <br>

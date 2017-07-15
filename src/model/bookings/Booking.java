@@ -19,34 +19,28 @@ public class Booking implements CampusObject {
     private final User booker;
     private final Room room;
     private final CampusSubject subject;
-    private final WeekDay day;
     private final Time startTime;
     private final Time endTime;
-    private final Date startDate;
-    private final Date endDate;
+    private final Date bookingDate;
     private final String description;
 
-    public Booking(int bookingID, User booker, Room room, CampusSubject subject, WeekDay day,
-                   Time startTime, Time endTime, String description, Date startDate, Date endDate) {
+    public Booking(int bookingID, User booker, Room room, CampusSubject subject,
+                   Time startTime, Time endTime, String description, Date bookingDate) {
         this.bookingID = bookingID;
         this.booker = booker;
         this.room = room;
         this.subject = subject;
-        this.day = day;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startTime = new Time(startTime.getTime());
+        this.endTime = new Time(endTime.getTime());
         this.description = description;
-        this.startDate = new Date(startDate.getTime());
-        this.endDate = new Date(endDate.getTime());
+        this.bookingDate = new Date(bookingDate.getTime());
+
     }
 
-    public Date getStartDate() {
-        return new Date(startDate.getTime());
+    public Date getBookingDate() {
+        return new Date(bookingDate.getTime());
     }
 
-    public Date getEndDate() {
-        return new Date(endDate.getTime());
-    }
 
     @Override
     public int getId() {
@@ -74,10 +68,6 @@ public class Booking implements CampusObject {
         return new Time(startTime.getTime());
     }
 
-    public WeekDay getDay() {
-        return day;
-    }
-
 
     public String getDescription() {
         return description;
@@ -95,10 +85,7 @@ public class Booking implements CampusObject {
         if (getClass() != obj.getClass())
             return false;
         Booking other = (Booking) obj;
-        if (bookingID != other.bookingID)
-            return false;
-
-        return true;
+        return bookingID == other.bookingID;
     }
 
     @Override
@@ -109,8 +96,8 @@ public class Booking implements CampusObject {
         return "Booking{" + "\n"
                 + (subject == null ? description : subject.getName())
                 + ": დაჯავშნა: " + booker.getFirstName() + " " +
-                booker.getLastName() + " თარიღი: " + dFormat.format(startDate) +
-                " დღე: " + day + " დასაწყისი " + format.format(startTime) +
+                booker.getLastName() + " თარიღი: " + dFormat.format(getBookingDate()) +
+                " დასაწყისი " + format.format(startTime) +
                 " დასასრული " + format.format(endTime) +
                 " აუდიტორია " + room.getRoomName() +
                 "}";

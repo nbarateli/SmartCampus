@@ -86,10 +86,13 @@ public class DBConnector {
                 addParameters(statement, values);
             }
 
-            if (isUpdate)
-                return statement.executeUpdate();
-            else
+            if (isUpdate) {
+                int nRows = statement.executeUpdate();
+                statement.close();
+                return nRows;
+            } else {
                 return statement.executeQuery();
+            }
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

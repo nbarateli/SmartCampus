@@ -1,7 +1,7 @@
 package test;
 
+import misc.Utils;
 import model.bookings.Booking;
-import model.lectures.Lecture;
 import model.bookings.Booking.WeekDay;
 import model.rooms.Room;
 import model.rooms.Room.RoomType;
@@ -128,7 +128,9 @@ public class RoomManagerTest {
         Room room1 = manager.getRoomById(4);
         List<Booking> lecturesList = manager.findAllBookingsAt(room1);
         Booking lec = lecturesList.get(0);
-        List<Booking> lecturesList2 = manager.findAllBookingsAt(room1, lec.getDay(), lec.getStartTime(), lec.getEndTime());
+        List<Booking> lecturesList2 = manager.findAllBookingsAt(room1,
+                WeekDay.values()[Utils.getWeekDay(lec.getBookingDate())],
+                lec.getStartTime(), lec.getEndTime());
         assertEquals(lecturesList2.size(), 1);
         assertTrue(lecturesList2.get(0).equals(lec));
     }
@@ -142,7 +144,8 @@ public class RoomManagerTest {
         Room room1 = manager.getRoomByName("408");
         List<Booking> lecturesList = manager.findAllBookingsAt(room1);
         Booking lec = lecturesList.get(0);
-        List<Booking> lecturesList2 = manager.findAllBookingsAt(room1, lec.getDay(), lec.getStartTime(), lec.getEndTime());
+        List<Booking> lecturesList2 = manager.findAllBookingsAt(room1,
+                WeekDay.values()[Utils.getWeekDay(lec.getBookingDate())], lec.getStartTime(), lec.getEndTime());
         assertEquals(lecturesList2.size(), 1);
         assertTrue(lecturesList2.get(0).equals(lec));
     }
