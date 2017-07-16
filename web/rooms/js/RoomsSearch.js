@@ -57,6 +57,7 @@ function showOnMap(id) {
                     showFourth();
                     break;
             }
+            unHighLightRooms();
             highlightRoom(data);
         }
     });

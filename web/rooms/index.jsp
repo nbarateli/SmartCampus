@@ -75,13 +75,7 @@
           src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
   <script src="js/Floors.js"></script>
-  <script src="js/RoomsSearch.js" <%
-    String showOnMap = request.getParameter("showonmap");
-    if (showOnMap != null) {
-      out.print("onload=\"showOnMap(" + showOnMap + ")\"");
-    }
-  %>>
-  </script>
+
 
 </head>
 <body>
@@ -583,6 +577,13 @@
     </td>
   </tr>
 </table>
+<script src="js/RoomsSearch.js" <%
+  String showOnMap = request.getParameter("showonmap");
+  if (showOnMap != null) {
+    out.print("onload=\"showOnMap(" + showOnMap + ")\"");
+  }
+%>>
+</script>
 
 </body>
 </html>
