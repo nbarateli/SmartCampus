@@ -168,16 +168,19 @@
         <div class="form-group">
           <table id="datepairExample" class="form-group">
             <tr id="fromRow">
-              <td><label class="control-label">თარიღი
+              <td><label class="control-label">თარიღი (დან)<br>
                 <input id="date-input-from" type="text" name="start_date" class="date start"/>
+              </label></td>
+              <td><label class="control-label">თარიღი (მდე)<br>
+                <input id="date-input-to" type="text" name="end_date" class="date end"/>
               </label></td>
 
             </tr>
             <tr id="toRow">
+
               <td><label class="control-label">დრო (დან)<br>
                 <input id="time-input-from" type="text" name="start_time" class="time start"/>
               </label></td>
-
               <td>
                 <label class="control-label">დრო (მდე)<br>
                   <input id="time-input-to" type="text" name="end_time" class="time end"/>

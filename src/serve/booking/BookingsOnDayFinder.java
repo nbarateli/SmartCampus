@@ -44,8 +44,9 @@ public class BookingsOnDayFinder extends HttpServlet {
 
     private void buildJson(JsonObjectBuilder builder, HttpServletRequest request, BookingManager bookingManager, RoomManager roomManager) {
         try {
+            String id = request.getParameter("room_id");
             Date day = getDay(request);
-            Room room = roomManager.getRoomById(Integer.parseInt(request.getParameter("room_id")));
+            Room room = roomManager.getRoomById(Integer.parseInt(id));
             if (room == null) {
                 builder.add(JSON_ERROR, JSON_ROOM_ERROR_NOT_FOUND);
                 return;
@@ -95,6 +96,6 @@ public class BookingsOnDayFinder extends HttpServlet {
 
     private Date getDay(HttpServletRequest request) throws Exception {
         String day = request.getParameter("day");
-        return new SimpleDateFormat("dd.MM.yy").parse(day);
+        return new SimpleDateFormat("dd.MM.yyyy").parse(day);
     }
 }
