@@ -338,6 +338,9 @@
       </div>
     </div>
   </div>
+  <script src="js/addImages.js"></script>
+
+</div>
 
 </body>
 </html>
