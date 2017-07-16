@@ -86,7 +86,6 @@
 </head>
 <body style="background-color: #bbbbbb">
 
-<a id="back-to-main" class="image" href="/"></a>
 
 <div class="modal fade" id="add-room-modal" role="dialog">
   <div class="modal-dialog">
@@ -123,17 +122,16 @@
     </div>
   </div>
 </div>
-<%
-  if (canDisplay(request)) {
-    out.print("<button class=\"main-button\" data-toggle=\"modal\" data-target=\"#add-room-modal\">სურათის ატვირთვა\n" +
-            "</button>");
-  }
-%>
+
 <script src="js/addImages.js"></script>
 <div align="center">
 
+
   <div class="to-hide">
-    <div style="font-size: 25px"><%out.println(room.getRoomName());%></div>
+    <div>
+      <a id="back-to-main" class="image" href="/"></a>
+    </div>
+    <div style="font-size: 25px"><%out.print(room.getRoomName());%></div>
     <div>
       <br>
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -166,6 +164,15 @@
 
         </div>
       </div>
+    </div>
+    <div>
+      <%
+        if (canDisplay(request)) {
+          out.print("<button class=\"main-button\" data-toggle=\"modal\" data-target=\"#add-room-modal\"" +
+                  ">სურათის დამატება\n" +
+                  "</button>");
+        }
+      %>
     </div>
     <div id="room-info-div">
       <div>სართული: <%out.print(room.getFloor());%>.</div>
