@@ -21,14 +21,19 @@ $(function () {
         dateFormat: 'dd.mm.yy',
         onSelect: function (dateText, inst) {
             var date = $(this).datepicker('getDate');
-            startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 1);
-            endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 7);
+            console.log(date);
+            if (date.getDay() === 0) {
+                startDate = new Date(date - 6 * MS_PER_DAY)
+            } else {
+                startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() + 1);
+            }
+            endDate = new Date(startDate.getTime() + 6 * MS_PER_DAY);
 
             var dateFormat = inst.settings.dateFormat || $.datepicker._defaults.dateFormat;
             // $('#startDate').text($.datepicker.formatDate(dateFormat, startDate, inst.settings));
             // $('#endDate').text($.datepicker.formatDate(dateFormat, endDate, inst.settings));
-            console.log($.datepicker.formatDate(dateFormat, startDate, inst.settings) + " "
-                + $.datepicker.formatDate(dateFormat, endDate, inst.settings));
+            // console.log($.datepicker.formatDate(dateFormat, startDate, inst.settings) + " "
+            //     + $.datepicker.formatDate(dateFormat, endDate, inst.settings));
 
             displayWeek(endDate, inst.settings);
             selectCurrentWeek();

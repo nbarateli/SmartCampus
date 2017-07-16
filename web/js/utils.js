@@ -1,3 +1,4 @@
+const MS_PER_DAY = 86400000;
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
