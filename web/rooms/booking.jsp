@@ -98,14 +98,10 @@
         <script>roomNameAutocomplete('r_name');</script>
       </div>
 
-      <div class="form-group">
-        <input type="text" name="subject_name" class="form-control" id="subj_name"
-               placeholder="შეიყვანეთ საგნის სახელი (თუ ლექციაა)">
-      </div>
 
       <div class="form-group">
         <input type="text" name="description" class="form-control" id="desc"
-               placeholder="შეიყვანეთ დაჯავშნის მიზეზი (თუ ლექცია არ არის)">
+               placeholder="შეიყვანეთ დაჯავშნის მიზეზი">
       </div>
 
       <input type="hidden" name="repetition" value="1">
@@ -117,7 +113,7 @@
       <div id="timeForm" class="form-group">
 
         <div class="form-center">თარიღი<br>
-          <input type="text" name="end_date" class="date start" id="end_d"/>
+          <input type="text" name="booking_date" class="date start" id="end_d"/>
         </div>
         <div class="form-left  ">დრო (დან) <br>
           <input type="text" name="start_time" class="time start" id="start_t"/>
@@ -176,7 +172,7 @@
 
       <input type="button" value="დამატება" style="margin-top: 100px" ;
              class="btn btn-info btn-lg"
-             onclick=<%= getClickFunction()%>>
+             onclick="addBookingFromForm()">
     </form>
 
   </div>

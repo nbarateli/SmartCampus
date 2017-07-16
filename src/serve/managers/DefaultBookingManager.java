@@ -51,7 +51,6 @@ public class DefaultBookingManager implements BookingManager {
     public boolean add(Booking booking) {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String date = format.format(booking.getBookingDate());
-
         String description = booking.getDescription();
         CampusSubject subject = booking.getSubject();
 

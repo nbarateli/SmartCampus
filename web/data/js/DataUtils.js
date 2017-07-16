@@ -257,6 +257,7 @@ function addLectureFromForm() {
     var params = ($('#sched-form').serialize());
 
     //clearFormInputs(document.getElementById("sched-form"));
+    console.log(params);
 
     sendData("/lectures/addlecture", params, true);
     return false;
