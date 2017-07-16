@@ -54,7 +54,7 @@ public class RoomInfo extends HttpServlet {
             builder.add(JSON_ERROR, JSON_ERROR_BAD_PARAM);
         }
         JsonWriter writer = Json.createWriter(response.getWriter());
-//        System.out.println(builder.build().toString());
+
         writer.writeObject(builder.build());
     }
 
@@ -127,7 +127,8 @@ public class RoomInfo extends HttpServlet {
         JsonArrayBuilder bookingArrayBuilder = Json.createArrayBuilder();
         for (Booking booking : manager.findAllBookingsAt(room)) {
             JsonObjectBuilder bookingBuilder = Json.createObjectBuilder();
-            bookingBuilder.add(JSON_BOOKING_SUBJECT, booking.getSubject().getName());
+            if (booking.getSubject() != null)
+                bookingBuilder.add(JSON_BOOKING_SUBJECT, booking.getSubject().getName());
             bookingBuilder.add(JSON_BOOKING_BOOKER, booking.getBooker().getFirstName() + " " +
                     booking.getBooker().getLastName());
             bookingBuilder.add(JSON_BOOKING_START_TIME, toHHMM(booking.getStartTime()));
