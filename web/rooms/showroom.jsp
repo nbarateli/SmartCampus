@@ -90,7 +90,7 @@
   <link rel="icon" href="/img/smallLogo.png">
 
 </head>
-<body style="background-color: #bbbbbb">
+<body style="background-color: #67b168">
 
 
 <!-- Navigation -->
