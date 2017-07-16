@@ -95,7 +95,7 @@ button:hover {
 
 #back-to-main {
   content: url(../../img/bigLogo.png);
-  position: relative;
+  position: absolute;
   right: 10px;
   top: 10px;
   height: 80px;
