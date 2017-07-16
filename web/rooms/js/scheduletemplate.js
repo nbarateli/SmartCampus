@@ -2,14 +2,13 @@
  * Created by Niko on 13.07.2017.
  */
 const WEEKDAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+let room_id;
 
 function displayDay(currentDay, elemId) {
     document.getElementById(elemId).innerHTML = "";
-    let room_id = getParameterByName('id', window.location['href']);
     $.get('/bookings/bookings_on', {day: currentDay, room_id: room_id},
         function (returnedData) {
-            console.log(currentDay);
-            console.log(elemId);
+
             if (undefined === returnedData['bookings']) return;
 
             for (i in returnedData['bookings']) {

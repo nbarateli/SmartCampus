@@ -74,8 +74,14 @@
   <script
           src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
-  <script src="js/RoomsSearch.js"></script>
   <script src="js/Floors.js"></script>
+  <script src="js/RoomsSearch.js" <%
+    String showOnMap = request.getParameter("showonmap");
+    if (showOnMap != null) {
+      out.print("onload=\"showOnMap(" + showOnMap + ")\"");
+    }
+  %>>
+  </script>
 
 </head>
 <body>
@@ -162,24 +168,20 @@
         <div class="form-group">
           <table id="datepairExample" class="form-group">
             <tr id="fromRow">
-              <td><label class="control-label">თარიღი (დან)
+              <td><label class="control-label">თარიღი
                 <input id="date-input-from" type="text" name="start_date" class="date start"/>
-              </label></td>
-              <td><label class="control-label">დრო (დან)<br>
-                <input id="time-input-from" type="text" name="start_time" class="time start"/>
               </label></td>
 
             </tr>
             <tr id="toRow">
+              <td><label class="control-label">დრო (დან)<br>
+                <input id="time-input-from" type="text" name="start_time" class="time start"/>
+              </label></td>
+
               <td>
-                <label> თარიღი (მდე)
-                  <input id="date-input-to" type="text" name="end_date" class="date end"/>
+                <label class="control-label">დრო (მდე)<br>
+                  <input id="time-input-to" type="text" name="end_time" class="time end"/>
                 </label>
-              </td>
-              <td>
-                  <label class="control-label">დრო (მდე)<br>
-                      <input id="time-input-to" type="text" name="end_time" class="time end"/>
-                  </label>
               </td>
 
             </tr>

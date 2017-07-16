@@ -3,7 +3,6 @@
 body {
   height: 100%;
   width: 100%;
-  background-image: url(../../img/showroom6.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -30,10 +29,15 @@ tr, th, td {
 
 #back-to-main {
   content: url(../../img/bigLogo.png);
-  position: relative;
+  position: absolute;
   float: right;
   height: 80px;
   width: 90px;
   padding: 10px;
-  /*display: none;*/
+  display: none;
+}
+
+.mainPageButton {
+  height: 180%;
+
 }
