@@ -189,6 +189,7 @@
         <li>
           <button class="main-button" onclick="requestOnMap(<%out.print(room.getId());%>)">მაჩვენე რუკაზე</button>
         </li>
+        <br>
         <%
           if (canInsertData()) {
             out.print(

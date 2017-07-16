@@ -108,7 +108,7 @@
                 <input type="text" name="start_time" class="time start" id="start_t"/>
               </div>
               <div class="form-right">დრო (მდე) <br>
-                <input type="text" name="end_time" class="time start" id="end_t"/>
+                <input type="text" name="end_time" class="time end" id="end_t"/>
               </div>
             </div>
 
@@ -144,8 +144,13 @@
                 // initialize input widgets first
                 $('#datepairExample .time').timepicker({
                     'showDuration': true,
-                    'timeFormat': 'H:i'
+                    'timeFormat': 'H:i',
+                    'maxTime': '23:59',
+                    'minTime': '10:00',
+                    'step': 70
                 });
+
+                $('#timeForm .end').timepicker('option', 'minTime', '11:00');
 
                 $('#datepairExample .date').datepicker({
                     'format': 'dd.mm.yyyy',

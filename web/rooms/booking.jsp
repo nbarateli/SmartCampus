@@ -150,8 +150,12 @@
           $('#timeForm .time').timepicker({
               'showDuration': true,
               'timeFormat': 'H:i',
-              'maxTime': '23:59'
+              'maxTime': '23:59',
+              'minTime': '10:00',
+              'step': 70
           });
+
+          $('#timeForm .end').timepicker('option', 'minTime', '11:00');
 
 
           $('#timeForm .date').datepicker({
