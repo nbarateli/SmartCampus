@@ -86,12 +86,6 @@
   <div id="form-div">
     <form id="booking-form" class="form-vertical">
 
-      <div class="form-group">
-        <input type="email" name="lecturer_email" id="lect_mail"
-               class="form-control"
-               placeholder="შეიყვანეთ ლექტორის/დამჯავშნავის ფოსტის მისამართი">
-      </div>
-
       <div class="form-group ui-widget">
         <input type="text" name="room_name" class="form-control"
                placeholder="შეიყვანეთ ოთახის დასახელება" width="100px" id="r_name">
@@ -206,10 +200,6 @@
 <%
 } else {
 %>
-
-<script>
-    changeMail(<%="'" + currentUser.geteMail() + "'"%>)
-</script>
 
 <%
   }

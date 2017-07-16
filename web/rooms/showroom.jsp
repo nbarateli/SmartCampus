@@ -222,34 +222,20 @@
   </script>
   <script src="/js/utils.js"></script>
   <script src="/js/weekpicker.js"></script>
-  <script src="js/scheduletemplate.js" onload="room_id = <%out.print(room.getId());%>;"></script>
+  <%out.print("<script src=\"js/scheduletemplate.js\" onload='room_id=" + room.getId() + "'></script>");%>
 
-    <!--
-    Related;
-    Projects;
-    Row -->
-    < div;
-    align = "center";
-    style = "width: 100%" >
-        < div;
-    style = "align-items: center;" >
+
+  <!-- Related Projects Row -->
+  <div align="center" style="width: 100%">
+    <div style="align-items: center;">
       <div>
-        < div;
-    class
-    = "week-picker" > < / div >
+        <div class="week-picker"></div>
       </div>
-        < div;
-    class
-    = "table-users" >
-        < div;
-    class
-    = "header" > ლექციები / ჯავშნები < / div >
+      <div class="table-users">
+        <div class="header">ლექციები/ჯავშნები</div>
 
-        < div;
-    class
-    = schedule >
-        < tr;
-    style = "overflow-x: scroll" >
+        <div class=schedule>
+          <tr style="overflow-x: scroll">
             <td>
               <table>
                 <tr>
@@ -263,46 +249,39 @@
                 </tr>
                 <tr>
                   <td>
-        < table;
-    id = "monday" >
+                    <table id="monday">
 
                     </table>
                   </td>
                   <td>
-        < table;
-    id = "tuesday" >
+                    <table id="tuesday">
                       <tr>
 
                       </tr>
                     </table>
                   </td>
                   <td>
-        < table;
-    id = "wednesday" >
+                    <table id="wednesday">
 
                     </table>
                   </td>
                   <td>
-        < table;
-    id = "thursday" >
+                    <table id="thursday">
 
                     </table>
                   </td>
                   <td>
-        < table;
-    id = "friday" >
+                    <table id="friday">
 
                     </table>
                   </td>
                   <td>
-        < table;
-    id = "saturday" >
+                    <table id="saturday">
 
                     </table>
                   </td>
                   <td>
-        < table;
-    id = "sunday" >
+                    <table id="sunday">
 
                     </table>
                   </td>
@@ -325,32 +304,16 @@
   </div>
   <!-- /.container -->
 
-        < div;
-    class
-    = "modal fade";
-    id = "add-room-modal";
-    role = "dialog" >
-        < div;
-    class
-    = "modal-dialog" >
+  <div class="modal fade" id="add-room-modal" role="dialog">
+    <div class="modal-dialog">
 
-        < div;
-    class
-    = "modal-content" >
+      <div class="modal-content">
 
-        < div;
-    class
-    = "modal-body" >
+        <div class="modal-body">
           <br>
           <br>
           <br>
-        < label;
-    class
-    = "info-label" > < b > აირჩიეთ;
-    სურათ(ებ);
-    ი:<
-    /
-    b > < / label >
+          <label class="info-label"><b>აირჩიეთ სურათ(ებ)ი:</b></label>
           <br>
           <br>
 
@@ -360,29 +323,15 @@
 
           <br>
           <br>
-    < div;
-    class
-    = "form-vertical";
-    id = "rooms-file" >
-        < input;
-    type = "file";
-    id = 'imageup';
-    name = "pic";
-    multiple;
-    accept = "image/*";
-    style = ";display:none" >
-        < div;
-    style = "padding: 10px;border: solid 1px #cccccc" >
-        < div;
-    id = "drop_zone";
-    style = "padding: 5px; border: dashed #cccccc" > Drop;
-    files;
+          <div class="form-vertical" id="rooms-file">
+            <input type="file" id='imageup' name="pic" multiple accept="image/*" style=";display:none">
+            <div style="padding: 10px;border: solid 1px #cccccc">
+              <div id="drop_zone" style="padding: 5px; border: dashed #cccccc">Drop files
                 here
               </div>
             </div>
             <br>
-                < output;
-    id = "image-list" > < / output >
+            <output id="image-list"></output>
           </div>
           <br>
           <br>
@@ -390,8 +339,7 @@
       </div>
     </div>
   </div>
-        < script;
-    src = "js/addImages.js" ></script>
+  <script src="js/addImages.js"></script>
 
 </div>
 
