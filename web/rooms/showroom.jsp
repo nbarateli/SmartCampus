@@ -215,7 +215,7 @@
   <script type="mustache/x-tmpl" id="bookingtemplate">
     <tr>
       <td><img class="user-picture" src={{booker_pic}} alt=""></td>
-      <td>{{subject_name}}</td>
+      <td>{{subject_name}}{{description}}</td>
       <td>{{booker}}</td>
       <td>{{start_time}}</td>
     </tr>

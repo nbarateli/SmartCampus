@@ -1,73 +1,73 @@
 .center_message {
-    font-size: 24pt;
+  font-size: 24pt;
 }
 
 .box {
-    text-align: center;
+  text-align: center;
 }
 
 @font-face {
-    font-family: bpg_arial;
-    src: url(fonts/bpg_arial_2009.ttf);
+  font-family: bpg_arial;
+  src: url(fonts/bpg_arial_2009.ttf);
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a:visited {
-    color: inherit;
+  color: inherit;
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 body {
-    height: 100%;
-    width: 100%;
-    background-image: url(img/background.jpg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    font-family: bpg_arial;
+  height: 100%;
+  width: 100%;
+  background-image: url(img/background.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: bpg_arial;
 }
 
 .main-container {
-    width: 30%;
-    height: 55%;
-    background: white;
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 20px;
-    box-shadow: 0 1px 10px 1px rgba(0,0,0,0.35);
-    top: 50%;
-    text-align: center;
-    padding: 20px 30px;
+  width: 30%;
+  height: 55%;
+  background: white;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  box-shadow: 0 1px 10px 1px rgba(0, 0, 0, 0.35);
+  top: 50%;
+  text-align: center;
+  padding: 20px 30px;
 }
 
 .main-container_inner * {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .main-container .fa {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .main-container_inner {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .title {
-    color: black;
-    margin-bottom: 40px;
-    font-size: 18px;
-    font-weight: bold;
+  color: black;
+  margin-bottom: 40px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .find-room {
@@ -79,12 +79,10 @@ body {
 }
 
 .sign-in {
-    display: inline-block;
-    margin-bottom: -2px;
-    margin-top: 40px;
+  display: inline-block;
+  margin-bottom: -2px;
+  margin-top: 40px;
 }
-
-
 
 .lost-and-found {
 
