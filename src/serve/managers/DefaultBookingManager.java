@@ -4,8 +4,8 @@ import model.bookings.Booking;
 import model.bookings.BookingManager;
 import model.bookings.BookingSearchQueryGenerator;
 import model.campus.CampusSearchQuery;
-import model.subjects.CampusSubject;
 import model.rooms.Room;
+import model.subjects.CampusSubject;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,6 +29,7 @@ public class DefaultBookingManager implements BookingManager {
 
     /**
      * constructor of DefaultBookingManager class
+     *
      * @param connector DBConnector object, so that this class can interact with database
      */
     DefaultBookingManager(DBConnector connector) {
@@ -39,7 +40,9 @@ public class DefaultBookingManager implements BookingManager {
     public List<Booking> find(BookingSearchQueryGenerator queryGenerator) {
         List<Booking> list = new ArrayList<>();
         CampusSearchQuery query = queryGenerator.generateQuery();
-        try (ResultSet set = connector.executeQuery(query.getQuery(), query.getValues())) {
+        String sql = query.getQuery();
+        Object[] values = query.getValues();
+        try (ResultSet set = connector.executeQuery(sql, values)) {
 
 
             while (set.next()) {

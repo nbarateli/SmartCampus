@@ -3,16 +3,21 @@ package test;
 import misc.Utils;
 import model.accounts.User;
 import model.accounts.User.UserRole;
+import model.bookings.Booking;
 import model.bookings.Booking.WeekDay;
 import model.rooms.Room;
 import model.rooms.Room.RoomType;
 import model.rooms.Room.SeatType;
 import model.rooms.RoomProblem;
+import model.subjects.CampusSubject;
 import org.junit.Test;
 
 import java.sql.SQLException;
 import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 
@@ -60,10 +65,8 @@ public class UtilsTest {
         assertEquals("მაგიდები", Utils.seatTypeToString(type, true));
         type = SeatType.valueOf("COMPUTERS");
         assertEquals("კომპიუტერები", Utils.seatTypeToString(type, true));
-        type = SeatType.valueOf("WOODEN_CHAIR");
-        assertEquals("სკამ-მერხები (ხის)", Utils.seatTypeToString(type, true));
-        type = SeatType.valueOf("PLASTIC_CHAIR");
-        assertEquals("სკამ-მერხები (პლასტმასის)", Utils.seatTypeToString(type, true));
+        type = SeatType.valueOf("CHAIRS");
+        assertEquals("სკამები", Utils.seatTypeToString(type, true));
     }
 
     @Test
@@ -95,10 +98,8 @@ public class UtilsTest {
         assertEquals(type, Utils.toSeatType("tables"));
         type = SeatType.valueOf("COMPUTERS");
         assertEquals(type, Utils.toSeatType("computers"));
-        type = SeatType.valueOf("WOODEN_CHAIR");
-        assertEquals(type, Utils.toSeatType("wooden_chair"));
-        type = SeatType.valueOf("PLASTIC_CHAIR");
-        assertEquals(type, Utils.toSeatType("plastic_chair"));
+        type = SeatType.valueOf("CHAIRS");
+        assertEquals(type, Utils.toSeatType("chairs"));
         assertEquals(null, Utils.toSeatType("any"));
     }
 
@@ -157,6 +158,69 @@ public class UtilsTest {
                                     SeatType.valueOf("DESKS"), false, 5), "name", "name",
                             java.sql.Date.valueOf("2017-07-16")),
                     Utils.getProblemFromResults(new MockResultSet()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getWeekDayTest(){
+        SimpleDateFormat dateformat2 = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        String strdate1 = "16-07-2017 11:35:42";
+        String strdate2 = "17-07-2017 11:35:42";
+        String strdate3 = "18-07-2017 11:35:42";
+        String strdate4 = "19-07-2017 11:35:42";
+        String strdate5 = "20-07-2017 11:35:42";
+        String strdate6 = "21-07-2017 11:35:42";
+        String strdate7 = "22-07-2017 11:35:42";
+        try {
+            Date date1;
+            date1 = dateformat2.parse(strdate1);
+            Date date2;
+            date2 = dateformat2.parse(strdate2);
+            Date date3;
+            date3 = dateformat2.parse(strdate3);
+            Date date4;
+            date4 = dateformat2.parse(strdate4);
+            Date date5;
+            date5 = dateformat2.parse(strdate5);
+            Date date6;
+            date6 = dateformat2.parse(strdate6);
+            Date date7;
+            date7 = dateformat2.parse(strdate7);
+            assertEquals(Utils.getWeekDay(date1), 1);
+            assertEquals(Utils.getWeekDay(date2), 2);
+            assertEquals(Utils.getWeekDay(date3), 3);
+            assertEquals(Utils.getWeekDay(date4), 4);
+            assertEquals(Utils.getWeekDay(date5), 5);
+            assertEquals(Utils.getWeekDay(date6), 6);
+            assertEquals(Utils.getWeekDay(date7), 7);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getBookingFromResultsTest(){
+        try {
+            assertEquals(new Booking(5, new User(5, "name", "name", "name",
+                    UserRole.STUDENT, ""),
+                    new Room(5, 5, "name", RoomType.valueOf("AUDITORIUM"),
+                            SeatType.valueOf("DESKS"), false, 5),
+                            new CampusSubject(-1, "name"),
+                    new Time(4, 0, 0), new Time(4, 0, 0),
+                            "new subject", java.sql.Date.valueOf("2017-07-16")),
+                    Utils.getBookingFromResults(new MockResultSet()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getSubjectFromResults(){
+        try {
+            assertEquals(new CampusSubject(5, "magaltman"),
+                    Utils.getSubjectFromResults(new MockResultSet()));
         } catch (SQLException e) {
             e.printStackTrace();
         }
