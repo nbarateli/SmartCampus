@@ -327,12 +327,21 @@
           <div class="form-vertical" id="rooms-file">
             <input type="file" id='imageup' name="pic" multiple accept="image/*" style=";display:none">
             <div style="padding: 10px;border: solid 1px #cccccc">
-              <div id="drop_zone" style="padding: 5px; border: dashed #cccccc">Drop files
+              <div id="drop_zone" class="drop-zone">Drop files
                 here
               </div>
             </div>
             <br>
             <output id="image-list"></output>
+          </div>
+          <div class="progress">
+            <div id="prog" class="progress-bar progress-bar-striped progress-bar-animated active" role="progressbar"
+                 aria-valuenow="75"
+                 aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+
+          </div>
+          <div align="center">
+            <h3 id='successMessage' style="display: none"></h3>
           </div>
           <br>
           <br>
