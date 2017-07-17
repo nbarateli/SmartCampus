@@ -281,6 +281,9 @@
           <br>
           <br>
           <div class="form-vertical" id="rooms-file">
+            <img src="../../img/tick.png" id="tick" />
+            <img src="../../img/w8.gif" id="w8gif" />
+            <img src="../../img/fail.png" id="fail" />
             <input type="file" name="pic" accept=".xls,.xlsx"><br>
             <output id="room-list"></output>
           </div>

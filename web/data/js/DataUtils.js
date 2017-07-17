@@ -17,12 +17,12 @@ function ExcelToJSON(file, type) {
                     if (type === "lecture") {
                         addLectureFromJson(XL_row_object[i], false);
                     } else if (type === "subject") {
-
                         addSubjectFromJson(XL_row_object[i], false);
                     } else {
                         addRoomFromJson(XL_row_object[i], false);
                     }
 
+                    showSuccess();
                 }
             })
 
@@ -30,6 +30,7 @@ function ExcelToJSON(file, type) {
 
         reader.onerror = function (ex) {
             console.log(ex);
+            showFailure();
             return null;
         };
 
@@ -311,7 +312,9 @@ function clearFormInputs(formToClear) {
 function handleFileSelect(evt, type) {
     var files = evt.target.files; // FileList object
     // files is a FileList of File objects. List some properties.
+
     for (var i = 0, f; f = files[i]; i++) {
+        showLoading();
         if (type === "lecture") {
             addLecturesFromFile(f);
         } else if (type === "subject") {
@@ -390,4 +393,20 @@ $(document).ready(function () {
 
 });
 
+function showLoading(){
+    document.getElementById("tick").style.display = "none";
+    document.getElementById("w8gif").style.display = "inline";
+    document.getElementById("fail").style.display = "none";
+}
 
+function showSuccess(){
+    document.getElementById("tick").style.display = "inline";
+    document.getElementById("w8gif").style.display = "none";
+    document.getElementById("fail").style.display = "none'"
+}
+
+function showFailure(){
+    document.getElementById("tick").style.display = "none";
+    document.getElementById("w8gif").style.display = "none";
+    document.getElementById("fail").style.display = "inline";
+}

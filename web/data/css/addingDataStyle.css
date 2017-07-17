@@ -102,6 +102,36 @@ button:hover {
   width: 90px;
 }
 
+#tick {
+  position: relative;
+  left: 20%;
+  top: 36px;
+  height: 50px;
+  width: 50px;
+
+  display: none;
+}
+
+#w8gif {
+  position: relative;
+  left: 20%;
+  top: 36px;
+  height: 50px;
+  width: 50px;
+
+  display: none;
+}
+
+#fail {
+  position: relative;
+  left: 20%;
+  top: 36px;
+  height: 50px;
+  width: 50px;
+
+  display: none;
+}
+
 
 
 
