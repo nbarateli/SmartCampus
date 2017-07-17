@@ -19,6 +19,7 @@ function ExcelToJSON(file, type) {
                         showLectureSuccess();
                     } else if (type === "subject") {
                         addSubjectFromJson(XL_row_object[i], false);
+                        showSubjectSuccess();
                     } else {
                         addRoomFromJson(XL_row_object[i], false);
                         showRoomSuccess();
@@ -319,6 +320,7 @@ function handleFileSelect(evt, type) {
             showLectureLoading();
             addLecturesFromFile(f);
         } else if (type === "subject") {
+            showSubjectLoading();
             addSubjectsFromFile(f);
         } else {
             showRoomLoading();
@@ -395,6 +397,11 @@ $(document).ready(function () {
 
 });
 
+function showSubjectLoading(){
+    document.getElementById("subject-tick").style.display = "none";
+    document.getElementById("subject-w8gif").style.display = "inline";
+    document.getElementById("subject-fail").style.display = "none";
+}
 function showLectureLoading(){
     document.getElementById("lecture-tick").style.display = "none";
     document.getElementById("lecture-w8gif").style.display = "inline";
@@ -406,6 +413,12 @@ function showRoomLoading(){
     document.getElementById("room-fail").style.display = "none";
 }
 
+
+function showSubjectSuccess(){
+    document.getElementById("subject-tick").style.display = "inline";
+    document.getElementById("subject-w8gif").style.display = "none";
+    document.getElementById("subject-fail").style.display = "none'"
+}
 function showLectureSuccess(){
     document.getElementById("lecture-tick").style.display = "inline";
     document.getElementById("lecture-w8gif").style.display = "none";
@@ -417,6 +430,12 @@ function showRoomSuccess(){
     document.getElementById("room-fail").style.display = "none'"
 }
 
+
+function showSubjectFailure(){
+    document.getElementById("subject-tick").style.display = "none";
+    document.getElementById("subject-w8gif").style.display = "none";
+    document.getElementById("subject-fail").style.display = "inline";
+}
 function showLectureFailure(){
     document.getElementById("lecture-tick").style.display = "none";
     document.getElementById("lecture-w8gif").style.display = "none";

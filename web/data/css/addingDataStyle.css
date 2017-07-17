@@ -162,6 +162,36 @@ button:hover {
   display: none;
 }
 
+#subject-tick {
+  position: relative;
+  height: 50px;
+  width: 50px;
+  left: 20%;
+  top: -54px;
+
+  display: none;
+}
+
+#subject-w8gif {
+  position: relative;
+  height: 50px;
+  width: 50px;
+  left: 20%;
+  top: -54px;
+
+  display: none;
+}
+
+#subject-fail {
+  position: relative;
+  height: 50px;
+  width: 50px;
+  left: 20%;
+  top: -54px;
+
+  display: none;
+}
+
 
 
 

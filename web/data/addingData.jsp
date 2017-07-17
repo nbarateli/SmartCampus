@@ -361,6 +361,9 @@
           <br>
           <div class="form-vertical" id="subj-file">
             <input type="file" name="pic" accept=".xls,.xlsx"><br>
+            <img src="../../img/tick.png" id="subject-tick" />
+            <img src="../../img/w8.gif" id="subject-w8gif" />
+            <img src="../../img/fail.png" id="subject-fail" />
             <output id="subj-list"></output>
           </div>
           <br>
