@@ -82,7 +82,6 @@ public class DBConnector {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.executeQuery("USE " + MYSQL_DATABASE_NAME + ";");
             if (values != null) {
-
                 addParameters(statement, values);
             }
 
@@ -100,11 +99,15 @@ public class DBConnector {
         }
     }
 
+    /**
+     * adds given parameters to given PreparedStatement
+     * @param statement PreparedStatement which we need to add parameters to
+     * @param values parameters needed to be added to PreparedStatement
+     * @throws SQLException
+     */
     private void addParameters(PreparedStatement statement, Object[] values) throws SQLException {
         for (int i = 0; i < values.length; i++) {
             statement.setObject(i + 1, values[i]);
-
         }
-
     }
 }

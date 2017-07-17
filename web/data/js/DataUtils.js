@@ -318,7 +318,7 @@ function removeRoomFromForm() {
 function addRoomFromForm() {
     var params = ($('#add-room-form').serialize());
 
-    clearFormInputs(document.getElementById("add-room-form"));
+    // clearFormInputs(document.getElementById("add-room-form"));
 
     sendData("/rooms/addroom", params, true);
     return false;

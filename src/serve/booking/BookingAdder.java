@@ -74,7 +74,7 @@ public class BookingAdder extends HttpServlet {
     /**
      * checks if given booking will overlap some other booking, which is already in database
      * @param booking booking we need to check for overlapping
-     * @param bookingManager DAO needed to check things with database
+     * @param bookingManager DAO needed to find specific bookings in database
      * @return true if this booking will overlap some other booking already in database
      */
     private boolean overlapsOtherBookings(Booking booking, BookingManager bookingManager) {
