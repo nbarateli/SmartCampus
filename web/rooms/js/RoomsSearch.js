@@ -1,7 +1,3 @@
-/**
- *
- */
-
 $(document).ready(function () {
     $(".to-hide").hide();
     $("button").click(function () {

@@ -30,7 +30,10 @@ public class DefaultRoomManager implements RoomManager {
 
     private final DBConnector connector;
 
-
+    /**
+     * constructor of DefaultRoomManager class
+     * @param connector DBConnector object, so that this class can interact with database
+     */
     DefaultRoomManager(DBConnector connector) {
         this.connector = connector;
     }

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static misc.ModelConstants.SENTINEL_INT;
 import static misc.WebConstants.*;
 
 /**
@@ -41,7 +42,7 @@ public class SubjectAdder extends HttpServlet {
 
         gn.setSubjectName(subjectName);
         if (manager.find(gn).size() == 0) {
-            CampusSubject subj = new CampusSubject(-1, subjectName);
+            CampusSubject subj = new CampusSubject(SENTINEL_INT, subjectName);
             manager.add(subj);
             response.getWriter().println(SUCCESS);
         } else {

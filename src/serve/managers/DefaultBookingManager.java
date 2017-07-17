@@ -27,6 +27,10 @@ public class DefaultBookingManager implements BookingManager {
 
     private final DBConnector connector;
 
+    /**
+     * constructor of DefaultBookingManager class
+     * @param connector DBConnector object, so that this class can interact with database
+     */
     DefaultBookingManager(DBConnector connector) {
         this.connector = connector;
     }
