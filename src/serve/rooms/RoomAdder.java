@@ -45,7 +45,8 @@ public class RoomAdder extends HttpServlet {
             int capacity = Integer.parseInt(request.getParameter("capacity"));
             Room.RoomType roomType = toRoomType(request.getParameter("room_type"));
             Room.SeatType seatType = toSeatType(request.getParameter("seat_type"));
-            boolean canBeBooked = ("true".equals(request.getParameter("can_be_booked")));
+            String bookable = request.getParameter("can_be_booked");
+            boolean canBeBooked = ("on".equals(bookable));
             Room newRoom = new Room(ModelConstants.SENTINEL_INT, capacity, name, roomType,
                     seatType, canBeBooked, floor);
             manager.add(newRoom);

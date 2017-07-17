@@ -4,7 +4,7 @@ function ExcelToJSON(file, type) {
 
         var reader = new FileReader();
 
-            reader.onload = function (e) {
+        reader.onload = function (e) {
             var data = e.target.result;
             var workbook = XLSX.read(data, {type: 'binary'});
 
@@ -323,7 +323,7 @@ function removeRoomFromForm() {
 function addRoomFromForm() {
     var params = ($('#add-room-form').serialize());
 
-    clearFormInputs(document.getElementById("add-room-form"));
+    // clearFormInputs(document.getElementById("add-room-form"));
 
     sendData("/rooms/addroom", params, true);
     return false;
@@ -443,20 +443,11 @@ $(document).ready(function () {
 
 });
 
-function showSubjectLoading(){
-    document.getElementById("subject-tick").style.display = "none";
-    document.getElementById("subject-w8gif").style.display = "inline";
-    document.getElementById("subject-fail").style.display = "none";
-}
-function showLectureLoading(){
-    document.getElementById("lecture-tick").style.display = "none";
-    document.getElementById("lecture-w8gif").style.display = "inline";
-    document.getElementById("lecture-fail").style.display = "none";
-}
-function showRoomLoading(){
-    document.getElementById("room-tick").style.display = "none";
-    document.getElementById("room-w8gif").style.display = "inline";
-    document.getElementById("room-fail").style.display = "none";
+function showModalWithName(name) {
+    var modal = $('#schedule-modal');
+    var room_name = $('#room_n');
+    modal.modal('show');
+    room_name.value = name;
 }
 
 

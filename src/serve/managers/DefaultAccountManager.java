@@ -16,11 +16,17 @@ import java.util.List;
 import static misc.Utils.*;
 import static model.database.SQLConstants.*;
 
+/**
+ * implementation of AccountManager (DAO for accounts)
+ */
 public class DefaultAccountManager implements AccountManager {
-
 
     private final DBConnector connector;
 
+    /**
+     * constructor of DefaultAccountManager class
+     * @param connector DBConnector object, so that this class can interact with database
+     */
     DefaultAccountManager(DBConnector connector) {
 
         this.connector = connector;
@@ -141,7 +147,10 @@ public class DefaultAccountManager implements AccountManager {
 
     @Override
     public boolean remove(int entityId) {
-        return false;
+
+        String sql = String.format("DELETE FROM %s WHERE %s = ?", SQL_TABLE_USER, SQL_COLUMN_USER_ID);
+
+        return successfulOperation(sql, connector, entityId);
     }
 
 

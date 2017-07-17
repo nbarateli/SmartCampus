@@ -14,12 +14,19 @@ import static misc.Utils.getSubjectFromResults;
 import static misc.Utils.successfulOperation;
 import static model.database.SQLConstants.*;
 
+/**
+ * implementation of SubjectManager (DAO for subjects)
+ */
 public class DefaultSubjectManager implements SubjectManager {
 
     private static SubjectManager instance;
 
     private final DBConnector connector;
 
+    /**
+     * constructor of DefaultSubjectManager class
+     * @param connector DBConnector object, so that this class can interact with database
+     */
     DefaultSubjectManager(DBConnector connector) {
         this.connector = connector;
     }

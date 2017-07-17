@@ -56,12 +56,8 @@ public class LectureAdder extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
-        List<String> ps = new LinkedList<>();
-        Enumeration<String> params = request.getParameterNames();
-        while (params.hasMoreElements()) ps.add(params.nextElement());
-        String s = ps.toString();
-        ServletContext context = request.getServletContext();
 
+        ServletContext context = request.getServletContext();
         ManagerFactory factory = (ManagerFactory) context.getAttribute(MANAGER_FACTORY);
         BookingManager manager = factory.getBookingManager();
         SubjectManager subjectManager = factory.getSubjectManager();
@@ -77,10 +73,18 @@ public class LectureAdder extends HttpServlet {
 
     /**
      * Reads parameters from the request and tries to add it
+     * @param request passed HttpServletRequest
+     * @param manager DAO needed to find specific bookings in database
+     * @param subjectManager DAO needed to find specific subjects in database
+     * @param accountManager DAO needed to find specific accounts in database
+     * @param roomManager DAO needed to find specific rooms in database
+     * @param writer response writer
+     * @return true if no problems occurred while adding lecture
      */
     private boolean addLecture(HttpServletRequest request, BookingManager manager,
                                SubjectManager subjectManager, AccountManager accountManager, RoomManager roomManager,
                                PrintWriter writer) {
+        //get request parameters
         String lecturerEmail = request.getParameter("lecturer_email");
         String subjectName = request.getParameter("subject_name");
         String roomName = request.getParameter("room_name");
@@ -91,10 +95,12 @@ public class LectureAdder extends HttpServlet {
         Integer numWeeks = misc.Utils.validateNumber(request.getParameter("num_weeks"), 1, 16);
         Integer rep = misc.Utils.validateNumber(request.getParameter("repetition"), 1, 16);
 
+        //get respective lecturer, subject and room from database
         User lecturer = accountManager.getUserViaEMail(lecturerEmail);
         CampusSubject subject = subjectManager.getSubjectByName(subjectName);
         Room room = roomManager.getRoomByName(roomName);
 
+        //if parameters are valid adds lectures in database according to repetition and number of weeks
         if (validParameters(lecturer, room, startTime, endTime, date, numWeeks, rep, subject, writer) &&
                 !overlapsOtherLectures(room, date, startTime, endTime, numWeeks, rep, manager, writer)) {
             for (int i = 0; i < numWeeks / rep; i++) {
@@ -110,6 +116,18 @@ public class LectureAdder extends HttpServlet {
         return false;
     }
 
+    /**
+     * checks if any lecture that will be added will overlap with other lecture already in database
+     * @param room requested room
+     * @param date requested start date
+     * @param startTime requested start time
+     * @param endTime requested end time
+     * @param numWeeks requested number of weeks
+     * @param rep requested repetition (number of weeks between each repetition of this lecture)
+     * @param manager DAO needed to find specific bookings in database
+     * @param writer response writer
+     * @return true if this lecture will overlap with any other lecture already in database
+     */
     private boolean overlapsOtherLectures(Room room, Date date, Time startTime,
                                           Time endTime, Integer numWeeks, Integer rep,
                                           BookingManager manager, PrintWriter writer) {
@@ -131,6 +149,17 @@ public class LectureAdder extends HttpServlet {
         return false;
     }
 
+    /**
+     * checks if all the passed parameters are valid
+     * @param room requested room
+     * @param date requested start date
+     * @param startTime requested start time
+     * @param endTime requested end time
+     * @param numWeeks requested number of weeks
+     * @param rep requested repetition (number of weeks between each repetition of this lecture)
+     * @param writer response writer
+     * @return
+     */
     private boolean validParameters(User lecturer, Room room, Time startTime, Time endTime,
                                     Date date, Integer numWeeks, Integer rep, CampusSubject subject, PrintWriter writer) {
         JsonObjectBuilder objectBuilder = Json.createObjectBuilder();

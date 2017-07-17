@@ -6,6 +6,7 @@ import model.bookings.Booking.WeekDay;
 import model.rooms.Room;
 import model.rooms.Room.RoomType;
 import model.rooms.Room.SeatType;
+import model.rooms.RoomProblem;
 import model.rooms.RoomSearchQueryGenerator;
 import org.junit.Before;
 import org.junit.Test;
@@ -172,5 +173,16 @@ public class RoomManagerTest {
             assertEquals(lecturesList2.size(), 1);
             assertTrue(lecturesList2.get(0).equals(lec));
         }
+    }
+
+    /*
+     * Test8
+     * Tests findAllProblemsOf and getRoomByName method of RoomManager
+     */
+    @Test
+    public void test8() {
+        List<RoomProblem> myList = manager.findAllProblemsOf(manager.getRoomById(1));
+        List<RoomProblem> myList1 = manager.findAllProblemsOf(manager.getRoomByName(manager.getRoomById(1).getRoomName()));
+        assertTrue(myList.equals(myList1));
     }
 }

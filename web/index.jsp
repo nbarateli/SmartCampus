@@ -23,7 +23,7 @@
 </script>
 <link rel="stylesheet" href="styles.css">
 <script src="https://apis.google.com/js/platform.js" async defer></script>
-<script src="auth.js"></script>
+<script src="js/auth.js"></script>
 
 <body>
 
