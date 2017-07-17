@@ -3,8 +3,8 @@ package model.bookings;
 import model.accounts.User;
 import model.campus.CampusSearchQuery;
 import model.campus.CampusSearchQueryGenerator;
-import model.subjects.CampusSubject;
 import model.rooms.Room;
+import model.subjects.CampusSubject;
 
 import java.sql.Time;
 import java.util.ArrayList;
@@ -26,6 +26,9 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
     private Date bookingDate;
     private String description;
 
+    private Date dateFrom;
+    private Date dateTo;
+
     public BookingSearchQueryGenerator(Integer bookingID, User booker, Room room, CampusSubject subject, Booking.WeekDay day,
                                        Time startTime, Time endTime, String description, Date bookingDate) {
         this.bookingID = bookingID;
@@ -45,6 +48,21 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
                 null, null, null, null);
     }
 
+    public Date getDateFrom() {
+        return new Date(dateFrom.getTime());
+    }
+
+    public void setDateFrom(Date from) {
+        this.dateFrom = new Date(from.getTime());
+    }
+
+    public Date getDateTo() {
+        return new Date(dateTo.getTime());
+    }
+
+    public void setDateTo(Date to) {
+        this.dateTo = new Date(to.getTime());
+    }
 
     public Date getBookingDate() {
         return bookingDate == null ? null : new Date(bookingDate.getTime());
@@ -124,7 +142,7 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
         String sql = hasNonNullFields() ? String.format("SELECT * FROM \n%s \nJOIN %s ON %s.%s = %s.%s\n" +
                         " JOIN %s ON %s.%s = %s.%s \n" +
                         joinSubject() +
-                        " \nWHERE \n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s",
+                        " \nWHERE \n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s",
                 SQL_TABLE_BOOKING, SQL_TABLE_ROOM, SQL_TABLE_BOOKING,
                 SQL_COLUMN_BOOKING_ROOM, SQL_TABLE_ROOM, SQL_COLUMN_ROOM_ID,
                 SQL_TABLE_USER, SQL_TABLE_BOOKING, SQL_COLUMN_BOOKING_BOOKER,
@@ -136,6 +154,8 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
                 generateLikeQuery(subject, SQL_COLUMN_BOOKING_SUBJECT_ID, values) + " AND ",
                 generateTimeQuery(endTime, SQL_COLUMN_BOOKING_START_TIME, values, false) + " AND ",
                 generateTimeQuery(startTime, SQL_COLUMN_BOOKING_END_TIME, values, true) + " AND ",
+                generateDateQuery(dateFrom, SQL_COLUMN_BOOKING_BOOKING_DATE, values, true) + " AND ",
+                generateDateQuery(dateTo, SQL_COLUMN_BOOKING_BOOKING_DATE, values, false) + " AND ",
                 generateLikeQuery(description, SQL_COLUMN_BOOKING_DESCRIPTION, values) + " AND ",
                 generateWeekDayQuery(day, SQL_COLUMN_BOOKING_BOOKING_DATE, values) + " AND ",
                 generateDateEqualsQuery(bookingDate, SQL_COLUMN_BOOKING_BOOKING_DATE, values)

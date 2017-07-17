@@ -36,6 +36,7 @@ public class RoomFinder extends HttpServlet {
         BookingManager bookingManager = managerFactory.getBookingManager();
         List<Room> rooms = roomManager.find(getQuery(request));
 
+
         BookingSearchQueryGenerator bookingSearchQueryGenerator = getTimeQuery(request);
         boolean searchByBooking = searchesByBooking(request);
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
@@ -76,13 +77,15 @@ public class RoomFinder extends HttpServlet {
 
     private BookingSearchQueryGenerator getTimeQuery(HttpServletRequest request) {
         BookingSearchQueryGenerator generator = new BookingSearchQueryGenerator();
-        String bookingDate = request.getParameter("booking_date");
-        String startTime = request.getParameter("start_time");
-        String endTime = request.getParameter("end_time");
+        String dateFrom = request.getParameter("start_date");
+        String dateTo = request.getParameter("end_date");
+        String timeFrom = request.getParameter("start_time");
+        String timeTo = request.getParameter("end_time");
 
-        generator.setBookingDate(bookingDate == null ? null : stringToDate(bookingDate, "dd.mm.yyyy"));
-        generator.setStartTime(startTime == null ? null : stringToTime(startTime));
-        generator.setEndTime(endTime == null ? null : stringToTime(endTime));
+        generator.setDateFrom(dateFrom == null ? null : stringToDate(dateFrom, "dd.MM.yyyy"));
+        generator.setDateTo(dateTo == null ? null : stringToDate(dateTo, "dd.MM.yyyy"));
+        generator.setStartTime(timeFrom == null ? null : stringToTime(timeFrom));
+        generator.setEndTime(timeTo == null ? null : stringToTime(timeTo));
         return generator;
     }
 
