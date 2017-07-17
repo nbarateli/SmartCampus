@@ -230,6 +230,36 @@ function addRoomFromJson(jsonObject, doAlert) {
     sendData("/rooms/addroom", params, doAlert);
 }
 
+function showSuccessMessage() {
+    var elem = document.getElementById("output");
+    elem.innerHTML = "წარმატებით დაემატა!";
+    elem.style.color = "green";
+}
+
+function showDataDuplicateMessage() {
+    var elem = document.getElementById("output");
+    elem.innerHTML = "მოცემულ პერიოდში ოთახი დაკავებულია!";
+    elem.style.color = "red";
+}
+
+function validateInputs(responseText) {
+    if (responseText == "success") {
+        showSuccessMessage();
+        return;
+    }
+    if (responseText == "failure") {
+        showDataDuplicateMessage();
+        return;
+    }
+    var obj = JSON.parse(responseText);
+    if (obj.lecturer !== undefined) document.getElementById("error_lecturer_email").innerHTML = obj.lecturer;
+    if (obj.name !== undefined) document.getElementById("error_room_name").innerHTML = obj.name;
+    if (obj.start_time !== undefined) document.getElementById("error_start_time").innerHTML = obj.start_time;
+    if (obj.end_time !== undefined) document.getElementById("error_end_time").innerHTML = obj.end_time;
+    if (obj.booking_date !== undefined) document.getElementById("error_date").innerHTML = obj.booking_date;
+    if (obj.numWeeks !== undefined) document.getElementById("error_numWeeks").innerHTML = obj.numWeeks;
+    if (obj.subject !== undefined) document.getElementById("error_subject_name").innerHTML = obj.subject;
+}
 function sendData(url, params, doAlert) {
     var http = new XMLHttpRequest();
     http.open("POST", url, true);
@@ -239,7 +269,8 @@ function sendData(url, params, doAlert) {
 
     http.onreadystatechange = function (alert) {//Call a function when the state changes.
         if (http.readyState === 4 && http.status === 200 && doAlert) {
-            window.alert(http.responseText);
+            // window.alert(http.responseText);
+            validateInputs(http.responseText);
         }
     };
     http.send(params);
@@ -253,9 +284,19 @@ function createDialog() {
     }
 }
 
+function clearValidationMessages() {
+    var messages = document.getElementsByClassName('errorMessage');
+    for (var i = 0; i < messages.length; i++) {
+        messages[i].innerHTML = "";
+    }
+}
+function clearOutputMessage() {
+    document.getElementById("output").innerHTML = "";
+}
 function addLectureFromForm() {
     var params = ($('#sched-form').serialize());
-
+    clearValidationMessages();
+    clearOutputMessage();
     //clearFormInputs(document.getElementById("sched-form"));
     console.log(params);
 

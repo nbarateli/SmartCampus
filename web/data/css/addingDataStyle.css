@@ -102,8 +102,15 @@ button:hover {
   width: 90px;
 }
 
+.errorMessage {
+    color: red;
+    font-style: italic;
+}
 
-
+.successMessage {
+    font-style: italic;
+    color: green;
+}
 
 
 

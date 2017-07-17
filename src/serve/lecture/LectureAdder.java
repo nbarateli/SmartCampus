@@ -12,6 +12,10 @@ import model.rooms.Room;
 import model.rooms.RoomManager;
 import serve.managers.ManagerFactory;
 
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
+import javax.json.JsonWriter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,6 +53,8 @@ public class LectureAdder extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
         List<String> ps = new LinkedList<>();
         Enumeration<String> params = request.getParameterNames();
@@ -64,10 +70,8 @@ public class LectureAdder extends HttpServlet {
 
 
         if (addLecture(request, manager, subjectManager, accountManager, roomManager, response.getWriter())) {
-            response.getWriter().println(SUCCESS);
-
+            response.getWriter().print(SUCCESS);
         }
-
     }
 
     /**
@@ -90,7 +94,7 @@ public class LectureAdder extends HttpServlet {
         CampusSubject subject = subjectManager.getSubjectByName(subjectName);
         Room room = roomManager.getRoomByName(roomName);
 
-        if (validParameters(lecturer, room, startTime, endTime, date, numWeeks, rep, writer) &&
+        if (validParameters(lecturer, room, startTime, endTime, date, numWeeks, rep, subject, writer) &&
                 !overlapsOtherLectures(room, date, startTime, endTime, numWeeks, rep, manager, writer)) {
             for (int i = 0; i < numWeeks / rep; i++) {
                 Booking thisBooking = new Booking(
@@ -118,7 +122,7 @@ public class LectureAdder extends HttpServlet {
 
             for (Booking booking : manager.find(queryGenerator)) {
                 if (booking.getSubject() != null) {
-                    writer.print(FAILED + ": overlaps other lectures");
+                    writer.print(FAILED);
                     return true;
                 }
             }
@@ -127,12 +131,25 @@ public class LectureAdder extends HttpServlet {
     }
 
     private boolean validParameters(User lecturer, Room room, Time startTime, Time endTime,
-                                    Date date, Integer numWeeks, Integer rep, PrintWriter writer) {
+                                    Date date, Integer numWeeks, Integer rep, CampusSubject subject, PrintWriter writer) {
+        JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
         if (lecturer != null && room != null && startTime != null && endTime != null && date != null
-                && numWeeks != null && rep != null) {
+                && numWeeks != null && rep != null && subject != null) {
             return true;
         }
-        writer.print(FAILED + ": incomplete parameters");
+        if (lecturer == null) objectBuilder.add(JSON_BOOKING_BOOKER, "შეიყვანეთ არსებული ლექტორის ფოსტის მისამართი!");
+        if (room == null) objectBuilder.add(JSON_ROOM_NAME, "შეიყვანეთ არსებული ოთახის ნომერი!");
+        ;
+        if (startTime == null) objectBuilder.add(JSON_BOOKING_START_TIME, "*");
+        if (endTime == null) objectBuilder.add(JSON_BOOKING_END_TIME, "*");
+        if (date == null) objectBuilder.add(JSON_BOOKING_DATE, "*");
+        if (numWeeks == null) objectBuilder.add("numWeeks", "მიუთითეთ კვირების რაოდენობა!");
+        if (subject == null) objectBuilder.add(JSON_BOOKING_SUBJECT, "სწორად შეიყვანეთ საგანი!");
+
+        JsonObject obj = objectBuilder.build();
+        JsonWriter jwriter = Json.createWriter(writer);
+        jwriter.writeObject(obj);
+
         return false;
     }
 }

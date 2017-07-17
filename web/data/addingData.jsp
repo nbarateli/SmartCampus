@@ -70,11 +70,13 @@
               <input type="email" name="lecturer_email"
                      class="form-control"
                      placeholder="შეიყვანეთ ლექტორის ფოსტის მისამართი">
+                <span id="error_lecturer_email" class="errorMessage"></span>
             </div>
 
             <div class="form-group">
               <input type="text" name="subject_name" class="form-control" id="subj_name_l"
                      placeholder="შეიყვანეთ საგნის სახელი">
+                <span id="error_subject_name" class="errorMessage"></span>
             </div>
             <script> subjectNameAutocomplete('subj_name_l')</script>
             <div class="form-group">
@@ -84,8 +86,11 @@
 
             <br>
 
-            <input type="number" name="num_weeks" class="form-control" id="num_w"
-                   placeholder="კვირების რაოდენობა" min=1 max=16>
+              <div>
+                  <input type="number" name="num_weeks" class="form-control" id="num_w"
+                         placeholder="კვირების რაოდენობა" min=1 max=16>
+                  <span id="error_numWeeks" class="errorMessage"></span>
+              </div>
 
             <br>
 
@@ -101,44 +106,19 @@
             <br>
 
             <div id="datepairExample" class="form-group">
-              <div class="form-mid">ლექციის<br>
+                <div class="form-mid">ლექციის თარიღი<br>
                 <input type="text" name="start_date" class="date start" id="start_d"/>
+                    <span id="error_date" class="errorMessage"></span>
               </div>
               <div class="form-left">დრო (დან) <br>
                 <input type="text" name="start_time" class="time start" id="start_t"/>
+                  <span id="error_start_time" class="errorMessage"></span>
               </div>
               <div class="form-right">დრო (მდე) <br>
                 <input type="text" name="end_time" class="time end" id="end_t"/>
+                  <span id="error_end_time" class="errorMessage"></span>
               </div>
             </div>
-
-            <%--<div class="form-group">--%>
-            <%--<table id="datepairExample" class="form-group">--%>
-            <%--<tr id="fromRow">--%>
-            <%--<td><label class="control-label">თარიღი <br>--%>
-            <%--<input type="text" name="start_date" class="date start"/>--%>
-            <%--</label></td>--%>
-            <%--<td></td>--%>
-            <%--<td><label class="control-label">დრო (დან)<br>--%>
-            <%--<input type="text" name="start_time" class="time start"/>--%>
-            <%--</label></td>--%>
-
-            <%--</tr>--%>
-            <%--<tr id="toRow">--%>
-            <%--<td>--%>
-            <%--<label> თარიღი (მდე) <br>--%>
-            <%--<input type="text" name="end_date" class="date end"/>--%>
-            <%--</label>--%>
-            <%--</td>--%>
-            <%--<td></td>--%>
-            <%--<td>--%>
-            <%--<label class="control-label">დრო<br>--%>
-            <%--<input type="text" name="end_time" class="time end"/>--%>
-            <%--</label>--%>
-            <%--</td>--%>
-            <%--</tr>--%>
-            <%--</table>--%>
-            <%--</div>--%>
 
             <script>
                 // initialize input widgets first
@@ -166,6 +146,7 @@
               <br>
               <input name="room_name" class="form-control" id="room_n"
                      placeholder="შეიყვანეთ ოთახის დასახელება">
+                <span id="error_room_name" class="errorMessage"></span>
             </div>
 
             <br>
@@ -175,6 +156,8 @@
             <input type="button" value="დამატება"
                    class="btn btn-primary btn-lg"
                    onclick="addLectureFromForm()">
+              <br>
+              <span id="output"></span>
           </form>
 
           <br>
@@ -341,7 +324,6 @@
                    class="btn btn-primary btn-lg"
                    onclick="addSubjectFromForm()">
           </form>
-
 
           <br>
           <br>
