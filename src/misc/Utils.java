@@ -3,7 +3,7 @@ package misc;
 import model.accounts.User;
 import model.bookings.Booking;
 import model.bookings.Booking.WeekDay;
-import model.lectures.CampusSubject;
+import model.subjects.CampusSubject;
 import model.rooms.Room;
 import model.rooms.RoomProblem;
 import serve.managers.DBConnector;

@@ -106,11 +106,70 @@ button:hover {
     color: red;
     font-style: italic;
 }
+#room-tick {
+  position: relative;
+  left: 20%;
+  top: 36px;
+  height: 50px;
+  width: 50px;
 
 .successMessage {
     font-style: italic;
     color: green;
 }
+  display: none;
+}
+
+#room-w8gif {
+  position: relative;
+  left: 20%;
+  top: 36px;
+  height: 50px;
+  width: 50px;
+
+  display: none;
+}
+
+#room-fail {
+  position: relative;
+  left: 20%;
+  top: 36px;
+  height: 50px;
+  width: 50px;
+
+  display: none;
+}
+
+#lecture-tick {
+  position: relative;
+  height: 50px;
+  width: 50px;
+  left: 20%;
+  top: -37px;
+
+  display: none;
+}
+
+#lecture-w8gif {
+  position: relative;
+  height: 50px;
+  width: 50px;
+  left: 20%;
+  top: -37px;
+
+  display: none;
+}
+
+#lecture-fail {
+  position: relative;
+  height: 50px;
+  width: 50px;
+  left: 20%;
+  top: -37px;
+
+  display: none;
+}
+
 
 
 

@@ -18,7 +18,7 @@ function addLectureFromForm() {
 
     //clearFormInputs(document.getElementById("sched-form"));
 
-    sendData("/lectures/addlecture", params, true);
+    sendData("/subjects/addlecture", params, true);
     return false;
 }
 

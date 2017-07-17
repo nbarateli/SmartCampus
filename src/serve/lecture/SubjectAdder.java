@@ -1,8 +1,8 @@
 package serve.lecture;
 
-import model.lectures.CampusSubject;
-import model.lectures.SubjectManager;
-import model.lectures.SubjectSearchQueryGenerator;
+import model.subjects.CampusSubject;
+import model.subjects.SubjectManager;
+import model.subjects.SubjectSearchQueryGenerator;
 import serve.managers.ManagerFactory;
 
 import javax.servlet.ServletException;
@@ -17,7 +17,7 @@ import static misc.WebConstants.*;
 /**
  * Servlet implementation class SubjectAdder
  */
-@WebServlet(name = "Subject Adder", urlPatterns = {"/lectures/addsubject"})
+@WebServlet(name = "Subject Adder", urlPatterns = {"/subjects/addsubject"})
 public class SubjectAdder extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

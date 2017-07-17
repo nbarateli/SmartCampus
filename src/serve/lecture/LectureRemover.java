@@ -16,7 +16,7 @@ import static misc.WebConstants.*;
 /**
  * Servlet implementation class LectureRemover
  */
-@WebServlet(name = "Lecture Remover", urlPatterns = {"/lectures/removelecture"})
+@WebServlet(name = "Lecture Remover", urlPatterns = {"/subjects/removelecture"})
 public class LectureRemover extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -39,7 +39,7 @@ public class LectureRemover extends HttpServlet {
         PrintWriter out = response.getWriter();
         if ("true".equals(request.getParameter("remove_all"))) {
             manager.removeAllLectures();
-            out.println(SUCCESS + ": all lectures removed.");
+            out.println(SUCCESS + ": all subjects removed.");
             return;
         }
 

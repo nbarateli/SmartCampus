@@ -4,7 +4,7 @@ function ExcelToJSON(file, type) {
 
         var reader = new FileReader();
 
-        reader.onload = function (e) {
+            reader.onload = function (e) {
             var data = e.target.result;
             var workbook = XLSX.read(data, {type: 'binary'});
 
@@ -16,11 +16,12 @@ function ExcelToJSON(file, type) {
                 for (i in XL_row_object) {
                     if (type === "lecture") {
                         addLectureFromJson(XL_row_object[i], false);
+                        showLectureSuccess();
                     } else if (type === "subject") {
-
                         addSubjectFromJson(XL_row_object[i], false);
                     } else {
                         addRoomFromJson(XL_row_object[i], false);
+                        showRoomSuccess();
                     }
 
                 }
@@ -105,13 +106,13 @@ function addLectureFromJson(jsonObject, doAlert) {
     params += "&repetition=" + jsonObject.repetition;
 
     console.log(params);
-    sendData("/lectures/addlecture", params, doAlert);
+    sendData("/subjects/addlecture", params, doAlert);
 }
 
 var addSubjectFromJson = function (jsonObject, doAlert) {
     var params = "subj_name=" + jsonObject.subj_name;
 
-    sendData("/lectures/addsubject", params, doAlert);
+    sendData("/subjects/addsubject", params, doAlert);
 };
 
 function addRoomFromJson(jsonObject, doAlert) {
@@ -280,7 +281,7 @@ function createDialog() {
     var conf = confirm("დარწმუნებული ხართ რომ გსურთ ყველა ლექციის შესახებ მონაცემების წაშლა?");
     if (conf) {
         var params = "remove_all=true";
-        sendData("/lectures/removelecture", params, true);
+        sendData("/subjects/removelecture", params, true);
     }
 }
 
@@ -300,7 +301,7 @@ function addLectureFromForm() {
     //clearFormInputs(document.getElementById("sched-form"));
     console.log(params);
 
-    sendData("/lectures/addlecture", params, true);
+    sendData("/subjects/addlecture", params, true);
     return false;
 }
 
@@ -327,7 +328,7 @@ function addSubjectFromForm() {
 
     clearFormInputs(document.getElementById("add-subj-form"));
 
-    sendData("/lectures/addsubject", params, true);
+    sendData("/subjects/addsubject", params, true);
     return false;
 }
 
@@ -352,12 +353,16 @@ function clearFormInputs(formToClear) {
 function handleFileSelect(evt, type) {
     var files = evt.target.files; // FileList object
     // files is a FileList of File objects. List some properties.
+
     for (var i = 0, f; f = files[i]; i++) {
+
         if (type === "lecture") {
+            showLectureLoading();
             addLecturesFromFile(f);
         } else if (type === "subject") {
             addSubjectsFromFile(f);
         } else {
+            showRoomLoading();
             addRoomsFromFile(f);
         }
     }
@@ -431,4 +436,35 @@ $(document).ready(function () {
 
 });
 
+function showLectureLoading(){
+    document.getElementById("lecture-tick").style.display = "none";
+    document.getElementById("lecture-w8gif").style.display = "inline";
+    document.getElementById("lecture-fail").style.display = "none";
+}
+function showRoomLoading(){
+    document.getElementById("room-tick").style.display = "none";
+    document.getElementById("room-w8gif").style.display = "inline";
+    document.getElementById("room-fail").style.display = "none";
+}
 
+function showLectureSuccess(){
+    document.getElementById("lecture-tick").style.display = "inline";
+    document.getElementById("lecture-w8gif").style.display = "none";
+    document.getElementById("lecture-fail").style.display = "none'"
+}
+function showRoomSuccess(){
+    document.getElementById("room-tick").style.display = "inline";
+    document.getElementById("room-w8gif").style.display = "none";
+    document.getElementById("room-fail").style.display = "none'"
+}
+
+function showLectureFailure(){
+    document.getElementById("lecture-tick").style.display = "none";
+    document.getElementById("lecture-w8gif").style.display = "none";
+    document.getElementById("lecture-fail").style.display = "inline";
+}
+function showRoomFailure(){
+    document.getElementById("room-tick").style.display = "none";
+    document.getElementById("room-w8gif").style.display = "none";
+    document.getElementById("room-fail").style.display = "inline";
+}

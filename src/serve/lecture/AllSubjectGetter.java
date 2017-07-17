@@ -1,7 +1,7 @@
 package serve.lecture;
 
-import model.lectures.CampusSubject;
-import model.lectures.SubjectManager;
+import model.subjects.CampusSubject;
+import model.subjects.SubjectManager;
 import serve.managers.ManagerFactory;
 
 import javax.json.*;
@@ -17,6 +17,7 @@ import static misc.WebConstants.*;
 
 @WebServlet(name = "AllSubjectGetter", urlPatterns = {"/getallsubjects"})
 public class AllSubjectGetter extends HttpServlet {
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -32,6 +33,12 @@ public class AllSubjectGetter extends HttpServlet {
         doGet(request, response);
     }
 
+    /**
+     * returns given list of CampusSubjects as JsonArray
+     * @param subjects list of CampusSubjects to be converted
+     * @return JsonArray with given CampusSubjects
+     * @throws JsonException
+     */
     private JsonArray toJsonArray(List<CampusSubject> subjects) throws JsonException {
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
         for (CampusSubject subject : subjects) {
@@ -40,6 +47,11 @@ public class AllSubjectGetter extends HttpServlet {
         return arrayBuilder.build();
     }
 
+    /**
+     * returns given CampusSubject as JsonObject
+     * @param subject CampusSubject to be converted to JsonObject
+     * @return JsonObject representing given CampusSubject
+     */
     private JsonObject toJsonObject(CampusSubject subject) {
         JsonObjectBuilder builder = Json.createObjectBuilder();
         builder.add(JSON_SUBJECT_ID, subject.getId());

@@ -19,6 +19,7 @@ import static org.junit.Assert.assertTrue;
 
 public class RoomManagerTest {
     private DefaultRoomManager manager;
+    private Room room;
 
     @Before
     public void setUp() {
@@ -34,9 +35,9 @@ public class RoomManagerTest {
         RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();
         List<Room> list = manager.find(query);
         int x = list.size();
-        Room room1 = new Room(-1, 50, "100", RoomType.AUDITORIUM, SeatType.DESKS, true, 1);
-        Room room2 = new Room(-1, 150, "101", RoomType.UTILITY, SeatType.COMPUTERS, false, 1);
-        Room room3 = new Room(-1, 90, "102", RoomType.AUDITORIUM, SeatType.DESKS, true, 1);
+        Room room1 = new Room(-1, 50, "500", RoomType.AUDITORIUM, SeatType.DESKS, true, 1);
+        Room room2 = new Room(-1, 150, "501", RoomType.UTILITY, SeatType.COMPUTERS, false, 1);
+        Room room3 = new Room(-1, 90, "502", RoomType.AUDITORIUM, SeatType.DESKS, true, 1);
         manager.add(room1);
         list = manager.find(query);
         int y = list.size();
@@ -51,6 +52,8 @@ public class RoomManagerTest {
         assertEquals(x + 3, y);
     }
 
+
+
     /*
      * Test2
      * Tests methods find, remove and getRoomByName of RoomManagerClass
@@ -60,15 +63,15 @@ public class RoomManagerTest {
         RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();
         List<Room> list = manager.find(query);
         int x = list.size();
-        manager.remove(manager.getRoomByName("100").getId());
+        manager.remove(manager.getRoomByName("500").getId());
         list = manager.find(query);
         int y = list.size();
         assertEquals(x - 1, y);
-        manager.remove(manager.getRoomByName("101").getId());
+        manager.remove(manager.getRoomByName("501").getId());
         list = manager.find(query);
         y = list.size();
         assertEquals(x - 2, y);
-        manager.remove(manager.getRoomByName("102").getId());
+        manager.remove(manager.getRoomByName("502").getId());
         list = manager.find(query);
         y = list.size();
         assertEquals(x - 3, y);
@@ -76,7 +79,7 @@ public class RoomManagerTest {
 
     /*
      * Test3
-     * Tests methods find, addImage and getAllImagesOf of RoomManagerClass
+     * Tests methods find, addImage, removeImage and getAllImagesOf of RoomManagerClass
      */
     @Test
     public void test3() {
@@ -97,14 +100,30 @@ public class RoomManagerTest {
         listOfImages = manager.getAllImagesOf(room1);
         y = listOfImages.size();
         assertEquals(x + 3, y);
+        room = room1;
+
+        x = listOfImages.size();
+        manager.removeImage(room1, "test24.jpg");
+        listOfImages = manager.getAllImagesOf(room1);
+        y = listOfImages.size();
+        assertEquals(x - 1, y);
+        manager.removeImage(room1, "test2");
+        listOfImages = manager.getAllImagesOf(room1);
+        y = listOfImages.size();
+        assertEquals(x - 2, y);
+        manager.removeImage(room1, "test3");
+        listOfImages = manager.getAllImagesOf(room1);
+        y = listOfImages.size();
+        assertEquals(x - 3, y);
     }
 
+
     /*
-     * Test4
+     * Test5
      * Tests methods find, findAllLecturesAt and addAll of RoomManagerClass
      */
     @Test
-    public void test4() {
+    public void test5() {
         RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();
         List<Room> list = manager.find(query);
         Room room1 = list.get(0);
@@ -120,33 +139,38 @@ public class RoomManagerTest {
     }
 
     /*
-     * Test5
+     * Test6
      * Tests methods findAllLecturesAt and getRoomById of RoomManagerClass
      */
     @Test
-    public void test5() {
+    public void test6() {
         Room room1 = manager.getRoomById(4);
         List<Booking> lecturesList = manager.findAllBookingsAt(room1);
-        Booking lec = lecturesList.get(0);
+        if(lecturesList.size() > 0){
+            Booking lec = lecturesList.get(0);
+
         List<Booking> lecturesList2 = manager.findAllBookingsAt(room1,
                 WeekDay.values()[Utils.getWeekDay(lec.getBookingDate())],
                 lec.getStartTime(), lec.getEndTime());
         assertEquals(lecturesList2.size(), 1);
         assertTrue(lecturesList2.get(0).equals(lec));
+        }
     }
 
     /*
-     * Test6
+     * Test7
      * Tests methods findAllLecturesAt and getRoomByName of RoomManagerClass
      */
     @Test
-    public void test6() {
+    public void test7() {
         Room room1 = manager.getRoomByName("408");
         List<Booking> lecturesList = manager.findAllBookingsAt(room1);
-        Booking lec = lecturesList.get(0);
-        List<Booking> lecturesList2 = manager.findAllBookingsAt(room1,
-                WeekDay.values()[Utils.getWeekDay(lec.getBookingDate())], lec.getStartTime(), lec.getEndTime());
-        assertEquals(lecturesList2.size(), 1);
-        assertTrue(lecturesList2.get(0).equals(lec));
+        if(lecturesList.size() > 0) {
+            Booking lec = lecturesList.get(0);
+            List<Booking> lecturesList2 = manager.findAllBookingsAt(room1,
+                    WeekDay.values()[Utils.getWeekDay(lec.getBookingDate())], lec.getStartTime(), lec.getEndTime());
+            assertEquals(lecturesList2.size(), 1);
+            assertTrue(lecturesList2.get(0).equals(lec));
+        }
     }
 }

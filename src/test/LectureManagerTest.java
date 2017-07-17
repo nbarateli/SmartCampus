@@ -2,10 +2,10 @@
 //
 //import misc.DBInfo;
 //import model.accounts.User;
-//import model.lectures.CampusSubject;
-//import model.lectures.Lecture;
+//import model.subjects.CampusSubject;
+//import model.subjects.Lecture;
 //import model.bookings.Booking.WeekDay;
-//import model.lectures.LectureManager;
+//import model.subjects.LectureManager;
 //import model.rooms.Room;
 //import model.rooms.Room.RoomType;
 //import model.rooms.Room.SeatType;
