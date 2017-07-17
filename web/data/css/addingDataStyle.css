@@ -106,6 +106,12 @@ button:hover {
     color: red;
     font-style: italic;
 }
+
+.successMessage {
+  font-style: italic;
+  color: green;
+}
+
 #room-tick {
   position: relative;
   left: 20%;
@@ -113,10 +119,6 @@ button:hover {
   height: 50px;
   width: 50px;
 
-.successMessage {
-    font-style: italic;
-    color: green;
-}
   display: none;
 }
 
