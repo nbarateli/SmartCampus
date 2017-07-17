@@ -29,6 +29,10 @@ import static model.rooms.Room.SeatType.*;
 
 public final class Utils {
 
+    private Utils() {
+
+    }
+
     /**
      * converts Date object to respective string in dd.MM.yyyy HH:mm format
      *
@@ -515,7 +519,7 @@ public final class Utils {
         DateFormat format = new SimpleDateFormat("HH:mm");
         try {
             return new Time(format.parse(toConvert).getTime());
-        } catch (ParseException e) {
+        } catch (Exception e) {
             return null;
         }
     }
@@ -629,10 +633,5 @@ public final class Utils {
         return time.length() >= 5 && time.charAt(2) == ':' &&
                 numberStringIsValid(time.substring(0, 2), true) &&
                 numberStringIsValid(time.substring(3, 5), false);
-    }
-
-
-    private Utils() {
-
     }
 }
