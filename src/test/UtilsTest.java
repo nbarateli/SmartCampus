@@ -3,11 +3,13 @@ package test;
 import misc.Utils;
 import model.accounts.User;
 import model.accounts.User.UserRole;
+import model.bookings.Booking;
 import model.bookings.Booking.WeekDay;
 import model.rooms.Room;
 import model.rooms.Room.RoomType;
 import model.rooms.Room.SeatType;
 import model.rooms.RoomProblem;
+import model.subjects.CampusSubject;
 import org.junit.Test;
 
 import java.sql.SQLException;
@@ -196,6 +198,31 @@ public class UtilsTest {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
 
+    @Test
+    public void getBookingFromResultsTest(){
+        try {
+            assertEquals(new Booking(5, new User(5, "name", "name", "name",
+                    UserRole.STUDENT, ""),
+                    new Room(5, 5, "name", RoomType.valueOf("AUDITORIUM"),
+                            SeatType.valueOf("DESKS"), false, 5),
+                            new CampusSubject(-1, "name"),
+                    new Time(4, 0, 0), new Time(4, 0, 0),
+                            "new subject", java.sql.Date.valueOf("2017-07-16")),
+                    Utils.getBookingFromResults(new MockResultSet()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getSubjectFromResults(){
+        try {
+            assertEquals(new CampusSubject(5, "magaltman"),
+                    Utils.getSubjectFromResults(new MockResultSet()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
