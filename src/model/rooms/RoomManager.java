@@ -101,6 +101,14 @@ public interface RoomManager extends CampusManager<Room, RoomSearchQueryGenerato
     void addImage(Room room, String imageURL);
 
     /**
+     * Removes image from the database
+     *
+     * @param room     a room to which said image belongs to
+     * @param imageURL an URL to the image
+     */
+    void removeImage(Room room, String imageURL);
+
+    /**
      * Returns a list of names of all the rooms.
      */
     List<String> getAllRoomNames();
