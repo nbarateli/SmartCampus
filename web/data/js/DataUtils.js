@@ -4,7 +4,7 @@ function ExcelToJSON(file, type) {
 
         var reader = new FileReader();
 
-        reader.onload = function (e) {
+            reader.onload = function (e) {
             var data = e.target.result;
             var workbook = XLSX.read(data, {type: 'binary'});
 
@@ -16,11 +16,13 @@ function ExcelToJSON(file, type) {
                 for (i in XL_row_object) {
                     if (type === "lecture") {
                         addLectureFromJson(XL_row_object[i], false);
+                        showLectureSuccess();
                     } else if (type === "subject") {
-
                         addSubjectFromJson(XL_row_object[i], false);
+                        showSubjectSuccess();
                     } else {
                         addRoomFromJson(XL_row_object[i], false);
+                        showRoomSuccess();
                     }
 
                 }
@@ -230,6 +232,36 @@ function addRoomFromJson(jsonObject, doAlert) {
     sendData("/rooms/addroom", params, doAlert);
 }
 
+function showSuccessMessage() {
+    var elem = document.getElementById("output");
+    elem.innerHTML = "წარმატებით დაემატა!";
+    elem.style.color = "green";
+}
+
+function showDataDuplicateMessage() {
+    var elem = document.getElementById("output");
+    elem.innerHTML = "მოცემულ პერიოდში ოთახი დაკავებულია!";
+    elem.style.color = "red";
+}
+
+function validateInputs(responseText) {
+    if (responseText == "success") {
+        showSuccessMessage();
+        return;
+    }
+    if (responseText == "failure") {
+        showDataDuplicateMessage();
+        return;
+    }
+    var obj = JSON.parse(responseText);
+    if (obj.lecturer !== undefined) document.getElementById("error_lecturer_email").innerHTML = obj.lecturer;
+    if (obj.name !== undefined) document.getElementById("error_room_name").innerHTML = obj.name;
+    if (obj.start_time !== undefined) document.getElementById("error_start_time").innerHTML = obj.start_time;
+    if (obj.end_time !== undefined) document.getElementById("error_end_time").innerHTML = obj.end_time;
+    if (obj.booking_date !== undefined) document.getElementById("error_date").innerHTML = obj.booking_date;
+    if (obj.numWeeks !== undefined) document.getElementById("error_numWeeks").innerHTML = obj.numWeeks;
+    if (obj.subject !== undefined) document.getElementById("error_subject_name").innerHTML = obj.subject;
+}
 function sendData(url, params, doAlert) {
     var http = new XMLHttpRequest();
     http.open("POST", url, true);
@@ -253,6 +285,15 @@ function createDialog() {
     }
 }
 
+function clearValidationMessages() {
+    var messages = document.getElementsByClassName('errorMessage');
+    for (var i = 0; i < messages.length; i++) {
+        messages[i].innerHTML = "";
+    }
+}
+function clearOutputMessage() {
+    document.getElementById("output").innerHTML = "";
+}
 function addLectureFromForm() {
     var params = ($('#sched-form').serialize());
 
@@ -348,7 +389,7 @@ $(document).ready(function () {
     document.getElementById('subj-file').addEventListener('change', handleFileSelectSubj, false);
     document.getElementById('rooms-file').addEventListener('change', handleFileSelectRoom, false);
 
-    $("#room_n").focus(function () {
+    $("#room_n").focus(function() {
         makeRoomSuggestions();
     });
 
@@ -358,7 +399,7 @@ $(document).ready(function () {
     function makeRoomSuggestions() {
         $.get("/rooms/availablerooms",
             $("#sched-form").serialize(),
-            function (data) {
+            function(data) {
                 roomNames = [];
                 roomAutocomplete.destroy();
                 for (i in data) {
@@ -390,6 +431,21 @@ $(document).ready(function () {
 
 });
 
+function showSubjectLoading(){
+    document.getElementById("subject-tick").style.display = "none";
+    document.getElementById("subject-w8gif").style.display = "inline";
+    document.getElementById("subject-fail").style.display = "none";
+}
+function showLectureLoading(){
+    document.getElementById("lecture-tick").style.display = "none";
+    document.getElementById("lecture-w8gif").style.display = "inline";
+    document.getElementById("lecture-fail").style.display = "none";
+}
+function showRoomLoading(){
+    document.getElementById("room-tick").style.display = "none";
+    document.getElementById("room-w8gif").style.display = "inline";
+    document.getElementById("room-fail").style.display = "none";
+}
 function showModalWithName(name) {
     var modal = $('#schedule-modal');
     modal.modal('show');
@@ -398,3 +454,36 @@ function showModalWithName(name) {
 
 
 
+
+function showSubjectSuccess(){
+    document.getElementById("subject-tick").style.display = "inline";
+    document.getElementById("subject-w8gif").style.display = "none";
+    document.getElementById("subject-fail").style.display = "none'"
+}
+function showLectureSuccess(){
+    document.getElementById("lecture-tick").style.display = "inline";
+    document.getElementById("lecture-w8gif").style.display = "none";
+    document.getElementById("lecture-fail").style.display = "none'"
+}
+function showRoomSuccess(){
+    document.getElementById("room-tick").style.display = "inline";
+    document.getElementById("room-w8gif").style.display = "none";
+    document.getElementById("room-fail").style.display = "none'"
+}
+
+
+function showSubjectFailure(){
+    document.getElementById("subject-tick").style.display = "none";
+    document.getElementById("subject-w8gif").style.display = "none";
+    document.getElementById("subject-fail").style.display = "inline";
+}
+function showLectureFailure(){
+    document.getElementById("lecture-tick").style.display = "none";
+    document.getElementById("lecture-w8gif").style.display = "none";
+    document.getElementById("lecture-fail").style.display = "inline";
+}
+function showRoomFailure(){
+    document.getElementById("room-tick").style.display = "none";
+    document.getElementById("room-w8gif").style.display = "none";
+    document.getElementById("room-fail").style.display = "inline";
+}
