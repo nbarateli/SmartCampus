@@ -51,6 +51,7 @@ public class RoomAdder extends HttpServlet {
             manager.add(newRoom);
             response.getWriter().println(SUCCESS);
         } catch (Exception e) {
+
             response.getWriter().println(FAILED);
         }
 
