@@ -120,7 +120,7 @@ public class RoomInfo extends HttpServlet {
     }
 
     /**
-     * Appends the list of the all lectures of the room to the json builder in the format
+     * Appends the list of the all subjects of the room to the json builder in the format
      * of the json array.
      */
     private void addBookings(JsonObjectBuilder builder, Room room, RoomManager manager) {

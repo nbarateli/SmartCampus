@@ -4,7 +4,7 @@ import model.bookings.Booking;
 import model.bookings.BookingManager;
 import model.bookings.BookingSearchQueryGenerator;
 import model.campus.CampusSearchQuery;
-import model.lectures.CampusSubject;
+import model.subjects.CampusSubject;
 import model.rooms.Room;
 
 import java.sql.ResultSet;
@@ -18,6 +18,9 @@ import java.util.List;
 import static misc.Utils.*;
 import static model.database.SQLConstants.*;
 
+/**
+ * implementation of BookingManager (DAO for bookings)
+ */
 public class DefaultBookingManager implements BookingManager {
 
     private static BookingManager instance;

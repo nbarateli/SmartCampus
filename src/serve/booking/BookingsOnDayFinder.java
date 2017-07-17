@@ -4,7 +4,7 @@ package serve.booking;
 import model.accounts.User;
 import model.bookings.Booking;
 import model.bookings.BookingManager;
-import model.lectures.CampusSubject;
+import model.subjects.CampusSubject;
 import model.rooms.Room;
 import model.rooms.RoomManager;
 import serve.managers.ManagerFactory;

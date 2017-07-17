@@ -2,7 +2,7 @@ package model.bookings;
 
 import model.accounts.User;
 import model.campus.CampusObject;
-import model.lectures.CampusSubject;
+import model.subjects.CampusSubject;
 import model.rooms.Room;
 
 import java.sql.Time;

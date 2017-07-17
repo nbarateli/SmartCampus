@@ -2,7 +2,7 @@ package serve.managers;
 
 import model.accounts.AccountManager;
 import model.bookings.BookingManager;
-import model.lectures.SubjectManager;
+import model.subjects.SubjectManager;
 import model.rooms.RoomManager;
 
 /**

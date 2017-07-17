@@ -105,13 +105,13 @@ function addLectureFromJson(jsonObject, doAlert) {
     params += "&repetition=" + jsonObject.repetition;
 
     console.log(params);
-    sendData("/lectures/addlecture", params, doAlert);
+    sendData("/subjects/addlecture", params, doAlert);
 }
 
 var addSubjectFromJson = function (jsonObject, doAlert) {
     var params = "subj_name=" + jsonObject.subj_name;
 
-    sendData("/lectures/addsubject", params, doAlert);
+    sendData("/subjects/addsubject", params, doAlert);
 };
 
 function addRoomFromJson(jsonObject, doAlert) {
@@ -249,7 +249,7 @@ function createDialog() {
     var conf = confirm("დარწმუნებული ხართ რომ გსურთ ყველა ლექციის შესახებ მონაცემების წაშლა?");
     if (conf) {
         var params = "remove_all=true";
-        sendData("/lectures/removelecture", params, true);
+        sendData("/subjects/removelecture", params, true);
     }
 }
 
@@ -259,7 +259,7 @@ function addLectureFromForm() {
     //clearFormInputs(document.getElementById("sched-form"));
     console.log(params);
 
-    sendData("/lectures/addlecture", params, true);
+    sendData("/subjects/addlecture", params, true);
     return false;
 }
 
@@ -286,7 +286,7 @@ function addSubjectFromForm() {
 
     clearFormInputs(document.getElementById("add-subj-form"));
 
-    sendData("/lectures/addsubject", params, true);
+    sendData("/subjects/addsubject", params, true);
     return false;
 }
 

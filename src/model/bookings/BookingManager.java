@@ -29,7 +29,7 @@ public interface BookingManager extends CampusManager<Booking, BookingSearchQuer
     void removeAllBookings();
 
     /**
-     * removes all lectures from database
+     * removes all subjects from database
      */
     void removeAllLectures();
 

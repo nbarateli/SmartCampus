@@ -6,8 +6,8 @@ import model.accounts.User;
 import model.bookings.Booking;
 import model.bookings.BookingManager;
 import model.bookings.BookingSearchQueryGenerator;
-import model.lectures.CampusSubject;
-import model.lectures.SubjectManager;
+import model.subjects.CampusSubject;
+import model.subjects.SubjectManager;
 import model.rooms.Room;
 import model.rooms.RoomManager;
 import serve.managers.ManagerFactory;
@@ -33,7 +33,7 @@ import static misc.WebConstants.*;
 /**
  * Servlet implementation class LectureAdder
  */
-@WebServlet(name = "Lecture Adder", urlPatterns = {"/lectures/addlecture"})
+@WebServlet(name = "Lecture Adder", urlPatterns = {"/subjects/addlecture"})
 public class LectureAdder extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -118,7 +118,7 @@ public class LectureAdder extends HttpServlet {
 
             for (Booking booking : manager.find(queryGenerator)) {
                 if (booking.getSubject() != null) {
-                    writer.print(FAILED + ": overlaps other lectures");
+                    writer.print(FAILED + ": overlaps other subjects");
                     return true;
                 }
             }

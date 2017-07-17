@@ -1,9 +1,9 @@
 package serve.managers;
 
 import model.campus.CampusSearchQuery;
-import model.lectures.CampusSubject;
-import model.lectures.SubjectManager;
-import model.lectures.SubjectSearchQueryGenerator;
+import model.subjects.CampusSubject;
+import model.subjects.SubjectManager;
+import model.subjects.SubjectSearchQueryGenerator;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

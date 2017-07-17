@@ -1,4 +1,4 @@
-package model.lectures;
+package model.subjects;
 
 import model.campus.CampusSearchQuery;
 import model.campus.CampusSearchQueryGenerator;

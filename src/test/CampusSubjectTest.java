@@ -1,6 +1,6 @@
 package test;
 
-import model.lectures.CampusSubject;
+import model.subjects.CampusSubject;
 import org.junit.Before;
 import org.junit.Test;
 
