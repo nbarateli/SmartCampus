@@ -121,23 +121,20 @@ public class DefaultRoomManager implements RoomManager {
 
     @Override
     public Booking findBookingAt(Room room, Date date, Time current) {
-        WeekDay day = toWeekDay(date);
         Booking booking = null;
-
-        String sql = String.format("SELECT * FROM booking \n" +
-                "WHERE room_id = ? \n" +
-                "AND booking_date = ? \n" +
-                "AND start_time <= ? AND  ? <= booking.end_time");
-        /*"SELECT * FROM " + SQL_TABLE_BOOKING + " INNER JOIN " + SQL_TABLE_USER + " ON " +
-                SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_BOOKER + " = " + SQL_TABLE_USER + "." +
-                SQL_COLUMN_USER_ID +
-                " INNER JOIN " + SQL_TABLE_SUBJECT + " ON " + SQL_TABLE_SUBJECT + "." + SQL_COLUMN_SUBJECT_ID +
-                " = " + SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_SUBJECT_ID + " \n " +
-                " INNER JOIN " + SQL_TABLE_ROOM + " ON " + SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_ROOM +
-                " = " + SQL_TABLE_ROOM + "." + SQL_COLUMN_ROOM_ID +
-                " WHERE " + SQL_TABLE_BOOKING + "." + SQL_COLUMN_BOOKING_ROOM + " = ? " +
-                " AND " + SQL_COLUMN_BOOKING_WEEK_DAY + " = ? " +
-                " AND " + SQL_COLUMN_BOOKING_START_TIME + " <= ? AND " + SQL_COLUMN_BOOKING_END_TIME + " >= ?";*/
+        String sql = String.format("SELECT * FROM %s \n" +
+                        "JOIN %s ON %s.%s = %s.%s \n " +
+                        "JOIN %s ON %s.%s = %s.%s \n" +
+                        "LEFT JOIN %s ON %s.%s = %s.%s \n" +
+                        "WHERE %s.%s = ? \n" +
+                        "AND %s = ? \n" +
+                        "AND %s <= ? AND  ? <= %s ",
+                SQL_TABLE_BOOKING, SQL_TABLE_USER, SQL_TABLE_BOOKING,
+                SQL_COLUMN_BOOKING_BOOKER, SQL_TABLE_USER, SQL_COLUMN_USER_ID,
+                SQL_TABLE_ROOM, SQL_TABLE_BOOKING, SQL_COLUMN_ROOM_ID, SQL_TABLE_ROOM,
+                SQL_COLUMN_ROOM_ID, SQL_TABLE_SUBJECT, SQL_TABLE_BOOKING, SQL_COLUMN_BOOKING_SUBJECT_ID,
+                SQL_TABLE_SUBJECT, SQL_COLUMN_SUBJECT_ID, SQL_TABLE_BOOKING, SQL_COLUMN_BOOKING_ID,
+                SQL_COLUMN_BOOKING_BOOKING_DATE, SQL_COLUMN_BOOKING_START_TIME, SQL_COLUMN_BOOKING_END_TIME);
 
         try (ResultSet rs = connector.executeQuery(sql, room.getId(),
                 date, current, current)) {
