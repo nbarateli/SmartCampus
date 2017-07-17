@@ -341,7 +341,7 @@
 
           </div>
           <div align="center">
-            <h3 id='successMessage' style="display: none"></h3>
+            <h2 id='successMessage' style="display: none"></h2>
           </div>
           <br>
           <br>
