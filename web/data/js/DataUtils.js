@@ -21,8 +21,8 @@ function ExcelToJSON(file, type) {
                         addSubjectFromJson(XL_row_object[i], false);
                         showSubjectSuccess();
                     } else {
-                        addRoomFromJson(XL_row_object[i], false);
-                        showRoomSuccess();
+                        if(addRoomFromJson(XL_row_object[i], false))
+                            showRoomSuccess();
                     }
 
                 }
@@ -117,8 +117,12 @@ var addSubjectFromJson = function (jsonObject, doAlert) {
 };
 
 function addRoomFromJson(jsonObject, doAlert) {
-    var name = jsonObject['ოთახის N'].toString();
-    var typePure = jsonObject['ტიპი'];
+    var name = jsonObject['ოთახის N'] !== undefined ? jsonObject['ოთახის N'].toString() : null;
+    var typePure = jsonObject['ტიპი'] !== undefined ? jsonObject['ტიპი'] : null;
+    if(name == null || typePure == null){
+        showRoomFailure();
+        return false;
+    }
 
     function getFloorViaName(name) {
 
@@ -230,6 +234,7 @@ function addRoomFromJson(jsonObject, doAlert) {
     params += "&can_be_booked=" + canBeBooked(typePure);
 
     sendData("/rooms/addroom", params, doAlert);
+    return true;
 }
 
 function showSuccessMessage() {
