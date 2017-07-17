@@ -58,7 +58,12 @@ public class RoomInfo extends HttpServlet {
         writer.writeObject(builder.build());
     }
 
-    /***/
+    /**
+     * builds JsonObject with all the information about the room
+     * @param builder JsonObjectBuilder this JsonObject will be built from
+     * @param room room info is taken of
+     * @param manager DAO needed to interact with database about rooms
+     */
     private void buildJson(JsonObjectBuilder builder, Room room, RoomManager manager) {
         if (room == null) {
             builder.add(JSON_ERROR, JSON_ROOM_ERROR_NOT_FOUND);
@@ -70,9 +75,10 @@ public class RoomInfo extends HttpServlet {
         addProblems(builder, room, manager);
     }
 
-
     /**
      * Adds basic info of the room to the json object builder.
+     * @param objectBuilder JsonObjectBuilder info is added to
+     * @param room room, basic info is taken from
      */
     private void addBasicInfo(JsonObjectBuilder objectBuilder, Room room) {
         objectBuilder.add(JSON_ROOM_ID, room.getId());
@@ -89,6 +95,9 @@ public class RoomInfo extends HttpServlet {
      * Adds images associated with the given room to the json object.
      * The first image will be added as its main image.
      * The rest will be added in the format of the array.
+     * @param builder JsonObjectBuilder images are added to
+     * @param room room, images are taken from
+     * @param manager DAO needed to interact with database about rooms
      */
     private void addImages(JsonObjectBuilder builder, Room room, RoomManager manager) {
         List<String> images = manager.getAllImagesOf(room);
@@ -104,6 +113,9 @@ public class RoomInfo extends HttpServlet {
     /**
      * Appends the list of the current problems of the room to the json builder in the format
      * of the json array.
+     * @param builder JsonObjectBuilder room problems are appended to
+     * @param room room, problems are taken of
+     * @param manager DAO needed to interact with database about rooms
      */
     private void addProblems(JsonObjectBuilder builder, Room room, RoomManager manager) {
         JsonArrayBuilder problemArrayBuilder = Json.createArrayBuilder();
@@ -122,6 +134,9 @@ public class RoomInfo extends HttpServlet {
     /**
      * Appends the list of the all subjects of the room to the json builder in the format
      * of the json array.
+     * @param builder JsonObjectBuilder room subjects are appended to
+     * @param room room, subjects are taken of
+     * @param manager DAO needed to interact with database about rooms
      */
     private void addBookings(JsonObjectBuilder builder, Room room, RoomManager manager) {
         JsonArrayBuilder bookingArrayBuilder = Json.createArrayBuilder();
