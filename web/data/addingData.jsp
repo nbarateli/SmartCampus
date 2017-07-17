@@ -373,6 +373,11 @@
     <a href="/index.jsp">მთავარ გვერდზე დაბრუნება</a>
   </div>
 </div>
-
+<%
+  String roomName = request.getParameter("room_name");
+  if (roomName != null) {
+    out.print("<script>showModalWithName(" + roomName + ")</script>");
+  }
+%>
 </body>
 </html>

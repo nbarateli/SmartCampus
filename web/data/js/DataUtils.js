@@ -348,7 +348,7 @@ $(document).ready(function () {
     document.getElementById('subj-file').addEventListener('change', handleFileSelectSubj, false);
     document.getElementById('rooms-file').addEventListener('change', handleFileSelectRoom, false);
 
-    $("#room_n").focus(function() {
+    $("#room_n").focus(function () {
         makeRoomSuggestions();
     });
 
@@ -358,7 +358,7 @@ $(document).ready(function () {
     function makeRoomSuggestions() {
         $.get("/rooms/availablerooms",
             $("#sched-form").serialize(),
-            function(data) {
+            function (data) {
                 roomNames = [];
                 roomAutocomplete.destroy();
                 for (i in data) {
@@ -389,5 +389,12 @@ $(document).ready(function () {
     }
 
 });
+
+function showModalWithName(name) {
+    var modal = $('#schedule-modal');
+    modal.modal('show');
+    document.getElementById('room_n').value = name;
+}
+
 
 

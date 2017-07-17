@@ -34,6 +34,10 @@ function bookThisRoom(name) {
     window.open('booking.jsp?room_name=' + name, '_blank')
 }
 
+function addLectureAtThisRoom(name) {
+    window.open('/data/addingData.jsp?room_name=' + name, '_blank');
+}
+
 function showOnMap(id) {
     $.get('/rooms/room', {id: id}, function (data) {
 
@@ -62,7 +66,6 @@ function showOnMap(id) {
         }
     });
 }
-
 function requestOnMap(id) {
     window.open('index.jsp?showonmap=' + id, '_blank');
 

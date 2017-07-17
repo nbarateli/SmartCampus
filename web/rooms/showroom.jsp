@@ -195,13 +195,16 @@
             out.print(
                     "<li><button class=\"main-button\" data-toggle=\"modal\" data-target=\"#add-room-modal\"" +
                             ">სურათის დამატება\n" +
-                            "</button></li>");
+                            "</button></li><br>" +
+                            "<li><button class=\"main-button\"   onclick='addLectureAtThisRoom(" +
+                            room.getRoomName() + ")'  >ლექციის დამატება\n" +
+                            "</button></li>\n");
           }
         %>
         <%
           if (canBookThisRoom()) {
             out.print(
-                    "<li><button class=\"main-button\"   onclick='bookThisRoom(" + room.getRoomName() +
+                    "<br><li><button class=\"main-button\"   onclick='bookThisRoom(" + room.getRoomName() +
                             ")'  " +
                             ">დაჯავშნა\n" +
                             "</button></li>");
@@ -218,7 +221,7 @@
       <td><img class="user-picture" src={{booker_pic}} alt=""></td>
       <td>{{subject_name}}{{description}}</td>
       <td>{{booker}}</td>
-      <td>{{start_time}}</td>
+      <td>{{start_time}}<br>{{end_time}}</td>
     </tr>
   </script>
   <script src="/js/utils.js"></script>
