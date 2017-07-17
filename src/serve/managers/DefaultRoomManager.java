@@ -222,6 +222,18 @@ public class DefaultRoomManager implements RoomManager {
     }
 
     @Override
+    public void removeImage(Room room, String imageURL) {
+        String sql = "DELETE FROM " + SQL_TABLE_ROOM_IMAGE + " WHERE " + SQL_COLUMN_ROOM_IMAGE_URL + " = " +
+                "?" + " and " + SQL_COLUMN_ROOM_IMAGE_ROOM_ID + " = ?";
+        System.out.println(sql);
+        try {
+            connector.executeUpdate(sql, imageURL, room.getId());
+        } catch (SQLException e) {
+            //doing nothing
+        }
+    }
+
+    @Override
     public List<String> getAllRoomNames() {
         List<String> roomNames = new ArrayList<>();
         String sql = "SELECT " + SQL_COLUMN_ROOM_NAME + " FROM " + SQL_TABLE_ROOM;

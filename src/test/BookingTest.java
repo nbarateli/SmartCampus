@@ -14,10 +14,12 @@ import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class BookingTest {
 
-    private Booking booking;
+    private Booking booking1;
+    private Booking booking2;
     private Room room;
     private CampusSubject subject;
     private User user;
@@ -33,22 +35,24 @@ public class BookingTest {
         startTime = new Time(500);
         endTime = new Time(600);
 
-        booking = new Booking(1, user, room, subject, startTime, endTime, null, date);
+        booking1 = new Booking(1, user, room, subject, startTime, endTime, null, date);
+        booking2 = new Booking(1, user, room, subject, startTime, endTime, null, date);
     }
 
     @Test
     public void test() {
-        assertEquals(1, booking.getId());
-        assertEquals(user, booking.getBooker());
-        assertEquals(room, booking.getRoom());
-        assertEquals(subject, booking.getSubject());
-        assertEquals(date, booking.getBookingDate());
-        assertEquals(startTime, booking.getStartTime());
-        assertEquals(endTime, booking.getEndTime());
-        assertNull(booking.getDescription());
+        assertEquals(1, booking1.getId());
+        assertEquals(user, booking1.getBooker());
+        assertEquals(room, booking1.getRoom());
+        assertEquals(subject, booking1.getSubject());
+        assertEquals(date, booking1.getBookingDate());
+        assertEquals(startTime, booking1.getStartTime());
+        assertEquals(endTime, booking1.getEndTime());
+        assertNull(booking1.getDescription());
         assertEquals("Booking{\n" + "კალკულუსი: დაჯავშნა: firstName lastName თარიღი: 01/01/1970 " +
                 "დასაწყისი 04:00 დასასრული 04:00 აუდიტორია name}",
-                booking.toString());
+                booking1.toString());
+        assertTrue(booking1.equals(booking2));
     }
 
 }
