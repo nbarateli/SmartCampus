@@ -4,7 +4,7 @@ function ExcelToJSON(file, type) {
 
         var reader = new FileReader();
 
-        reader.onload = function (e) {
+            reader.onload = function (e) {
             var data = e.target.result;
             var workbook = XLSX.read(data, {type: 'binary'});
 
@@ -16,13 +16,14 @@ function ExcelToJSON(file, type) {
                 for (i in XL_row_object) {
                     if (type === "lecture") {
                         addLectureFromJson(XL_row_object[i], false);
+                        showLectureSuccess();
                     } else if (type === "subject") {
                         addSubjectFromJson(XL_row_object[i], false);
                     } else {
                         addRoomFromJson(XL_row_object[i], false);
+                        showRoomSuccess();
                     }
 
-                    showSuccess();
                 }
             })
 
@@ -30,7 +31,6 @@ function ExcelToJSON(file, type) {
 
         reader.onerror = function (ex) {
             console.log(ex);
-            showFailure();
             return null;
         };
 
@@ -314,12 +314,14 @@ function handleFileSelect(evt, type) {
     // files is a FileList of File objects. List some properties.
 
     for (var i = 0, f; f = files[i]; i++) {
-        showLoading();
+
         if (type === "lecture") {
+            showLectureLoading();
             addLecturesFromFile(f);
         } else if (type === "subject") {
             addSubjectsFromFile(f);
         } else {
+            showRoomLoading();
             addRoomsFromFile(f);
         }
     }
@@ -393,20 +395,35 @@ $(document).ready(function () {
 
 });
 
-function showLoading(){
-    document.getElementById("tick").style.display = "none";
-    document.getElementById("w8gif").style.display = "inline";
-    document.getElementById("fail").style.display = "none";
+function showLectureLoading(){
+    document.getElementById("lecture-tick").style.display = "none";
+    document.getElementById("lecture-w8gif").style.display = "inline";
+    document.getElementById("lecture-fail").style.display = "none";
+}
+function showRoomLoading(){
+    document.getElementById("room-tick").style.display = "none";
+    document.getElementById("room-w8gif").style.display = "inline";
+    document.getElementById("room-fail").style.display = "none";
 }
 
-function showSuccess(){
-    document.getElementById("tick").style.display = "inline";
-    document.getElementById("w8gif").style.display = "none";
-    document.getElementById("fail").style.display = "none'"
+function showLectureSuccess(){
+    document.getElementById("lecture-tick").style.display = "inline";
+    document.getElementById("lecture-w8gif").style.display = "none";
+    document.getElementById("lecture-fail").style.display = "none'"
+}
+function showRoomSuccess(){
+    document.getElementById("room-tick").style.display = "inline";
+    document.getElementById("room-w8gif").style.display = "none";
+    document.getElementById("room-fail").style.display = "none'"
 }
 
-function showFailure(){
-    document.getElementById("tick").style.display = "none";
-    document.getElementById("w8gif").style.display = "none";
-    document.getElementById("fail").style.display = "inline";
+function showLectureFailure(){
+    document.getElementById("lecture-tick").style.display = "none";
+    document.getElementById("lecture-w8gif").style.display = "none";
+    document.getElementById("lecture-fail").style.display = "inline";
+}
+function showRoomFailure(){
+    document.getElementById("room-tick").style.display = "none";
+    document.getElementById("room-w8gif").style.display = "none";
+    document.getElementById("room-fail").style.display = "inline";
 }

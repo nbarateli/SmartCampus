@@ -193,7 +193,10 @@
           <br>
           <br>
           <div class="form-vertical" id="lect-file">
-            <input type="file" name="pic" accept=".xls,.xlsx"><br>
+            <input type="file" name="pic" accept=".xls,.xlsx">
+            <img src="../../img/tick.png" id="lecture-tick" />
+            <img src="../../img/w8.gif" id="lecture-w8gif" />
+            <img src="../../img/fail.png" id="lecture-fail" /><br>
             <output id="lect-list"></output>
           </div>
           <br>
@@ -281,9 +284,9 @@
           <br>
           <br>
           <div class="form-vertical" id="rooms-file">
-            <img src="../../img/tick.png" id="tick" />
-            <img src="../../img/w8.gif" id="w8gif" />
-            <img src="../../img/fail.png" id="fail" />
+            <img src="../../img/tick.png" id="room-tick" />
+            <img src="../../img/w8.gif" id="room-w8gif" />
+            <img src="../../img/fail.png" id="room-fail" />
             <input type="file" name="pic" accept=".xls,.xlsx"><br>
             <output id="room-list"></output>
           </div>

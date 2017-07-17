@@ -102,7 +102,7 @@ button:hover {
   width: 90px;
 }
 
-#tick {
+#room-tick {
   position: relative;
   left: 20%;
   top: 36px;
@@ -112,7 +112,7 @@ button:hover {
   display: none;
 }
 
-#w8gif {
+#room-w8gif {
   position: relative;
   left: 20%;
   top: 36px;
@@ -122,7 +122,7 @@ button:hover {
   display: none;
 }
 
-#fail {
+#room-fail {
   position: relative;
   left: 20%;
   top: 36px;
@@ -132,7 +132,35 @@ button:hover {
   display: none;
 }
 
+#lecture-tick {
+  position: relative;
+  height: 50px;
+  width: 50px;
+  left: 20%;
+  top: -37px;
 
+  display: none;
+}
+
+#lecture-w8gif {
+  position: relative;
+  height: 50px;
+  width: 50px;
+  left: 20%;
+  top: -37px;
+
+  display: none;
+}
+
+#lecture-fail {
+  position: relative;
+  height: 50px;
+  width: 50px;
+  left: 20%;
+  top: -37px;
+
+  display: none;
+}
 
 
 
