@@ -11,10 +11,11 @@ import org.junit.Test;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class RoomProblemTest {
 
-    private RoomProblem problem, problem1;
+    private RoomProblem problem, problem1, problem2;
     private User user;
     private Room room;
 
@@ -24,6 +25,7 @@ public class RoomProblemTest {
         room = new Room(5, 5, "name", RoomType.AUDITORIUM, SeatType.DESKS, false, 5);
         problem = new RoomProblem(1, user, room, "title", "desc", new Date(500));
         problem1 = new RoomProblem(1, user, room, null, null, new Date(500));
+        problem2 = new RoomProblem(1, user, room, null, null, new Date(500));
     }
 
     @Test
@@ -40,5 +42,6 @@ public class RoomProblemTest {
     public void test2() {
         assertEquals("", problem1.getTitle());
         assertEquals("", problem1.getDescription());
+        assertTrue(problem1.equals(problem2));
     }
 }
