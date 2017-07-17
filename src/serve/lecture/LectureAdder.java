@@ -6,10 +6,10 @@ import model.accounts.User;
 import model.bookings.Booking;
 import model.bookings.BookingManager;
 import model.bookings.BookingSearchQueryGenerator;
-import model.subjects.CampusSubject;
-import model.subjects.SubjectManager;
 import model.rooms.Room;
 import model.rooms.RoomManager;
+import model.subjects.CampusSubject;
+import model.subjects.SubjectManager;
 import serve.managers.ManagerFactory;
 
 import javax.json.Json;
@@ -26,9 +26,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Time;
 import java.util.Date;
-import java.util.Enumeration;
-import java.util.LinkedList;
-import java.util.List;
 
 import static misc.ModelConstants.DAYS_IN_WEEK;
 import static misc.Utils.addDaysToDate;
@@ -68,7 +65,6 @@ public class LectureAdder extends HttpServlet {
         if (addLecture(request, manager, subjectManager, accountManager, roomManager, response.getWriter())) {
             response.getWriter().print(SUCCESS);
         }
-
     }
 
     /**
