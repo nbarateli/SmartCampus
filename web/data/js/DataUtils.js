@@ -4,7 +4,7 @@ function ExcelToJSON(file, type) {
 
         var reader = new FileReader();
 
-            reader.onload = function (e) {
+        reader.onload = function (e) {
             var data = e.target.result;
             var workbook = XLSX.read(data, {type: 'binary'});
 
@@ -271,7 +271,8 @@ function sendData(url, params, doAlert) {
 
     http.onreadystatechange = function (alert) {//Call a function when the state changes.
         if (http.readyState === 4 && http.status === 200 && doAlert) {
-            window.alert(http.responseText);
+            // window.alert(http.responseText);
+            validateInputs(http.responseText);
         }
     };
     http.send(params);
@@ -296,7 +297,8 @@ function clearOutputMessage() {
 }
 function addLectureFromForm() {
     var params = ($('#sched-form').serialize());
-
+    clearValidationMessages();
+    clearOutputMessage();
     //clearFormInputs(document.getElementById("sched-form"));
     console.log(params);
 
@@ -352,12 +354,17 @@ function clearFormInputs(formToClear) {
 function handleFileSelect(evt, type) {
     var files = evt.target.files; // FileList object
     // files is a FileList of File objects. List some properties.
+
     for (var i = 0, f; f = files[i]; i++) {
+
         if (type === "lecture") {
+            showLectureLoading();
             addLecturesFromFile(f);
         } else if (type === "subject") {
+            showSubjectLoading();
             addSubjectsFromFile(f);
         } else {
+            showRoomLoading();
             addRoomsFromFile(f);
         }
     }
@@ -431,28 +438,12 @@ $(document).ready(function () {
 
 });
 
-function showSubjectLoading(){
-    document.getElementById("subject-tick").style.display = "none";
-    document.getElementById("subject-w8gif").style.display = "inline";
-    document.getElementById("subject-fail").style.display = "none";
-}
-function showLectureLoading(){
-    document.getElementById("lecture-tick").style.display = "none";
-    document.getElementById("lecture-w8gif").style.display = "inline";
-    document.getElementById("lecture-fail").style.display = "none";
-}
-function showRoomLoading(){
-    document.getElementById("room-tick").style.display = "none";
-    document.getElementById("room-w8gif").style.display = "inline";
-    document.getElementById("room-fail").style.display = "none";
-}
 function showModalWithName(name) {
     var modal = $('#schedule-modal');
+    var room_name = $('#room_n');
     modal.modal('show');
-    document.getElementById('room_n').value = name;
+    room_name.value = name;
 }
-
-
 
 
 function showSubjectSuccess(){
