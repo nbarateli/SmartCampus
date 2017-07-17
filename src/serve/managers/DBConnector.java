@@ -19,7 +19,7 @@ import static misc.DBInfo.*;
 public class DBConnector {
     private PooledConnection pool;
 
-    DBConnector() {
+    public DBConnector() {
         MysqlConnectionPoolDataSource dataSource = new MysqlConnectionPoolDataSource();
         try {
             DBInfo.class.newInstance();

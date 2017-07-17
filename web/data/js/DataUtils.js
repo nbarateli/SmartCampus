@@ -237,8 +237,8 @@ function addRoomFromJson(jsonObject, doAlert) {
     return true;
 }
 
-function showSuccessMessage() {
-    var elem = document.getElementById("output");
+function showSuccessMessage(id) {
+    var elem = document.getElementById(id);
     elem.innerHTML = "წარმატებით დაემატა!";
     elem.style.color = "green";
 }
@@ -249,9 +249,9 @@ function showDataDuplicateMessage() {
     elem.style.color = "red";
 }
 
-function validateInputs(responseText) {
+function validateLectureAddingForm(responseText) {
     if (responseText == "success") {
-        showSuccessMessage();
+        showSuccessMessage("output");
         return;
     }
     if (responseText == "failure") {
@@ -267,6 +267,25 @@ function validateInputs(responseText) {
     if (obj.numWeeks !== undefined) document.getElementById("error_numWeeks").innerHTML = obj.numWeeks;
     if (obj.subject !== undefined) document.getElementById("error_subject_name").innerHTML = obj.subject;
 }
+
+function validateRoomAddingForm(responseText) {
+    if (responseText == "success") {
+        showSuccessMessage("message");
+        return;
+    }
+    var obj = JSON.parse(responseText);
+    if (obj.name != undefined) document.getElementById("error_room").innerHTML = obj.name;
+    if (obj.floor != undefined) document.getElementById("error_floor").innerHTML = obj.floor;
+    if (obj.capacity != undefined) document.getElementById("error_capacity").innerHTML = obj.capacity;
+}
+function validateInputs(responseText, url) {
+    if (url == "/subjects/addlecture") {
+        validateLectureAddingForm(responseText);
+    }
+    if (url == "/rooms/addroom") {
+        validateRoomAddingForm(responseText);
+    }
+}
 function sendData(url, params, doAlert) {
     var http = new XMLHttpRequest();
     http.open("POST", url, true);
@@ -276,8 +295,7 @@ function sendData(url, params, doAlert) {
 
     http.onreadystatechange = function (alert) {//Call a function when the state changes.
         if (http.readyState === 4 && http.status === 200 && doAlert) {
-            // window.alert(http.responseText);
-            validateInputs(http.responseText);
+            validateInputs(http.responseText, url);
         }
     };
     http.send(params);
@@ -297,13 +315,13 @@ function clearValidationMessages() {
         messages[i].innerHTML = "";
     }
 }
-function clearOutputMessage() {
-    document.getElementById("output").innerHTML = "";
+function clearOutputMessage(id) {
+    document.getElementById(id).innerHTML = "";
 }
 function addLectureFromForm() {
     var params = ($('#sched-form').serialize());
     clearValidationMessages();
-    clearOutputMessage();
+    clearOutputMessage("output");
     //clearFormInputs(document.getElementById("sched-form"));
     console.log(params);
 
@@ -322,9 +340,9 @@ function removeRoomFromForm() {
 
 function addRoomFromForm() {
     var params = ($('#add-room-form').serialize());
-
+    clearValidationMessages();
+    clearOutputMessage("message");
     // clearFormInputs(document.getElementById("add-room-form"));
-
     sendData("/rooms/addroom", params, true);
     return false;
 }

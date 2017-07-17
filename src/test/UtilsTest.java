@@ -16,10 +16,14 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
+import static model.database.SQLConstants.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class UtilsTest {
 
@@ -224,5 +228,44 @@ public class UtilsTest {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+//    @Test
+//    public void successfulOperationTest(){
+//        String insertQuery = "";
+//        assertTrue(Utils.successfulOperation(insertQuery, new DBConnector()));
+//    }
+
+    @Test
+    public void generateEqualQueryTest(){
+        List<Object> myList = new ArrayList<Object>();
+        assertEquals(" 1 = 1 ", Utils.generateEqualQuery(null, "", myList));
+        assertEquals("booker_id = ?", Utils.generateEqualQuery(new User(5, "name", "name",
+                "name", UserRole.STUDENT, ""), SQL_COLUMN_BOOKING_BOOKER, myList));
+        assertEquals("room.room_id = ?", Utils.generateEqualQuery(1,
+                SQL_TABLE_ROOM + "." + SQL_COLUMN_BOOKING_ROOM, myList));;
+        assertEquals("subject_id Like ?", Utils.generateLikeQuery(new CampusSubject(-1, "magaltman"),
+                SQL_COLUMN_BOOKING_SUBJECT_ID, myList));
+        Room room = new Room(5, 5, "name", RoomType.valueOf("AUDITORIUM"),
+                SeatType.valueOf("DESKS"), false, 5);
+        assertEquals("room.room_id = ?", Utils.generateEqualQuery(room == null ? null : room.getId(),
+                SQL_TABLE_ROOM + "." + SQL_COLUMN_BOOKING_ROOM, myList));
+    }
+
+    @Test
+    public void toUserPermissionTest(){
+        assertTrue(User.UserPermission.BOOK_A_ROOM.equals(Utils.toUserPermission("book_a_room")));
+        assertTrue(User.UserPermission.REQUEST_BOOKED_ROOM.equals(Utils.toUserPermission("request_booked_room")));
+        assertTrue(User.UserPermission.CANCEL_BOOKING.equals(Utils.toUserPermission("cancel_booking")));
+        assertTrue(User.UserPermission.REPORT_ROOM_PROBLEM.equals(Utils.toUserPermission("report_room_problem")));
+        assertTrue(User.UserPermission.DELETE_PROBLEM.equals(Utils.toUserPermission("delete_problem")));
+        assertTrue(User.UserPermission.LOST_FOUND_POST.equals(Utils.toUserPermission("lost_found_post")));
+        assertTrue(User.UserPermission.LOST_FOUND_DELETE.equals(Utils.toUserPermission("lost_found_delete")));
+        assertTrue(User.UserPermission.WARN_USER.equals(Utils.toUserPermission("warn_user")));
+        assertTrue(User.UserPermission.VIEW_USER_WARNINGS.equals(Utils.toUserPermission("view_user_warnings")));
+        assertTrue(User.UserPermission.DELETE_USER_WARNINGS.equals(Utils.toUserPermission("delete_user_warnings")));
+        assertTrue(User.UserPermission.REMOVE_PERMISSION.equals(Utils.toUserPermission("remove_permission")));
+        assertTrue(User.UserPermission.INSERT_DATA.equals(Utils.toUserPermission("insert_data")));
+
     }
 }

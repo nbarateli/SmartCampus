@@ -213,12 +213,15 @@
               <label class="control-label">ოთახის სახელი</label> <input
                     type="text" name="room_name" class="form-control"
                     placeholder="შეიყვანეთ ოთახის სახელი">
+              <span id="error_room" class="errorMessage"></span>
             </div>
 
             <div class="form-group">
               <label class="control-label">სართული</label> <input id="add-room-floor-number"
                     type="number" name="room_floor" class="form-control"
                     placeholder="შეიყვანეთ სართული" min=0 max=4>
+              <span id="error_floor" class="errorMessage"></span>
+
             </div>
 
             <div class="form-group">
@@ -226,6 +229,7 @@
               <input type="number" name="capacity"
                      class="form-control"
                      placeholder="შეიყვანეთ ადგილების რაოდენობა" min=0>
+              <span id="error_capacity" class="errorMessage"></span>
             </div>
 
             <div class="select">
@@ -252,8 +256,9 @@
                 <input type="checkbox" name="can_be_booked"> შეიძლება სტუდენტისთვის
               </label>
             </div>
-
             <input type="button" value="დამატება" class="btn btn-primary btn-lg" onclick="addRoomFromForm()">
+            <br>
+            <span id="message"></span>
           </form>
 
           <br>
