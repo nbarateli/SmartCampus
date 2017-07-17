@@ -52,4 +52,5 @@ INSERT INTO item_report (item_name, item_description, author_id, report_type, da
   ('ყურსასმენი', 'მწვანე, Panasonic-ის', 3, 'found', '16-05-17');
 
 
+
   

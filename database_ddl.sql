@@ -17,7 +17,7 @@ CREATE UNIQUE INDEX user_user_email_uindex
 CREATE TABLE room
 (
   room_id                INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  room_name              VARCHAR(40)     NOT NULL,
+  room_name              VARCHAR(40)     NOT NULL UNIQUE,
   room_floor             INT             NOT NULL,
   room_type              ENUM ('auditorium', 'utility', 'laboratory'),
   capacity               INT,
@@ -48,7 +48,7 @@ CREATE TABLE room_problem
 CREATE TABLE campus_subject
 (
   subject_id   INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  subject_name VARCHAR(100)    NOT NULL
+  subject_name VARCHAR(100)    NOT NULL UNIQUE
 );
 
 CREATE TABLE booking

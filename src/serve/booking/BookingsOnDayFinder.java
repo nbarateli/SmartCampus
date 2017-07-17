@@ -114,8 +114,8 @@ public class BookingsOnDayFinder extends HttpServlet {
     }
 
     /**
-     * parses current day passed with request to dd.MM/yyyy format
-     * @param request request sent to this servelt
+     * parses current day passed with request to dd.MM.yyyy format
+     * @param request request sent to this servlet
      * @return respective date to passed day in dd.MM.yyyy format
      * @throws Exception if there occured exception during parsing date
      */

@@ -216,7 +216,7 @@
             </div>
 
             <div class="form-group">
-              <label class="control-label">სართული</label> <input
+              <label class="control-label">სართული</label> <input id="add-room-floor-number"
                     type="number" name="room_floor" class="form-control"
                     placeholder="შეიყვანეთ სართული" min=0 max=4>
             </div>

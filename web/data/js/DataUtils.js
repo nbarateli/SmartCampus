@@ -397,6 +397,13 @@ function handleFileSelectRoom(evt) {
 }
 
 $(document).ready(function () {
+    $('#add-room-floor-number').blur(function () {
+        var val = $(this).val();
+        console.log(val);
+        if(val < 1) $(this).val(1);
+        if(val > 4) $(this).val(4);
+    });
+
     document.getElementById('lect-file').addEventListener('change', handleFileSelectLect, false);
     document.getElementById('subj-file').addEventListener('change', handleFileSelectSubj, false);
     document.getElementById('rooms-file').addEventListener('change', handleFileSelectRoom, false);
@@ -440,7 +447,6 @@ $(document).ready(function () {
             }
         });
     }
-
 });
 
 function showModalWithName(name) {
@@ -483,3 +489,4 @@ function showRoomFailure(){
     document.getElementById("room-w8gif").style.display = "none";
     document.getElementById("room-fail").style.display = "inline";
 }
+
