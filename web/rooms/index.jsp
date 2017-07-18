@@ -80,7 +80,6 @@
   <script
           src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
-  <script src="js/Floors.js"></script>
 
   <meta name="google-signin-client_id"
         content="752594653432-dcqce0b92nbtce0d0ahpq91jfis07092.apps.googleusercontent.com">
@@ -93,7 +92,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse" role="navigation">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -630,13 +629,16 @@
     </td>
   </tr>
 </table>
-<script src="js/RoomsSearch.js" <%
+<script src="js/Floors.js"></script>
+<script src="js/RoomsSearch.js">
+</script>
+
+<script><%
   String showOnMap = request.getParameter("showonmap");
   if (showOnMap != null) {
-    out.print("onload=\"showOnMap(" + showOnMap + ")\"");
+    out.print("showOnMap(" + showOnMap + ")");
   }
-%>>
-</script>
+%></script>
 
 </body>
 </html>
