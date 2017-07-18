@@ -445,7 +445,6 @@ function handleFileSelectRoom(evt) {
 $(document).ready(function () {
     $('#add-room-floor-number').blur(function () {
         var val = $(this).val();
-        console.log(val);
         if(val < 1) $(this).val(1);
         if(val > 4) $(this).val(4);
     });
@@ -516,6 +515,22 @@ function showLectureSuccess(){
 function showRoomSuccess(){
     document.getElementById("room-tick").style.display = "inline";
     document.getElementById("room-w8gif").style.display = "none";
+    document.getElementById("room-fail").style.display = "none'"
+}
+
+function showSubjectLoading(){
+    document.getElementById("subject-tick").style.display = "none";
+    document.getElementById("subject-w8gif").style.display = "inline";
+    document.getElementById("subject-fail").style.display = "none'"
+}
+function showLectureLoading(){
+    document.getElementById("lecture-tick").style.display = "none";
+    document.getElementById("lecture-w8gif").style.display = "inline";
+    document.getElementById("lecture-fail").style.display = "none'"
+}
+function showRoomLoading(){
+    document.getElementById("room-tick").style.display = "none";
+    document.getElementById("room-w8gif").style.display = "inline";
     document.getElementById("room-fail").style.display = "none'"
 }
 

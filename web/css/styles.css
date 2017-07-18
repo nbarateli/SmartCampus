@@ -96,6 +96,14 @@ body {
 
 }
 
+a:active {
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+
 .room-image {
   border-radius: 0;
   width: 100%;
@@ -105,3 +113,7 @@ body {
   height: 50px;
   border-radius: 50%;
 }
+
+
+
+
