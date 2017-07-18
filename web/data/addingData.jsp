@@ -382,6 +382,8 @@
             <input type="button" value="დამატება"
                    class="btn btn-primary btn-lg"
                    onclick="addSubjectFromForm()">
+            <br>
+            <span id="add_subject_output"></span>
           </form>
 
           <br>

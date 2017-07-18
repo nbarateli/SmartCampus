@@ -289,6 +289,17 @@ function validateRoomRemovingForm(responseText) {
         output.style.color = "red";
     }
 }
+function validateSubjectAddingForm(responseText) {
+    var output = document.getElementById("add_subject_output");
+    if (responseText == "success") {
+        output.innerHTML = "წარმატებით დაემატა!";
+        output.style.color = "green";
+    }
+    if (responseText == "failure") {
+        output.innerHTML = "ასეთი საგანი უკვე არსებობს!";
+        output.style.color = "red";
+    }
+}
 function validateInputs(responseText, url) {
     if (url == "/subjects/addlecture") {
         validateLectureAddingForm(responseText);
@@ -298,6 +309,9 @@ function validateInputs(responseText, url) {
     }
     if (url == "/rooms/removeroom") {
         validateRoomRemovingForm(responseText);
+    }
+    if (url == "/subjects/addsubject") {
+        validateSubjectAddingForm(responseText);
     }
 }
 function sendData(url, params, doAlert) {
