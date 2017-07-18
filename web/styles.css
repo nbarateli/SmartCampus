@@ -95,3 +95,11 @@ body {
 .input-data {
 
 }
+
+a:active {
+  color: black;
+}
+
+a:visited {
+  color: black;
+}

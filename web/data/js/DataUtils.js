@@ -417,7 +417,6 @@ function handleFileSelectRoom(evt) {
 $(document).ready(function () {
     $('#add-room-floor-number').blur(function () {
         var val = $(this).val();
-        console.log(val);
         if(val < 1) $(this).val(1);
         if(val > 4) $(this).val(4);
     });
