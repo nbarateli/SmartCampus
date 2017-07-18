@@ -30,6 +30,7 @@ public class BookingAdder extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         ServletContext context = request.getServletContext();
         ManagerFactory factory = (ManagerFactory) context.getAttribute(MANAGER_FACTORY);
@@ -38,12 +39,12 @@ public class BookingAdder extends HttpServlet {
 
         User currentUser = (User) request.getSession().getAttribute(SIGNED_ACCOUNT);
         if (currentUser == null) {
-            out.print("NOT ADDED. no user signed in");
+            out.print("არ დაემატა. დასაჯავშნად გთხოვთ დალოგინდეთ.");
             return;
         }
 
         if (!factory.getAccountManager().getAllPermissionsOf(currentUser).contains(User.UserPermission.BOOK_A_ROOM)) {
-            out.print("NOT ADDED. you don't have that permission.");
+            out.print("არ დაემატა. თქვენ არ გაქვთ ამ ოპერაციის შესრულების უფლება");
             return;
         }
         String name = request.getParameter("room_name");
@@ -52,24 +53,36 @@ public class BookingAdder extends HttpServlet {
             out.print("NOT ADDED. room not found");
             return;
         }
-
         Date bookingDate = misc.Utils.stringToDate(request.getParameter("booking_date"), "dd.MM.yyyy");
         String description = request.getParameter("description");
         Time startTime = misc.Utils.toHHMM(request.getParameter("start_time"));
         Time endTime = misc.Utils.toHHMM(request.getParameter("end_time"));
-
+        if(endTime == null && startTime == null){
+            out.println("არ დაემატა. გთხოვთ მიუთითოთ ჯავშნის დაწყების და დამთავრების დრო");
+            return;
+        }
+        if(startTime == null){
+            out.println("არ დაემატა. გთხოვთ მიუთითოთ ჯავშნის დაწყების დრო");
+            return;
+        }
+        if(endTime == null){
+            out.println("არ დაემატა. გთხოვთ მიუთითოთ ჯავშნის დამთავრების დრო");
+            return;
+        }
+        if(description == null){
+            out.println("არ დაემატა. გთხოვთ მიუთითოთ დაჯავშნის მიზეზი");
+            return;
+        }
         try {
             Booking booking = new Booking(SENTINEL_INT, currentUser, room,
                     null, startTime, endTime, description, bookingDate);
             if (!overlapsOtherBookings(booking, bookingManager) && bookingManager.add(booking)) {
-                out.println("Booking successfully added");
+                out.println("ჯავშანი წარმატებით დაემატა");
             } else {
                 throw new Exception();
             }
         } catch (Exception ex) {
-            out.println("NOT ADDED. overlaps other bookings or subjects.");
-            out.flush();
-            out.close();
+            out.println("არ დაემატა. აღნიშნულ დროს ჯავშნის დამატება არ შეიძლება, ემთხვევა სხვა ჯავშანს ან ლექციას");
         }
     }
 

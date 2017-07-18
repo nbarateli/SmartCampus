@@ -34,12 +34,12 @@ function sendData(url, params) {
             var response = document.getElementById("responseID");
             response.innerHTML = http.responseText;
             var res = http.responseText.substring(0, 1);
-            var str1 = "N"
-            if(str1.localeCompare(res)){
-                response.style.color = "GREEN";
+            var str1 = "ა";
+            if(!str1.localeCompare(res)){
+                response.style.color = "RED";
             }
             else {
-                response.style.color = "RED";
+                response.style.color = "GREEN";
             }
         }
     };
