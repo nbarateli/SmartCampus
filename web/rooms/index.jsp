@@ -45,12 +45,7 @@
   RoomManager roomManager = factory.getRoomManager();
 %>
 <html>
-<%
-  String url = request.getServletContext().getRealPath("/rooms/roomform.html");
-  String content = Utils.getContent(url);
 
-  out.println(content);
-%>
 
 <head>
   <title>ოთახები</title>
@@ -83,11 +78,10 @@
 
   <meta name="google-signin-client_id"
         content="752594653432-dcqce0b92nbtce0d0ahpq91jfis07092.apps.googleusercontent.com">
-  <script src="https://apis.google.com/js/api.js">
-
-  </script>
+  <script src="https://apis.google.com/js/api.js"></script>
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script src="/js/auth.js"></script>
+
   <%user = (User) request.getSession().getAttribute(SIGNED_ACCOUNT);%>
 </head>
 <body>
@@ -197,19 +191,6 @@
           </label>
         </div>
 
-        <%--<div class="form-group">--%>
-        <%--<label class="control-label">დროით ძებნა</label>--%>
-        <%--<input type="date" name="date_interested" class="form-control">--%>
-        <%--</div>--%>
-
-        <%--<div class="form-group">--%>
-        <%--<input name="start_time" class="form-control"--%>
-        <%--placeholder="დაკავებულობის სტატუსი (დან)">--%>
-        <%--</div>--%>
-        <%--<div class="form-group">--%>
-        <%--<input name="end_time" class="form-control"--%>
-        <%--placeholder="-მდე">--%>
-        <%--</div>--%>
 
         <div class="form-group">
           <table id="datepairExample" class="form-group">
@@ -629,16 +610,22 @@
     </td>
   </tr>
 </table>
-<script src="js/Floors.js"></script>
-<script src="js/RoomsSearch.js">
-</script>
 
-<script><%
-  String showOnMap = request.getParameter("showonmap");
-  if (showOnMap != null) {
-    out.print("showOnMap(" + showOnMap + ")");
-  }
-%></script>
+<%
+  String url = request.getServletContext().getRealPath("/rooms/roomform.html");
+  String content = Utils.getContent(url);
+  out.println(content);
+%>
+<script src="js/Floors.js"></script>
+<script src="js/RoomsSearch.js"></script>
+<script>
+    <%
+     String showOnMap = request.getParameter("showonmap");
+     if (showOnMap != null) {
+       out.print("showOnMap(" + showOnMap + ")");
+     }
+   %>
+</script>
 
 </body>
 </html>

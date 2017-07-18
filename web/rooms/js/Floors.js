@@ -3,7 +3,6 @@
  */
 let maps = [null];
 load();
-
 function showFloor(floor) {
     if (floor < 1 || floor > 4) return;
     for (var i = 1; i <= 4; i++) {
