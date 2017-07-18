@@ -545,7 +545,7 @@ public final class Utils {
         int numValue;
         try {
             numValue = Integer.parseInt(number);
-            if (numValue < min && numValue > max)
+            if (numValue < min || numValue > max)
                 return null;
         } catch (NumberFormatException e) {
             return null; //the text wasn't a number

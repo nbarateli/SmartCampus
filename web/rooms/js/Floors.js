@@ -3,7 +3,6 @@
  */
 let maps = [null];
 load();
-
 function showFloor(floor) {
     if (floor < 1 || floor > 4) return;
     for (var i = 1; i <= 4; i++) {
@@ -28,7 +27,6 @@ function load() {
     workMaps(map2);
     workMaps(map3);
     workMaps(map4);
-    showFloor(1);
     var span = document.getElementById("closeModal");
     var modal = document.getElementById('myModal');
     span.onclick = function () {
@@ -42,6 +40,7 @@ function load() {
             modal.style.display = "none";
         }
     }
+    showFloor(1);
 }
 
 function workMaps(map) {

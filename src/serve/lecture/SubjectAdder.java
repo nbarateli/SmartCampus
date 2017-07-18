@@ -2,7 +2,6 @@ package serve.lecture;
 
 import model.subjects.CampusSubject;
 import model.subjects.SubjectManager;
-import model.subjects.SubjectSearchQueryGenerator;
 import serve.managers.ManagerFactory;
 
 import javax.servlet.ServletException;
@@ -38,15 +37,13 @@ public class SubjectAdder extends HttpServlet {
         ManagerFactory factory = (ManagerFactory) getServletContext().getAttribute(MANAGER_FACTORY);
         SubjectManager manager = factory.getSubjectManager();
         String subjectName = request.getParameter("subj_name");
-        SubjectSearchQueryGenerator gn = new SubjectSearchQueryGenerator();
-
-        gn.setSubjectName(subjectName);
-        if (manager.find(gn).size() == 0) {
+        CampusSubject searched = manager.getSubjectByName(subjectName);
+        if (searched == null) {
             CampusSubject subj = new CampusSubject(SENTINEL_INT, subjectName);
             manager.add(subj);
-            response.getWriter().println(SUCCESS);
+            response.getWriter().print(SUCCESS);
         } else {
-            response.getWriter().println(FAILED);
+            response.getWriter().print(FAILED);
         }
     }
 }
