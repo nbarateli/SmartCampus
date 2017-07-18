@@ -7,12 +7,10 @@ CREATE TABLE campus_user
   user_id      INT PRIMARY KEY                                             NOT NULL AUTO_INCREMENT,
   first_name   VARCHAR(20)                                                 NOT NULL,
   last_name    VARCHAR(20)                                                 NOT NULL,
-  user_email   VARCHAR(30)                                                 NOT NULL,
+  user_email   VARCHAR(30)                                                 NOT NULL UNIQUE,
   initial_role ENUM ('student', 'lecturer', 'staff', 'admin', 'sys_admin') NOT NULL,
   img_url      VARCHAR(300)
 );
-CREATE UNIQUE INDEX user_user_email_uindex
-  ON campus_user (user_email);
 
 CREATE TABLE room
 (

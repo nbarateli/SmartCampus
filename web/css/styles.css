@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: bpg_arial;
-  src: url(fonts/bpg_arial_2009.ttf);
+  src: url(../fonts/bpg_arial_2009.ttf);
 }
 
 a {
@@ -26,7 +26,7 @@ a:hover {
 body {
   height: 100%;
   width: 100%;
-  background-image: url(img/background.jpg);
+  background-image: url(../img/background.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -113,3 +113,7 @@ a:visited {
   height: 50px;
   border-radius: 50%;
 }
+
+
+
+
