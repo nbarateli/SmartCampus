@@ -1,9 +1,24 @@
 /**
  * Created by Shota on 6/26/2017.
  */
-window.addEventListener('load', load, false);
+let maps = [null];
+load();
+function showFloor(floor) {
+    if (floor < 1 || floor > 4) return;
+    for (var i = 1; i <= 4; i++) {
+        if (i === floor) {
+            maps[i].show();
+        } else {
+            maps[i].hide();
+        }
+    }
+}
 
 function load() {
+    maps.push($('#map1'));
+    maps.push($('#map2'));
+    maps.push($('#map3'));
+    maps.push($('#map4'));
     var map1 = document.getElementById("map1");
     var map2 = document.getElementById("map2");
     var map3 = document.getElementById("map3");
@@ -12,9 +27,6 @@ function load() {
     workMaps(map2);
     workMaps(map3);
     workMaps(map4);
-    map2.style.display = "none";
-    map3.style.display = "none";
-    map4.style.display = "none";
     var span = document.getElementById("closeModal");
     var modal = document.getElementById('myModal');
     span.onclick = function () {
@@ -28,6 +40,7 @@ function load() {
             modal.style.display = "none";
         }
     }
+    showFloor(1);
 }
 
 function workMaps(map) {
@@ -35,14 +48,13 @@ function workMaps(map) {
     for (i = 0; i < areas.length; i++) {
         // var className = areas[i].getAttribute("class");
         var child = areas[i];
-        var name = $(child).attr('class') == undefined? null : $(child).attr('class').split(' ')[0];
+        var name = $(child).attr('class') == undefined ? null : $(child).attr('class').split(' ')[0];
         if (name !== 'room' && name !== 'room_name') continue;
         areas[i].addEventListener("click", roomClicked);
         // areas[i].addEventListener("mouseover", myHover);
         // areas[i].addEventListener("mouseout", myOut);
     }
 }
-
 
 
 function roomClicked() {
@@ -60,17 +72,18 @@ function roomClicked() {
     modal.style.display = "block";
 }
 
-function myOut(){
+function myOut() {
     var roomId = document.getElementById("x" + this.id.substr(1)).id;
     var id = "h" + roomId;
     var hoverElement = document.getElementById(id);
     hoverElement.style.display = "none";
 }
+
 function myHover() {
     //return;
     var roomId = document.getElementById("x" + this.id.substr(1)).id;
     var already = document.getElementById("h" + roomId);
-    if(already !== null){
+    if (already !== null) {
         already.style.display = "unset";
         return;
     }
@@ -78,14 +91,14 @@ function myHover() {
     var div = document.createElement("div");
     var rect = document.getElementById(roomId).getBoundingClientRect();
     var leftPos = +rect.left + rect.width;
-    var topPos = +rect.top ;
-    console.log(leftPos +" "+ topPos);
+    var topPos = +rect.top;
+    console.log(leftPos + " " + topPos);
 
     var text = document.createTextNode("this room is: " + roomId.substr(1));
     div.appendChild(text);
 
     div.className = "popup-div";
-    div.id = "h"+roomId;
+    div.id = "h" + roomId;
     div.style.left = leftPos + "px";
     div.style.top = topPos + "px";
 
@@ -93,40 +106,25 @@ function myHover() {
 }
 
 function floorChange() {
-    var x = document.getElementById("floors").value;
-    if (x === "first") showFirst();
-    if (x === "second") showSecond();
-    if (x === "third") showThird();
-    if (x === "fourth") showFourth();
+    var floorString = document.getElementById("floors").value;
+    let floor;
+    switch (floorString) {
+        case "first":
+            floor = 1;
+            break;
+        case "second":
+            floor = 2;
+            break;
+        case "third":
+            floor = 3;
+            break;
+        case "fourth":
+            floor = 4;
+            break;
+    }
+    showFloor(floor);
 }
 
-function showFirst() {
-    document.getElementById("map2").style.display = "none";
-    document.getElementById("map3").style.display = "none";
-    document.getElementById("map4").style.display = "none";
-    document.getElementById("map1").style.display = "unset";
-}
-
-function showSecond() {
-    document.getElementById("map1").style.display = "none";
-    document.getElementById("map3").style.display = "none";
-    document.getElementById("map4").style.display = "none";
-    document.getElementById("map2").style.display = "unset";
-}
-
-function showThird() {
-    document.getElementById("map1").style.display = "none";
-    document.getElementById("map2").style.display = "none";
-    document.getElementById("map4").style.display = "none";
-    document.getElementById("map3").style.display = "unset";
-}
-
-function showFourth() {
-    document.getElementById("map1").style.display = "none";
-    document.getElementById("map2").style.display = "none";
-    document.getElementById("map3").style.display = "none";
-    document.getElementById("map4").style.display = "unset";
-}
 
 function unHighLightRooms() {
     var map1 = document.getElementById("map1");

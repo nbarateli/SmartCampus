@@ -24,6 +24,17 @@ public class Booking implements CampusObject {
     private final Date bookingDate;
     private final String description;
 
+    /**
+     * constructor of Booking class
+     * @param bookingID booking id in database
+     * @param booker user which booked this
+     * @param room room booked
+     * @param subject subject booked for
+     * @param startTime start time of booking
+     * @param endTime end time of booking
+     * @param description description of booking
+     * @param bookingDate date of booking
+     */
     public Booking(int bookingID, User booker, Room room, CampusSubject subject,
                    Time startTime, Time endTime, String description, Date bookingDate) {
         this.bookingID = bookingID;
@@ -37,38 +48,60 @@ public class Booking implements CampusObject {
 
     }
 
-    public Date getBookingDate() {
-        return new Date(bookingDate.getTime());
-    }
-
-
+    /**
+     * override of CampusObject's getId method (which this class is implementing)
+     * @return booking id in database
+     */
     @Override
     public int getId() {
         return bookingID;
     }
 
+    /**
+     * @return booking date
+     */
+    public Date getBookingDate() {
+        return new Date(bookingDate.getTime());
+    }
 
+    /**
+     * @return booker (User)
+     */
     public User getBooker() {
         return booker;
     }
 
+    /**
+     * @return room booked
+     */
     public Room getRoom() {
         return room;
     }
 
+    /**
+     * @return subject booking is for
+     */
     public CampusSubject getSubject() {
         return subject;
     }
 
+    /**
+     * @return end time of booking
+     */
     public Time getEndTime() {
         return new Time(endTime.getTime());
     }
 
+    /**
+     * @return start time of booking
+     */
     public Time getStartTime() {
         return new Time(startTime.getTime());
     }
 
-
+    /**
+     * @return description of booking
+     */
     public String getDescription() {
         return description;
     }
@@ -103,6 +136,9 @@ public class Booking implements CampusObject {
                 "}";
     }
 
+    /**
+     * enum of weekday
+     */
     public enum WeekDay {
         MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
     }

@@ -103,8 +103,8 @@ button:hover {
 }
 
 .errorMessage {
-    color: red;
-    font-style: italic;
+  color: red;
+  font-style: italic;
 }
 
 .successMessage {
@@ -202,6 +202,12 @@ button:hover {
   display: none;
 }
 
+.room-image {
+  border-radius: 0;
+  width: 100%;
+}
 
-
-
+.navbar-pic {
+  height: 50px;
+  border-radius: 50%;
+}

@@ -25,6 +25,17 @@ public class RoomSearchQueryGenerator implements CampusSearchQueryGenerator<Room
     private boolean availableForBooking;
     private boolean hasProblems;
 
+    /**
+     * constructor of RoomSearchQueryGenerator class
+     * @param name name of room being searched
+     * @param floor floor of rooms being searched
+     * @param capacityFrom minimum capacity of rooms being searched
+     * @param capacityTo maximum of rooms being searched
+     * @param roomType type of rooms being searched
+     * @param availableForBooking availability for students of rooms being searched
+     * @param seatType seat type of rooms being searched
+     * @param hasProblems if rooms with problems are acceptable or not
+     */
     public RoomSearchQueryGenerator(String name, Integer floor, Integer capacityFrom, Integer capacityTo,
                                     Room.RoomType roomType, boolean availableForBooking,
                                     Room.SeatType seatType, boolean hasProblems) {
@@ -46,26 +57,44 @@ public class RoomSearchQueryGenerator implements CampusSearchQueryGenerator<Room
                 null, false, null, true);
     }
 
+    /**
+     * @return name of room being searched
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * set name of room being searched
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * @return floor of rooms being searched
+     */
     public Integer getFloor() {
         return floor;
     }
 
+    /**
+     * sets floor of rooms being searched
+     */
     public void setFloor(Integer floor) {
         this.floor = floor;
     }
 
+    /**
+     * @return minimum capacity of rooms being searched
+     */
     public Integer getCapacityFrom() {
         return capacityFrom;
     }
 
+    /**
+     * sets minimum capacity of rooms being searched
+     */
     public void setCapacityFrom(Integer capacityFrom) {
         if (capacityFrom != null) {
             if ((capacityTo != null && capacityFrom > capacityTo) || capacityFrom < 0) {
@@ -75,10 +104,16 @@ public class RoomSearchQueryGenerator implements CampusSearchQueryGenerator<Room
         this.capacityFrom = capacityFrom;
     }
 
+    /**
+     * @return maximum of rooms being searched
+     */
     public Integer getCapacityTo() {
         return capacityTo;
     }
 
+    /**
+     * sets maximum of rooms being searched
+     */
     public void setCapacityTo(Integer capacityTo) {
         if (capacityTo != null) {
             if ((capacityFrom != null && capacityFrom > capacityTo) || capacityTo < 0) {
@@ -88,34 +123,58 @@ public class RoomSearchQueryGenerator implements CampusSearchQueryGenerator<Room
         this.capacityTo = capacityTo;
     }
 
+    /**
+     * @return type of rooms being searched
+     */
     public Room.RoomType getRoomType() {
         return roomType;
     }
 
+    /**
+     * sets type of rooms being searched
+     */
     public void setRoomType(Room.RoomType roomType) {
         this.roomType = roomType;
     }
 
+    /**
+     * @return seat type of rooms being searched
+     */
     public Room.SeatType getSeatType() {
         return seatType;
     }
 
+    /**
+     * sets seat type of rooms being searched
+     */
     public void setSeatType(Room.SeatType seatType) {
         this.seatType = seatType;
     }
 
+    /**
+     * @return true if rooms with problems are acceptable or not
+     */
     public boolean hasProblems() {
         return hasProblems;
     }
 
+    /**
+     * sets if rooms with problems are acceptable or not
+     */
     public void setHasProblems(boolean hasProblems) {
         this.hasProblems = hasProblems;
     }
 
+    /**
+     * @return availability for students of rooms being searched
+     */
     public boolean isAvailableForBooking() {
         return availableForBooking;
     }
 
+    /**
+     * sets availability for students of rooms being searched
+     */
     public void setAvailableForBooking(boolean availableForBooking) {
         this.availableForBooking = availableForBooking;
     }

@@ -113,7 +113,7 @@ public class LectureAdder extends HttpServlet {
     }
 
     /**
-     * checks if any lecture that will be added will overlap with other lecture already in database
+     * checks that the given lectures don't overlap with old ones.
      * @param room requested room
      * @param date requested start date
      * @param startTime requested start time

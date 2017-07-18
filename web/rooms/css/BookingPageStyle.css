@@ -1,63 +1,74 @@
 @font-face {
-    font-family: bpg_arial;
-    src: url(../../fonts/bpg_arial_2009.ttf);
+  font-family: bpg_arial;
+  src: url(../../fonts/bpg_arial_2009.ttf);
 }
+
 body {
-    background-color: #178699;
-    font-family: bpg_arial;
+  background-color: #178699;
+  font-family: bpg_arial;
 }
-
-
-
 
 #header {
-    text-align: center;
-    margin-top: 50px;
+  text-align: center;
+  margin-top: 50px;
 }
 
 #form-div {
-    width: 500px;
+  width: 500px;
 }
 
 #main-div {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 #home-link {
-    color: #04333B;
+  color: #04333B;
 }
 
 #back-to-main {
-    content: url(../../img/bigLogo.png);
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    height: 80px;
-    width: 90px;
+  content: url(../../img/bigLogo.png);
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  height: 80px;
+  width: 90px;
 }
 
 .form-left {
-    position: relative;
-    float: left;
-    margin-bot: 5px;
+  position: relative;
+  float: left;
+  margin-bot: 5px;
 }
 
 .form-right {
-    position: relative;
-    float: right;
-    margin-bot: 5px;
-    padding-bot: 5px;
+  position: relative;
+  float: right;
+  margin-bot: 5px;
+  padding-bot: 5px;
 }
 
 #start_t {
-    border-radius: 6px;
+  border-radius: 6px;
 }
+
 #end_t {
-    border-radius: 6px;
+  border-radius: 6px;
 }
+
 #start_d {
-    border-radius: 6px;
+  border-radius: 6px;
 }
+
 #end_d {
-    border-radius: 6px;
+  border-radius: 6px;
+}
+
+.room-image {
+  border-radius: 0;
+  width: 100%;
+}
+
+.navbar-pic {
+  height: 30px;
+  border-radius: 50%;
 }

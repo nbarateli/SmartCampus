@@ -38,30 +38,15 @@ function showOnMap(id) {
     $.get('/rooms/room', {id: id}, function (data) {
 
         if (undefined === data['error']) {
-            var floor = data['floor'];
-            switch (floor) {
-                case 1:
-                    document.getElementById("floors").value = 'first';
-                    showFirst();
-                    break;
-                case 2:
-                    document.getElementById("floors").value = 'second';
-                    showSecond();
-                    break;
-                case 3:
-                    document.getElementById("floors").value = 'third';
-                    showThird();
-                    break;
-                case 4:
-                    document.getElementById("floors").value = 'fourth';
-                    showFourth();
-                    break;
-            }
             unHighLightRooms();
+            var floor = data['floor'];
+            showFloor(floor);
+
             highlightRoom(data);
         }
     });
 }
+
 function requestOnMap(id) {
     window.open('index.jsp?showonmap=' + id, '_blank');
 

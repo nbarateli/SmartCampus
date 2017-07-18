@@ -1,77 +1,77 @@
 @CHARSET "UTF-8";
 .mapdivision {
   background-color: white;
-    border-color: black;
-    border-radius: 20px;
+  border-color: black;
+  border-radius: 20px;
 }
 
 @font-face {
-    font-family: bpg_arial;
-    src: url(../../fonts/bpg_arial_2009.ttf);
+  font-family: bpg_arial;
+  src: url(../../fonts/bpg_arial_2009.ttf);
 }
 
 body {
-    background-color: lightgreen;
-    font-family: bpg_arial;
+  background-color: lightgreen;
+  font-family: bpg_arial;
 }
 
 #full-table {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 }
 
 #left-td {
-    width: 30%;
+  width: 30%;
 }
 
 #search-form {
-    width: 100%;
+  width: 100%;
 }
 
 #right-td {
-    width: 85%;
+  width: 85%;
 }
 
 #right-div {
-    overflow-y: scroll;
-    height: 100%;
+  overflow-y: scroll;
+  height: 100%;
 }
 
 td, tr {
-    text-align: center;
-    align-items: center;
+  text-align: center;
+  align-items: center;
 }
 
 #room-id-div {
-    font-size: 25px;
+  font-size: 25px;
 }
 
 #room-info-div {
-    font-size: 17px;
-    align-items: center;
+  font-size: 17px;
+  align-items: center;
 }
 
 #yes-span {
-    padding-right: 5px;
-    color: #009900;
+  padding-right: 5px;
+  color: #009900;
 }
 
 #no-span {
-    color: #cc0000;
-    padding-right: 5px;
+  color: #cc0000;
+  padding-right: 5px;
 }
 
 .popup-div {
-    display: unset;
-    z-index: 1;
-    height: 100px;
-    width: 100px;
-    position: absolute;
-    right: 0;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    background-color: yellow;
+  display: unset;
+  z-index: 1;
+  height: 100px;
+  width: 100px;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: yellow;
 }
 
 .smaller-lab {
@@ -79,57 +79,66 @@ td, tr {
 }
 
 #floors {
-    margin-bottom: 10px;
-    paddin-bottom: 5px;
-    height: 25px;
+  margin-bottom: 10px;
+  paddin-bottom: 5px;
+  height: 25px;
 }
 
 #par {
-    font-family: serif;
-    margin-bottom: -2px;
+  font-family: serif;
+  margin-bottom: -2px;
 }
 
 .control-label {
-    font-family: bpg_arial;
-    font-size: initial;
+  font-family: bpg_arial;
+  font-size: initial;
 }
 
 .form-control {
-    font-family: bpg_arial;
+  font-family: bpg_arial;
 }
 
-#full-table td{
-    padding-left: 10px;
-    padding-right: 10px;
+#full-table td {
+  padding-left: 10px;
+  padding-right: 10px;
 }
-#full-table td:first-child{
-    padding-right: 0px;
+
+#full-table td:first-child {
+  padding-right: 0px;
 }
 
 #time-input-from {
-    border-radius: 6px;
+  border-radius: 6px;
 }
 
 #time-input-to {
-    border-radius: 6px;
+  border-radius: 6px;
 }
 
 #date-input-from {
-    border-radius: 6px;
+  border-radius: 6px;
 }
 
 #date-input-to {
-    border-radius: 6px;
+  border-radius: 6px;
 }
 
 #back-to-main {
-    content: url(../../img/bigLogo.png);
-    position: relative;
-    float: right;
-    height: 80px;
-    width: 90px;
-    padding: 10px;
-    /*display: none;*/
+  content: url(../../img/bigLogo.png);
+  position: relative;
+  float: right;
+  height: 80px;
+  width: 90px;
+  padding: 10px;
+  /*display: none;*/
 }
 
+.room-image {
+  border-radius: 0;
+  width: 100%;
+}
 
+.navbar-pic {
+  height: 6%;
+  border-radius: 50%;
+}

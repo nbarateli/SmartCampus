@@ -1,3 +1,7 @@
+gapi.load('auth2', function () {
+    gapi.auth2.init();
+});
+
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
     var id_token = googleUser.getAuthResponse().id_token;
@@ -24,5 +28,6 @@ function signOut() {
             console.log(xhr.responseText);
         };
         xhr.send(null);
+        window.location.reload();
     });
 }

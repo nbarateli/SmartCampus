@@ -9,6 +9,9 @@ package model.campus;
  */
 public interface CampusSearchQueryGenerator<T extends CampusObject> {
 
+    /**
+     * generates search query using specifications given by user
+     * @return CampusSearchQuery object
+     */
     CampusSearchQuery generateQuery();
-
 }

@@ -73,10 +73,56 @@
   <script src="${pageContext.request.contextPath}/scriptlibs/Datepair.js"></script>
   <script src="${pageContext.request.contextPath}/scriptlibs/wrapper.js"></script>
 
+  <meta name="google-signin-client_id"
+        content="752594653432-dcqce0b92nbtce0d0ahpq91jfis07092.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/api.js">
+
+  </script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="/js/auth.js"></script>
 
 </head>
 <body>
-<a id="back-to-main" class="image" href="/"></a>
+<nav class="navbar navbar-inverse" role="navigation">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><img src="/img/bigLogo.png" class="mainPageButton"
+                                            style="height: 40px; width:40px"></a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <%
+        if (currentUser != null) {
+          out.print("<li><a><img src=\"" + currentUser.getImageURL() + "\" class=\"navbar-pic\"></a></li>\n" +
+                  "      <li><a> " + currentUser.getFirstName() + " " + currentUser.getLastName() + "</a></li>\n" +
+                  "      <li>\n" +
+                  "        <a class=\"sign-out\">\n" +
+                  "          <div class='btn btn-warning' onclick=\"signOut();\"> Sign out</div>\n" +
+                  "        </a>\n" +
+                  "      </li>");
+        } else {
+          out.print("\n" +
+                  "      <li>\n" +
+                  "        <a class=\"g-signin2 sign-in\" data-onsuccess=\"onSignIn\"></a>\n" +
+                  "      </li>");
+        }
+      %>
+    </ul>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container -->
+</nav>
+<%--<a id="back-to-main" class="image" href="/"></a>--%>
 <h1 id="header">ოთახის დაჯავშნა</h1>
 
 <br>

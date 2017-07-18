@@ -21,8 +21,8 @@ function ExcelToJSON(file, type) {
                         addSubjectFromJson(XL_row_object[i], false);
                         showSubjectSuccess();
                     } else {
-                        addRoomFromJson(XL_row_object[i], false);
-                        showRoomSuccess();
+                        if(addRoomFromJson(XL_row_object[i], false))
+                            showRoomSuccess();
                     }
 
                 }
@@ -117,8 +117,12 @@ var addSubjectFromJson = function (jsonObject, doAlert) {
 };
 
 function addRoomFromJson(jsonObject, doAlert) {
-    var name = jsonObject['ოთახის N'].toString();
-    var typePure = jsonObject['ტიპი'];
+    var name = jsonObject['ოთახის N'] !== undefined ? jsonObject['ოთახის N'].toString() : null;
+    var typePure = jsonObject['ტიპი'] !== undefined ? jsonObject['ტიპი'] : null;
+    if(name == null || typePure == null){
+        showRoomFailure();
+        return false;
+    }
 
     function getFloorViaName(name) {
 
@@ -230,6 +234,7 @@ function addRoomFromJson(jsonObject, doAlert) {
     params += "&can_be_booked=" + canBeBooked(typePure);
 
     sendData("/rooms/addroom", params, doAlert);
+    return true;
 }
 
 function showSuccessMessage(id) {
@@ -424,6 +429,13 @@ function handleFileSelectRoom(evt) {
 }
 
 $(document).ready(function () {
+    $('#add-room-floor-number').blur(function () {
+        var val = $(this).val();
+        console.log(val);
+        if(val < 1) $(this).val(1);
+        if(val > 4) $(this).val(4);
+    });
+
     document.getElementById('lect-file').addEventListener('change', handleFileSelectLect, false);
     document.getElementById('subj-file').addEventListener('change', handleFileSelectSubj, false);
     document.getElementById('rooms-file').addEventListener('change', handleFileSelectRoom, false);
@@ -467,7 +479,6 @@ $(document).ready(function () {
             }
         });
     }
-
 });
 
 function showModalWithName(name) {
@@ -510,3 +521,4 @@ function showRoomFailure(){
     document.getElementById("room-w8gif").style.display = "none";
     document.getElementById("room-fail").style.display = "inline";
 }
+
