@@ -273,12 +273,26 @@ function validateRoomAddingForm(responseText) {
     if (obj.floor != undefined) document.getElementById("error_floor").innerHTML = obj.floor;
     if (obj.capacity != undefined) document.getElementById("error_capacity").innerHTML = obj.capacity;
 }
+function validateRoomRemovingForm(responseText) {
+    var output = document.getElementById("remove_room_output");
+    if (responseText == "success") {
+        output.innerHTML = "წარმატებით წაიშალა!";
+        output.style.color = "green";
+    }
+    if (responseText == "failure") {
+        output.innerHTML = "ასეთი ოთახი არ არსებობს!";
+        output.style.color = "red";
+    }
+}
 function validateInputs(responseText, url) {
     if (url == "/subjects/addlecture") {
         validateLectureAddingForm(responseText);
     }
     if (url == "/rooms/addroom") {
         validateRoomAddingForm(responseText);
+    }
+    if (url == "/rooms/removeroom") {
+        validateRoomRemovingForm(responseText);
     }
 }
 function sendData(url, params, doAlert) {

@@ -44,9 +44,9 @@ public class RoomRemover extends HttpServlet {
         List<Room> foundRooms = manager.find(query);
         if (foundRooms.size() != 0) {
             manager.remove(foundRooms.get(0).getId());
-            response.getWriter().println(SUCCESS);
+            response.getWriter().print(SUCCESS);
         } else {
-            response.getWriter().println(FAILED);
+            response.getWriter().print(FAILED);
         }
     }
 }

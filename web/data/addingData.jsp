@@ -307,6 +307,8 @@
             <script>roomNameAutocomplete('room_n_delete')</script>
             <input type="button" value="წაშლა" class="btn btn-primary btn-lg"
                    onclick="removeRoomFromForm()">
+            <br>
+            <span id="remove_room_output"></span>
           </form>
         </div>
       </div>
