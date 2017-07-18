@@ -20,7 +20,8 @@ import java.sql.Time;
 import java.util.Date;
 
 import static misc.ModelConstants.SENTINEL_INT;
-import static misc.WebConstants.*;
+import static misc.WebConstants.MANAGER_FACTORY;
+import static misc.WebConstants.SIGNED_ACCOUNT;
 
 /**
  * Created by Administrator on 04.07.2017.
@@ -37,13 +38,13 @@ public class BookingAdder extends HttpServlet {
         BookingManager bookingManager = factory.getBookingManager();
         RoomManager roomManager = factory.getRoomManager();
 
-        User currentUser = (User) request.getSession().getAttribute(SIGNED_ACCOUNT);
-        if (currentUser == null) {
+        User user = (User) request.getSession().getAttribute(SIGNED_ACCOUNT);
+        if (user == null) {
             out.print("არ დაემატა. დასაჯავშნად გთხოვთ დალოგინდეთ.");
             return;
         }
 
-        if (!factory.getAccountManager().getAllPermissionsOf(currentUser).contains(User.UserPermission.BOOK_A_ROOM)) {
+        if (!factory.getAccountManager().getAllPermissionsOf(user).contains(User.UserPermission.BOOK_A_ROOM)) {
             out.print("არ დაემატა. თქვენ არ გაქვთ ამ ოპერაციის შესრულების უფლება");
             return;
         }
@@ -53,6 +54,7 @@ public class BookingAdder extends HttpServlet {
             out.print("NOT ADDED. room not found");
             return;
         }
+
         Date bookingDate = misc.Utils.stringToDate(request.getParameter("booking_date"), "dd.MM.yyyy");
         String description = request.getParameter("description");
         Time startTime = misc.Utils.toHHMM(request.getParameter("start_time"));
@@ -74,7 +76,7 @@ public class BookingAdder extends HttpServlet {
             return;
         }
         try {
-            Booking booking = new Booking(SENTINEL_INT, currentUser, room,
+            Booking booking = new Booking(SENTINEL_INT, user, room,
                     null, startTime, endTime, description, bookingDate);
             if (!overlapsOtherBookings(booking, bookingManager) && bookingManager.add(booking)) {
                 out.println("ჯავშანი წარმატებით დაემატა");

@@ -8,10 +8,10 @@
 <html>
 <%
   ManagerFactory factory = (ManagerFactory) request.getServletContext().getAttribute(MANAGER_FACTORY);
-  User currentUser = (User) request.getSession().getAttribute(SIGNED_ACCOUNT);
+  User user = (User) request.getSession().getAttribute(SIGNED_ACCOUNT);
 
-  if (currentUser == null || !factory.getAccountManager().
-          getAllPermissionsOf(currentUser).contains(User.UserPermission.INSERT_DATA)) {
+  if (user == null || !factory.getAccountManager().
+          getAllPermissionsOf(user).contains(User.UserPermission.INSERT_DATA)) {
     response.sendRedirect("/unallowed_operation.jsp");
   }
 %>
@@ -71,18 +71,13 @@
     </div>
     <ul class="nav navbar-nav navbar-right">
       <%
-        if (currentUser != null) {
-          out.print("<li><a><img src=\"" + currentUser.getImageURL() + "\" class=\"navbar-pic\"></a></li>\n" +
-                  "      <li><a> " + currentUser.getFirstName() + " " + currentUser.getLastName() + "</a></li>\n" +
+        if (user != null) {
+          out.print("<li><a style='height: 70px'><img src=\"" + user.getImageURL() + "\" class=\"navbar-brand\" style='border-radius: 50% '></a></li>\n" +
+                  "      <li><a class='navbar-text'> " + user.getFirstName() + " " + user.getLastName() + "</a></li>\n" +
                   "      <li>\n" +
                   "        <a class=\"sign-out\">\n" +
                   "      <div class='btn btn-info' onclick=\"signOut();\"><span class='glyphicon glyphicon-log-out'></span> Sign out</div>\n" +
                   "        </a>\n" +
-                  "      </li>");
-        } else {
-          out.print("\n" +
-                  "      <li>\n" +
-                  "        <a class=\"g-signin2 sign-in\" data-onsuccess=\"onSignIn\"></a>\n" +
                   "      </li>");
         }
       %>

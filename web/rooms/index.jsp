@@ -16,7 +16,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%!
-  private User user;
+  private User currentUser;
 
   private Integer nullIfNoLength(String s) {
     return s == null || s.length() < 1 ? null : Integer.valueOf(s) < 0 ? 0 : Integer.valueOf(s);
@@ -81,7 +81,7 @@
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script src="/js/auth.js"></script>
 
-  <%user = (User) request.getSession().getAttribute(SIGNED_ACCOUNT);%>
+  <%currentUser = (User) request.getSession().getAttribute(SIGNED_ACCOUNT);%>
 </head>
 <body>
 
@@ -100,9 +100,9 @@
     </div>
     <ul class="nav navbar-nav navbar-right">
       <%
-        if (user != null) {
-          out.print("<li><a><img src=\"" + user.getImageURL() + "\" class=\"navbar-pic\"></a></li>\n" +
-                  "      <li><a> " + user.getFirstName() + " " + user.getLastName() + "</a></li>\n" +
+        if (currentUser != null) {
+          out.print("<li><a style='height: 70px'><img src=\"" + currentUser.getImageURL() + "\" class=\"navbar-brand\" style='border-radius: 50% '></a></li>\n" +
+                  "      <li><a class='navbar-text'> " + currentUser.getFirstName() + " " + currentUser.getLastName() + "</a></li>\n" +
                   "      <li>\n" +
                   "        <a class=\"sign-out\">\n" +
                   "      <div class='btn btn-info' onclick=\"signOut();\"><span class='glyphicon glyphicon-log-out'></span> Sign out</div>\n" +

@@ -44,12 +44,17 @@
     <ul class="nav navbar-nav navbar-right">
       <%
         if (currentUser != null) {
-          out.print("<li><a><img src=\"" + currentUser.getImageURL() + "\" class=\"navbar-pic\"></a></li>\n" +
-                  "      <li><a> " + currentUser.getFirstName() + " " + currentUser.getLastName() + "</a></li>\n" +
+          out.print("<li><a style='height: 70px'><img src=\"" + currentUser.getImageURL() + "\" class=\"navbar-brand\" style='border-radius: 50% '></a></li>\n" +
+                  "      <li><a class='navbar-text'> " + currentUser.getFirstName() + " " + currentUser.getLastName() + "</a></li>\n" +
                   "      <li>\n" +
                   "        <a class=\"sign-out\">\n" +
-                  "          <div class='btn btn-info' onclick=\"signOut();\"> <span class='glyphicon glyphicon-log-out'></span> Sign out</div>\n" +
+                  "      <div class='btn btn-info' onclick=\"signOut();\"><span class='glyphicon glyphicon-log-out'></span> Sign out</div>\n" +
                   "        </a>\n" +
+                  "      </li>");
+        } else {
+          out.print("\n" +
+                  "      <li>\n" +
+                  "        <a class=\"g-signin2 sign-in\" data-onsuccess=\"onSignIn\"></a>\n" +
                   "      </li>");
         }
       %>

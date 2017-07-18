@@ -2,8 +2,8 @@ package model.bookings;
 
 import model.accounts.User;
 import model.campus.CampusObject;
-import model.subjects.CampusSubject;
 import model.rooms.Room;
+import model.subjects.CampusSubject;
 
 import java.sql.Time;
 import java.text.DateFormat;

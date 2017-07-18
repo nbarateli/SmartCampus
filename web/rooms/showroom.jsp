@@ -62,11 +62,11 @@
   <%!
 
     private boolean canInsertData() {
-      return user != null && accountManager.getAllPermissionsOf(user).contains(INSERT_DATA);
+      return currentUser != null && accountManager.getAllPermissionsOf(currentUser).contains(INSERT_DATA);
     }
 
     private boolean canBookThisRoom() {
-      List<UserPermission> permissions = accountManager.getAllPermissionsOf(user);
+      List<UserPermission> permissions = accountManager.getAllPermissionsOf(currentUser);
       return (permissions.contains(BOOK_A_ROOM) && room.isAvailableForStudents())
               || permissions.contains(REQUEST_BOOKED_ROOM);
     }
@@ -74,13 +74,13 @@
     private Room room;
     private List<String> images;
     private RoomManager manager;
-    private User user;
+    private User currentUser;
     private AccountManager accountManager;
   %>
   <%
 
     try {
-      user = (User) request.getSession().getAttribute(SIGNED_ACCOUNT);
+      currentUser = (User) request.getSession().getAttribute(SIGNED_ACCOUNT);
       manager = ((ManagerFactory) request.getServletContext()
               .getAttribute(MANAGER_FACTORY)).getRoomManager();
       accountManager = ((ManagerFactory) request.getServletContext().getAttribute(MANAGER_FACTORY)).
@@ -117,9 +117,9 @@
     </div>
     <ul class="nav navbar-nav navbar-right">
       <%
-        if (user != null) {
-          out.print("<li><a><img src=\"" + user.getImageURL() + "\" class=\"navbar-pic\"></a></li>\n" +
-                  "      <li><a> " + user.getFirstName() + " " + user.getLastName() + "</a></li>\n" +
+        if (currentUser != null) {
+          out.print("<li><a style='height: 70px'><img src=\"" + currentUser.getImageURL() + "\" class=\"navbar-brand\" style='border-radius: 50% '></a></li>\n" +
+                  "      <li><a class='navbar-text'> " + currentUser.getFirstName() + " " + currentUser.getLastName() + "</a></li>\n" +
                   "      <li>\n" +
                   "        <a class=\"sign-out\">\n" +
                   "      <div class='btn btn-info' onclick=\"signOut();\"><span class='glyphicon glyphicon-log-out'></span> Sign out</div>\n" +
