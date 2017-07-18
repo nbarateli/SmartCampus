@@ -1,9 +1,10 @@
 <%@ page import="misc.Utils" %>
-<%@ page import="model.rooms.Room" %>
+<%@ page import="model.accounts.User" %>
 <%@ page import="static misc.WebConstants.*" %>
+<%@ page import="model.rooms.Room" %>
 <%@ page import="model.rooms.RoomManager" %>
-<%@ page import="model.rooms.RoomSearchQueryGenerator" %>
 <%@ page import="static misc.Utils.*" %>
+<%@ page import="model.rooms.RoomSearchQueryGenerator" %>
 <%@ page import="serve.managers.ManagerFactory" %>
 <%@ page import="java.util.List" %>
 <%--
@@ -15,6 +16,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%!
+  private User user;
+
   private Integer nullIfNoLength(String s) {
     return s == null || s.length() < 1 ? null : Integer.valueOf(s) < 0 ? 0 : Integer.valueOf(s);
   }
@@ -37,7 +40,9 @@
 
 %>
 <%
-  RoomManager manager1 = ((ManagerFactory) request.getServletContext().getAttribute(MANAGER_FACTORY)).getRoomManager();
+
+  ManagerFactory factory = (ManagerFactory) request.getServletContext().getAttribute(MANAGER_FACTORY);
+  RoomManager roomManager = factory.getRoomManager();
 %>
 <html>
 <%
@@ -46,9 +51,9 @@
 
   out.println(content);
 %>
+
 <head>
   <title>ოთახები</title>
-
   <meta charset="utf-8">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,6 +62,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/Floors.css">
   <link rel="stylesheet" href="css/SearchPageStyle.css">
+
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <link rel="stylesheet" href="/css/auto-complete.css">
@@ -74,13 +80,59 @@
   <script
           src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
-  <script src="js/Floors.js"></script>
 
+  <meta name="google-signin-client_id"
+        content="752594653432-dcqce0b92nbtce0d0ahpq91jfis07092.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/api.js">
 
+  </script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="/js/auth.js"></script>
+  <%user = (User) request.getSession().getAttribute(SIGNED_ACCOUNT);%>
 </head>
 <body>
 
-<a id="back-to-main" class="image" href="/"></a>
+<nav class="navbar navbar-inverse" role="navigation">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><img src="/img/bigLogo.png" class="mainPageButton"
+                                            style="height: 40px; width:40px"></a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <%
+        if (user != null) {
+          out.print("<li><a><img src=\"" + user.getImageURL() + "\" class=\"navbar-pic\"></a></li>\n" +
+                  "      <li><a> " + user.getFirstName() + " " + user.getLastName() + "</a></li>\n" +
+                  "      <li>\n" +
+                  "        <a class=\"sign-out\">\n" +
+                  "          <div class='btn btn-warning' onclick=\"signOut();\"> Sign out</div>\n" +
+                  "        </a>\n" +
+                  "      </li>");
+        } else {
+          out.print("\n" +
+                  "      <li>\n" +
+                  "        <a class=\"g-signin2 sign-in\" data-onsuccess=\"onSignIn\"></a>\n" +
+                  "      </li>");
+        }
+      %>
+    </ul>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container -->
+</nav>
+
+<%--<a id="back-to-main" class="image" href="/"></a>--%>
 
 <table id="full-table">
   <tr>
@@ -210,7 +262,7 @@
         <%
           RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();
           buildQuery(request, query);
-          List<Room> rooms = manager1.find(query);
+          List<Room> rooms = roomManager.find(query);
           for (Room room : rooms) {
         %>
         <script>
@@ -577,13 +629,16 @@
     </td>
   </tr>
 </table>
-<script src="js/RoomsSearch.js" <%
+<script src="js/Floors.js"></script>
+<script src="js/RoomsSearch.js">
+</script>
+
+<script><%
   String showOnMap = request.getParameter("showonmap");
   if (showOnMap != null) {
-    out.print("onload=\"showOnMap(" + showOnMap + ")\"");
+    out.print("showOnMap(" + showOnMap + ")");
   }
-%>>
-</script>
+%></script>
 
 </body>
 </html>

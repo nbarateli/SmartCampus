@@ -19,6 +19,13 @@ public class Room implements CampusObject {
 
     /**
      * Constructs a new Room object.
+     * @param roomID room id in the database
+     * @param capacity room capacity (number of seats)
+     * @param roomName room name (mostly number)
+     * @param roomType room type
+     * @param seatType room seat type
+     * @param isAvailableForStudents if the room can be booked by a student
+     * @param floor room floor
      */
     public Room(int roomID, int capacity, String roomName, RoomType roomType,
                 SeatType seatType, boolean isAvailableForStudents, int floor) {
@@ -31,31 +38,53 @@ public class Room implements CampusObject {
         this.floor = floor;
     }
 
-    public int getFloor() {
-        return floor;
-    }
-
-    public boolean isAvailableForStudents() {
-        return isAvailableForStudents;
-    }
-
+    /**
+     * override of CampusObjects getId (which this class is implementing)
+     * @return id of this room in database
+     */
     @Override
     public int getId() {
         return roomID;
     }
 
+    /**
+     * @return room floor
+     */
+    public int getFloor() {
+        return floor;
+    }
+
+    /**
+     * @return if this room can be booked by a student
+     */
+    public boolean isAvailableForStudents() {
+        return isAvailableForStudents;
+    }
+
+    /**
+     * @return room capacity
+     */
     public int getCapacity() {
         return capacity;
     }
 
+    /**
+     * @return room name (number)
+     */
     public String getRoomName() {
         return roomName;
     }
 
+    /**
+     * @return room type
+     */
     public RoomType getRoomType() {
         return roomType;
     }
 
+    /**
+     * @return room seat type
+     */
     public SeatType getSeatType() {
         return seatType;
     }
@@ -82,10 +111,16 @@ public class Room implements CampusObject {
         return getRoomName();
     }
 
+    /**
+     * enum for room type
+     */
     public enum RoomType {
         AUDITORIUM, UTILITY, LABORATORY
     }
 
+    /**
+     * enum for seat type
+     */
     public enum SeatType {
         DESKS, CHAIRS, COMPUTERS, TABLES
     }

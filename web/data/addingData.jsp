@@ -47,10 +47,56 @@
   <script src="${pageContext.request.contextPath}/scriptlibs/wrapper.js"></script>
   <script src="/js/auto-complete.js"></script>
   <script src="/js/utils.js"></script>
+  <meta name="google-signin-client_id"
+        content="752594653432-dcqce0b92nbtce0d0ahpq91jfis07092.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/api.js">
 
+  </script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="/js/auth.js"></script>
 </head>
 <body>
-<a id="back-to-main" class="image" href="/" style=" display:inline-block;"></a>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><img src="/img/bigLogo.png" class="mainPageButton"
+                                            style="height: 40px; width:40px"></a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <%
+        if (currentUser != null) {
+          out.print("<li><a><img src=\"" + currentUser.getImageURL() + "\" class=\"navbar-pic\"></a></li>\n" +
+                  "      <li><a> " + currentUser.getFirstName() + " " + currentUser.getLastName() + "</a></li>\n" +
+                  "      <li>\n" +
+                  "        <a class=\"sign-out\">\n" +
+                  "          <div class='btn btn-warning' onclick=\"signOut();\"> Sign out</div>\n" +
+                  "        </a>\n" +
+                  "      </li>");
+        } else {
+          out.print("\n" +
+                  "      <li>\n" +
+                  "        <a class=\"g-signin2 sign-in\" data-onsuccess=\"onSignIn\"></a>\n" +
+                  "      </li>");
+        }
+      %>
+    </ul>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container -->
+</nav>
+
+<%--<a id="back-to-main" class="image" href="/" style=" display:inline-block;"></a>--%>
 
 <div align="center" id="main-div">
   <button class="main-button" data-toggle="modal" data-target="#schedule-modal">ლექციების ცხრილის შეყვანა</button>
@@ -70,13 +116,13 @@
               <input type="email" name="lecturer_email"
                      class="form-control"
                      placeholder="შეიყვანეთ ლექტორის ფოსტის მისამართი">
-                <span id="error_lecturer_email" class="errorMessage"></span>
+              <span id="error_lecturer_email" class="errorMessage"></span>
             </div>
 
             <div class="form-group">
               <input type="text" name="subject_name" class="form-control" id="subj_name_l"
                      placeholder="შეიყვანეთ საგნის სახელი">
-                <span id="error_subject_name" class="errorMessage"></span>
+              <span id="error_subject_name" class="errorMessage"></span>
             </div>
             <script> subjectNameAutocomplete('subj_name_l')</script>
             <div class="form-group">
@@ -86,11 +132,11 @@
 
             <br>
 
-              <div>
-                  <input type="number" name="num_weeks" class="form-control" id="num_w"
-                         placeholder="კვირების რაოდენობა" min=1 max=16>
-                  <span id="error_numWeeks" class="errorMessage"></span>
-              </div>
+            <div>
+              <input type="number" name="num_weeks" class="form-control" id="num_w"
+                     placeholder="კვირების რაოდენობა" min=1 max=16>
+              <span id="error_numWeeks" class="errorMessage"></span>
+            </div>
 
             <br>
 
@@ -106,17 +152,17 @@
             <br>
 
             <div id="datepairExample" class="form-group">
-                <div class="form-mid">ლექციის თარიღი<br>
+              <div class="form-mid">ლექციის თარიღი<br>
                 <input type="text" name="start_date" class="date start" id="start_d"/>
-                    <span id="error_date" class="errorMessage"></span>
+                <span id="error_date" class="errorMessage"></span>
               </div>
               <div class="form-left">დრო (დან) <br>
                 <input type="text" name="start_time" class="time start" id="start_t"/>
-                  <span id="error_start_time" class="errorMessage"></span>
+                <span id="error_start_time" class="errorMessage"></span>
               </div>
               <div class="form-right">დრო (მდე) <br>
                 <input type="text" name="end_time" class="time end" id="end_t"/>
-                  <span id="error_end_time" class="errorMessage"></span>
+                <span id="error_end_time" class="errorMessage"></span>
               </div>
             </div>
 
@@ -146,7 +192,7 @@
               <br>
               <input name="room_name" class="form-control" id="room_n"
                      placeholder="შეიყვანეთ ოთახის დასახელება">
-                <span id="error_room_name" class="errorMessage"></span>
+              <span id="error_room_name" class="errorMessage"></span>
             </div>
 
             <br>
@@ -156,8 +202,8 @@
             <input type="button" value="დამატება"
                    class="btn btn-primary btn-lg"
                    onclick="addLectureFromForm()">
-              <br>
-              <span id="output"></span>
+            <br>
+            <span id="output"></span>
           </form>
 
           <br>
@@ -177,9 +223,9 @@
           <br>
           <div class="form-vertical" id="lect-file">
             <input type="file" name="pic" accept=".xls,.xlsx">
-            <img src="../../img/tick.png" id="lecture-tick" />
-            <img src="../../img/w8.gif" id="lecture-w8gif" />
-            <img src="../../img/fail.png" id="lecture-fail" /><br>
+            <img src="../../img/tick.png" id="lecture-tick"/>
+            <img src="../../img/w8.gif" id="lecture-w8gif"/>
+            <img src="../../img/fail.png" id="lecture-fail"/><br>
             <output id="lect-list"></output>
           </div>
           <br>
@@ -218,8 +264,8 @@
 
             <div class="form-group">
               <label class="control-label">სართული</label> <input id="add-room-floor-number"
-                    type="number" name="room_floor" class="form-control"
-                    placeholder="შეიყვანეთ სართული" min=0 max=4>
+                                                                  type="number" name="room_floor" class="form-control"
+                                                                  placeholder="შეიყვანეთ სართული" min=0 max=4>
               <span id="error_floor" class="errorMessage"></span>
 
             </div>
@@ -272,9 +318,9 @@
           <br>
           <br>
           <div class="form-vertical" id="rooms-file">
-            <img src="../../img/tick.png" id="room-tick" />
-            <img src="../../img/w8.gif" id="room-w8gif" />
-            <img src="../../img/fail.png" id="room-fail" />
+            <img src="../../img/tick.png" id="room-tick"/>
+            <img src="../../img/w8.gif" id="room-w8gif"/>
+            <img src="../../img/fail.png" id="room-fail"/>
             <input type="file" name="pic" accept=".xls,.xlsx"><br>
             <output id="room-list"></output>
           </div>
@@ -348,9 +394,9 @@
           <br>
           <div class="form-vertical" id="subj-file">
             <input type="file" name="pic" accept=".xls,.xlsx"><br>
-            <img src="../../img/tick.png" id="subject-tick" />
-            <img src="../../img/w8.gif" id="subject-w8gif" />
-            <img src="../../img/fail.png" id="subject-fail" />
+            <img src="../../img/tick.png" id="subject-tick"/>
+            <img src="../../img/w8.gif" id="subject-w8gif"/>
+            <img src="../../img/fail.png" id="subject-fail"/>
             <output id="subj-list"></output>
           </div>
           <br>

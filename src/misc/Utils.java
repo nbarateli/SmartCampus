@@ -27,6 +27,9 @@ import static model.database.SQLConstants.*;
 import static model.rooms.Room.RoomType.*;
 import static model.rooms.Room.SeatType.*;
 
+/**
+ * this class consists of static utility methods that are used in many other classes
+ */
 public final class Utils {
 
     private Utils() {
@@ -313,6 +316,11 @@ public final class Utils {
         return new CampusSubject(id, name);
     }
 
+    /**
+     * converts given WeekDay to Georgian
+     * @param day WeekDay to be converted
+     * @return toString of this day but in Georgian
+     */
     public static String toGeorgian(WeekDay day) {
         switch (day) {
             case MONDAY:
@@ -458,9 +466,6 @@ public final class Utils {
         switch (permission.toLowerCase()) {
             case "book_a_room":
                 return BOOK_A_ROOM;
-          /*  ('book_a_room', 'request_booked_room', 'cancel_booking', 'report_room_problem',
-                    'delete_problem', 'lost_found_post', 'lost_found_delete', 'warn_user',
-                    'view_user_warnings', 'delete_user_warnings', 'remove_permission', 'insert_data')*/
             case "request_booked_room":
                 return REQUEST_BOOKED_ROOM;
             case "cancel_booking":
@@ -504,7 +509,6 @@ public final class Utils {
      * @param pattern   a pattern by which the given string is formatted
      * @return respective date
      */
-
     public static Date stringToDate(String toConvert, String pattern) {
         DateFormat format = new SimpleDateFormat(pattern);
 
@@ -515,6 +519,11 @@ public final class Utils {
         }
     }
 
+    /**
+     * converts given string to HH:mm time format
+     * @param toConvert string to be converted
+     * @return respective time in HH:mm format or null if there was an exception
+     */
     public static Time stringToTime(String toConvert) {
         DateFormat format = new SimpleDateFormat("HH:mm");
         try {
@@ -563,6 +572,11 @@ public final class Utils {
         return c.getTime();
     }
 
+    /**
+     * converts given UserRole to string
+     * @param role UserRole to be converted
+     * @return string representation of given UserRole
+     */
     public static String roleToString(UserRole role) {
         switch (role) {
             case STUDENT:
@@ -579,26 +593,66 @@ public final class Utils {
         return "";
     }
 
+    /**
+     * formats given date to string with given pattern
+     * @param date date to be formatted
+     * @param inPattern pattern in which this date should be
+     * @return string representation of given string in given pattern
+     */
     public static String dateToString(Date date, String inPattern) {
         DateFormat format = new SimpleDateFormat(inPattern);
         return format.format(date);
     }
 
+    /**
+     * generates date query for database with given parameters
+     * @param field date we're comparing to
+     * @param column column name of date
+     * @param values date in the right pattern will be then added to this list of objects (for PreparedStatement)
+     * @param larger tells if date in database should be larger or smaller than passed date
+     * @return query string
+     */
     public static String generateDateQuery(Date field, String column, List<Object> values, boolean larger) {
 
         return generateDateQuery(field, column, values, larger, "'%d/%m/%Y'", "dd/MM/yyyy");
 
     }
 
+    /**
+     * generates date query for database with given parameters
+     * (but date in database should be equal to passed date)
+     * @param field date we're comparing to
+     * @param column column name of date
+     * @param values date in the right pattern will be then added to this list of objects (for PreparedStatement)
+     * @return query string
+     */
     public static String generateDateEqualsQuery(Date field, String column, List<Object> values) {
         return generateDateEqualsQuery(field, column, values, "'%d/%m/%Y'", "dd/MM/yyyy");
 
     }
 
+    /**
+     * generates time query for database with given parameters
+     * @param time time we're comparing to
+     * @param column column name of time
+     * @param values time in the right pattern will be then added to this list of objects (for PreparedStatement)
+     * @param larger tells if time in database should be larger or smaller than passed time
+     * @return query string
+     */
     public static String generateTimeQuery(Time time, String column, List<Object> values, boolean larger) {
         return generateDateQuery(time, column, values, larger, "'%H:%i'", "HH:mm");
     }
 
+    /**
+     * generates date query for database with given parameters
+     * (but date in database should be equal to passed date)
+     * @param field date we're comparing to
+     * @param column column name of date
+     * @param values date in the right pattern will be then added to this list of objects (for PreparedStatement)
+     * @param inPattern pattern in which the passed date is
+     * @param outPattern pattern in which the date in database is
+     * @return query string
+     */
     private static String generateDateEqualsQuery(Date field, String column, List<Object> values,
                                                   String outPattern, String inPattern) {
         if (field == null) return " 1 = 1 ";
@@ -606,6 +660,16 @@ public final class Utils {
         return column + "= STR_TO_DATE(?, " + outPattern + ")";
     }
 
+    /**
+     * generates date query for database with given parameters
+     * @param field date we're comparing to
+     * @param column column name of date
+     * @param values date in the right pattern will be then added to this list of objects (for PreparedStatement)
+     * @param larger tells if date in database should be larger or smaller than passed date
+     * @param inPattern pattern in which the passed date is
+     * @param outPattern pattern in which the date in database is
+     * @return query string
+     */
     private static String generateDateQuery(Date field, String column, List<Object> values,
                                             boolean larger, String outPattern, String inPattern) {
         if (field == null) return " 1 = 1 ";

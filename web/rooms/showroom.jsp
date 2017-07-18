@@ -50,6 +50,15 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
 
+
+  <meta name="google-signin-client_id"
+        content="752594653432-dcqce0b92nbtce0d0ahpq91jfis07092.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/api.js">
+
+  </script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="/js/auth.js"></script>
+
   <%!
 
     private boolean canInsertData() {
@@ -106,6 +115,24 @@
       </button>
       <a class="navbar-brand" href="/"><img src="/img/bigLogo.png" class="mainPageButton"></a>
     </div>
+    <ul class="nav navbar-nav navbar-right">
+      <%
+        if (user != null) {
+          out.print("<li><a><img src=\"" + user.getImageURL() + "\" class=\"navbar-pic\"></a></li>\n" +
+                  "      <li><a> " + user.getFirstName() + " " + user.getLastName() + "</a></li>\n" +
+                  "      <li>\n" +
+                  "        <a class=\"sign-out\">\n" +
+                  "          <div class='btn btn-warning' onclick=\"signOut();\"> Sign out</div>\n" +
+                  "        </a>\n" +
+                  "      </li>");
+        } else {
+          out.print("\n" +
+                  "      <li>\n" +
+                  "        <a class=\"g-signin2 sign-in\" data-onsuccess=\"onSignIn\"></a>\n" +
+                  "      </li>");
+        }
+      %>
+    </ul>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
@@ -223,6 +250,7 @@
       <td>{{booker}}</td>
       <td>{{start_time}}<br>{{end_time}}</td>
     </tr>
+
   </script>
   <script src="/js/utils.js"></script>
   <script src="/js/weekpicker.js"></script>

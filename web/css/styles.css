@@ -103,3 +103,13 @@ a:active {
 a:visited {
   color: black;
 }
+
+.room-image {
+  border-radius: 0;
+  width: 100%;
+}
+
+.navbar-pic {
+  height: 50px;
+  border-radius: 50%;
+}

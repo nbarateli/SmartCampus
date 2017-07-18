@@ -67,6 +67,11 @@ public class RoomFinder extends HttpServlet {
 
     }
 
+    /**
+     * checks if searching rooms by booking is necessary
+     * @param request passed HttpServletRequest
+     * @return true if at least one parameter associated with booking is not null
+     */
     private boolean searchesByBooking(HttpServletRequest request) {
         String startDate = request.getParameter("start_date");
         String startTime = request.getParameter("start_time");
@@ -75,6 +80,11 @@ public class RoomFinder extends HttpServlet {
         return !"".equals(startDate) || !"".equals(startTime) || !"".equals(endDate) || !"".equals(endTime);
     }
 
+    /**
+     * builds BookingSearchQueryGenerator according to booking date and time parameters passed
+     * @param request passed HttpServletRequest
+     * @return BookingSearchQueryGenerator object which has all the needed parameters set
+     */
     private BookingSearchQueryGenerator getTimeQuery(HttpServletRequest request) {
         BookingSearchQueryGenerator generator = new BookingSearchQueryGenerator();
         String dateFrom = request.getParameter("start_date");
@@ -89,11 +99,20 @@ public class RoomFinder extends HttpServlet {
         return generator;
     }
 
-
+    /**
+     * returns integer value of passed string, null if it's empty or null and 0 if it's value is negative
+     * @param s string we need to get value of
+     * @return positive integer value of passed string
+     */
     private Integer nullIfNoLength(String s) {
         return s == null || s.length() < 1 ? null : Integer.valueOf(s) < 0 ? 0 : Integer.valueOf(s);
     }
 
+    /**
+     * builds RoomSearchQueryGenerator according to parameters associated with rooms
+     * @param request passed HttpServletRequest
+     * @return RoomSearchQueryGenerator object which has all the needed parameters set
+     */
     private RoomSearchQueryGenerator getQuery(HttpServletRequest request) {
         RoomSearchQueryGenerator query = new RoomSearchQueryGenerator();
         if (request.getParameter("search") == null) return query;
