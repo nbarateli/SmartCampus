@@ -33,17 +33,18 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
 
     /**
      * constructor of BookingSearchQueryGenerator class
-     * @param bookingID booking id in database
-     * @param booker booker (User object)
-     * @param room booked room (Room object)
-     * @param subject booking subject (CampusSubject object)
-     * @param day weekday of booking (WeekDay enum type)
-     * @param startTime booking start time
-     * @param endTime booking end time
+     *
+     * @param bookingID   booking id in database
+     * @param booker      booker (User object)
+     * @param room        booked room (Room object)
+     * @param subject     booking subject (CampusSubject object)
+     * @param day         weekday of booking (WeekDay enum type)
+     * @param startTime   booking start time
+     * @param endTime     booking end time
      * @param description booking description
      * @param bookingDate booking date
-     * @param dateFrom date from where booking is being searched
-     * @param dateTo date to when booking is being searched
+     * @param dateFrom    date from where booking is being searched
+     * @param dateTo      date to when booking is being searched
      */
     public BookingSearchQueryGenerator(Integer bookingID, User booker, Room room, CampusSubject subject, Booking.WeekDay day,
                                        Time startTime, Time endTime, String description, Date bookingDate,
@@ -80,7 +81,7 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
      * sets date from where booking is being searched
      */
     public void setDateFrom(Date from) {
-        this.dateFrom = new Date(from.getTime());
+        this.dateFrom = from == null ? null : new Date(from.getTime());
     }
 
     /**
@@ -94,7 +95,7 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
      * sets date to when booking is being searched
      */
     public void setDateTo(Date to) {
-        this.dateTo = new Date(to.getTime());
+        this.dateTo = to == null ? null : new Date(to.getTime());
     }
 
     /**
@@ -252,9 +253,10 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
 
     /**
      * generates query for finding bookings on given WeekDay
-     * @param day WeekDay on which found bookings should take place
+     *
+     * @param day        WeekDay on which found bookings should take place
      * @param columnName column name of WeekDay in booking table in database
-     * @param values this day in correct format will be added to this array of objects (for PreparedStatement)
+     * @param values     this day in correct format will be added to this array of objects (for PreparedStatement)
      * @return
      */
     private String generateWeekDayQuery(Booking.WeekDay day, String columnName, List<Object> values) {
@@ -274,6 +276,7 @@ public class BookingSearchQueryGenerator implements CampusSearchQueryGenerator<B
     /**
      * checks if given search query has non null fields
      * so that there will be something to search for
+     *
      * @return true if there is at least one non null field
      */
     private boolean hasNonNullFields() {
