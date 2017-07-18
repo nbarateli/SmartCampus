@@ -266,6 +266,108 @@ public class UtilsTest {
         assertTrue(User.UserPermission.DELETE_USER_WARNINGS.equals(Utils.toUserPermission("delete_user_warnings")));
         assertTrue(User.UserPermission.REMOVE_PERMISSION.equals(Utils.toUserPermission("remove_permission")));
         assertTrue(User.UserPermission.INSERT_DATA.equals(Utils.toUserPermission("insert_data")));
+    }
 
+    @Test
+    public void stringToDateTest(){
+        SimpleDateFormat dateformat2 = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        String strdate1 = "16-07-2017 11:35:42";
+        String strdate2 = "17-07-2017 11:35:42";
+        String strdate3 = "18-07-2017 11:35:42";
+        String strdate4 = "19-07-2017 11:35:42";
+        String strdate5 = "20-07-2017 11:35:42";
+        String strdate6 = "21-07-2017 11:35:42";
+        String strdate7 = "22-07-2017 11:35:42";
+        try {
+            Date date1;
+            date1 = dateformat2.parse(strdate1);
+            Date date2;
+            date2 = dateformat2.parse(strdate2);
+            Date date3;
+            date3 = dateformat2.parse(strdate3);
+            Date date4;
+            date4 = dateformat2.parse(strdate4);
+            Date date5;
+            date5 = dateformat2.parse(strdate5);
+            Date date6;
+            date6 = dateformat2.parse(strdate6);
+            Date date7;
+            date7 = dateformat2.parse(strdate7);
+            assertEquals(Utils.stringToDate("16-07-2017 11:35:42", "dd-M-yyyy hh:mm:ss"), date1);
+            assertEquals(Utils.stringToDate("17-07-2017 11:35:42", "dd-M-yyyy hh:mm:ss"), date2);
+            assertEquals(Utils.stringToDate("18-07-2017 11:35:42", "dd-M-yyyy hh:mm:ss"), date3);
+            assertEquals(Utils.stringToDate("19-07-2017 11:35:42", "dd-M-yyyy hh:mm:ss"), date4);
+            assertEquals(Utils.stringToDate("20-07-2017 11:35:42", "dd-M-yyyy hh:mm:ss"), date5);
+            assertEquals(Utils.stringToDate("21-07-2017 11:35:42", "dd-M-yyyy hh:mm:ss"), date6);
+            assertEquals(Utils.stringToDate("22-07-2017 11:35:42", "dd-M-yyyy hh:mm:ss"), date7);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void stringToTime(){
+        Time time = new Time(20, 10, 00);
+        assertEquals(Utils.stringToTime("20:10"), time);
+        time = new Time(21, 10, 00);
+        assertEquals(Utils.stringToTime("21:10"), time);
+        time = new Time(00, 00, 00);
+        assertEquals(Utils.stringToTime("00:00"), time);
+    }
+
+    @Test
+    public void validateNumberTest(){
+        assertEquals(null, Utils.validateNumber("a11", 0, 10));
+        assertEquals(null, Utils.validateNumber("", 0, 10));
+        assertEquals(null, Utils.validateNumber("x", 0, 10));
+        assertEquals(null, Utils.validateNumber("50", 0, 10));
+        assertEquals((Integer)5, Utils.validateNumber("5", 0, 10));
+        assertEquals(null, Utils.validateNumber("-17", 0, 10));
+        assertEquals((Integer)100, Utils.validateNumber("100", 0, 100));
+    }
+
+    @Test
+    public void addDaysToDate(){
+        SimpleDateFormat dateformat2 = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        String strdate1 = "16-07-2017 11:35:42";
+        String strdate2 = "17-07-2017 11:35:42";
+        String strdate3 = "18-07-2017 11:35:42";
+        String strdate4 = "19-07-2017 11:35:42";
+        String strdate5 = "20-07-2017 11:35:42";
+        String strdate6 = "21-07-2017 11:35:42";
+        String strdate7 = "22-07-2017 11:35:42";
+        try {
+            Date date1;
+            date1 = dateformat2.parse(strdate1);
+            Date date2;
+            date2 = dateformat2.parse(strdate2);
+            Date date3;
+            date3 = dateformat2.parse(strdate3);
+            Date date4;
+            date4 = dateformat2.parse(strdate4);
+            Date date5;
+            date5 = dateformat2.parse(strdate5);
+            Date date6;
+            date6 = dateformat2.parse(strdate6);
+            Date date7;
+            date7 = dateformat2.parse(strdate7);
+            assertEquals(date2, Utils.addDaysToDate(date1, 1));
+            assertEquals(date3, Utils.addDaysToDate(date1, 2));
+            assertEquals(date4, Utils.addDaysToDate(date1, 3));
+            assertEquals(date5, Utils.addDaysToDate(date1, 4));
+            assertEquals(date6, Utils.addDaysToDate(date1, 5));
+            assertEquals(date7, Utils.addDaysToDate(date1, 6));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void roleToString(){
+        assertEquals("student", Utils.roleToString(UserRole.STUDENT));
+        assertEquals("admin", Utils.roleToString(UserRole.ADMIN));
+        assertEquals("staff", Utils.roleToString(UserRole.STAFF));
+        assertEquals("lecturer", Utils.roleToString(UserRole.LECTURER));
+        assertEquals("sys_admin", Utils.roleToString(UserRole.SYS_ADMIN));
     }
 }
