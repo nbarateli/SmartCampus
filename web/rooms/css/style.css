@@ -213,3 +213,7 @@ table tr:nth-child(2n+1) {
   width: 100%;
 }
 
+.navbar-pic {
+  height: 6%;
+  border-radius: 50%;
+}
