@@ -39,7 +39,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="/"><img src="/img/bigLogo.png" class="mainPageButton"
-                                            style="height: 40px; width:40px"></a>
+                                            style="height: 55px; width:65px"></a>
     </div>
     <ul class="nav navbar-nav navbar-right">
       <%
