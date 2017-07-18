@@ -48,7 +48,7 @@
                   "      <li><a> " + currentUser.getFirstName() + " " + currentUser.getLastName() + "</a></li>\n" +
                   "      <li>\n" +
                   "        <a class=\"sign-out\">\n" +
-                  "          <div class='btn btn-warning' onclick=\"signOut();\"> Sign out</div>\n" +
+                  "          <div class='btn btn-info' onclick=\"signOut();\"> <span class='glyphicon glyphicon-log-out'></span> Sign out</div>\n" +
                   "        </a>\n" +
                   "      </li>");
         }
@@ -76,7 +76,7 @@
         out.print("    <div class=\"g-signin2 sign-in\" data-onsuccess=\"onSignIn\"></div>\n");
       } else {
         out.print("<div class=\"sign-out\">\n" +
-                "      <div class='btn btn-warning' onclick=\"signOut();\"> Sign out</div>\n" +
+                "      <div class='btn btn-info' onclick=\"signOut();\"><span class='glyphicon glyphicon-log-out'></span> Sign out</div>\n" +
                 "    </div>");
       }
     %>

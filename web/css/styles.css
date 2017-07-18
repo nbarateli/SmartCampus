@@ -13,10 +13,11 @@
 
 a {
   text-decoration: none;
+  color: black;
 }
 
 a:visited {
-  color: inherit;
+  color: #1b6d85;
 }
 
 a:hover {

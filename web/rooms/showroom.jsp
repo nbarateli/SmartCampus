@@ -122,7 +122,7 @@
                   "      <li><a> " + user.getFirstName() + " " + user.getLastName() + "</a></li>\n" +
                   "      <li>\n" +
                   "        <a class=\"sign-out\">\n" +
-                  "          <div class='btn btn-warning' onclick=\"signOut();\"> Sign out</div>\n" +
+                  "      <div class='btn btn-info' onclick=\"signOut();\"><span class='glyphicon glyphicon-log-out'></span> Sign out</div>\n" +
                   "        </a>\n" +
                   "      </li>");
         } else {

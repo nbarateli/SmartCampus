@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<%@ page import="static misc.WebConstants.SIGNED_ACCOUNT" %><%--
+  Created by IntelliJ IDEA.
+  User: Niko
+  Date: 18.07.2017
+  Time: 12:41
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -19,8 +26,10 @@
 <div class="box" align="center">
   <div class=center_message>სამწუხაროდ, თქვენ არ გაქვთ ამ ოპერაციის განხორციელების უფლება.</div>
   <div><a href="index.jsp">დაბრუნება მთავარ გვერდზე</a></div>
-  <div class="g-signin2 sign-in" data-onsuccess="onSignIn"></div>
+  <%
+    if (session.getAttribute(SIGNED_ACCOUNT) == null)
+      out.print("<div class=\"g-signin2 sign-in\" data-onsuccess=\"onSignIn\"></div>");
+  %>
 </div>
-
 </body>
 </html>
