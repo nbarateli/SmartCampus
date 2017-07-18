@@ -17,6 +17,7 @@ function onSignIn(googleUser) {
     };
     xhr.send('idtoken=' + id_token);
     console.log(profile.getEmail());
+    window.location.reload();
 }
 
 function signOut() {

@@ -12,7 +12,7 @@
 
   if (currentUser == null || !factory.getAccountManager().
           getAllPermissionsOf(currentUser).contains(User.UserPermission.INSERT_DATA)) {
-    response.sendRedirect("/unallowed_operation.html");
+    response.sendRedirect("/unallowed_operation.jsp");
   }
 %>
 <head>
@@ -76,7 +76,7 @@
                   "      <li><a> " + currentUser.getFirstName() + " " + currentUser.getLastName() + "</a></li>\n" +
                   "      <li>\n" +
                   "        <a class=\"sign-out\">\n" +
-                  "          <div class='btn btn-warning' onclick=\"signOut();\"> Sign out</div>\n" +
+                  "      <div class='btn btn-info' onclick=\"signOut();\"><span class='glyphicon glyphicon-log-out'></span> Sign out</div>\n" +
                   "        </a>\n" +
                   "      </li>");
         } else {

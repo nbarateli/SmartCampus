@@ -72,8 +72,7 @@
   <script src="${pageContext.request.contextPath}/scriptlibs/Datepair.js"></script>
   <script src="${pageContext.request.contextPath}/scriptlibs/jquery.datepair.js"></script>
   <script src="${pageContext.request.contextPath}/scriptlibs/wrapper.js"></script>
-  <script
-          src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
 
   <meta name="google-signin-client_id"
@@ -106,7 +105,7 @@
                   "      <li><a> " + user.getFirstName() + " " + user.getLastName() + "</a></li>\n" +
                   "      <li>\n" +
                   "        <a class=\"sign-out\">\n" +
-                  "          <div class='btn btn-warning' onclick=\"signOut();\"> Sign out</div>\n" +
+                  "      <div class='btn btn-info' onclick=\"signOut();\"><span class='glyphicon glyphicon-log-out'></span> Sign out</div>\n" +
                   "        </a>\n" +
                   "      </li>");
         } else {
