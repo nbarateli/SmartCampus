@@ -217,6 +217,8 @@
       <input type="button" value="დამატება" style="margin-top: 100px" ;
              class="btn btn-info btn-lg"
              onclick="addBookingFromForm()">
+      <br><br>
+      <span id="responseID"></span>
     </form>
 
   </div>

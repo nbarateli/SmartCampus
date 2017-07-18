@@ -31,7 +31,16 @@ function sendData(url, params) {
 
     http.onreadystatechange = function (alert) {//Call a function when the state changes.
         if (http.readyState === 4 && http.status === 200) {
-            window.alert(http.responseText);
+            var response = document.getElementById("responseID");
+            response.innerHTML = http.responseText;
+            var res = http.responseText.substring(0, 1);
+            var str1 = "N"
+            if(str1.localeCompare(res)){
+                response.style.color = "GREEN";
+            }
+            else {
+                response.style.color = "RED";
+            }
         }
     };
     console.log("params are: " + params);

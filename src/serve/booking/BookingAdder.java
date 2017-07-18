@@ -38,18 +38,18 @@ public class BookingAdder extends HttpServlet {
 
         User currentUser = (User) request.getSession().getAttribute(SIGNED_ACCOUNT);
         if (currentUser == null) {
-            out.print(FAILED + ": no user signed in");
+            out.print("NOT ADDED. no user signed in");
             return;
         }
 
         if (!factory.getAccountManager().getAllPermissionsOf(currentUser).contains(User.UserPermission.BOOK_A_ROOM)) {
-            out.print(FAILED + ": you don't have that permission.");
+            out.print("NOT ADDED. you don't have that permission.");
             return;
         }
-
-        Room room = roomManager.getRoomByName(request.getParameter("room_name"));
+        String name = request.getParameter("room_name");
+        Room room = roomManager.getRoomByName(name);
         if (room == null) {
-            out.print(FAILED + " room not found");
+            out.print("NOT ADDED. room not found");
             return;
         }
 
@@ -62,12 +62,14 @@ public class BookingAdder extends HttpServlet {
             Booking booking = new Booking(SENTINEL_INT, currentUser, room,
                     null, startTime, endTime, description, bookingDate);
             if (!overlapsOtherBookings(booking, bookingManager) && bookingManager.add(booking)) {
-                out.println(SUCCESS);
+                out.println("Booking successfully added");
             } else {
                 throw new Exception();
             }
         } catch (Exception ex) {
-            out.println(FAILED + ": overlaps other bookings or subjects.");
+            out.println("NOT ADDED. overlaps other bookings or subjects.");
+            out.flush();
+            out.close();
         }
     }
 
